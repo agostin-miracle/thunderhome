@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{22F1CC40-E78D-439D-B947-CCFC62A2FB58}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ThunderFire.Business</RootNamespace>
+    <AssemblyName>ThunderFire.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\ThunderHomeDAL\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\ThunderHomeDAL\packages\NLog.4.7.13\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThunderFire">
+      <HintPath>..\..\DLL\ThunderFire.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bAccountType.cs" />
+    <Compile Include="bActiveCards.cs" />
+    <Compile Include="bAddressBook.cs" />
+    <Compile Include="bAddressType.cs" />
+    <Compile Include="bAttributeType.cs" />
+    <Compile Include="bContactBook.cs" />
+    <Compile Include="bContactType.cs" />
+    <Compile Include="bGeneralRegistry.cs" />
+    <Compile Include="bGeneralTable.cs" />
+    <Compile Include="bLoginUser.cs" />
+    <Compile Include="bProductCards.cs" />
+    <Compile Include="bProductLine.cs" />
+    <Compile Include="bProductManagement.cs" />
+    <Compile Include="bProducts.cs" />
+    <Compile Include="bSystemFeatures.cs" />
+    <Compile Include="bTransactionStatus.cs" />
+    <Compile Include="bUserType.cs" />
+    <Compile Include="BusinessBase.cs" />
+    <Compile Include="bVirtualAccount.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support.cs" />
+    <Compile Include="WriteAuditing.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThunderFire.Connector\ThunderFire.Connector.csproj">
+      <Project>{9fa228c0-b9c8-4ab1-963b-183b528be942}</Project>
+      <Name>ThunderFire.Connector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThunderFire.Domain\ThunderFire.Domain.csproj">
+      <Project>{ff889cb2-6ce9-4b9a-b04a-30a145ca850c}</Project>
+      <Name>ThunderFire.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThunderFire.Interface\ThunderFire.Interface.csproj">
+      <Project>{75c1e1d1-5b16-46e8-9967-8b594a8ad2f9}</Project>
+      <Name>ThunderFire.Interface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
