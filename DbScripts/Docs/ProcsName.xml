@@ -1,0 +1,114 @@
+<procs>
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRAUDDATINS" desc="Inserção de Registros na Tabela TBAUDDAT" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERINS" desc="Inserção de Registros na Tabela TBCADGER" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERSEL" desc="Seleciona o registro de acordo com o Código do Usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERSELALL" desc="Obtêm uma lista de registros do cadastro geral conforme parâmetros informados" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERSELNAM" desc="Efetua uma busca com base no nome e atributo especifico" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERUPD" desc="Altera um registro da tabela TBCADGER ()  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERVALENTRCMF" desc="Valida um CPF/CNPJ já existente para o mesmo atributo na base de cadastro geral" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADUSUPSQCMF" desc="Verifica se já existe um cadastro com o CPF/CNPJ cadastrado, e retorna o id localizado" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSUINS" desc="Inserção de Registros na Tabela TBLGNUSU" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSUSEL" desc="Obtêm o registro de Login do Usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSUUPD" desc="Altera um registro da tabela TBLGNUSU ()  de acordo com a chave identity" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSULOG" desc="Efetua um login com base nas credenciais de acesso" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSUREF" desc="Verifica se o usuario precisa fazer um refresh de senha" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSUCHGPSW" desc="Efetua um login com base nas credenciais de acesso" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSURSTPSW" desc="Efetua um login com base nas credenciais de acesso" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPATRINS" desc="Inserção de Registros na Tabela TBTIPATR" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPATRSEL" desc="Obtêm o registro do tipo de atributo informado" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPATRLST" desc="Obtêm todos os registros de tipo de atributo cadastrados" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPATRUPD" desc="Altera um registro da tabela TBTIPATR (Tipo de Atributo)  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTABGERINS" desc="Inserção de Registros na Tabela TBTABGER" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTABGERSEL" desc="Seleciona o registro de acordo com o id de registro da tabela geral" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTABGERCOD" desc="Seleciona um Tipo de Tabela Específica ou Todas se o número da tabela não for especificado" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTABGERUPD" desc="Altera um registro da tabela TBTABGER ()  de acordo com a chave identity" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTABGERFNDKEY" desc="Obtêm o Id de Registro de uma Tabela Geral Baseada no Código Chave da Tabela" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTABGERFNDTXT" desc="Obtêm o Id de Registro de uma Tabela Geral Baseada no Código Chave Texto da Tabela" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADSTAINS" desc="Inserção de Registros na Tabela TBCADSTA" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADSTASEL" desc="Seleciona o registro de acordo com o codigo do status fornecido" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADSTASELALL" desc="Seleciona todos os registros de status de transações de acordo com o módulo informado" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADSTAUPD" desc="Altera um registro da tabela TBCADSTA (Transaction Status)  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTOINS" desc="Inserção de Registros na Tabela TBCADCTO" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTOSEL" desc="Seleciona o registro de acordo com o código do cadastro de contatos" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTOSELCTO" desc="Obtêm o registro de contato de acordo com os parâmetros informados" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTOUPD" desc="Altera um registro da tabela TBCADCTO ()  de acordo com a chave identity" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTOSELALL" desc="Seleciona todos os registros de contato do usuário fornecido" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTOFIN" desc="Localiza um contato com base nos parâmetros fornecidos" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADENDINS" desc="Inserção de Registros na Tabela TBCADEND" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADENDSEL" desc="Obtêm o registro de Endereço" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADENDSELUSU" desc="Obtêm uma lista de todos os endereços de um usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADENDUPD" desc="Altera um registro da tabela TBCADEND ()  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADENDFND" desc="Localiza o ID de um endereço com base nos parametros fornecidos" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="" desc="Efetua o logoff de um usuario" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPCTOINS" desc="Inserção de Registros na Tabela TBTIPCTO" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPCTOSEL" desc="Obtêm uma lista de todos os tipos de contatos" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPCTOUPD" desc="Altera um registro da tabela TBTIPCTO ()  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPENDINS" desc="Inserção de Registros na Tabela TBTIPEND" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPENDSEL" desc="Obtêm o registro de Tipo de Endereço com base no id informado" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPENDSELALL" desc="Obtêm uma Lista dos Tipos de Endereços" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPENDUPD" desc="Altera um registro da tabela TBTIPEND (Address Type)  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPUSUINS" desc="Inserção de Registros na Tabela TBTIPUSU" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPUSUSEL" desc="Obtêm o registro do Tipo de Usuário fornecido" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPUSUSELALL" desc="Obtêm todos os registros de Tipo de Usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPUSUUPD" desc="Altera um registro da tabela TBTIPUSU ()  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFUNINS" desc="Inserção de Registros na Tabela TBSYSFUN" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFUNSEL" desc="Seleciona o tipo de contato de acordo com o código" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFUNUPD" desc="Altera um registro da tabela TBSYSFUN ()  de acordo com a chave identity" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRSYSFUNSELALL" desc="Seleciona todos os tipos de contato existentes" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADPROINS" desc="Inserção de Registros na Tabela TBCADPRO" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADPROSEL" desc="Obtêm o registro do produto de acorco o código de produto informado" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADPROUPD" desc="Altera um registro da tabela TBCADPRO (Products)  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADPROSELALL" desc="Obtêm uma lista de todos os produtos" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRCADPROLSTCRT" desc="Obtêm a lista de cartões ativos associadas ao produto" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCRTINS" desc="Inserção de Registros na Tabela TBCADCRT" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRADMCRTSEL" desc="Seleciona o registro de acordo com o Código do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRADMCRTSELCRT" desc="Seleciona o registro de acordo com o Código Extendido do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCRTUPD" desc="Altera um registro da tabela TBCADCRT ()  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRADMCRTGETATV" desc="Verifica se o cartão já foi alocado para um portador" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRADMCRTCHGSTA" desc="ADM : Altera o Status de um Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRADMCRTCHGPSW" desc="Efetua a alteração da senha do cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRADMCRTCHGCVC" desc="Efetua a alteração do número o CVC do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGASS" desc="Efetua o cancelamento da associação de um cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSUACECTL" desc="Obtêm o registro de controle de acesso do usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTINS" desc="Inserção de Registros na Tabela TBREGCRT" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTSEL" desc="Seleciona o registro de acordo com o Código do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTSELCRT" desc="Seleciona o registro de acordo com o Código Extendido do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTSELKEY" desc="Obtêm o registro do cartão de acordo com a chave fornecida" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTUPD" desc="Altera um registro da tabela TBREGCRT ()  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTSELALL" desc="Obtêm uma lista de todos os cartões da base ativa conforme parâmetros de pesquisa informados" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGONLPAR" desc="Altera o campo de permissão de compra on-line" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGOWN" desc="Altera o Gestor do Cartão em uso" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGMEN" desc="Executa Ações de Atualização pela manutenção do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTGETATV" desc="Verifica se o cartão e o CPF/CNPJ informado são passíveis de ativação" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTLCKCRT" desc="Operação@1 -Bloqueia o Cartão@2 - Reverte o Bloqueio Anterior@3 -Fixa o cartão como aguardando desbloqueio" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGSTA" desc="Altera o Status de um Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGPSW" desc="Efetua a alteração da senha do cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGCVC" desc="Efetua a alteração do número o CVC do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLINPROINS" desc="Inserção de Registros na Tabela TBLINPRO" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLINPROSEL" desc="Seleciona o registro de acordo com o Código da Linha" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLINPROUPD" desc="Altera um registro da tabela TBLINPRO ()  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLINPROSELALL" desc="Obtêm todos os registros de linha de produtos existentes" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRUSUPROINS" desc="Inserção de Registros na Tabela TBUSUPRO" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRUSUPROSEL" desc="Obtêm o registro de Gerencia de Produto de acordo com ocódigo do gestor" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRUSUPROLOC" desc="Obtêm o Código do Gestor de Produto com base no produto e usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRUSUPROUPD" desc="Altera um registro da tabela TBUSUPRO ()  de acordo com o campo USUPRO" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRUSUPROSELALL" desc="Obtêm uma lista de todos os registros de Gestores de Produtos de acordo com o usuario e/ou  o produto informado" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRUSUPROLSTUSU" desc="Obtêm a lista de usuarios vinculados a produtos da tabela de gestores" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRUSUPROLSTGST" desc="Obtêm uma lista de gestores associados aos seus produtos e respectivas linhas de produto" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRCADGERSELREC" desc="Obtêm uma lista de registros do cadastro geral conforme parâmetros informados" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSUGET" desc="Obtêm o registro de Login Ativo do Usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPCTAINS" desc="Inserção de Registros na Tabela TBTIPCTA" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPCTASEL" desc="Obtêm uma lista de todos os tipos de conta" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPCTAUPD" desc="Altera um registro da tabela TBTIPCTA (Tipos de Conta)  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADENDSELALL" desc="Obtêm uma lista de todos os endereços de um usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERSELCTA" desc="Obtêm uma lista de usuários com contas virtuais ativas" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTAINS" desc="Inserção de Registros na Tabela TBCADCTA" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTASEL" desc="Seleciona o registro de conta virtual de acordo com o id da conta" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTASELCTA" desc="Seleciona o registro de conta virtual de acordo com os parâmetros fornecidos" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTASELCMF" desc="Obtêm o registro de conta virtual de acordo com o cpf/cnpj informado" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTAUPD" desc="Altera um registro da tabela TBCADCTA (Virtual Account)  de acordo com a chave identity" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTASELALL" desc="Obtêm todos os registros de contas virtuais registradas conforme parametro fornecido" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTADELNID" desc="Exclui logicamente um registro de conta" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTACHGSTAACC" desc="Executa a aprovação ou rejeição de uma conta digital" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTALOC" desc="Localiza uma conta virtual a partir do código de usuário" />
+</procs>
