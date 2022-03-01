@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FF889CB2-6CE9-4B9A-B04A-30A145CA850C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ThunderFire.Domain</RootNamespace>
+    <AssemblyName>ThunderFire.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="DTO\AccessControl.cs" />
+    <Compile Include="DTO\ActiveCards.cs" />
+    <Compile Include="DTO\DataTableResponse.cs" />
+    <Compile Include="DTO\ExecutionResponse.cs" />
+    <Compile Include="DTO\Products.cs" />
+    <Compile Include="Models\cAccountType.cs" />
+    <Compile Include="Models\cActiveCards.cs" />
+    <Compile Include="Models\cAddressBook.cs" />
+    <Compile Include="Models\cAddressType.cs" />
+    <Compile Include="Models\cAttributeType.cs" />
+    <Compile Include="Models\cAuditing.cs" />
+    <Compile Include="Models\cContactBook.cs" />
+    <Compile Include="Models\cContactType.cs" />
+    <Compile Include="Models\cGeneralRegistry.cs" />
+    <Compile Include="Models\cGeneralTable.cs" />
+    <Compile Include="Models\cLoginUser.cs" />
+    <Compile Include="Models\cProductCards.cs" />
+    <Compile Include="Models\cProductLine.cs" />
+    <Compile Include="Models\cProductManagement.cs" />
+    <Compile Include="Models\cProducts.cs" />
+    <Compile Include="Models\cSystemFeatures.cs" />
+    <Compile Include="Models\cTransactionStatus.cs" />
+    <Compile Include="Models\cUserType.cs" />
+    <Compile Include="Models\cVirtualAccount.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThunderFire\ThunderFire.csproj">
+      <Project>{1c929daf-4fea-4a79-b953-407a399611a2}</Project>
+      <Name>ThunderFire</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
