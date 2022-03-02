@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/fontawesome/css/all.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/datatables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav" style="color:black">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Cadastros", "Index", "Cadastros")</li>
+                        <li>@Html.ActionLink("Gestão", "Index", "Gestao")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container body-content">
+            <div id="divmessage"></div>
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>*@
+
+    <div class="content">
+        <div class="wrapper">
+            <div class="row justify-content-lg-start">
+                <div class="col-lg-2 text-center">
+                    <div class="text-center">
+                        <a href="/Cadastros/Index" class="text-uppercase">ThunderHome</a>
+                    </div>
+                </div>
+                <div class="col-lg-auto">
+
+                    <nav class="nav nav-pills nav-fill">
+                        <a class="nav-item nav-link active" href="@Url.Action("Index","Cadastros")">Cadastros</a>
+                        <a class="nav-item nav-link" href="#">Link</a>
+                        <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                    </nav>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </div>
+
+
+    <footer class="footer">
+
+        <div class="copyright pull-right">
+            &copy;
+            <script>document.write(new Date().getFullYear())</script>
+        </div>
+
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.pt-BR.min.js" integrity="sha512-mVkLPLQVfOWLRlC2ZJuyX5+0XrTlbW2cyAwyqgPkLGxhoaHNSWesYMlcUjX8X+k45YB8q90s88O7sos86636NQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @Scripts.Render("~/bundles/datatables")
+    @RenderSection("scripts", required: false)
+
+
+
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+
+                $.notify({
+                    icon: 'ti-gift',
+                    message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
+
+                }, {
+                    type: 'success',
+                    timer: 4000
+                });
+
+            });
+        </script>*@
+</body>
+</html>

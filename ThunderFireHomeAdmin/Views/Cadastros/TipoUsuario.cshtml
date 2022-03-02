@@ -1,0 +1,171 @@
+﻿@model ThunderFireHomeAdmin.Models.UserTypeModel
+@{
+    ViewBag.Title = "Tipo de Usuário";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tipo de Usuário</h4>
+                <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                <hr />
+                <div class="table-responsive">
+                    <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                                <th>Atualizado</th>
+                                <th>&#160;</th>
+                            </tr>
+                        </thead>
+
+                        @foreach (var item in Model.Lista)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TIPUSU)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSCTUS)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DATUPD)
+                                </td>
+                                <td>
+                                    @if (item.STAREC != 2)
+                                    {
+                                        <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.TIPUSU','@item.DSCTUS','@item.STAREC');"> <i class="fa fa-edit"></i></button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modalusertype" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalcaption">@ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FUPDUSU" value="0" />
+                <div class="form-group">
+                    <label for="FTIPUSU" class="col-form-label">Tipo de Usuário:</label>
+                    <input type="text" class="form-control" id="FTIPUSU" size="4" maxlength="4" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="FDSCTUS" class="col-form-label">Descrição:</label>
+                    <input type="text" class="form-control" id="FDSCTUS" size="30" maxlength="30" required>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
+                    <label class="form-check-label" for="FSTAREC">Ativo</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+   
+        function CallForEdit(pcodnum, pdsctxt, pstarec) {
+            var vstarec = (pstarec == 1);
+            $("#modalcaption").html("Alteração de Tipo de Usuário");
+            $("#OPERATION").val("2");
+            $("#FTIPUSU").val(pcodnum);
+            $("#FDSCTUS").val(pdsctxt);
+            $("#FSTAREC").prop('checked', vstarec);
+            //$('#modalusertype').modal({ backdrop: "static", keyboard: false});
+            $('#modalusertype').modal('toggle');
+        }
+        function CallForAdd() {
+            $("#modalcaption").html("Inclusão de Tipo de Usuário");
+            $("#OPERATION").val("1");
+            $("#FTIPUSU").val("0");
+            $("#FDSCTUS").val("");
+            $("#FSTAREC").prop('checked', "true");
+            //$('#modalusertype').modal({ backdrop: "static", keyboard: false});
+            $('#modalusertype').modal('toggle');
+        }
+
+        function Alertar(message, type) {
+
+            var timestamp = new Date().getUTCMilliseconds();
+            var html = "<div id='" + timestamp + "' class='row'>";
+            html += "<div class='col'>";
+            html += "<div class='alert " + type + " alert-dismissible fade show' role='alert'>";
+            html += "<strong>!!!</strong> " + message;
+            html += "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+            html += "<span aria-hidden='true'>&times;</span>";
+            html += "</button>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+            $("#divmessage").append(html);
+            setTimeout(function () {
+                $("#" + timestamp).remove();
+            }, 6000);
+        };
+
+
+
+        $(document).ready(function () {
+            $(document).on("click", "#btn_update", function () {
+
+                var VTIPUSU = $("#FTIPUSU").val();
+                var VDSCTUS = $("#FDSCTUS").val();
+                var VSTAREC = $("#FSTAREC").is(':checked') ? 1 : 0;
+                var mode = $("#OPERATION").val();
+                var vurl = "/Cadastros/InsertUserType/";
+                if (mode == 2)
+                    vurl = "/Cadastros/UpdateUserType/";
+                var VDATA = JSON.stringify({ 'TIPUSU': VTIPUSU, 'DSCTUS': VDSCTUS, 'STAREC': VSTAREC, 'UPDUSU': 0, 'DATCAD': null, 'DATUPD': null });
+                $.ajax({
+                    type: "POST",
+                    url: vurl,
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) { $('#modalusertype').modal('toogle'); }
+                        else { Alertar(result.MessageToUser, 'alert-danger') };
+            },
+                error: function (data) {
+                    alert("Ocorreu um erro inesperado, por favor tente novamente");
+                }
+                    });
+                });
+            });
+
+    </script>
+}

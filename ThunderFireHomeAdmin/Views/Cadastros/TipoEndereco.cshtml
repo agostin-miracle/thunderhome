@@ -1,0 +1,159 @@
+﻿@model ThunderFireHomeAdmin.Models.AddressTypeModel
+@{
+    ViewBag.Title = "Tipo de Endereco";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+            <hr />
+            <div class="table-responsive">
+                <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Descrição</th>
+                            <th width="15%">Atualização</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+
+                    @foreach (var item in Model.Lista)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TIPEND)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DSCTEN)
+                        </td>
+                        <td class="text-center">
+                            @Model.ShowDate(item.DATUPD)
+                        </td>
+                        <td>
+                            @if (item.STAREC != 2)
+                            {
+                                <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.TIPEND','@item.DSCTEN','@item.STAREC');"> <i class="fa fa-edit"></i></button>
+                            }
+                        </td>
+                    </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="modaladdresstype" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalcaption">@ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FUPDUSU" value="0" />
+                <div class="form-group">
+                    <label for="FTIPEND" class="col-form-label">Tipo de Endereço:</label>
+                    <input type="text" class="form-control" id="FTIPEND" size="4" maxlength="4" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="FDSCTEN" class="col-form-label">Descrição:</label>
+                    <input type="text" class="form-control" id="FDSCTEN" size="30" maxlength="30" required>
+                </div>
+
+                <div class="form-group row ml-4">
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked />
+                        <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FREFCTO" checked />
+                        <label class="form-check-label" for="FREGATV">Contatosl</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+
+        function CallForEdit(pTIPEND, pDSCTEN, pSTAREC) {
+            $("#modalcaption").html("Alteração de Tipo de Usuário");
+            $("#OPERATION").val("2");
+            $("#FTIPEND").val(pTIPEND);
+            $("#FDSCTEN").val(pDSCTEN);
+            $("#FSTAREC").prop('checked', (pSTAREC==1));
+            $('#modaladdresstype').modal({ backdrop: "static", keyboard: false});
+            $('#modaladdresstype').modal('toggle');
+        }
+        function CallForAdd() {
+            $("#modalcaption").html("Inclusão de Tipo de Usuário");
+            $("#OPERATION").val("1");
+            $("#FTIPEND").val("0");
+            $("#FDSCTEN").val("");
+            $("#FSTAREC").prop('checked', "true");
+            $('#modaladdresstype').modal({ backdrop: "static", keyboard: false });
+            $('#modaladdresstype').modal('toggle');
+        }
+
+        $(document).ready(function () {
+            $(document).on("click", "#btn_update", function () {
+
+                var mode = $("#OPERATION").val();
+                var vurl = "/Cadastros/InsertAddressType/";
+                if (mode == 2)
+                    vurl = "/Cadastros/UpdateAddressType/";
+                var VDATA = JSON.stringify(
+                    {
+                        'TIPEND': $("#FTIPEND").val(),
+                        'DSCTEN': $("#FDSCTEN").val(),
+                        'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0,
+                        'REFCTO': $("#FREFCTO").is(':checked') ? 1 : 0
+                    });
+                $.ajax({
+                    type: "POST",
+                    url: vurl,
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) { $('#modaladdresstype').modal('toggle'); }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Acesso', message: result.MessageToUser, effect: 'newspaper' });
+                        };
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Acesso', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+            });
+        });
+    </script>
+}
+

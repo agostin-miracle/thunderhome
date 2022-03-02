@@ -1,0 +1,284 @@
+﻿@model ThunderFireHomeAdmin.Models.ProductsModel
+@{
+    ViewBag.Title = "Produtos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="modalproducts" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-product-hunt" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <div class="form-group row">
+                    <label for="FLINPRO" class="col-sm-2 control-label form-control-sm">Linha:</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" id="FLINPRO" style="max-width:80%;">
+                            <option value="-1">Selecione</option>
+                            @if (Model.ListaLinhaProduto != null)
+                            {
+                                foreach (var item in Model.ListaLinhaProduto)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.LINPRO)">@Html.DisplayFor(modelItem => item.DSCLIN)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="FCODPRO" class="col-sm-2 control-label form-control-sm">Produto:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm codigo" id="FCODPRO" size="6" maxlength="6">
+                    </div>
+
+                    <label for="FDSCPRO" class="col-sm-2 col-form-label">Descrição:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-sm" id="FDSCPRO" size="50" maxlength="50" required>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="FNOMFAN" class="col-form-label">Nome Fantasia:</label>
+                    <input type="text" class="form-control" id="FNOMFAN" size="50" maxlength="50" required>
+                </div>
+
+                <div class="form-group row ml-4">
+                    <div class="form-check">
+                        <input class="form-check-input form-control-sm" type="checkbox" value="" id="FATVCDT" checked>
+                        <label class="form-check-label form-control-sm" for="FATVCDT">Ativação Cadastral</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input form-control-sm" type="checkbox" value="" id="FATVGPA">
+                        <label class="form-check-label form-control-sm" for="FATVGPA">Gerar Senha Automática</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input form-control-sm" type="checkbox" value="" id="FINDBNF" checked>
+                        <label class="form-check-label form-control-sm" for="FINDBNF">Benefício</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input form-control-sm" type="checkbox" value="" id="FSTAREC" checked>
+                        <label class="form-check-label form-control-sm" for="FSTAREC">Ativo</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="CLINPRO" class="col-sm-2 control-label form-control-sm">Linha:</label>
+                <div class="col-sm-10">
+                    <select class="form-control form-control-sm" id="CLINPRO" style="max-width:80%;">
+                        <option value="-1">Selecione</option>
+                        @if (Model.ListaLinhaProduto != null)
+                        {
+                            foreach (var item in Model.ListaLinhaProduto)
+                            {
+                                <option value="@Html.DisplayFor(modelItem => item.LINPRO)">@Html.DisplayFor(modelItem => item.DSCLIN)</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+            <hr />
+            <div class="table-responsive">
+                <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Status</th>
+                            <th>Produto</th>
+                            <th>Nome</th>
+                            <th>Ativação</th>
+                            <th>Senha</th>
+                            <th>Benefício</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.codigo').mask('0000');
+
+            commandquery = "/Cadastros/QueryProducts";
+            $('#gridshow').DataTable(
+                {
+                    paging: true,
+                    searching: false,
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                    processing: true,
+                    serverSide: true,
+                    orderMulti: false,
+                    ajax: {
+                        url: commandquery,
+                        type: "POST",
+                        datatype: "json",
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                        data: {
+                            pLINPRO: function () { return $('#CLINPRO').val() }
+                        }
+                    },
+
+                    columns: [
+                        { data: "CODPRO" },
+                        { data: "DSCREC" },
+                        { data: "DSCPRO" },
+                        { data: "NOMFAN" },
+                        { data: "DSCCDT" },
+                        { data: "DSCGPA" },
+                        { data: "DSCBNF" },
+                        { data: "LGNUSU" },
+                        {
+                            "render": function (data, type, row) {
+                                return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.CODPRO + "');\"> <i class='fas fa-edit'></i></button>&nbsp;"
+                            }
+                        }
+                    ],
+                    "language": {
+                        "processing": "Aguarde, buscando informações",
+                        "loadingRecords": "Carregando",
+                    },
+                    "pageLength": 10,
+                    "oLanguage": {
+                        "sLengthMenu": "Mostrar _MENU_ registros por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                        "sSearch": "Pesquisar: "
+                    },
+                    columnDefs: [
+                        { "targets": [0], "visible": false, "searchable": false },
+                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "5%" },
+                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "20%" },
+                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "20%" },
+                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "5%" },
+                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "5%" },
+                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "5%" },
+                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "12%" },
+                        { className: "text-right", "targets": [8], "visible": true, "searchable": false, "width": "15%" }
+                    ]
+                });
+
+
+
+
+            $(document).on("click", "#btn_update", function () {
+                var mode = $("#OPERATION").val();
+                var vurl = "/Cadastros/ChangeProducts?modo=" + mode;
+                var vNOMFAN = $('#FNOMFAN').val();
+                if (vNOMFAN === "" || vNOMFAN == null)
+                    vNOMFAN = " ";
+                var VDATA = JSON.stringify({
+                    'CODPRO': parseInt($("#FCODPRO").val()),
+                    'DSCPRO': $("#FDSCPRO").val(),
+                    'LINPRO': parseInt($("#FLINPRO").val()),
+                    'NOMFAN': vNOMFAN,
+                    'ATVCDT': $("#FATVCDT").is(':checked') ? 1 : 0,
+                    'ATVGPA': $("#FATVGPA").is(':checked') ? 1 : 0,
+                    'INDBNF': $("#FINDBNF").is(':checked') ? 1 : 0,
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                });
+                $.ajax({
+                    type: "POST",
+                    url: vurl,
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) { $('#modalproducts').modal('toggle'); }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Produtos', message: result.MessageToUser, effect: 'newspaper' });
+                            location.href = location.href;
+                        };
+                    },
+                    error: function (data) {
+                        console.log(data);
+                        $.alert({ class: 'danger', title: 'Produtos', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+            });
+
+
+            $('#CLINPRO').on('change', function () {
+                $('#gridshow').DataTable().ajax.reload();
+            });
+
+        });
+
+
+        function CallForAdd() {
+
+            var value = $('#CLINPRO').val();
+            if (value > 0) {
+                $("#OPERATION").val("1");
+                $("#FSTAREC").prop('checked', "true");
+                $("#FLINPRO").val(value);
+                $("#FLINPRO").prop('disabled', true);
+                $("#FCODPRO").val("0");
+                $("#FCODPRO").prop('disabled', true);
+                $('#modalproducts').modal({ backdrop: 'static', Keyboard: 'true' });
+                $('#modalproducts').modal('toggle');
+            }
+            else {
+                $.alert({ class: 'danger', title: 'Produtos', message: 'Selecione uma linha de produto válida', effect: 'zoom' });
+            }
+        }
+        function CallForEdit(pCODPRO) {
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: "/Cadastros/SelectProducts",
+                data: { pCODPRO: pCODPRO },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FCODPRO").val(result.USUPRO);
+                    $("#FDSCPRO").val(result.CODUSU);
+                    $("#FLINPRO").val(result.LINPRO);
+                    $("#FLINPRO").prop('disabled', true);
+                    $("#FDSCPRO").val(result.DSCPRO);
+                    $("#FNOMFAN").val(result.NOMFAN);
+                    $("#FATVCDT").prop('checked', (result.ATVCDT == 1));
+                    $("#FATVGPA").prop('checked', (result.ATVGPA == 1));
+                    $("#FINDBNF").prop('checked', (result.INDBNF == 1));
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                }
+            });
+            $('#modalproducts').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalproducts').modal('toggle');
+        }
+    </script>
+}

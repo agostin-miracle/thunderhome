@@ -1,0 +1,227 @@
+﻿@model ThunderFireHomeAdmin.Models.GeneralTableModel
+@{
+    /**/
+
+    ViewBag.Title = "TabelaGeral";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="modal fade" id="modalgeneraltable" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalcaption">@ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FUPDUSU" value="0" />
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="FNUMTAB" class="col-form-label">Tabela Associada:</label>
+                        <select class="form-control form-control-md" id="FNUMTAB" disabled>
+                            @if (Model.ListaTabela != null)
+                            {
+                                foreach (var item in Model.ListaTabela)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="FKEYCOD" class="col-form-label">Código:</label>
+                        <input type="text" class="form-control" id="FKEYCOD" size="8" maxlength="8" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="FKEYTXT" class="col-form-label">Chave:</label>
+                        <input type="text" class="form-control" id="FKEYTXT" size="8" maxlength="8" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="FDSCTAB" class="col-form-label">Descrição:</label>
+                        <input type="text" class="form-control" id="FDSCTAB" size="40" maxlength="100" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="FNUMREF" class="col-form-label">Referência:</label>
+                        <input type="text" class="form-control" id="FNUMREF" size="8" maxlength="8" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="FIDEPRE" class="col-form-label">Precedência:</label>
+                        <input type="text" class="form-control" id="FIDEPRE" size="4" maxlength="4" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="checkbox" class="form-check-input ml-md-4" id="FUSRDSP" checked>
+                        <label class="form-check-label ml-md-6" for="FUSRDSP">Disponível para usuário</label>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="checkbox" class="form-check-input  ml-md-4" id="FSTAREC" checked>
+                        <label class="form-check-label ml-md-6" for="FSTAREC">Ativo</label>
+                    </div>
+                </div>
+
+
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tabela Geral</h4>
+                <div class="form-horizontal">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="CKEYCOD" class="col-sm-2 control-label">Tabelas</label>
+                            <select class="form-control form-control-sm" id="CKEYCOD">
+                                @if (Model.ListaTabela != null)
+                                {
+                                    foreach (var item in Model.ListaTabela)
+                                    {
+                                        <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                <hr />
+                <div class="table-responsive">
+                    <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Código</th>
+                                <th>Chave</th>
+                                <th>Descrição</th>
+                                <th>Referência</th>
+                                <th>Precedente</th>
+                                <th>Disponível</th>
+                                <th>&#160;</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var pNUMTAB = $('#CKEYCOD').val();
+            if (pNUMTAB == null)
+                pNUMTAB = 0;
+            var commandquery = "/Cadastros/GeneralTableQuery?pnumtab=" + pNUMTAB;
+            commandquery = "/Cadastros/GeneralTableQuery";
+            $('#gridshow').DataTable(
+                {
+                    paging: true,
+                    searching: false,
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                    processing: true,
+                    serverSide: true,
+                    orderMulti: false,
+                    ajax: {
+                        url: commandquery,
+                        type: "POST",
+                        datatype: "json",
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                        data: {
+                            pNUMTAB: function () { return $('#CKEYCOD').val() }
+                        }
+                    },
+
+                    //dataSrc: function (json) {
+                    //    console.log(json);
+                    //    data.draw = json.Draw;
+                    //    data.recordsTotal = json.RecordsTotal;
+                    //    data.recordsFiltered = json.RecordsFiltered;
+                    //    data.data = json.Data;
+                    //    alert('x');
+                    //    return data.data;
+
+                    //},
+                    columns: [
+                        { data: "KEYTAB" },
+                        { data: "KEYCOD" },
+                        { data: "KEYTXT" },
+                        { data: "DSCTAB" },
+                        { data: "NUMREF" },
+                        { data: "IDEPRE" },
+                        { data: "USRDSP" },
+                        {
+                            "render": function (data, type, row) {
+                                return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallToEdit('" + row.KEYTAB + "');\"> <i class='mdi mdi-content-save'></i></button>&nbsp;"
+                            }
+                        }
+                    ],
+                    "language": {
+                        "processing": "Aguarde, buscando informações",
+                        "loadingRecords": "Carregando",
+                    },
+                    "pageLength": 10,
+                    "oLanguage": {
+                        "sLengthMenu": "Mostrar _MENU_ registros por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                        "sSearch": "Pesquisar: "
+                    },
+                    columnDefs: [
+                        { "targets": [0], "visible": false, "searchable": false },
+                        { className: "text-right", "targets": [1], "visible": true, "searchable": false, "width": "10%" },
+                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "10%" },
+                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "40%" },
+                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "10%" },
+                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "10%" },
+                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "10%" },
+                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "10%" }
+                    ]
+                });
+        });
+
+
+        function CallForAdd() {
+            $("#modalcaption").html("Inclusão de Item na Tabela Geral");
+            $("#OPERATION").val("1");
+            $("#FNUMTAB").val($('#CKEYCOD').val());
+            $("#FDSCTAB").val("");
+            $("#FIDEPRE").val("0");
+            $("#FSTAREC").prop('checked', "true");
+            $("#FUSRDSP").prop('checked', "true");
+            $('#modalgeneraltable').modal('toggle');
+        }
+
+    </script>
+
+}

@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Logon";
+}
+
+
+<div class="modal fade" id="modalformlogin" tabindex="-1" role="dialog" aria-labelledby="loginlabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="color:red;float:left"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="FLGNTYP" value="1" />
+                <div class="form-group">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <input type="text" class="form-control" id="FLGNUSU" placeholder="Informe o nome do usuário" required>
+                </div>
+                <div class="form-group">
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    <input type="text" class="form-control" id="FPSWUSU" placeholder="Informe a senha" required>
+                </div>
+                <button type="button" id="btn_log" class="btn btn-default btn-success btn-block" data-status="Warning">
+                    <span class="glyphicon glyphicon-off"></span> Login
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            $('#modalformlogin').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalformlogin').modal('show');
+            $(document).on("click", "#btn_log", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/Authenticate",
+                    data: JSON.stringify({ 'LGNTYP': parseInt($("#FLGNTYP").val()), 'LGNUSU': $("#FLGNUSU").val(), 'PSWUSU': $("#FPSWUSU").val() }),
+                    dataType: 'json',
+                    contentType:'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) {
+                            $('#modalformlogin').modal('toggle');
+                        }
+                        else {
+                            var status = $(this).data('status');
+                            $.alert({ class: status, title: 'Acesso', message: result.MessageToUser, effect: 'newspaper'});
+                        };
+                    },
+                    error: function (data) {
+                        var status = $(this).data('status');
+                        $.alert({ class: 'danger', title: 'Acesso', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+            });
+        });
+
+    </script>
+
+}
+

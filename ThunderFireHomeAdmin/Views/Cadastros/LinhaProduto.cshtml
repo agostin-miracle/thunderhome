@@ -1,0 +1,150 @@
+﻿
+@model ThunderFireHomeAdmin.Models.ProductLineModel
+@{
+    ViewBag.Title = "Linha de Produto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Linha de Produto</h4>
+                <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                <hr />
+                <div class="table-responsive">
+                    <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Linha</th>
+                                <th>Descrição</th>
+                                <th>Atualizado</th>
+                                <th>&#160;</th>
+                            </tr>
+                        </thead>
+
+                        @foreach (var item in Model.Lista)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LINPRO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSCLIN)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DATUPD)
+                                </td>
+                                <td>
+                                    @if (item.STAREC != 2)
+                                    {
+                                        <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.LINPRO','@item.DSCLIN','@item.STAREC');"> <i class="fa fa-edit"></i></button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modalproductline" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalcaption">@ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FUPDUSU" value="0" />
+                <div class="form-group">
+                    <label for="FLINPRO" class="col-form-label">Linha:</label>
+                    <input type="text" class="form-control" id="FLINPRO" size="4" maxlength="4" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="FDSCLIN" class="col-form-label">Descrição:</label>
+                    <input type="text" class="form-control" id="FDSCLIN" size="50" maxlength="50" required>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
+                    <label class="form-check-label" for="FSTAREC">Ativo</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+
+        function CallForEdit(pcodnum, pdsctxt, pstarec) {
+            var vstarec = (pstarec == 1);
+            $("#OPERATION").val("2");
+            $("#FLINPRO").val(pcodnum);
+            $("#FDSCLIN").val(pdsctxt);
+            $("#FSTAREC").prop('checked', vstarec);
+            $('#modalproductline').modal({ backdrop: "static", keyboard: false });
+            $('#modalproductline').modal('toggle');
+        }
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            $("#FLINPRO").val("0");
+            $("#FDSCLIN").val("");
+            $("#FSTAREC").prop('checked', "true");
+            $('#modalproductline').modal({ backdrop: "static", keyboard: false });
+            $('#modalproductline').modal('toggle');
+        }
+
+
+        $(document).ready(function () {
+            $(document).on("click", "#btn_update", function () {
+                var mode = $("#OPERATION").val();
+                var VTIPLIN = parseInt($("#FLINPRO").val());
+                var vurl = "/Cadastros/ChangeProductLine?modo=" + mode;
+                var VDATA = JSON.stringify({
+                    'LINPRO': VTIPLIN,
+                    'DSCLIN': $("#FDSCLIN").val(),
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                });
+                $.ajax({
+                    type: "POST",
+                    url: vurl,
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) { $('#modalproductline').modal('toogle'); }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Linha de Produto', message: result.MessageToUser, effect: 'newspaper' });
+                            location.href = location.href;
+                        };
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Linha de Produto', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+            });
+        });
+
+    </script>
+}

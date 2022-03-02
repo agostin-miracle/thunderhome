@@ -1,0 +1,364 @@
+﻿@model ThunderFireHomeAdmin.Models.ContactBookModel
+@{
+    ViewBag.Title = "Contatos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group row">
+                <label for="CCODUSU" class="col-sm-2 col-form-label">Usuário</label>
+                <input type="hidden" id="CURUSR" value="@Model.CodigoUsuario" />
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm" id="CCODUSU">
+                        @if (Model.CodigoUsuario == 0)
+                        {
+                            <option value="-1">Selecione</option>
+                        }
+                        @if (Model.ListaUsuario != null)
+                        {
+                            foreach (var item in Model.ListaUsuario)
+                            {
+                                @*if (item.CODUSU == Model.UsuarioSelecionado)
+                                    {
+                                        <option selected value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+                                    }
+                                    else
+                                    {*@
+                                <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Detalhes</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="gridcontact" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Registro</th>
+                            <th>Principal</th>
+                            <th>Tipo</th>
+                            <th>DDD</th>
+                            <th>Telefone</th>
+                            <th>Atualização</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalcontactbook" tabindex="-1" role="dialog" aria-labelledby="modalab" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-phone" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FCODEND" value="@Model.CodigoEndereco" />
+                <div class="form-group row">
+                    <label for="FCODUSU" class="col-sm-2 control-label">Usuário</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" id="FCODUSU">
+                            @if (Model.CodigoUsuario == 0)
+                            {
+                                <option value="-1">Selecione</option>
+                            }
+                            @if (Model.ListaUsuario != null)
+                            {
+                                foreach (var item in Model.ListaUsuario)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="FTIPCTO" class="col-sm-2 control-label">Tipo</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" id="FTIPCTO">
+                            @if (Model.ListaTipoContato != null)
+                            {
+                                foreach (var item in Model.ListaTipoContato)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.TIPCTO)">@Html.DisplayFor(modelItem => item.DSCCTO)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <label for="FCODPAI" class="col-sm-2 control-label">País</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" id="FCODPAI">
+                            @if (Model.ListaPais != null)
+                            {
+                                foreach (var item in Model.ListaPais)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label for="FCODOPR" class="col-sm-2 control-label">Operadora</label>
+                    <div class="col-sm-2">
+                        <select class="form-control form-control-sm" id="FCODOPR">
+                            @if (Model.ListaOperadora != null)
+                            {
+                                foreach (var item in Model.ListaOperadora)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <label for="FNUMDDD" class="col-sm-2 control-label">DDD</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm ddd" id="FNUMDDD" name="FNUMDDD" placeholder="DDD" value="" required>
+                    </div>
+                    <label for="FNUMTEL" class="col-sm-2 control-label">Número</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm phone" id="FNUMTEL" name="FNUMTEL" placeholder="Número" value="0">
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label for="FDSCOBS" class="col-sm-2 control-label">Observações</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="FDSCOBS" name="FDSCOBS" placeholder="" value="" maxlength="100" required>
+                    </div>
+                </div>
+
+                <div class="form-group row ml-4">
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked />
+                        <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FREGATV" checked />
+                        <label class="form-check-label" for="FREGATV">Principal</label>
+                    </div>
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FISWHAT" checked />
+                        <label class="form-check-label" for="FISWHAT">Whats App</label>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="btn_update_end">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.phone').mask('0 0000-0000');
+            $('.ddd').mask('000');
+            var commandquery = "/Cadastros/QueryContactBook";
+            $('#gridcontact').DataTable(
+                {
+                    paging: true,
+                    searching: false,
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                    processing: true,
+                    serverSide: true,
+                    orderMulti: false,
+                    responsive: true,
+                    ajax: {
+                        url: commandquery,
+                        type: "POST",
+                        datatype: "json",
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                        data: {
+                            pCODUSU: function () { return $('#CCODUSU').val() }
+                        }
+                    },
+                    columns: [
+                        { data: "CODCTO" },
+                        { data: "DSCREC" },
+                        { data: "DSCATV" },
+                        { data: "DSCCTO" },
+                        { data: "NUMDDD" },
+                        { data: "NUMTEL" },
+                        { data: "DATUPD" },
+                        { data: "LGNUSU" },
+                        {
+                            "render": function (data, type, row) {
+                                var botoes = "";
+                                botoes += "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.CODEND + "');\"> <i class='fa fa-edit'></i></button>&nbsp;"
+                                botoes += "<button id='btn_call_pho' value='Contact' class='btn btn-primary btn-sm' onclick=\"CallForContact(" + row.CODUSU.toString() + "," + row.CODEND.toString() + ");\"> <i class='fa fa-phone'></i></button>&nbsp;"
+                                return botoes;
+                            }
+                        }
+                    ],
+                    "language": {
+                        "processing": "Aguarde, buscando informações",
+                        "loadingRecords": "Carregando",
+                    },
+                    "pageLength": 10,
+                    "oLanguage": {
+                        "sLengthMenu": "Mostrar _MENU_ registros por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                        "sSearch": "Pesquisar: "
+                    },
+                    columnDefs: [
+                        { "targets": [0], "visible": false, "searchable": false },
+                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-center", "targets": [2], "visible": true, "searchable": false, "width": "4%" },
+                        { className: "text-center", "targets": [3], "visible": true, "searchable": false, "width": "6%" },
+                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "80px" },
+                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "12%" },
+                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-right", "targets": [7], "visible": true, "searchable": false, "width": "10%" }
+                        { className: "text-right", "targets": [8], "visible": true, "searchable": false, "width": "10%" }
+                    ]
+                });
+
+
+
+            $(document).on("click", "#btn_update_cto", function () {
+                var mode = $("#OPERATION").val();
+                var vurl = "/Cadastros/ChangeContactBook?modo=" + mode;
+
+                var vCODPAI = $('#FCODPAI').val();
+                if (vCODPAI === "" || vCODPAI == null)
+                    vCODPAI = 55;
+                else
+                    vCODPAI = parseInt(vCODPAI);
+                var vCODOPR = $('#FCODOPR').val();
+                if (vCODOPR === "" || vCODOPR == null)
+                    vCODOPR = 0;
+
+                var vNUMTEL = $("#FNUMTEL").val().replace('.', '').replace(',', '').replace('-', '').replace(' ','');
+                var VDATA = JSON.stringify({
+                    'CODCTO': parseInt($("#FCODCTO").val()),
+                    'CODEND': parseInt($("#FCODEND").val()),
+                    'CODUSU': parseInt($("#FCODUSU").val()),
+                    'TIPCTO': parseInt($("#FTIPCTO").val()),
+                    'REGATV': $("#FREGATV").is(':checked') ? 1 : 0,
+                    'CODPAI': vCODPAI,
+                    'CODOPR': vCODOPR,
+                    'NUMDDD': $("#FNUMDDD").val(),
+                    'ISWHAT': $("#FISWHAT").is(':checked') ? 1 : 0,
+                    'NUMTEL': vNUMTEL,
+                    'DSCOBS': $("#FDSCOBS").val(),
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                });
+                $.ajax({
+                    type: "POST",
+                    url: vurl,
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) {
+                            $('#modalcontactbook').modal('toggle');
+                            location.href = location.href;
+                        }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Endereços', message: result.MessageToUser, effect: 'newspaper' });
+                        };
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Endereços', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+
+            });
+
+
+            $('#CCODUSU').on('change', function () {
+                $('#gridcontact').DataTable().ajax.reload();
+            });
+
+        });
+
+
+
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            $("#FSTAREC").prop('checked', "true");
+            var pCODUSU = $("#CCODUSU").val();
+            if (pCODUSU > 0) {
+                $("#FCODUSU").val(pCODUSU);
+                $("#FCODUSU").attr('disabled', 'disabled');
+            }
+            $("#FCODPAI").val(55);
+            $("#FTIPCTO").val(3);
+            $('#modalcontactbook').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalcontactbook').modal('toggle');
+        }
+
+        function CallForEdit(pCODEND) {
+            var commandquery = "/Cadastros/SelectContactBook";
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: commandquery,
+                data: { pCODCTO: pCODCTO },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FCODCTO").val(result.CODCTO);
+                    $("#FCODUSU").val(result.CODUSU);
+                    $("#FCODEND").val(result.CODEND);
+                    $("#FTIPCTO").val(result.TIPCTO);
+                    $("#FREGATV").prop('checked', (result.REGATV == 1));
+                    $("#FCODPAI").val(result.CODPAI);
+                    $("#FCODOPR").val(result.CODOPR);
+                    $("#FNUMDDD").val(result.NUMDDD);
+                    $("#FISWHAT").prop('checked', (result.ISWHAT == 1));
+                    $("#FNUMTEL").val(result.NUMTEL);
+                    $("#FDSCOBS").val(result.DSCOBS);
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                }
+            })
+            $('#modalcontactbook').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalcontactbook').modal('toggle');
+        }
+    </script>
+}

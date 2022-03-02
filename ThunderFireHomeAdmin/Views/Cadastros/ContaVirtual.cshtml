@@ -1,0 +1,495 @@
+﻿@model ThunderFireHomeAdmin.Models.VirtualAccountModel
+@{
+    ViewBag.Title = "ContaVirtual";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group row">
+                <label for="CCODUSU" class="col-sm-2 col-form-label">Usuário</label>
+                <input type="hidden" id="CURUSR" value="@Model.CodigoUsuario" />
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm" id="CCODUSU">
+                        @if (Model.CodigoUsuario == 0)
+                        {
+                            <option value="-1">Selecione</option>
+                        }
+                        @if (Model.ListaUsuario != null)
+                        {
+                            foreach (var item in Model.ListaUsuario)
+                            {
+                                if (item.CODUSU == Model.UsuarioSelecionado)
+                                {
+                                    <option selected value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+                                }
+                                else
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Detalhes</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="gridaddress" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Origem</th>
+                            <th>Tipo</th>
+                            <th>Conta</th>
+                            <th>DV</th>
+                            <th>Banco</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalvirtualaccount" tabindex="-1" role="dialog" aria-labelledby="modalab" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-folder" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FCODEND" value="0" />
+                <div class="form-group row">
+                    <label for="FCODUSU" class="col-sm-2 control-label">Usuário</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" id="FCODUSU">
+                            @if (Model.CodigoUsuario == 0)
+                            {
+                                <option value="-1">Selecione</option>
+                            }
+                            @if (Model.ListaUsuario != null)
+                            {
+                                foreach (var item in Model.ListaUsuario)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="FSTACTA" class="col-sm-2 control-label">Status</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" id="FSTACTA">
+                            @if (Model.ListaStatusConta != null)
+                            {
+                                foreach (var item in Model.ListaStatusConta)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.CODSTA)">@Html.DisplayFor(modelItem => item.DSCSTA)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="FORGCTA" class="col-sm-2 control-label">Origem</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" id="FORGCTA">
+                            @if (Model.ListaOrigemConta != null)
+                            {
+                                foreach (var item in Model.ListaOrigemConta)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <label for="FNUMBCO" class="col-sm-2 control-label">Banco</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" id="FNUMBCO">
+                            @if (Model.ListaBancos != null)
+                            {
+                                foreach (var item in Model.ListaBancos)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYTXT)">@(item.KEYTXT + " - " + item.DSCTAB)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="FNUMAGE" class="col-sm-2 control-label">Tipo</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm" id="FNUMAGE" name="FNUMAGE" placeholder="Agência" maxlength="15">
+                    </div>
+                    <label for="FNUMCTA" class="col-sm-2 control-label">Conta</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm" id="FNUMCTA" name="FNUMCTA" placeholder="Agência" maxlength="15">
+                    </div>
+                    <label for="FNUMDVE" class="col-sm-2 control-label">DV</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm" id="FNUMDVE" name="FNUMDVE" placeholder="DV" maxlength="1">
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="FTIPCTA" class="col-sm-2 control-label">Tipo de Conta</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" id="FTIPCTA">
+                            @if (Model.ListaTipoConta != null)
+                            {
+                                foreach (var item in Model.ListaTipoConta)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.TIPCTA)">@Html.DisplayFor(modelItem => item.DSCCTA)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <label for="FTIPBNF" class="col-sm-2 control-label">Beneficiário</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" id="FTIPBNF">
+                            @if (Model.ListaTipoBeneficiario != null)
+                            {
+                                foreach (var item in Model.ListaTipoBeneficiario)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="FNOMBNF" class="col-sm-2 control-label">Beneficiário</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FNOMBNF" placeholder="Beneficiário" maxlength="70">
+                    </div>
+                    <label for="FCODCMF" class="col-sm-2 control-label">CPF/CNPJ</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FCODCMF" placeholder="CPF/CNPJ">
+                    </div>
+                </div>
+
+
+                <div class="form-group row ml-4">
+                        <div class="form-check col-sm-4">
+                            <input class="form-check-input" type="checkbox" value="" id="FAPLLIM"/>
+                            <label class="form-check-label" for="FAPLLIM">Aplicar limite</label>
+                        </div>
+
+                    <label for="FVLRLIM" class="col-sm-2 control-label">Limite</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm money" id="FVLRLIM" placeholder="Limite" maxlength="12">
+                    </div>
+                    <label for="FDATVAL" class="col-sm-2 control-label">Validade</label>
+                    <div class="col-sm-2">
+                        <div class='input-group date' id='datetimepicker3'>
+                            <input type="text" class="form-control form-control-sm datepicker" id="FDATVAL" placeholder="" maxlength="10">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group row ml-4">
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked />
+                        <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FREGATV" checked />
+                        <label class="form-check-label" for="FREGATV">Principal</label>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.money').mask("#.##0,00");
+            $('.datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: "pt-BR",
+                minViewMode: 0,
+                orientation: 'auto',
+                startDate: '+1d',
+                autoclose: true,
+                daysOfWeekDisabled: ['0']
+            });
+
+
+            var commandquery = "/Cadastros/QueryVirtualAccount";
+            $('#gridaddress').DataTable(
+                {
+                    paging: true,
+                    searching: false,
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                    processing: true,
+                    serverSide: true,
+                    orderMulti: false,
+                    responsive: true,
+                    ajax: {
+                        url: commandquery,
+                        type: "POST",
+                        datatype: "json",
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                        data: {
+                            pCODUSU: function () { return $('#CCODUSU').val() }
+                        }
+                    },
+                    columns: [
+                        { data: "NIDCTA" },
+                        { data: "DSCORG" },
+                        { data: "DSCCTA" },
+                        { data: "NUMCTA" },
+                        { data: "NUMDVE" },
+                        { data: "DSCBCO" },
+                        { data: "LGNUSU" },
+                        {
+                            "render": function (data, type, row) {
+                                var botoes = "";
+                                botoes += "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.CODEND + "');\"> <i class='fa fa-edit'></i></button>&nbsp;"
+                                if (row.REFCTO) {
+                                    botoes += "<button id='btn_call_pho' value='Contact' class='btn btn-primary btn-sm' onclick=\"CallForContact(" + row.CODUSU.toString() + "," + row.CODEND.toString() + ");\"> <i class='fa fa-phone'></i></button>&nbsp;"
+                                }
+                                return botoes;
+                            }
+                        }
+                    ],
+                    "language": {
+                        "processing": "Aguarde, buscando informações",
+                        "loadingRecords": "Carregando",
+                    },
+                    "pageLength": 10,
+                    "oLanguage": {
+                        "sLengthMenu": "Mostrar _MENU_ registros por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                        "sSearch": "Pesquisar: "
+                    },
+                    columnDefs: [
+                        { "targets": [0], "visible": false, "searchable": false },
+                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "6%" },
+                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "4%" },
+                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "12%" },
+                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-right", "targets": [7], "visible": true, "searchable": false, "width": "10%" }
+                    ]
+                });
+
+
+
+            $(document).on("click", "#btn_update", function () {
+                var mode = $("#OPERATION").val();
+                var vurl = "/Cadastros/ChangeVirtualAccount?modo=" + mode;
+                vDATVAL = ToDateValid($("#FDATVAL").val());
+                console.log(vDATVAL);
+                var VDATA = JSON.stringify({
+                    'CODUSU': parseInt($("#FCODUSU").val()),
+                    'NUMAGE': $("#FNUMAGE").val(),
+                    'NUMBCO': $("#FNUMBCO").val(),
+                    'NUMCTA': $("#FNUMCTA").val(),
+                    'NUMDVE': $("#FNUMDVE").val(),
+                    'ORGCTA': parseInt($("#FORGCTA").val()),
+                    'TIPCTA': parseInt($("#FTIPCTA").val()),
+                    'STACTA': parseInt($("#FSTACTA").val()),
+                    'VLRLIM': ToFloat($('#FVLRLIM').val()),
+                    'DATVAL': vDATVAL,
+                    'APLLIM': $("#FAPLLIM").is(':checked') ? 1 : 0,
+                    'TIPBNF': parseInt($("#FTIPBNF").val()),
+                    'CODCMF': $("#FCODCMF").val(),
+                    'NOMBNF': $("#FNOMBNF").val(),
+                        'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                });
+                $.ajax({
+                    type: "POST",
+                    url: vurl,
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) {
+                            $('#modalvirtualaccount').modal('toggle');
+                            location.href = location.href;
+                        }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Endereços', message: result.MessageToUser, effect: 'newspaper' });
+                        };
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Endereços', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+
+            });
+
+
+            $('#FORGCTA').on('change', function () {
+                var value = $(this).val();
+                if (value == 1) {
+                    $('#FNUMBCO').val("000");
+                    $('#FNUMBCO').attr("disabled", "disabled");
+                    $('#FNUMCTA').attr("disabled", "disabled");
+                    $('#FNUMDVE').attr("disabled", "disabled");
+                    $('#FNUMAGE').attr("disabled", "disabled");
+                    $('#FTIPCTA').val("1");
+                    $('#FTIPCTA').attr("disabled", "disabled");
+                    $('#FTIPBNF').val("1");
+                    $('#FTIPBNF').attr("disabled", "disabled");
+                    $('#FNOMBNF').attr("disabled", "disabled");
+                    $('#FCODCMF').attr("disabled", "disabled");
+                }
+            });
+
+            $('#CCODUSU').on('change', function () {
+                $('#gridaddress').DataTable().ajax.reload();
+            });
+
+        });
+
+
+
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            var pCODUSU = $("#CCODUSU").val();
+            if (pCODUSU > 0) {
+                $("#FCODUSU").val(pCODUSU);
+                $("#FCODUSU").attr('disabled', 'disabled');
+                $("#FSTACTA").val(253);
+                $("#FSTACTA").attr('disabled', 'disabled');
+                $("#FSTAREC").prop('checked', "true");
+                $("#FAPLLIM").prop('checked', "false");
+                $("#FDATVAL").val(FormatDate(addDays(new Date(),720)));
+                
+                $('#modalvirtualaccount').modal({ backdrop: 'static', Keyboard: 'true' });
+                $('#modalvirtualaccount').modal('toggle');
+            }
+            else {
+                $.alert({ class: 'danger', title: 'Conta Virtual', message: 'Selecione um usuário válido !!!', effect: 'zoom' });
+            }
+            
+        }
+
+        function CallForEdit(pNIDCTA) {
+            var commandquery = "/Cadastros/SelectVirtualAccount";
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: commandquery,
+                data: { pNIDCTA: pNIDCTA },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FNIDCTA").val(result.CODEND);
+                    $("#FCODUSU").val(result.CODUSU);
+                    $("#FNUMBCO").val(result.NUMBCO);
+                    $("#FNUMCTA").val(result.NUMCTA);
+                    $("#FNUMDVE").val(result.NUMDVE);
+                    $("#FORGCTA").val(result.ORGCTA);
+                    $("#FTIPCTA").val(result.TIPCTA);
+                    $("#FSTACTA").val(result.STACTA);
+                    $("#FAPLLIM").prop('checked', (result.APLLIM == 1));
+                    $("#FVLRLIM").val(result.VLRLIM);
+                    $("#FTIPBNF").val(result.TIPBNF);
+                    $("#FCODCMF").val(result.CODCMF);
+                    $("#FNOMBNF").val(result.NOMBNF);
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                }
+            })
+            $('#modalvirtualaccount').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalvirtualaccount').modal('toggle');
+        }
+
+        function addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+        }
+
+        function Left(str, n) {
+            if (n <= 0)
+                return "";
+            else if (n > String(str).length)
+                return str;
+            else
+                return String(str).substring(0, n);
+        }
+        function Right(str, n) {
+            if (n <= 0)
+                return "";
+            else if (n > String(str).length)
+                return str;
+            else {
+                var iLen = String(str).length;
+                return String(str).substring(iLen, iLen - n);
+            }
+        }
+        function FormatDate(date) {
+            return Right('00' + date.getDate(),2) + '/' + Right('00' + (date.getMonth()+1),2) + '/' + date.getFullYear();
+        }
+
+        function ToFloat(value) {
+            var v = value.replace('.', '').replace(',', '');
+            return parseInt(v) / 100;
+        }
+        function ToDateValid(value) {
+            var d=value;
+            if ((value === "") || (value == null)) {
+                d = FormatDate(addDays(new Date(), 720));
+            }
+            d = d.substr(6, 4) + d.substr(3, 2) + d.substr(0, 2) + ' 23:59:59';
+            return d;
+        }
+
+
+    </script>
+}
+
+
+

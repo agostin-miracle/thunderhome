@@ -1,0 +1,318 @@
+﻿@model ThunderFireHomeAdmin.Models.ProductManagementModel
+@{
+    ViewBag.Title = "Usuario Gestor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="modalproductmanagement" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-user" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FUPDUSU" value="0" />
+                <input type="hidden" id="FUSUPRO" value="0" />
+                <div class="form-group row">
+                    <label for="FCODUSU" class="col-sm-2 control-label form-control-sm">Usuário:</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" id="FCODUSU" style="max-width:80%;">
+                            <option value="-1">Selecione</option>
+                            @if (Model.ListaGestor != null)
+                            {
+                                foreach (var item in Model.ListaGestor)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="FCODPRO" class="col-sm-2 control-label form-control-sm">Produto:</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" id="FCODPRO" style="max-width:80%;">
+                            <option value="-1">Selecione</option>
+                            @if (Model.ListaProduto != null)
+                            {
+                                foreach (var item in Model.ListaProduto)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.CODPRO)">@Html.DisplayFor(modelItem => item.DSCPRO)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="FVLRMIN" class="col-sm-2 control-label form-control-sm">Valor Mínimo:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm money" id="FVLRMIN" size="8" maxlength="8" required>
+                    </div>
+                    <label for="FVLRMAX" class="col-sm-2 control-label form-control-sm">Valor Máximo:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm money" id="FVLRMAX" size="8" maxlength="8" required>
+                    </div>
+
+                </div>
+                <div class="form-check">
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLRVC">
+                            <label class="form-check-label form-control-sm" for="FAPLRVC">Aplicar Regra de Vencimento</label>
+                        </div>
+                        <label for="FREGVCT" class="col-form-label col-sm-2 form-control-sm">Número de Dias:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control form-control-sm" id="FREGVCT" size="8" maxlength="8" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLINT" checked>
+                    <label class="form-check-label form-control-sm" for="FAPLINT">Aplicação Interna</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLCES">
+                    <label class="form-check-label form-control-sm" for="FAPLCES">Vincular Conta Virtual Ativa</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLTAD" checked>
+                    <label class="form-check-label form-control-sm" for="FAPLTAD">Aplicar Tarifa Administrativa</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FSTAREC" checked>
+                    <label class="form-check-label form-control-sm" for="FSTAREC">Ativo</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="CCODUSU" class="col-sm-2 control-label">Usuário</label>
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm" id="CCODUSU">
+                        <option value="-1">Selecione</option>
+                        @if (Model.ListaGestor != null)
+                        {
+                            foreach (var item in Model.ListaGestor)
+                            {
+                                <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+                            }
+                        }
+
+                    </select>
+                </div>
+                <label for="CCODPRO" class="col-sm-2 control-label">Produto</label>
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm" id="CCODPRO">
+                        <option value="-1">Selecione</option>
+                        @if (Model.ListaProduto != null)
+                        {
+                            foreach (var item in Model.ListaProduto)
+                            {
+                                <option value="@Html.DisplayFor(modelItem => item.CODPRO)">@Html.DisplayFor(modelItem => item.DSCPRO)</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+            <hr />
+            <div class="table-responsive">
+                <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Registro</th>
+                            <th>Usuário</th>
+                            <th>Produto</th>
+                            <th>Interno</th>
+                            <th>Usuário</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.date').mask('00/00/0000');
+            $('.money').mask('000.000,00', { reverse: true });
+            $('.money2').mask("#.##0,00", { reverse: true });
+            commandquery = "/Cadastros/QueryProductManangement";
+            $('#gridshow').DataTable(
+                {
+                    paging: true,
+                    searching: false,
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                    processing: true,
+                    serverSide: true,
+                    orderMulti: false,
+                    ajax: {
+                        url: commandquery,
+                        type: "POST",
+                        datatype: "json",
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                        data: {
+                            pCODPRO: function () { return $('#CCODPRO').val() },
+                            pCODUSU: function () { return $('#CCODUSU').val() }
+                        }
+                    },
+
+                    columns: [
+                        { data: "USUPRO" },
+                        { data: "DSCREC" },
+                        { data: "NOMUSU" },
+                        { data: "DSCPRO" },
+                        { data: "DSCAPL" },
+                        { data: "LGNUSU" },
+                        {
+                            "render": function (data, type, row) {
+                                return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.USUPRO + "');\"> <i class='fas fa-edit'></i></button>&nbsp;"
+                            }
+                        }
+                    ],
+                    "language": {
+                        "processing": "Aguarde, buscando informações",
+                        "loadingRecords": "Carregando",
+                    },
+                    "pageLength": 10,
+                    "oLanguage": {
+                        "sLengthMenu": "Mostrar _MENU_ registros por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                        "sSearch": "Pesquisar: "
+                    },
+                    columnDefs: [
+                        { "targets": [0], "visible": false, "searchable": false },
+                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "12px" },
+                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "60px" },
+                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "60px" },
+                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "15px" },
+                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "30px" },
+                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "30px" }
+                    ]
+                });
+
+
+
+
+            $(document).on("click", "#btn_update", function () {
+                var mode = $("#OPERATION").val();
+                var vurl = "/Cadastros/InsertProductManagement";
+                if (mode == 2)
+                    vurl = "/Cadastros/UpdateProductManagement";
+
+                var vREGVCT = parseInt($("#FREGVCT").val());
+                var vVLRMIN = parseFloat($("#FVLRMIN").val());
+
+                var cVLRMAX = $("#FVLRMAX").val().replace('.', '').replace(',', '');
+                console.log(cVLRMAX);
+                alert(cVLRMAX);
+                var vVLRMAX = parseFloat($("#FVLRMAX").val());
+                if (vREGVCT <= 255) {
+
+                    var VDATA = JSON.stringify({
+                        'USUPRO': parseInt($("#FUSUPRO").val()),
+                        'CODUSU': parseInt($("#FCODUSU").val()),
+                        'CODPRO': parseInt($("#FCODPRO").val()),
+                        'APLINT': $("#FAPLINT").is(':checked') ? 1 : 0,
+                        'VLRMIN': ToFloat($("#FVLRMIN").val()),
+                        'VLRMAX': ToFloat($("#FVLRMAX").val()),
+                        'APLRVC': $("#FAPLRVC").is(':checked') ? 1 : 0,
+                        'REGVCT': vREGVCT,
+                        'APLCES': $("#FAPLCES").is(':checked') ? 1 : 0,
+                        'APLTAD': $("#FAPLTAD").is(':checked') ? 1 : 0,
+                        'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: vurl,
+                        data: VDATA,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        beforeSend: function () { },
+                        success: function (result) {
+                            console.log(result);
+                            var ok = parseInt(result.ReturnValue);
+                            if (ok > 0) { $('#modalproductmanagement').modal('toggle'); }
+                            else { Alertar(result.MessageToUser, 'alert-danger') };
+                        },
+                        error: function (data) {
+                            alert("Ocorreu um erro inesperado, por favor tente novamente");
+                        }
+                    });
+                }
+                else {
+                    $.alert({ class: 'danger', title: 'Usuário Gestor', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                };
+            });
+
+        });
+
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            $("#FSTAREC").prop('checked', "true");
+            $('#modalproductmanagement').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalproductmanagement').modal('toggle');
+        }
+        function CallForEdit(pUSUPRO) {
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: "/Cadastros/SelectProductManagement",
+                data: { pUSUPRO: pUSUPRO },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FUSUPRO").val(result.USUPRO);
+                    $("#FCODUSU").val(result.CODUSU);
+                    $("#FCODUSU").prop('disabled', true);
+                    $("#FCODPRO").val(result.CODPRO);
+                    $("#FCODPRO").prop('disabled', true);
+                    $("#FAPLINT").val(result.APLINT);
+                    $("#FVLRMIN").val(result.VLRMIN);
+                    $("#FVLRMAX").val(result.VLRMAX);
+                    $("#FAPLRVC").prop('checked', (result.APLRVC == 1));
+                    $("#FREGVCT").val(result.REGVCT);
+                    $("#FAPLCES").prop('checked', (result.APLCES == 1));
+                    $("#FAPLTAD").prop('checked', (result.APLTAD == 1));
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                }
+            });
+            $('#modalproductmanagement').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalproductmanagement').modal('toggle');
+        }
+
+        function ToFloat(value) {
+            var v = value.replace('.', '').replace(',', '');
+            return parseInt(v) / 100;
+        }
+    </script>
+}

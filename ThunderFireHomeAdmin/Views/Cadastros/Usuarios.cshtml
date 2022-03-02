@@ -1,0 +1,558 @@
+﻿@model ThunderFireHomeAdmin.Models.GeneralRegistryModel
+@{
+    ViewBag.Title = "Cadastro Geral";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="modal fade" id="modalgeneralregistry" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-address-book" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group row">
+                    <label for="FCODATR" class="col-sm-2 control-label">Atributo</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" id="FCODATR">
+                            @if (Model.ListaAtributo != null)
+                            {
+                                foreach (var item in Model.ListaAtributo)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.CODATR)">@Html.DisplayFor(modelItem => item.DSCATR)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <label for="FSTAUSU" class="col-sm-2 control-label">Status</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" id="FSTAUSU">
+                            @if (Model.ListaStatusUsuario != null)
+                            {
+                                foreach (var item in Model.ListaStatusUsuario)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.CODSTA)">@Html.DisplayFor(modelItem => item.DSCSTA)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="FSRCUSU" class="col-sm-2 control-label">Gestor</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" id="FSRCUSU">
+                            <option value="0">Não Aplicável</option>
+                            @if (Model.ListaGestor != null)
+                            {
+                                foreach (var item in Model.ListaGestor)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-sm-3">
+                        <label for="FTIPPES" class="control-label">Gênero</label>
+                        <select class="form-control form-control-sm" id="FTIPPES">
+                            @if (Model.ListaGenero != null)
+                            {
+                                foreach (var item in Model.ListaGenero)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYTXT)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="FNIVCFA" class="control-label">Nível de Confiança</label>
+                        <select class="form-control form-control-sm" id="FNIVCFA">
+                            @if (Model.ListaNivelConfianca != null)
+                            {
+                                foreach (var item in Model.ListaNivelConfianca)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                }
+                            }
+
+                        </select>
+
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="FTIPUSU" class="control-label">Tipo de Usuário</label>
+                        <select class="form-control form-control-sm" id="FTIPUSU">
+                            @if (Model.ListaTipoUsuario != null)
+                            {
+                                foreach (var item in Model.ListaTipoUsuario)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.TIPUSU)">@Html.DisplayFor(modelItem => item.DSCTUS)</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="FCODNAC" class="control-label">Nacionalidade</label>
+                        <select class="form-control form-control-sm" id="FCODNAC">
+                            @if (Model.ListaNacionalidade != null)
+                            {
+                                foreach (var item in Model.ListaNacionalidade)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="FCODATR" class="col-sm-2 control-label">CPF/CNPJ</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FCODCMF" name="FCODCMF" placeholder="CPF/CNPJ" value="" required>
+                    </div>
+                    <label for="FNUMIRG" class="col-sm-2 control-label">RG</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FNUMIRG" name="FNUMIRG" placeholder="RG" value="" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="FNOMUSU" class="col-sm-3 control-label">Nome/Razão Social</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-sm" id="FNOMUSU" name="FNOMUSU" placeholder="" value="" maxlength="70" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="FNOMMAE" class="col-sm-3 control-label">Nome Mãe/Fantasia</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control form-control-sm" id="FNOMMAE" name="FNOMMAE" placeholder="" value="" maxlength="70" required>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="FDATNAC" class="col-sm-3 control-label">Nascimento/fundação</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FDATNAC" name="FDATNAC" required>
+                    </div>
+                </div>
+                <div class="form-group row ml-4">
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked />
+                        <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
+                    <div class="form-check col-sm-4">
+                        <input class="form-check-input" type="checkbox" value="" id="FATRPPE">
+                        <label class="form-check-label" for="FATRPPE">Pessoa Politicamente exposta</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalloginuser" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:400px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-user" aria-hidden="true"> </i>@ViewBag.Title - Login de Usuário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="LCODUSU" value="0" />
+                <div class="form-group row">
+                    <label for="FLGNUSU" class="col-sm-2 control-label">Login</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="FLGNUSU" placeholder="Entre com o login o usuário" size="50" maxlength="50" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="PSWUSU" class="col-sm-2 control-label">Senha</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="FPSWUSU" name="FPSWUSU" placeholder="" value="" min="3" size="50" maxlength="50" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="FRSTPSW" class="col-sm-2 control-label">Resetar</label>
+                    <div class="col-sm-3">
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" class="form-check-input" id="FRSTPSW">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="btn_update_lgn">Alterar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalDataRef" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalcaption">Dados de Referência do Cadastro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="FNOMUSU" aria-describedby="" placeholder="Entre com o login o usuário" readonly>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-row">
+                        <div class="col-sm-6">
+                            <label for="FUFEEMI" class="control-label">RG UF Emissor</label>
+                            <select class="form-control form-control-sm" id="FUFEEMI">
+                                <option>PS</option>
+                                <option>SS</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="FORGEMI" class="control-label">RG Orgão Emissor</label>
+                            <input type="text" class="form-control" id="FORGEMI" name="FORGEMI" placeholder="" value="" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="FCODECV" class="control-label">Estado Civil</label>
+                            <select class="form-control form-control-sm" id="FCODECV"></select>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="FCODPRF" class="control-label">Profissão</label>
+                            <select class="form-control form-control-sm" id="FCODPRF"></select>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="FCODATU" class="control-label">ATU</label>
+                            <select class="form-control form-control-sm" id="FCODECV"></select>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="FCODEXT" class="control-label">EXT</label>
+                            <select class="form-control form-control-sm" id="FCODEXT"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="FNUMMAT" class="control-label">Matrícula</label>
+                            <input type="text" class="form-control" id="FNUMMAT" name="FNUMMAT" placeholder="" value="" required>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline mb-2 mr-sm-2">
+                        <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
+                        <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_lgn_ins">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="CCODATR" class="col-sm-2 col-form-label">Atributo</label>
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm" id="CCODATR">
+                        <option value="-1">Selecione</option>
+                        @if (Model.ListaAtributo != null)
+                        {
+                            foreach (var item in Model.ListaAtributo)
+                            {
+                                <option value="@Html.DisplayFor(modelItem => item.CODATR)">@Html.DisplayFor(modelItem => item.DSCATR)</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <label for="CSTAUSU" class="col-sm-2 col-form-label">Status</label>
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm" id="CSTAUSU">
+                        <option value="-1">Selecione</option>
+                        @if (Model.ListaStatusUsuario != null)
+                        {
+                            foreach (var item in Model.ListaStatusUsuario)
+                            {
+                                <option value="@Html.DisplayFor(modelItem => item.CODSTA)">@Html.DisplayFor(modelItem => item.DSCSTA)</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="TNOMUSU" class="col-sm-2 control-label">Nome</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control-sm form-control" id="TNOMUSU" name="TNOMUSU" placeholder="Nome ou parte a procurar" value="">
+                </div>
+                <label for="CSTAREC" class="col-sm-2 control-label">Status do Registro</label>
+                <div class="form-control-sm col-sm-4">
+                    <select class="form-control form-control-sm" id="CSTAREC">
+                        <option value="-1">Selecione</option>
+                        @if (Model.ListaStatusRegistro != null)
+                        {
+                            foreach (var item in Model.ListaStatusRegistro)
+                            {
+                                <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                            }
+                        }
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="CSRCUSU" class="col-sm-2 control-label">Responsável</label>
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm" id="CSRCUSU">
+                        <option value="-1">Selecione</option>
+                        @if (Model.ListaGestor != null)
+                        {
+                            foreach (var item in Model.ListaGestor)
+                            {
+                                <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                    <button id="btn_add2" value="Login" class="btn btn-primary btn-sm" onclick="CallForAddLogin();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Detalhes</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Registro</th>
+                            <th><i class="fa fa-credit-card" aria-hidden="true"></i></th>
+                            <th><i class="fa fa-envelope" aria-hidden="true"></i></th>
+                            <th><i class="fa fa-mobile" aria-hidden="true"></i></th>
+                            <th>Status</th>
+                            <th>Nome</th>
+                            <th>CNPJ/CPF</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var commandquery = "/Cadastros/GeneralRegistryQuery";
+            $('#gridshow').DataTable(
+                {
+                    paging: true,
+                    searching: false,
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                    processing: true,
+                    serverSide: true,
+                    orderMulti: false,
+                    responsive: true,
+                    ajax: {
+                        url: commandquery,
+                        type: "POST",
+                        datatype: "json",
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                        data: {
+                            pCODATR: function () { return $('#CCODATR').val() },
+                            pSTAUSU: function () { return $('#CSTAUSU').val() },
+                            pSRCUSU: function () { return $('#CSRCUSU').val() },
+                            pNOMUSU: function () { return $('#TNOMUSU').val() },
+                            pSTAREC: function () { return $('#CSTAREC').val() }
+                        }
+                    },
+                    columns: [
+                        { data: "CODUSU" },
+                        { data: "DSCREC" },
+                        { data: "CNTCTA" },
+                        { data: "CNTMAL" },
+                        { data: "CNTCEL" },
+                        { data: "DSCSTA" },
+                        { data: "NOMUSU" },
+                        { data: "CODCMF" },
+                        {
+                            "render": function (data, type, row) {
+                                var botoes = "";
+                                if (row.USELGN == 1 && row.STAREC == 1) {
+                                    botoes += "<button id='btn_call_lgn' value='Criar Logon' class='btn btn-primary btn-sm' onclick=\"CallForAddLogin('" + row.CODUSU + "');\"><i class='fa fa-key' aria-hidden='true'></i> </button>&nbsp;"
+                                }
+                                if (row.STAREC == 1) {
+                                    botoes += "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.CODUSU + "');\"> <i class='fa fa-edit'></i></button>&nbsp;"
+                                }
+                                botoes += "<a id='href_call_address' value='Endereços' class='btn btn-primary btn-sm' href=\"/Cadastros/Enderecos?usercode=" + row.CODUSU + "\" <i class='fa fa-map-marker' aria-hidden='true'></i></a>&nbsp;"
+                                return botoes;
+                            }
+                        }
+                    ],
+                    "language": {
+                        "processing": "Aguarde, buscando informações",
+                        "loadingRecords": "Carregando",
+                    },
+                    "pageLength": 10,
+                    "oLanguage": {
+                        "sLengthMenu": "Mostrar _MENU_ registros por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                        "sSearch": "Pesquisar: "
+                    },
+                    columnDefs: [
+                        { "targets": [0], "visible": false, "searchable": false },
+                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "10px" },
+                        { className: "text-center", "targets": [2], "visible": true, "searchable": false, "width": "5px" },
+                        { className: "text-center", "targets": [3], "visible": true, "searchable": false, "width": "5px" },
+                        { className: "text-center", "targets": [4], "visible": true, "searchable": false, "width": "5px" },
+                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "8px" },
+                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "60px" },
+                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "20px" },
+                        { className: "text-left", "targets": [8], "visible": true, "searchable": false, "width": "60px" }
+                    ]
+                });
+
+
+
+            $(document).on("click", "#btn_update_lgn", function () {
+                var mode = $("#OPERATION").val();
+                var commandquery = "/Cadastros/ChangeLoginUser";
+
+
+                var VDATA = JSON.stringify({
+                    'LGNNUM': 0,
+                    'CODUSU': parseInt($("#LCODUSU").val()),
+                    'LGNTYP': $("#FLGNTYP").is(':checked') ? 1 : 0,
+                    'LGNUSU': $("#FLGNUSU").val(),
+                    'PSWUSU': $("#FPSWUSU").val(),
+                    'RSTPSW': $("#FRSTPSW").is(':checked') ? 1 : 0,
+                    'STAREC': 1
+                });
+                $.ajax({
+                    type: "POST",
+                    url: commandquery,
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0)
+                        {
+                            $('#modalloginuser').modal('toggle');
+                        }
+                        else {
+
+
+                            $.notify({
+                                icon: 'ti-gift', message: result.MessageToUser
+                            }, {
+                                type: 'success',
+                                timer: 4000
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        alert("Ocorreu um erro inesperado, por favor tente novamente");
+                    }
+                });
+            });
+        });
+
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            $("#FSTAREC").prop('checked', "true");
+            $('#modalgeneralregistry').modal('toggle');
+        }
+
+        function CallForEdit(pCODUSU) {
+            var commandquery = "/Cadastros/SelectGeneralRegistry";
+            $.ajax({
+                type: "GET",
+                url: commandquery,
+                data: { id: pCODUSU },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FCODATR").val(result.CODATR);
+                    $("#FSTAUSU").val(result.STAUSU);
+                    $("#FSRCUSU").val(result.SRCUSU);
+                    $("#FTIPPES").val(result.TIPPES);
+                    $("#FNIVCFA").val(result.NIVCFA);
+                    $("#FTIPUSU").val(result.TIPUSU);
+                    $("#FCODNAC").val(result.CODNAC);
+                    $("#FCODCMF").val(result.CODCMF);
+                    $("#FNUMIRG").val(result.NUMIRG);
+                    $("#FNOMUSU").val(result.NOMUSU);
+                    $("#FNOMAME").val(result.NOMMAE);
+                    $("#FDATNAC").val(result.DATNAC);
+                    $("#FSTAREC").val(result.STAREC);
+                    $("#FATRPPE").val(result.ATRPPE);
+                }
+            })
+            $('#modalgeneralregistry').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalgeneralregistry').modal('toggle');
+        }
+
+        function CallAddress (pCODUSU) {
+            $.ajax({
+                type: "GET",
+                url: '/Cadastros/Enderecos',
+                data: { usercode: pCODUSU },
+                dataType: 'json',
+                success: function (result) {
+                    window.Location = '/Cadastros/Enderecos';
+                }
+            });
+        }
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            $("#FSTAREC").prop('checked', "true");
+            $('#modalgeneralregistry').modal('toggle');
+        }
+    </script>
+}

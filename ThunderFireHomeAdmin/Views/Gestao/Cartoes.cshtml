@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Cartões";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Cartões</h4>
+                <div class="form-horizontal">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="CKEYCOD" class="col-sm-2 control-label">Gestor</label>
+                            <select class="form-control form-control-sm" id="CUSUPRO"></select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="CKEYCOD" class="col-sm-2 control-label">Status</label>
+                            <select class="form-control form-control-sm" id="CSTACRT"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                <hr />
+                <div class="table-responsive">
+                    <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Status</th>
+                                <th>Cartão</th>
+                                <th>Origem</th>
+                                <th>Usuário</th>
+                                <th>Portador</th>
+                                <th>Precedente</th>
+                                <th>Bloqueio</th>
+                                <th>&#160;</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
