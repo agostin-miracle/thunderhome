@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThunderFire.Connector", "Th
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbScripts", "DbScripts\DbScripts.csproj", "{83F08A2B-51EF-4D25-86F0-CAFF5119F1DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThunderFire.Business", "ThunderFire.Business\ThunderFire.Business.csproj", "{22F1CC40-E78D-439D-B947-CCFC62A2FB58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThunderFire", "ThunderFire\ThunderFire.csproj", "{8935BBA9-C49D-4CEC-8FAA-F354F0CB8664}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{83F08A2B-51EF-4D25-86F0-CAFF5119F1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F08A2B-51EF-4D25-86F0-CAFF5119F1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F08A2B-51EF-4D25-86F0-CAFF5119F1DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F1CC40-E78D-439D-B947-CCFC62A2FB58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F1CC40-E78D-439D-B947-CCFC62A2FB58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F1CC40-E78D-439D-B947-CCFC62A2FB58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F1CC40-E78D-439D-B947-CCFC62A2FB58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8935BBA9-C49D-4CEC-8FAA-F354F0CB8664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8935BBA9-C49D-4CEC-8FAA-F354F0CB8664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8935BBA9-C49D-4CEC-8FAA-F354F0CB8664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8935BBA9-C49D-4CEC-8FAA-F354F0CB8664}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

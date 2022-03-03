@@ -1,0 +1,2321 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<messages>
+  <code number="401" id="401">
+    <message>NAO AUTORIZADO</message>
+    <severity>ERROR</severity>
+    <description>Semelhante ao 403 Proibido, mais especificamente para o uso quando a autenticação é possível, mas não conseguiu ou ainda não foram fornecidos. A resposta deve incluir um cabeçalho do campo www-authenticate contendo um desafio aplicável ao recurso solicitado.</description>
+  </code>
+  <code number="403" id="403">
+    <message>PROIBIDO</message>
+    <severity>ERROR</severity>
+    <description>O pedido é reconhecido pelo servidor mas este recusa-se a executá-lo. Ao contrário resposta 401 Não Autorizado, autenticação não fará diferença e o pedido não deve ser requisitado novamente.</description>
+  </code>
+  <code number="404" id="404">
+    <message>NAO ENCONTRADO</message>
+    <severity>ERROR</severity>
+    <description>O recurso requisitado não foi encontrado, mas pode ser disponibilizado novamente no futuro. As solicitações subsequentes pelo cliente são permitidas.</description>
+  </code>
+  <code number="405" id="405">
+    <message>METODO NÃO PERMITIDO</message>
+    <severity>ERROR</severity>
+    <description>Foi feita uma solicitação de um recurso usando um método de pedido não é compatível com esse recurso, por exemplo, usando GET em um formulário, que exige que os dados a serem apresentados via POST, PUT ou usar em um recurso somente de leitura.</description>
+  </code>
+  <code number="406" id="406">
+    <message>NAO ACEITÁVEL</message>
+    <severity>ERROR</severity>
+    <description>O recurso solicitado é apenas capaz de gerar conteúdo não aceitáveis ​​de acordo com os cabeçalhos Accept enviados na solicitação.</description>
+  </code>
+  <code number="408" id="408">
+    <message>REQUISICAO INVALIDA</message>
+    <severity>ERROR</severity>
+    <description>O pedido não pode ser entregue devido à sintaxe incorreta</description>
+  </code>
+  <code number="415" id="415">
+    <message>TIPO DE MIDIA NÃO SUPORTADO</message>
+    <severity>ERROR</severity>
+    <description>A entidade tem um pedido tipo de mídia que o servidor ou o recurso não tem suporte. Por exemplo, o cliente carrega uma imagem como image / svg + xml, mas o servidor requer que imagens usar um formato diferente.</description>
+  </code>
+  <code number="500" id="500">
+    <message>ERRO INTERNO DO SERVIDOR</message>
+    <severity>ERROR</severity>
+    <description>Indica um erro do servidor ao processar a solicitação. Na grande maioria dos casos está relacionada as permissões dos arquivos ou pastas do software ou script que o usuário tenta acessar e não foram configuradas no momento da programação/construção do site ou da aplicação. Para corrigir, verifique o diretório em que o arquivo ou recurso que houve falha de acesso está localizado, e este arquivo (bem como todos os outros), obedeçam às regras seguintes:  Pastas — chmod 755 (não utilizar 777) Arquivos — chmod 644 (não utilizar o 777, só utilizar outro se for expressamente solicitado na instalação)  OBS.: algumas aplicações e ou sistemas requerem permissões diferenciadas, pelo qual é importante verificar com os criadores do scripts/sistema, qual seria a permissão correta a usar. O exemplo descreve como é realizado em sistemas operacionais Unix-like. Fazer analogia como é realizado em sistemas como Windows (Windows 7, 8, XP entre outros). Este erro também pode ocorrer se o arquivo .htaccess do seu site estiver modificando os parâmetros ou tentando fazer o PHP utilizar comandos como: php_flag ou php_value. Remova qualquer entrada com esses comandos do arquivo .htaccess. Se for fazer modificações nos parâmetros do PHP, utilize o arquivo php.ini para fazer isso.</description>
+  </code>
+  <code number="501" id="501">
+    <message>NAO IMPLEMENTADO</message>
+    <severity>ERROR</severity>
+    <description>O servidor ainda não suporta a funcionalidade ativada</description>
+  </code>
+  <code number="502" id="502">
+    <message>BAD GATEWAY</message>
+    <severity>ERROR</severity>
+    <description>Em regra, o erro acontece quando há uma configuração imprecisa entre os computadores de back-end, possivelmente incluindo o servidor Web no site visitado. Antes de analisar este problema, é necessário limpar o cache do navegador, completamente. Se estiver navegando na Web e observar este problema em todos os websites visitados, então 1) o seu provedor de serviço de Internet tem uma falha/sobrecarga em um equipamento principal ou 2) tem algo de errado com a sua conexão interna à Internet, por exemplo, o firewall NAO ESTA funcionando corretamente. Se for o primeiro caso, somente o seu provedor pode ajudar. Se for o segundo, você precisa corrigir o que quer que esteja prevenindo que você acesse a Internet. Se tiver este problema somente em alguns websites visitados, provavelmente existe um problema nos sites. Por exemplo, uma das peças dos equipamentos estão falhando ou estão sobrecarregadas. Entre em contato com os responsáveis destes sites.</description>
+  </code>
+  <code number="503" id="503">
+    <message>SERVICO INDISPONÍVEL</message>
+    <severity>ERROR</severity>
+    <description>O servidor está em manutenção ou não consegue dar conta dos processamentos de recursos devido à sobrecarga do sistema. Isto deve ser uma condição temporária.</description>
+  </code>
+  <code number="504" id="504">
+    <message>GATEWAY Time-Out</message>
+    <severity>ERROR</severity>
+    <description>É caracterizado por erros particulares do site em questão. Pode ser que o site esteja em manutenção ou não exista.</description>
+  </code>
+  <code number="505" id="505">
+    <message>HTTP Version not supported</message>
+    <severity>ERROR</severity>
+    <description>
+      A maioria dos browsers assumem que os servidores de rede suportam versões 1.x do protocolo HTTP. Na prática, as versões muito antigas como a 0.9 são pouco utilizadas atualmente, não apenas porque eles fornecem pouca segurança e desempenho mais baixo do que as versões mais recentes do protocolo. Então, se acontecer esse erro no seu navegador de rede, a única opção é fazer o upgrade do software do servidor de rede. Se a versão da solicitação 1.x falhar, pode ser porque o servidor de rede está suportando versões incorretas do protocolo 1.x, em vez de não suportá-las.
+    </description>
+  </code>
+  <code number="10000" id="ACCESSKEY_NOTDEF">
+    <message>CHAVE DE ACESSO NÃO DEFINIDA</message>
+    <description>Chave de Acesso não fornecida</description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10001" id="ACCESSKEY_NOTEXIST">
+    <message>CHAVE DE ACESSO INEXISTENTE</message>
+    <description>Chave de Acesso não existe para o cliente</description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10002" id="ACCESSKEY_NOTREAD">
+    <message>NÃO FOI POSSIVEL EFETUAR A LEITURA DA CHAVE DE ACESSO</message>
+    <description>Provável perda de conexão de dados ou chave de acesso inativada</description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10003" id="ACCESSKEYINVALIDPARAM">
+    <message>A CHAVE DE ACESSO NAO POSSUI CREDENCIAIS DE AUTENTICACAO</message>
+    <description>Verifique se o usuário vinculado a chave de acesso possui credenciais de login cadastradas ou está acessível</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10004" id="ACCOUNTEXIST">
+    <message>O NUMERO DA CONTA JA ESTA CADASTRADO</message>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10005" id="ACCOUNTSAREEQUAL">
+    <message>AS CONTAS INFORMADAS NO PROCESSO SÃO AS MESMAS</message>
+    <description>O Código da conta de débito e o código da conta crédito são iguais</description>
+  </code>
+  <code number="10006" id="ALREADYEXISTCMF">
+    <message>CPF/CNPJ já está cadastrado para outro usuário</message>
+    <description>O aplicativo detectou que este CPF/CNPJ já existe em nossos registros</description>
+  </code>
+  <code number="10007" id="ALREADYEXISTMAIL">
+    <message>O EMAIL {0} JÁ ESTÁ CADASTRADO PARA O CPF/CNPJ {1}</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10008" id="ALREADYPAYMENTREGISTERED">
+    <message>JA EXISTE UM PAGAMENTO REGISTRADO PARA O BOLETO E PARCELA CORRESPONDENTE</message>
+    <description>JA EXISTE UMA ANOTAÇÃO DE REGISTRO DE PAGAMENTO PARA O BOLETO NA TABELA CORRESPONDENTE DE BAIXA DE BOLETOS</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10009" id="BADCONNECTIONCONFIG">
+    <message>A CONFIGURAÇÃO DE CONEXÃO ESTÁ MAL FORMADA, CONTATE O ADMINSTRADOR E RECONFIGURE A CONEXÃO PARA ACESSO</message>
+    <description>A configuração da conexão está duplicada ou ausente, verifique os arquivos de configuração</description>
+  </code>
+  <code number="10010" id="BALANCENOTALLOWED">
+    <message>O USUÁRIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE CONSULTA DE SALDO</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10011" id="BATCHCARDINVALID">
+    <message>O LOTE CONTEM REGISTROS INVALIDOS PARA INSERCAO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10012" id="BATCHFILEALREADYINPUTED">
+    <message>ARQUIVO DE LOTE JÁ REGISTRADO</message>
+    <severity>ERROR</severity>
+    <description>O usuário está tentando importar um arquivo com um nome já inserido pelo sistema</description>
+  </code>
+  <code number="10013" id="BATCHINVALIDMANAGER">
+    <message>O LOTE NÃO ESTA VINCULADO AO GESTOR INFORMADO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10014" id="BATCHNOTACCEPTMORRECORDS">
+    <message>O LOTE NÃO PERMITE A INCLUSÃO DE MAIS REGISTROS</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10015" id="BATCHNOTACTIVE">
+    <message>ARQUIVO DE LOTE NÃO ESTA ATIVO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10016" id="BATCHNOTCANDELETE">
+    <message>O LOTE POSSUI INFORMAÇÕES DE INTEGRIDADE COM OUTROS PROCESSOS, ELE NÃO PODE SER REMOVIDO, RESOLVA AS INTEGRAÇÕES E PROCESSE NOVAMENTE ESTA FUNÇÃO</message>
+    <description>O LOTE possui lançamentos e registros vinculados, deverão ser removidas as informações de integração para poder excluir o lote</description>
+  </code>
+  <code number="10017" id="BATCHNOTFOUND">
+    <message>ARQUIVO DE LOTE NÃO EXISTENTE</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10018" id="BATCHNOTOPERATIONAL">
+    <message>ARQUIVO DE LOTE NÃO E OPERACIONAL</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10019" id="BEARERNOTASSOCIATED">
+    <message>O PORTADOR/CARTAO NÃO COINCIDE COM O USUÁRIO</message>
+    <description>O Código do CPF/CNPJ informado não coincide com o portador informado</description>
+  </code>
+  <code number="10020" id="BEARERNOTFOUND">
+    <message>PORTADOR/CARTAO NÃO EXISTE</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10021" id="BILLETPAID">
+    <message>BOLETO/FATURA JÁ BAIXADO</message>
+    <severity>ERROR</severity>
+    <description>O registro de boleto já consta no sistema como pago</description>
+  </code>
+  <code number="10022" id="BROKENCONNECTION">
+    <message>A CONEXAO ESTÁ INVALIDA OU NAO EXISTE</message>
+    <description>A conexão foi quebrada por um instrução de bloqueio ou está nula</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10023" id="CARDACTIVATED">
+    <message>O CARTAO JÁ ESTA ATIVADO DESDE {0} PARA O USUARIO {1}</message>
+    <severity>WARNING</severity>
+    <description>Verifique se em seus controles o CARTAO esta anotado como ativado</description>
+  </code>
+  <code number="10024" id="CARDALREADYACTIVE">
+    <message>O CARTAO JA ESTA ATIVADO</message>
+    <severity>WARNING</severity>
+    <description>O CARTAO já está ativo para operações</description>
+  </code>
+  <code number="10025" id="CARDALREADYREGISTERED">
+    <message>O CARTAO JA ESTA CADASTRADO</message>
+    <severity>WARNING</severity>
+    <description>O CARTAO já está cadastrado no sistema</description>
+  </code>
+  <code number="10026" id="CARDASSOCIATED">
+    <message>O CARTAO JA ESTA ASSOCIADO AO USUARIO</message>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10027" id="CARDASSOCIATEDOTHERUSER">
+    <message>O CARTAO JA ESTA ASSOCIADO PARA OUTRO USUARIO</message>
+  </code>
+  <code number="10028" id="CARDBADFORMAT">
+    <message>O NUMERO DO CARTAO ESTA MAL FORMADO</message>
+  </code>
+  <code number="10029" id="CARDBELONGOTHER">
+    <message>O CARTAO INFORMADO NAO ESTA ASSOCIADO PARA SUA GESTÃO</message>
+    <description>O CARTAO está associado a um gestor de produto diferente do fornecido</description>
+  </code>
+  <code number="10030" id="CARDCANCELLED">
+    <message>O CARTAO FORNECIDO ESTA CANCELADO</message>
+    <severity>ERROR</severity>
+    <description>O CARTAO ESTÁ MARCADO COM STATUS DE CANCELADO</description>
+  </code>
+  <code number="10031" id="CARDDISABLED">
+    <message>O CARTAO ESTÁ DESABILITADO PARA PROCESSAMENTO</message>
+    <severity>ERROR</severity>
+    <description>O CARTAO não permite a entrada de lançamentos por estar inativo</description>
+  </code>
+  <code number="10032" id="CARDEMPTYNUMBER">
+    <message>O NÚMERO DO CARTAO NÃO FOI INFORMADO OU NÃO EXISTE</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10033" id="CARDEMPTYPASSWORDS">
+    <message>AS SENHAS DE ACESSO NÃO FORAM FORNECIDAS</message>
+  </code>
+  <code number="10034" id="CARDEMPTYPIN">
+    <message>A SENHA DE ACESSO DO CARTAO NAO FOI FORNECIDA</message>
+  </code>
+  <code number="10035" id="CARDFAILASSOCIATION">
+    <message>NÃO FOI POSSIVEL ASSOCIAR O CARTAO AO USUARIO INFORMADO</message>
+  </code>
+  <code number="10036" id="CARDFAILAUTHENTICATE">
+    <message>FALHA NA AUTENTICAÇÃO DOS DADOS DO CARTAO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10037" id="CARDFAILREAD">
+    <message>FALHA NA LEITURA E OBTENÇÃO DOS DADOS DO CARTAO</message>
+  </code>
+  <code number="10038" id="CARDFAILWRITE">
+    <message>FALHA NA GRAVAÇÃO OU ATUALIZAÇÃO DE DADOS DO CARTAO</message>
+  </code>
+  <code number="10039" id="CARDIDDIFFERENT">
+    <message>O CÓDIGO DO CARTAO NÃO CORRESPONDE AO ID DO CARTAO FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10040" id="CARDIDINVALID">
+    <message>O ID DO CARTAO É INVÁLIDO OU NÃO FOI FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10041" id="CARDIDINVALIDOWNER">
+    <message>O CÓDIGO DO CPF/CNPJ NÃO COINCIDE COM O CARTAO INFORMADO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10042" id="CARDINACTIVACTION">
+    <message>O CARTAO ESTÁ EM PROCESSO DE ATIVAÇÃO</message>
+    <severity>WARNING</severity>
+    <description>O CARTAO ESTÁ MARCADO COM O STATUS (107) DE ATIVAÇÃO</description>
+  </code>
+  <code number="10043" id="CARDINPROCACTIVATION">
+    <message>O CARTAO ESTÁ EM PROCESSO DE ATIVAÇÃO</message>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10044" id="CARDINVALIDACTIVATIONINLINE">
+    <message>O STATUS DO CARTAO E INVALIDO PARA ATIVACAO</message>
+    <description>O status do CARTAO deverá estar apontado para em 'Em Estoque' para concluir esta operação</description>
+  </code>
+  <code number="10045" id="CARDINVALIDLENGTH">
+    <message>O CARTAO INFORMADO É INVALIDO (L016)</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10046" id="CARDINVALIDNUMBER">
+    <message>O NÚMERO DO CARTAO É INVÁLIDO</message>
+    <description>O aplicativo está esperando um NÚMERO e está sendo fornecido um valor com caracters não válidos como numero</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10047" id="CARDINVALIDOPERATION">
+    <message>OPERAÇÃO DE PROCESSAMENTO INVÁLIDA</message>
+    <description>Operações válidas -1 - DEBITO, 1 - CREDITO</description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10049" id="CARDINVALIDPASSWORD">
+    <message>A SENHA DO CARTAO SOMENTE PODERA CONTER NUMEROS</message>
+    <severity>ERROR</severity>
+    <description>A senha do CARTAO somente pode conter números</description>
+  </code>
+  <code number="10050" id="CARDINVALIDPASSWORDLENGTH">
+    <message>A SENHA DO CARTAO SOMENTE PODERÁ TER 4 DIGITOS</message>
+    <severity>ERROR</severity>
+    <description>A senha do CARTAO somente pode conter 4 DIGITOS</description>
+  </code>
+  <code number="10051" id="CARDINVALIDPASSWORDS">
+    <message>AS SENHAS DE ACESSO ESTÃO DIFERENTES</message>
+  </code>
+  <code number="10052" id="CARDINVALIDPIN">
+    <message>A SENHA DE ACESSO E INVALIDA</message>
+    <severity>ERROR</severity>
+    <description>A senha do CARTAO é diferente da senha de comparação definida</description>
+  </code>
+  <code number="10053" id="CARDNOTACTIVATED">
+    <message>O CARTAO FORNECIDO ESTÁ INVÁLIDO PARA EXECUTAR ESTA OPERAÇÃO</message>
+    <severity>ERROR</severity>
+    <description>O CARTAO NAO ESTA ATIVADO PARA EXECUTAR ESTA OPERAÇÃO</description>
+  </code>
+  <code number="10054" id="CARDNOTALLOWRELEASES">
+    <message>O CARTAO NÃO ACEITA LANÇAMENTOS</message>
+    <severity>ERROR</severity>
+    <description>O CARTAO não permite a entrada de lançamentos fora do status de ativado</description>
+  </code>
+  <code number="10055" id="CARDNOTASSOCIATED">
+    <message>O CARTAO NÃO ESTA ASSOCIADO A NENHUM USUÁRIO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10056" id="CARDNOTASSOCIATED">
+    <message>O CARTAO NÃO POSSUI NENHUMA ASSOCIAÇÃO DEFINIDA</message>
+    <description>O CARTAO informado não possui associação definida</description>
+  </code>
+  <code number="10057" id="CARDNOTBELONGAPP">
+    <message>O CARTAO NAO ESTA VINCULADO AO USUÁRIO SOLICITANTE</message>
+    <severity>ERROR</severity>
+    <description>O correntista possui um CARTAO que NAO ESTA associado ao usuário solicitante do valor de aplicação</description>
+  </code>
+  <code number="10058" id="CARDNOTEXIST">
+    <message>O CARTAO INFORMADO NÃO EXISTE</message>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10059" id="CARDNOTFOUND">
+    <message>CARTAO NAO EXISTENTE</message>
+    <description>O CARTAO informado não existe</description>
+  </code>
+  <code number="10060" id="CARDNOTLOCALIZATED">
+    <message>O ID DO CARTAO E INVALIDO OU NAO EXISTE OU NAO ESTA ATIVADO PARA OPERACOES</message>
+    <description>O ID do CARTAO é validado contra a tabela de cartões, em situações de pesquisa, ou o CARTAO não existe, ou está inativo ou NAO ESTA com o status adequado para processamento</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10061" id="CARDNOTSTOK">
+    <message>O CARTAO FORNECIDO NAO ESTA EM ESTOQUE</message>
+    <severity>ERROR</severity>
+    <description>O CARTAO NAO ESTA MARCADO COM O STATUS (101,103)</description>
+  </code>
+  <code number="10062" id="CARDPASSWORDISALPHANUMERIC">
+    <message>SENHA DO CARTAO DEVERÁ SER NUMÉRICA COM 4 DIGITOS</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10063" id="CARDWITHOUTID">
+    <message>O CARTAO INFORMADO NÃO POSSUI UMA IDENTIFICAÇÃO INTERNA</message>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10064" id="CENOTFOUND">
+    <message>CONTA EXTERNA PARA O USUÁRIO NÃO EXISTE</message>
+    <description>A conta externa do usuário não foi encontrada</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10065" id="CHECKOUTNOTALLOWED">
+    <message>O USUÁRIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE CHECKOUT</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10066" id="CMFALREADYREGISTERED">
+    <message>ESTE CPF/CNPJ JÁ POSSUI UMA CONTA LIVRE ATIVA</message>
+    <description><![CDATA[PARA ATIVAR ESTE CARTAO,<br/> ACESSE: <A HREF='{0}'> MEU  LIVRE</A> &gt; MEUS CARTÕES &gt; VINCULAR CARTAO]]></description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10067" id="CMFERROR">
+    <message>CPF/CNPJ INFORMADO DIVERGE DAS REGRAS DO MINISTÉRIO DA FAZENDA</message>
+    <description>Foi informado um Código de CNPJ para uma pessoa Física</description>
+  </code>
+  <code number="10068" id="CMFNOTFOUND">
+    <message>CPF/CNPJ NÃO ENCONTRADO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10069" id="CODEBANKNOTFOUND">
+    <message>CÓDIGO DE BANCO NÃO EXISTENTE</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="1" id="COMPLETED">
+    <message>PROCESSAMENTO CONCLUIDO</message>
+    <severity>WARNING</severity>
+    <description>A solicitação foi processada porem não foi validada pela sua persistência, o usuário deverá avaliar o resultado da operação obtida.</description>
+  </code>
+  <code number="10070" id="CONNECTIOCONFIGERROR">
+    <message>A CONEXÃO PADRÃO DE DADOS ESTA CONFIGURADA DE FORMA INCORRETA</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10071" id="CONNECTIOERROR">
+    <message>ERRO DE CONEXAO DE DADOS</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10072" id="CONNECTIONTIMEOUT">
+    <message>O TEMPO LIMITE DE ESPERA FOI ATINGIDO</message>
+    <description>Tempo Limite de Execução Expirado. O período de tempo limite terminou antes da conclusão da operação ou o servidor NAO ESTA respondendo.</description>
+  </code>
+  <code number="10073" id="CREATETOKEN">
+    <message>FALHA NA CRIAÇÃO DO TOKEN DE ACESSO</message>
+    <description>Erro dinâmico de criação do token de acesso</description>
+  </code>
+  <code number="10074" id="CVNOTCREATE">
+    <message>FALHA NA CRIAÇÃO DA CONTA VIRTUAL DO USUÁRIO</message>
+    <description>Não foi possível criar a conta virtual do usuário</description>
+  </code>
+  <code number="10075" id="CVNOTDEF">
+    <message>CONTA VIRTUAL PARA O USUÁRIO NÃO DEFINIDA</message>
+    <description>A conta virtual do usuário não foi informada</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10076" id="CVNOTFOUND">
+    <message>CONTA VIRTUAL PARA O USUÁRIO NÃO EXISTE</message>
+    <description>A conta virtual do usuário não foi encontrada</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10077" id="CVOPERATIONNOTALLOWED">
+    <message>A CONTA VIRTUAL INFORMADA NÃO É OPERACIONAL PARA ESTE TIPO DE PROCESSO</message>
+    <description>A conta virtual do usuário esta sendo informada para processar uma operação de transferência não permitida, Transferencias entre contas são permitidas apenas para contas virtuais internas.</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10078" id="CVWITHOUTSOURCE">
+    <message>A CONTA VIRTUAL NÃO POSSUI ORIGEM DEFININDA PARA OPERAÇÃO</message>
+    <description>A conta virtual do usuário possui uma origem de conta não mapeada</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10079" id="DISABLEDCODEBANK">
+    <message>O CÓDIGO DO BANCO FORNECIDO NÃO É PERMITIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10080" id="EMAIL_DELETED">
+    <message>E-MAIL REMOVIDO COM SUCESSO</message>
+    <severity>WARNING</severity>
+    <description></description>
+  </code>
+  <code number="10081" id="EMAIL_ENTRYERROR">
+    <message>E-MAIL INVÁLIDO</message>
+    <severity>ERROR</severity>
+    <description>O e-mail é inválido ou não bem formado</description>
+  </code>
+  <code number="10082" id="EMAIL_HASFOUND">
+    <message>E-MAIL JÁ EXISTENTE</message>
+    <severity>ERROR</severity>
+    <description>O e-mail já existe no cadastro</description>
+  </code>
+  <code number="10083" id="EMAIL_HASNOTFOUND">
+    <message>E-MAIL NAO EXISTENTE</message>
+    <severity>ERROR</severity>
+    <description>O e-mail não existe no cadastro</description>
+  </code>
+  <code number="10084" id="EMAIL_NOTGIVEN">
+    <message>O E-MAIL DEVERÁ SER FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10085" id="EMAIL_SEND_SUCESS">
+    <message>E-MAIL ENVIADO COM SUCESSO</message>
+    <severity>WARNING</severity>
+    <description></description>
+  </code>
+  <code number="10086" id="EMPTYACCOUNT">
+    <message>O NÚMERO DA CONTA DEVERÁ SER FORNECIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10087" id="EMPTYADDRESS">
+    <message>O ENDEREÇO DO USUÁRIO NÃO FOI FORNECIDO</message>
+    <description>O Endereço do usuário não foi fornecido</description>
+  </code>
+  <code number="10088" id="EMPTYBENEF">
+    <message>O NOME DO BENEFICIÁRIO DEVERÁ SER FORNECIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10089" id="EMPTYCARD">
+    <message>O NÚMERO DO CARTAO DEVERÁ SER FORNECIDO</message>
+  </code>
+  <code number="10090" id="EMPTYCARDNID">
+    <message>O ID DO CARTAO DEVERÁ SER FORNECIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10091" id="EMPTYCEP">
+    <message>O CEP DEVERÁ SER FORNECIDO</message>
+  </code>
+  <code number="10092" id="EMPTYCMF">
+    <message>O CÓDIGO DO CPF/CNPJ DEVERÁ SER INFORMADO</message>
+  </code>
+  <code number="10093" id="EMPTYCONNECTIONCONFIG">
+    <message>NÃO EXISTE CONFIGURAÇÃO DE CONEXÃO PARA O SERVIDOR DE DADOS</message>
+    <description>Não existe uma configuração da conexão definida para este recurso</description>
+  </code>
+  <code number="10094" id="EMPTYCVC">
+    <message>CÓDIGO DO CVC NAO INFORMADO</message>
+    <severity>ERROR</severity>
+    <description>O Código do CVC não foi informado</description>
+  </code>
+  <code number="10095" id="EMPTYCVCNUMBER">
+    <message>NUMERO DO CVC DEVERA SER FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10096" id="EMPTYDATA">
+    <message>NENHUM DADO FOI FORNECIDO PARA PROCESSAMENTO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10097" id="EMPTYDATARECORDS">
+    <message>NÃO FORAM FORNECIDOS/ENCONTRADOS REGISTROS PARA PROCESSAMENTO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10098" id="EMPTYDATE">
+    <message>DATA NÃO FORNECIDA</message>
+  </code>
+  <code number="10099" id="EMPTYDATNAC">
+    <message>DATA DE NASCIMENTO/FUNDACAO  NAO FORNECIDA</message>
+    <description>A data de nascimento não foi fornecida</description>
+  </code>
+  <code number="10100" id="EMPTYDOC">
+    <message>O NÚMERO DO DOCUMENTO DE REFERENCIA NÃO FOI INFORMADO</message>
+    <severity>WARNING</severity>
+    <description></description>
+  </code>
+  <code number="10101" id="EMPTYGENDER">
+    <message>O GÊNERO DEVERÁ SER INFORMADO</message>
+    <description>Os código de gênero válidos são : F - Feminino, M - Masculino, I - Indeterminado</description>
+  </code>
+  <code number="10102" id="EMPTYLAUNCHIMPORT">
+    <message>NENHUM TIPO DE LANCAMENTO DEFINIDO PARA O REGISTRO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10103" id="EMPTYMAIL">
+    <message>O EMAIL DEVERÁ SER FORNECIDO</message>
+  </code>
+  <code number="10104" id="EMPTYMOBILE">
+    <message>O NÚMERO DO CELULAR DEVERÁ SER INFORMADO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10105" id="EMPTYMOTHERNAME">
+    <message>O NOME DA MÃE DEVERÁ SER FORNECIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10106" id="EMPTYNAME">
+    <message>O NOME DO TITULAR OU USUÁRIO TOMADOR DO SERVICO NAO INFORMADO</message>
+    <severity>WARNING</severity>
+    <description></description>
+  </code>
+  <code number="10107" id="EMPTYNUMBERSLIP">
+    <message>O ID DO BOLETO DEVERÁ SER INFORMADO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10108" id="EMPTYPERSJUR">
+    <message>A personalidade jurídica do cadastro deverá ser informada</message>
+    <description>Os código de personalidade jurídica válidos são : F - Pessoa Física, J - Pessoa Jurídica, I - Indeterminado</description>
+  </code>
+  <code number="10109" id="EMPTYPHONE">
+    <message>O NUMERO DO TELEFONE DEVERA SER INFORMADO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10110" id="EMPTYRECORDSETTING">
+    <message>TIPO DE LANÇAMENTO SEM DEFINIÇÃO PRIMARIA DE GRAVAÇAO</message>
+    <description>O TIPO DE LANÇAMENTO NÃO POSSUI DEFINIÇÃO DE GRAVAÇÃO PARA O REGISTRO PRIMARIO, A DEFINIÇÃO PRIMARIA É OBRIGATORIA</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10111" id="EMPTYRESPONSE">
+    <message>NENHUM DADO RETORNADO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10112" id="EMPTYTOWN">
+    <message>O NOME DA CIDADE DEVERÁ SER FORNECIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10113" id="EMPTYUF">
+    <message>O CÓDIGO DA UNIDADE DA FEDERAÇÃO DEVERÁ SER FORNECIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10114" id="EMPTYUSERNAME">
+    <message>NOME DE USUÁRIO NÃO FORNECIDO</message>
+    <description>O nome do usuário não foi fornecido</description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10115" id="EMPTYUSERSLIST">
+    <message>NÃO FOI FORNECIDO UMA LISTA DE USUARIOS PARA PROCESSAMENTO</message>
+    <description></description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10116" id="EMPTYVALUE">
+    <message>NAO HA VALOR FORNECIDO PARA A OPERACAO</message>
+    <severity>WARNING</severity>
+    <description></description>
+  </code>
+  <code number="10117" id="EXISTINGREQUEST">
+    <message>A SOLICITAÇÃO INFORMADA JÁ EXISTE EM NOSSOS REGISTROS</message>
+    <severity>ERROR</severity>
+    <description>Foi feita uma solicitação de inclusão de registro, porêm a solicitação já está cadastrada.</description>
+  </code>
+  <code number="10118" id="EXTERNALRESOURCENOTLOGGED">
+    <message>FALHA NA LEITURA DE DADOS DO LOGON DE RECURSOS EXTERNOS</message>
+    <description>Não foi possível efetuar a leiura do objeto de dados da conexão com o servidor externo</description>
+  </code>
+  <code number="10119" id="EXTERNALRESOURCENOTREAD">
+    <message>NÃO FOI POSSÍVEL LER OS DADOS DA CONFIGURAÇÃO DE ACESSO DO RECURSO</message>failwri
+    <description>Não foi possível efetuar a leiura de dados de conexão do servidor externo</description>
+  </code>
+  <code number="10120" id="FAIL_CONVERT_VALUE">
+    <message>FALHA NA CONVERSAO DO VALOR DA OPERACAO</message>
+    <severity>WARNING</severity>
+    <description>O valor tem de estar no formato 999999999.99 em string para conversão, verifique se não existem caracteres extras como (',#-') no valor</description>
+  </code>
+  <code number="2" id="FAILALL">
+    <message>FALHA DE PROCESSAMENTO</message>
+    <severity>ERROR</severity>
+    <description>Erro de processamento não determinado</description>
+  </code>
+  <code number="10121" id="FAILASSEMBLINGLIST">
+    <message>FALHA NA MONTAGEM DA LISTA DE SACADOS</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10122" id="FAILCARDACTIVATION">
+    <message>FALHA NO REGISTRO DE ATIVAÇÃO DO CARTAO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10123" id="FAILCONNECTION">
+    <message>FALHA DE CONEXAO, NAO FOI POSSIVEL ESTABELECER UMA CONEXAO DE DADOS</message>
+    <description>Não foi possível estabelecer uma conexão de dados, verifique se existe a configuração da conexão apropriada</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10124" id="FAILDELETERECORD">
+    <message>HOUVE UMA FALHA AO TENTAR EXCLUIR O REGISTRO, CONSULTE O LOG PARA VERIFICACAO</message>
+    <description>FALHA NA EXCLUSÃO DO REGISTRO, O LOG DE PROCESSAMENTO DEVERA SER CONSULTADO</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10125" id="FAILDETECTMANAGER">
+    <message>NÃO EXISTE DEFINIÇÃO DE PARAMETROS PARA O GESTOR INFORMADO</message>
+  </code>
+  <code number="10126" id="FAILDETECTSALESAGENT">
+    <message>NÃO FOI POSSÍVEL LOCALIZAR A CONFIGURAÇÃO DO GESTOR DE VENDAS DESTA OPERAÇÃO</message>
+    <description>Não há configuração definida para o Agente de Vendas do CARTAO</description>
+  </code>
+  <code number="10127" id="FAILEDRECORDOFRELEASES">
+    <message>HOUVE UMA FALHA NA GRAVAÇÃO DOS LANÇAMENTOS DO CONTA CORRENTE</message>
+    <severity>ERROR</severity>
+    <description />
+  </code>
+  <code number="10128" id="FAILEXECPROC">
+    <message>FALHA NA EXCECUÇÃO DO PROCEDIMENTO DE EXECUÇÃO</message>
+    <severity>DBERROR</severity>
+    <description></description>
+  </code>
+  <code number="10129" id="FAILLOCATECOUNTRY">
+    <message>FALHA NA LOCALIZAÇÃO DO CÓDIGO DO PAÍS</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10130" id="FAILLOGINTOKEN">
+    <message>FALHA DE LOGIN DO TOKEN DE ACESSO</message>
+    <description>Não foi possível efetuar o login do token de Acesso</description>
+  </code>
+  <code number="10131" id="FAILLOGON">
+    <message>FALHA DE LOGON</message>
+    <description>Não foi possível efetuar o logon para o aplicativo</description>
+  </code>
+  <code number="10132" id="FAILLOGONEXTERNAL">
+    <message>FALHA DE LOGON</message>
+    <description>Falha de logon no aplicativo externo</description>
+  </code>
+  <code number="10133" id="FAILLOGOUT">
+    <message>FALHA DE LOGOUT</message>
+    <description>Não foi possível efetuar o logout do aplicativo</description>
+  </code>
+  <code number="10134" id="FAILLOWBILLINGTICKET">
+    <message>FALHA NA BAIXA DE BOLETOS DE COBRANÇA</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10135" id="FAILREADAPISETTINGS">
+    <message>FALHA NA LEITURA DOS PARÂMETROS DE AUTENTICAÇÃO DA API</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10136" id="FAILREGISTERSALESCREDIT">
+    <message>FALHA NO REGISTRO DA TRANSAÇÃO DE BAIXA DE VENDAS CREDITO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10137" id="FAILREGISTERSALESMACHINE">
+    <message>FALHA NO REGISTRO DA TRANSAÇÃO DE VENDAS POR MÁQUINA</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10138" id="FAILREMOVEPROCESS">
+    <message>HOUVE UMA FALHA AO TENTAR REMOVER O PROCESSAMENTO, CONSULTE O LOG PARA VERIFICACAO</message>
+    <description>FALHA NA REMOCAO DO PROCESSAMENTO, O LOG DE PROCESSAMENTO DEVERA SER CONSULTADO</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10139" id="FAILREREGISTER">
+    <message>FALHA NO RECADASTRO DO USUÁRIO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10140" id="FAILSENDMAIL">
+    <message>FALHA NO ENVIO DE EMAIL</message>
+    <description>Houve ma falha no envio de email, o erro deve ser verificado no log de processamento.</description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10141" id="FAILUPDATEMACHINE">
+    <message>FALHA NA ATUALIZAÇÃO DO REGISTRO DE MÁQUINA PÓS</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10142" id="FAILUPDATESLIP">
+    <message>FALHA NA ATUALIZAÇÃO DA FATURA/BOLETO {0}</message>
+    <description>Erro indeterminado na atualização da fatura/boleto informado, provavalmente a informação de atualização é inválida ou não existe</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10143" id="FAILUPDLOTCARD">
+    <message>FALHA NA ATUALIZAÇÃO E INSCRIÇÃO DO CARTAO/LOTE</message>
+    <description>Erro indeterminado na atualização do número do lote em cartões.</description>
+  </code>
+  <code number="10144" id="FAILUPLOADEMPTYFILE">
+    <message>NÃO FOI FORNECIDO NENHUM ARQUIVO PARA UPLOAD</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10145" id="FAILUPLOADFILE">
+    <message>FALHA NO PROCESSAMENTO DO UPLOAD DO ARQUIVO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10146" id="FAILUPLOADINTEGRATION">
+    <message>FALHA NA INTEGRAÇÃO DOS DADOS DE UPLOAD</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10147" id="FAILUPLOADUPDATE">
+    <message>FALHA NA ATUALIZAÇÃO DOS DADOS DE UPLOAD</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10148" id="FAILURECARDACTIVATION">
+    <message>FALHA NO REGISTRO CONTÁBIL DE ATIVAÇÃO DO CARTAO</message>
+    <severity>ERROR</severity>
+    <description>Falha no registro de lançamento da tarifação da ativação do CARTAO</description>
+  </code>
+  <code number="10149" id="FAILURETRANSFERACCOUNTVIRTUAL">
+    <message>FALHA NO PROCESSAMENTO DE TRANSFERENCIA PARA CONTA VIRTUAL</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10150" id="FAILURETRANSFERANOTHERBANK">
+    <message>FALHA NO PROCESSAMENTO DE TRANSFERENCIA PARA OUTRO BANCO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10151" id="FAILURETRANSFERCARD">
+    <message>FALHA NO PROCESSAMENTO DE TRANSFERENCIA PARA O CARTAO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10152" id="FAILURETRANSFERCURRENTACCOUNT">
+    <message>FALHA NO PROCESSAMENTO DE TRANSFERENCIA PARA CONTA CORRENTE</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10153" id="FAILUREUPDATECARD">
+    <message>FALHA NO PROCESSAMENTO DE ATUALIZAÇÃO DO CARTAO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10154" id="FAILUREUPDATEREGISTER">
+    <message>FALHA NO PROCESSAMENTO DE ATUALIZAÇÃO DO CADASTRO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10155" id="FAILWRITE">
+    <message>FALHA NA ATUALIZACAO DE DADOS</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10156" id="FAILWRITEADDRESS">
+    <message>FALHA NA GRAVAÇÃO DO ENDEREÇO DO USUÁRIO</message>
+    <description>Erro indeterminado na gravação do endereço do usuário, o log de aplicativo deverá ser consultado.</description>
+  </code>
+  <code number="10157" id="FAILWRITECONTACT">
+    <message>FALHA NA GRAVAÇÃO DO CONTATO DO USUÁRIO</message>
+    <description>Erro indeterminado na gravação do contato do usuário, o log de aplicativo deverá ser consultado.</description>
+  </code>
+  <code number="10158" id="FAILWRITELOT">
+    <message>FALHA NA GRAVAÇÃO DO LOTE</message>
+    <description>Erro indeterminado na gravação do lote do usuário, o log de aplicativo deverá ser consultado.</description>
+  </code>
+  <code number="10159" id="FAILWRITERTR">
+    <message>FALHA NA GRAVAÇÃO DO REGISTRO DE TRANSAÇÃO</message>
+    <description>Falha no registro de inserção da transação de retorno e aprovação de crédito.</description>
+  </code>
+  <code number="10160" id="FAILWRITESLIP">
+    <message>FALHA NA GRAVAÇÃO DO BOLETO</message>
+    <description>Erro indeterminado na gravação do Boleto do usuário, o log de aplicativo deverá ser consultado.</description>
+  </code>
+  <code number="10161" id="FAILWRITEUSER">
+    <message>FALHA NA GRAVAÇÃO DE DADOS DO USUÁRIO</message>
+  </code>
+  <code number="10162" id="FAILWRITEUSERLIG">
+    <message>FALHA NA GRAVAÇÃO DE ASSOCIAÇÃO DO USUÁRIO</message>
+  </code>
+  <code number="10163" id="FAILWRITEVIRTUALACCOUNT">
+    <message>FALHA NA GRAVACAO DA CONTA VIRTUAL DO USUARIO</message>
+  </code>
+  <code number="10164" id="FIELDREQUIRED">
+    <message>O CAMPO {0} NÃO FOI INFORMADO</message>
+    <severity>ERROR</severity>
+    <description>Campo obrigatorio para processamento</description>
+  </code>
+  <code number="10165" id="FILEHASINVALIDRECORDS">
+    <message>O ARQUIVO POSSUI REGISTROS INVÁLIDOS</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10166" id="FILEINUSE">
+    <message>O ARQUIVO ALVO ESTÁ EM USO POR OUTRO PROCESSO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10167" id="FILENOTFOUND">
+    <message>ARQUIVO NAO ENCONTRADO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10168" id="FILENOTINTEGRATED">
+    <message>O ARQUIVO NAO PODE SER INTEGRADO, EXISTEM ERROS NA DEFINICAO DE CAMPOS E REGISTROS</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10169" id="FINANCIALOPERATIONINVALID">
+    <message>NÃO HÁ OPERAÇÃO FINANCEIRA PARA O CÓDIGO DE MOVIMENTO INFORMADO</message>
+    <description></description>
+  </code>
+  <code number="10170" id="FINANCIALOPERATIONNOTEXIST">
+    <message>NÃO HÁ OPERAÇÃO FINANCEIRA CADASTRADA</message>
+    <description></description>
+  </code>
+  <code number="10171" id="INDICATORNOTDETECTED">
+    <message>NÃO FOI POSSIVEL DETECTAR O INDICADOR {0} DO CADASTRO</message>
+    <severity>ERROR</severity>
+    <description>O Localizador não foi detectado pelo url de acesso do aplicativo</description>
+  </code>
+  <code number="10172" id="INDICATORNOTFOUND">
+    <message>NÃO FOI POSSÍVEL LOCALIZAR O INDICADOR {0} DO CADASTRO</message>
+    <severity>ERROR</severity>
+    <description>O Localizador não foi encontrado por que o login não existe</description>
+  </code>
+  <code number="10173" id="INSUFFICIENTFUNDS">
+    <message>SALDO INSUFICIENTE</message>
+    <severity>WARNING</severity>
+    <description>O saldo disponível é insuficiente para a conclusão da operação</description>
+  </code>
+  <code number="10174" id="INTERNALCONVERTIONKEY">
+    <message>FALHA NA CHAVE FORNECIDA, VERIFIQUE SE A CHAVE ESTÁ COMPLETA OU NÃO VAZIA</message>
+    <severity>ERROR</severity>
+    <description>Erro de conversão de Key Id</description>
+  </code>
+  <code number="10176" id="INTERNALDBERRORARGSEXCESS">
+    <message>A INSTRUÇÃO DE GRAVAÇÃO NÃO PÔDE SER CONCLUIDA, HÁ UM EXCESSO DE PARÂMETROS INFORMADOS PARA SUA CONCLUSÃO</message>
+    <description>Verificar se o procedimento atualizado está de acordo com as instruções de regras de negócio</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10177" id="INTERNALDBERRORFIELDTONULL">
+    <message>A INSTRUÇÃO DE GRAVAÇÃO TENTOU INSERIR UM VALOR NÃO APROPRIADO PARA UM CAMPO DE INFORMAÇÃO</message>
+    <description>Não é possível inserir o valor NULL para uma determinada coluna, a coluna não permite nulos.</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10178" id="INTERNALDBERRORKEYFAULT">
+    <message>A INSTRUÇÃO DE GRAVAÇÃO NÃO PÔDE SER CONCLUIDA, UM PARAMETRO ESTÁ AUSENTE NA ATUALIZAÇÃO DOS DADOS DE REFERÊNCIA</message>
+    <description>Restrição de Foreign-key, verifique se todos os parâmetros que satisfaçam a Foreign-Key foram fornecidos</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10179" id="INTERNALDBERRORPARAMETERS">
+    <message>A INSTRUÇÃO DE GRAVAÇÃO NÃO CONTEM UMA DEFINIÇÃO PARA UM PARAMETRO DE ENTRADA</message>
+    <description>FALHA NA DEFINIÇÃO DE UM PARÂMETRO DE ENTRADA/SAIDA NÃO DEFINIDO</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10180" id="INTERNALDBERRORPARAMETERSFAULT">
+    <message>FALHA DE ATUALIZACAO POR EXCESSO/FALTA DE ARGUMENTOS</message>
+    <description>O procedimento armazenado difere da instrução de gravação, os parâmetros estão discordantes ou ausentes</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10181" id="INTERNALDBERRORPROCNOTFOUND">
+    <message>PROCEDIMENTO DE EXECUÇÃO NÃO ENCONTRADO</message>
+    <severity>DBERROR</severity>
+    <description></description>
+  </code>
+  <code number="10182" id="INTERNALDBERRORRECORDFOUND">
+    <message>O REGISTRO JÁ EXISTE</message>
+    <description>O aplicativo detectou um registro que conflita com a chave primária da tabela alvo</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10183" id="INTERNALDBERRORRESTRICTDELETE">
+    <message>O REGISTRO NÃO PODE SER EXCLUIDO</message>
+    <description>O registro não pode ser excluido por definições de integridade</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10184" id="INTERNALDBOBJECT">
+    <message>OBJETO DE DADOS INVALIDO OU NÃO EXISTENTE</message>
+    <severity>DBERROR</severity>
+    <description>O objeto de processamento não existe ou é invalido</description>
+  </code>
+  <code number="10185" id="INTERNALDBTIMEOUTT">
+    <message>TIME OUT DE PROCESSAMENTO</message>
+    <severity>DBERROR</severity>
+    <description></description>
+  </code>
+  <code number="10186" id="INTERNALDBUSEEXCLUSIVE">
+    <message>O BANCO DE DADOS ESTÁ EM USO EXCLUSIVO</message>
+    <severity>DBERROR</severity>
+    <description>O Acesso a informação foi bloqueado por uso externo, verifique se uma outra instância do banco de dados está aberta em modo exclusivo</description>
+  </code>
+  <code number="10187" id="INTERNALSERVERERROR">
+    <message>ERRO INTERNO DO SERVIDOR</message>
+    <description>O Servidor retornou um erro inesperado</description>
+  </code>
+  <code number="10188" id="INVALID_AGE">
+    <message>DATA DE NASCIMENTO INVÁLIDA, DEVERÁ SER MAIOR DE 18 ANOS</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10189" id="INVALID_CMF">
+    <message>O NÚMERO DO CPF/CNPJ DEVERÁ SER FORNECIDO</message>
+    <description>O Código do CPF ou CNPJ não foi fornecido</description>
+  </code>
+  <code number="10190" id="INVALID_CNPJ">
+    <message>O NÚMERO DO CNPJ É INVALIDO</message>
+    <description>O CNPJ fornecido não coincide com o mecanismo de validação do Ministério da Fazenda</description>
+  </code>
+  <code number="10191" id="INVALID_CPF">
+    <message>O NÚMERO DO CPF É INVALIDO</message>
+    <description>O CPF fornecido não coincide com o mecanismo de validação do Ministério da Fazenda</description>
+  </code>
+  <code number="10192" id="INVALID_FORMAT_DATE">
+    <message>FORMATO DE DATA INVALIDO</message>
+    <description>Formato inválido de data fornecida, o padrão correto é dd/MM/yyyy</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10193" id="INVALID_LEN_DATE">
+    <message>COMPRIMENTO DE DATA INVALIDO</message>
+    <description>Formato inválido de data fornecida, o padrão correto é dd/MM/yyyy com tamanho igual a 10</description>
+    <severity>ERROR</severity>
+  </code>
+
+  <code number="10194" id="INVALID_FORMAT_VALUE">
+    <message>FORMATO DE VALOR INVÁLIDO</message>
+    <description>Formato Inválido de Valor fornecido</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10195" id="INVALID_LOGIN">
+    <message>O login de usuário deverá possuir no mínimo 3 caracteres</message>
+  </code>
+  <code number="10196" id="INVALID_RANGE_DATE">
+    <message>A DATA INICIAL É MAIOR QUE A DATA FINAL</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10197" id="INVALID_VALUE">
+    <message>O VALOR FORNECIDO É INVÁLIDO</message>
+    <description>O valor fornecido tem de ser maior que zero</description>
+  </code>
+  <code number="10198" id="INVALID_VALUE_DATE">
+    <message>O VALOR OU ARGUMENTO DA DATA FORNECIDO É INVÁLIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10199" id="INVALIDACCESSTOKEN">
+    <message>ACCESS TOKEN INVÁLIDO OU NÃO FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10200" id="INVALIDACCOUNT">
+    <message>O NUMERO DA CONTA E INVALIDO OU NAO FOI FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description>O id da conta virtual deverá ser fornecido</description>
+  </code>
+  <code number="10201" id="INVALIDAGENCY">
+    <message>O NÚMERO DA AGÊNCIA É INVÁLIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10202" id="INVALIDAGENCYLEN">
+    <message>O COMPRIMENTO DO NÚMERO DA AGÊNCIA DEVERÁ SER MAIOR QUE 4</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10203" id="INVALIDARGUMENT">
+    <message>O VALOR FORNECIDO PARA {0} É INVÁLIDO, VAZIO OU NÃO CORRESPONDE AO TIPO DE ENTRADA VALIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10204" id="INVALIDATTRIBUTE">
+    <message>CÓDIGO DE ATRIBUTO DE REGISTRO INVÁLIDO</message>
+    <description>A operação requer registro de atualização do cadatro geral, porêm não foi fornecido ou é menor ou igual a zero o atributo de identificação</description>
+  </code>
+  <code number="10205" id="INVALIDBEARNAME">
+    <message>O NOME DO TITULAR NÃO CONFERE</message>
+  </code>
+  <code number="10206" id="INVALIDCEP">
+    <message>O CEP CONTÊM CARACTERS INVÁLIDOS OU ESTÁ MAL FORMADO</message>
+  </code>
+  <code number="10207" id="INVALIDCLIENTSECRET">
+    <message>CLIENT SECRET INVÁLIDO OU NÃO FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10208" id="INVALIDCLIENTSECRETPSW">
+    <message>SECRET PASSWORD INVÁLIDO OU NÃO FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10209" id="INVALIDCODEBANK">
+    <message>CÓDIGO DE BANCO INVÁLIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10210" id="INVALIDCOUNTRYCODE">
+    <message>CÓDIGO DE PAÍS INVÁLIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10211" id="INVALIDCVC">
+    <message>CVC INVÁLIDO OU MAL FORMADO</message>
+    <severity>ERROR</severity>
+    <description>O Código do CVC É INVÁLIDO</description>
+  </code>
+  <code number="10212" id="INVALIDCVCNUMBER">
+    <message>NÚMERO DO CVC INVÁLIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10213" id="INVALIDDATA">
+    <message>DADOS INVÁLIDOS, TENTE NOVAMENTE !!!</message>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10214" id="INVALIDDATBAS">
+    <message>A DATA BASE OPERAÇÃO DEVERÁ SER INFORMADA</message>
+    <description>A data base de operação faz parte do calculo ou ação de registro, sua informação é determinante e não poderá ser omitida</description>
+  </code>
+  <code number="10215" id="INVALIDDATEDUE">
+    <message>DATA DE VÁLIDADE DO CARTAO ESTÁ COM FORMATO DIFERENTE DE 99/99</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10216" id="INVALIDDATEPOST">
+    <message>DATA DE LANÇAMENTO INVÁLIDA PARA POSTAGEM</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10217" id="INVALIDDATNAC">
+    <message>DATA DE NASCIMENTO/FUNDAÇÃO INVAIDA</message>
+    <description>A data de nascimento é inválida ou contêm argumentos inválidos</description>
+  </code>
+  <code number="10218" id="INVALIDDELIMITERFORREAD">
+    <message>O DELIMITADOR PRESENTE NO ARQUIVO É INVÁLIDO PARA LEITURA</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10219" id="INVALIDDIRECTORYOUTPUT">
+    <message>NÃO FOI POSSÍVEL LOCALIZAR O DIRETÓRIO DE SAÍDA OU GRAVAÇÃO DE DADOS</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10220" id="INVALIDDUEDATE">
+    <message>DATA DE VENCIMENTO INVÁLIDA OU NÃO FORNECIDA</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10221" id="INVALIDENTRYPHONE">
+    <message>O NUMERO DO TELEFONE CORRESPONDE A UM CELULAR</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10222" id="INVALIDFORMATVALUEENTRY">
+    <message>O VALOR POSSUI FORMATAÇÃO INVÁLIDA</message>
+    <description>O campo de valor possui formatação adicional inválida para esta operação</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10223" id="INVALIDGENDER">
+    <message>O GÊNERO INFORMADO É INVÁLIDO</message>
+    <description>Os código de gênero válidos são : F - Feminino, M - Masculino</description>
+  </code>
+  <code number="10224" id="INVALIDHEADER">
+    <message>O CABEÇALHO DO ARQUIVO É INVÁLIDO</message>
+    <severity>ERROR</severity>
+    <description>O Cabeçaho do arquivo fornecido difere do definido</description>
+  </code>
+  <code number="10225" id="INVALIDIMPORTFILEID">
+    <message>ESTA OPERAÇÃO REQUER UMA IDENTIFICAÇÃO DE IMPORTAÇÃO VÁLIDA</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10226" id="INVALIDINSTALLMENT">
+    <message>O NÚMERO DE PARCELAS FORNECIDAS É INVALIDO, O PARAMETRO DEVE ESTAR ENTRE [2 E 12]</message>
+    <description></description>
+  </code>
+  <code number="10227" id="INVALIDKEYFILE">
+    <message>CÓDIGO CHAVE DO ARQUIVO INVÁLIDA OU ARQUIVO NÃO EXISTENTE</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10228" id="INVALIDLAUNCHIMPORT">
+    <message>O TIPO DE LANÇAMENTO NÃO EXISTE OU NAO ESTA DEFINIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10229" id="INVALIDMAIL">
+    <message>O EMAIL CONTEM CARACTERES INVALIDOS OU ESTA MAL FORMADO</message>
+  </code>
+  <code number="10230" id="INVALIDMANAGERCODE">
+    <message>CODIGO DE GESTOR INVALIDO OU NAO DEFINIDO</message>
+    <severity>WARNING</severity>
+    <description></description>
+  </code>
+  <code number="10231" id="INVALIDMOBILE">
+    <message>O NUMERO DO CELULAR E INVALIDO</message>
+    <severity>ERROR</severity>
+    <description>O Celular deve possuir treze (13) digitos sendo 99 99 9 9999-9999</description>
+  </code>
+  <code number="10232" id="INVALIDOPERATION">
+    <message>OPERAÇÃO DE PROCESSAMENTO INVÁLIDA</message>
+    <description>Operações válidas 1 - Inclusão, 2 - Alteração, 3 - Exclusão</description>
+  </code>
+  <code number="10233" id="INVALIDPERSJUR">
+    <message>PERSONALIDADE JURÍDICA INVÁLIDA</message>
+    <description>Os código de personalidade jurídica válidos são : F - Pessoa Física, J - Pessoa Jurídica, I - Indeterminado</description>
+  </code>
+  <code number="10234" id="INVALIDPHONE">
+    <message>O NUMERO DO TELEFONE E INVALIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10235" id="INVALIDPORTNAME">
+    <message>O NOME DO PORTADOR DEVERA SER INFORMADO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10236" id="INVALIDPROCESSAUTHENTICATE">
+    <message>AUTENTICAÇÃO DE PROCESSAMENTO INVÁLIDA</message>
+  </code>
+  <code number="10237" id="INVALIDPRODUCTFORTOKEN">
+    <message>O PRODUTO PARA O TOKEN É INVALIDO OU NÃO FOI FORNECIDO</message>
+    <description>Código de Produto ou produto associado para a Chave de Segurança inválido para a geração do token</description>
+  </code>
+  <code number="10238" id="INVALIDPROTOCOL">
+    <message>PROTOCOLO INVÁLIDO OU DESCONHECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10239" id="INVALIDRECORDPHONE">
+    <message>O NÚMERO DO CELULAR É IGUAL AO NÚMERO DO TELEFONE FIXO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10240" id="INVALIDRECURRENCELIST">
+    <message>NÃO FOI POSSÍVEL DETERMINAR A FAIXA DE VENCIMENTOS COM OS PARÂMETROS INFORMADOS</message>
+    <description>A Data de vencimento inicial é inválida ou o tipo de recorrência não foi informado adequadamente</description>
+  </code>
+  <code number="10241" id="INVALIDREFERENCESOURCE">
+    <message>A REFERÊNCIA DE IDENTIFICAÇÃO É INVÁLIDA</message>
+    <severity>ERROR</severity>
+    <description>A referência de identificação não foi informada</description>
+  </code>
+  <code number="10242" id="INVALIDREFERENCESOURCENOTAPP">
+    <message>A REFERÊNCIA DE IDENTIFICAÇÃO NÃO É APLICÁVEL A ESTE PROCEDIMENTO</message>
+    <severity>ERROR</severity>
+    <description>A referência de identificação está sendo usada para uma operação que não permite esta atualização</description>
+  </code>
+  <code number="10243" id="INVALIDREFERENCESOURCENOTEXIST">
+    <message>A REFERÊNCIA DE IDENTIFICAÇÃO NÃO EXISTE</message>
+    <severity>ERROR</severity>
+    <description>A referência de identificação não existe em nossos registros</description>
+  </code>
+  <code number="10244" id="INVALIDREFERENCETARGET">
+    <message>O NÚMERO DA CONTA É INVÁLIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10245" id="INVALIDREFRESHTOKEN">
+    <message>REFRESH TOKEN INVÁLIDO OU NÃO FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10246" id="INVALIDRESPONSE">
+    <message>RESPOSTA DE PROCESSAMENTO INVÁLIDA</message>
+    <description>Não foi possível obter uma resposta válida do processamento do retorno.</description>
+  </code>
+  <code number="10247" id="INVALIDSLIPTYPE">
+    <message>TIPO DE BOLETO INVALIDO OU NÃO FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10248" id="INVALIDSTATUS">
+    <message>O STATUS FORNECIDO PARA PROCESSAMENTO É INVALIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10249" id="INVALIDTYPEINSTALLMENT">
+    <message>TIPO DE MENSALODADE INVALIDA</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10250" id="INVALIDUPDATEOPERATION">
+    <message>O REGISTRO JÁ EXISTE, PORÉM ESTÁ VINCULADO A OUTRO GESTOR DE PRODUTO</message>
+    <description>O registro está associado para um gestor diferente do atual, por definições de segurança somente o gestor do usuário pode efetuar alterações no respectivo usuário</description>
+  </code>
+  <code number="10251" id="INVALIDUSER">
+    <message>O CODIGO/NUMERO DO USUARIO E INVALIDO OU NAO FOI FORNECIDO</message>
+    <description>O Código do Usuário contêm letras ou está vazio</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10252" id="INVALIDUSERFORTOKEN">
+    <message>O USUÁRIO FORNECIDO PARA O TOKEN É INVALIDO OU NÃO FOI FORNECIDO</message>
+    <description>Código do Usuário inválido para a geração do token</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10253" id="INVALIDUSERPASSWORD">
+    <message>A SENHA OU SENHAS DE ACESSO ESTÃO DIFERENTES, VERIFIQUE</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10254" id="INVALIDUSERTYPE">
+    <message>O TIPO DE USUARIO NÃO CONTEM DEFINIÇÃO DE ACESSO</message>
+    <description>A DEFINIÇÃO DO CAMPO TIPUSU ESTA INVALIDA NO LOGON</description>
+  </code>
+  <code number="10255" id="INVALIDVALIDATIONDATE">
+    <message>DATA DE VALIDADE INVÁLIDA</message>
+    <severity>ERROR</severity>
+    <description>A data de validade da fatura ou do boleto deverá ser fornecida no formato dd/MM/yyyy</description>
+  </code>
+  <code number="10256" id="INVALIDVALIDATIONDATECARD">
+    <message>DATA DE VALIDADE DO CARTAO INVALIDA</message>
+    <severity>ERROR</severity>
+    <description>A data de validade fornecida não confere com os registros do CARTAO</description>
+  </code>
+  <code number="10257" id="INVOICENOTREGISTERED">
+    <message>NÃO FOI POSSIVEL REGISTRAR A OPERACAO</message>
+    <description>A OPERAÇÃO NÃO FOI REGISTRADA NA BASE DE MOVIMENTACAO DO CARTAO</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10258" id="LOCKCARDFAILREGISTER">
+    <message>O CARTAO FOI BLOQUEADO NA PROCESSADORA POREM NÃO FOI POSSÍVEL ATUALIZAR O REGISTRO DE CONTROLE</message>
+    <description>NÃO FOI POSSIVEL ATUALZAR O REGISTRO DE BLOQUEIO DO CARTAO (CRT)</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10259" id="LOCKCARDFAILREQUEST">
+    <message>NÃO FOI POSSÍVEL EFETUAR A REQUISICAO DE BLOQUEIO PARA A OPERADORA</message>
+    <description>HOUVE UMA FALHA NA REQUISIÇÃO DE BLOQUEIO PARA A OPERADORA (RESPOSTA INVÁLIDA)</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10260" id="LOGINALREADYEXISTS">
+    <message>O LOGIN FORNECIDO JÁ EXISTE PARA OUTRO REGISTRO</message>
+    <severity>ERROR</severity>
+    <description>O Login de usuário já esta definido para outro usuário</description>
+  </code>
+  <code number="10261" id="LOGINBLANK">
+    <message>A IDENTIFICAÇÃO DO LOGIN DEVERÁ SER INFORMADA</message>
+    <severity>ERROR</severity>
+    <description>A CREDENCIAL DE ACESSO NÃO FOI INFORMADA OU ESTA EM BRANCO</description>
+  </code>
+  <code number="10262" id="LOGINCANNOTBEREAD">
+    <message>NÃO FOI POSSÍVEL EFETUAR A LEITURA DO LOGIN DO USUARIO</message>
+    <severity>ERROR</severity>
+    <description>FALHA NA TENTATIVA DE EFETUAR A LEITURA DO LOGIN DO USUARIO</description>
+  </code>
+  <code number="10263" id="LOGINCODEACCESSINVALID">
+    <message>NÃO HÁ DEFINIÇÃO PARA O TIPO DE ACESSO INFORMADO</message>
+    <severity>ERROR</severity>
+    <description>VERIFIQUE SE O TIPO DE LOGIN INFORMADO ESTA CORRETO</description>
+  </code>
+  <code number="10264" id="LOGINCREDENTIALEXPIRED">
+    <message>A SENHA DE ACESSO PARA O LOGIN EXPIROU</message>
+    <severity>ERROR</severity>
+    <description>A DATA DE EXPIRAÇÃO DA SENHA FOI ATINGIDA</description>
+  </code>
+  <code number="10265" id="LOGINCREDENTIALNEEDRESET">
+    <message>A SENHA DE ACESSO DEVERÁ SER RESETADA</message>
+    <severity>ERROR</severity>
+    <description>O USUÁRIO DEVERÁ INSERIR UMA NOVA SENHA DE ACESSO</description>
+  </code>
+  <code number="10266" id="LOGINFAILREAD">
+    <message>FALHA NA LEITURA E AUTENTICAÇÃO DO LOGIN</message>
+    <severity>ERROR</severity>
+    <description>Falha na leitura do login de usuário para verificar unicidade</description>
+  </code>
+  <code number="10267" id="LOGININVALID">
+    <message>SENHA DE ACESSO INVALIDA</message>
+    <severity>ERROR</severity>
+    <description>A SENHA DE ACESSO É INVÁLIDA</description>
+  </code>
+  <code number="10268" id="LOGINNOTFOUND">
+    <message>NÃO FOI POSSÍVEL EFETUAR O LOGIN DO USUÁRIO</message>
+    <severity>ERROR</severity>
+    <description>Login de usuário não definido</description>
+  </code>
+  <code number="10269" id="LOGINPSWBLANK">
+    <message>A IDENTIFICAÇÃO DA SENHA DE ACESSO DEVERA SER INFORMADA</message>
+    <severity>ERROR</severity>
+    <description>A SENHA DA CREDENCIAL DE ACESSO NÃO FOI INFORMADA OU ESTA EM BRANCO</description>
+  </code>
+  <code number="10270" id="MACHINEALREADYALOCATED">
+    <message>A MÁQUINA JÁ ESTÁ ALOCADA PARA OUTRO USUÁRIO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10271" id="MACHINENOTFOUND">
+    <message>O REGISTRO DA MÁQUINA NÃO EXISTE</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10272" id="MAXRECURRENCELIMIT">
+    <message>O NÚMERO MÁXIMO DE RECORRÊNCIAS PERMITIDA É 24</message>
+    <description></description>
+  </code>
+  <code number="10273" id="MONTHLYPAYMENTNOTSLIPASSOCIATED">
+    <message>O TIPO DE MENSALIDADE NÃO POSSUI UM TIPO DE BOLETO ASSOCIADO</message>
+    <severity>ERROR</severity>
+    <description>O TIPO DE MENSALIDADE NÃO ESTA VINCULADO A UM TIPO DE BOLETO, VIDE TABERAL GERAL 50</description>
+  </code>
+  <code number="10274" id="NEGATIVEBALANCE">
+    <message>SALDO INSUFICIENTE</message>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10275" id="NEWACCESSTOKEN">
+    <message>NOVO TOKEN DE ACESSO GERADO</message>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10276" id="NEXTNUMBERERROR">
+    <message>NÃO FOI POSSÍVEL DEFINIR UM LOTE PARA O PROCESSO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10277" id="NONREGISTRABLESTATUS">
+    <message>NÃO EXISTEM REGISTROS PARA O STATUS SOLICITADO OU O STATUS NÃO É REGISTRAVEL</message>
+    <description></description>
+  </code>
+  <code number="401" id="NOTAUTHORIZED">
+    <message>FALHA NO ACESSO REMOTO, OPERAÇÃO NÃO AUTORIZADA</message>
+    <description>O Servidor reportou um erro 401 - Não autorizado</description>
+  </code>
+  <code number="404" id="NOTLOCALIZED">
+    <message>FALHA NO ACESSO REMOTO, OPERAÇÃO NÃO LOCALIZADA</message>
+    <description>O Servidor reportou um erro 404 - Não localizado</description>
+  </code>
+  <code number="415" id="NOTSUPPORTEDMEDIATYPE">
+    <message>MEDIA TYPE NÃO SUPORTADO</message>failwri
+    <description>O servidor remoto retornou um erro: (415) Unsupported Media Type.</description>
+  </code>
+  <code number="0" id="OK">
+    <message>PROCESSAMENTO EFETUADO COM SUCESSO</message>
+    <severity>WARNING</severity>
+    <description></description>
+  </code>
+  <code number="200" id="200">
+    <message>PROCESSAMENTO EFETUADO COM SUCESSO</message>
+    <severity>WARNING</severity>
+    <description></description>
+  </code>
+  <code number="201" id="201">
+    <message>PROCESSAMENTO EFETUADO COM SUCESSO</message>
+    <severity>WARNING</severity>
+    <description></description>
+  </code>
+
+  <code number="10278" id="PAYMENTDIFVALUE">
+    <message>O VALOR DIFERE DA INFORMAÇÃO DE LINHA FORNECIDA</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10279" id="PAYMENTEMPTYDIGITABLELINE">
+    <message>A LINHA DIGITÁVEL NÃO FOI FORNECIDA</message>
+    <description>A linha digitável está em branco</description>
+  </code>
+  <code number="10280" id="PAYMENTINSTRUCTIONALREADYEXECUTED">
+    <message>INSTRUCAO DE PAGAMENTO JA EXECUTADA E FECHADA</message>
+    <description>A instrução de pagamento já foi executada ou o pagamento já foi estornado ou cancelado</description>
+  </code>
+  <code number="10281" id="PAYMENTINVALIDDAC">
+    <message>DIGITO VERIFICADOR INVÁLIDO {0}</message>
+    <description>O DIGITO VERIFICADOR INFORMADO NÃO CONFERE COMA INFORMAÇÃO DA LINHA INFORMADA</description>
+  </code>
+  <code number="10282" id="PAYMENTINVALIDDUEDATE">
+    <message>A DATA DE VENCIMENTO DIFERE DA INFORMAÇÃO DE LINHA FORNECIDA</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10283" id="PAYMENTNOTFOUND">
+    <message>O REGISTRO DE PAGAMENTO NÃO EXISTE</message>
+    <description>NÃO FOI POSSIVEL EFETUAR O REGISTRO DE PAGAMENTO POIS O REGISTRO NÃO EXISTE</description>
+  </code>
+  <code number="10284" id="PRODUCTHASINTERNALCONTROL">
+    <message>O PRODUTO VINCULADO AO GESTOR NÃO PODE REALIZAR MOVIMENTAÇÕES EXTERNAS DE DADOS</message>
+    <description>Código de Produto Plataforma definido como produto de gestão</description>
+  </code>
+  <code number="10285" id="PRODUCTINVALIDFORRESOURCE">
+    <message>ESTE RECURSO NAO ESTA VINCULADO A ESTE TIPO DE PRODUTO</message>
+    <description>Tentativa de usar um recurso para um produto diferente da especificação do recurso</description>
+  </code>
+  <code number="10286" id="PRODUCTNUMBERALREADYEXIST">
+    <message>O CÓDIGO DO PRODUTO INFORMADO JÁ ESTÁ INFORMADO PARA OUTRO PRODUTO</message>
+    <description>O código externo do produto já existe para outro produto</description>
+  </code>
+  <code number="10287" id="PRODUCTNUMBERBLANK">
+    <message>O CÓDIGO DO PRODUTO INFORMADO ESTÁ EM BRANCO</message>
+    <description>O código externo do produto não foi informado</description>
+  </code>
+  <code number="10288" id="RECHARGEFAIL">
+    <message>FALHA NO PROCESSO DE RECARGA</message>
+  </code>
+  <code number="10289" id="RECHARGENOTALLOWED">
+    <message>O USUÁRIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O PROCESSO DE RECARGA</message>
+  </code>
+  <code number="10290" id="REDENUMPARCINVALID">
+    <message>O NÚMERO DE PARCELAS É INVÁLIDO</message>
+    <description>O Número máximo de parcelas permitido para opções de parcelamento é de 2 a 12.</description>
+  </code>
+  <code number="10291" id="REGISTEREDSLIPFORWRITEDOWN">
+    <message>JÁ EXISTE UM REGISTRO DE BAIXA PARA ESTE BOLETO/FATURA</message>
+    <severity>ERROR</severity>
+    <description>O Boleto já está registrado para baixa</description>
+  </code>
+  <code number="10292" id="REGISTERNOTALLOWED">
+    <message>O USUÁRIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE CADASTRAMENTO</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10293" id="RESOURCEFAILREAD">
+    <message>NAO FOI POSSIVEL EFETUAR A REQUISICAO PARA O SERVIDOR REMOTO</message>
+    <description>Não foi possível efetuar a requisição para o servidor remoto, Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10294" id="SALESCOMISSIONFAIL">
+    <message>FALHA NO REGISTRO DE COMISSÃO DE VENDAS</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10295" id="SELECTEDINVALIDPRODUCT">
+    <message>O PRODUTO SELECIONADO É INVÁLIDO</message>
+    <description>O usuário selecionou um produto inválido para registro</description>
+  </code>
+  <code number="10296" id="SELECTTOKEN">
+    <message>FALHA NA LOCALIZACAO DO TOKEN DE ACESSO</message>
+    <description>Erro dinâmico de busca do token de acesso</description>
+  </code>
+  <code number="10297" id="SLIP_MAXVALUE">
+    <message>O VALOR DO BOLETO/FATURA {0} {1:0.00} É SUPERIOR AO LIMITE DE {2:0.00}</message>
+    <description>O valor do boleto é superior ao limite de configuração</description>
+  </code>
+  <code number="10298" id="SLIP_MINVALUE">
+    <message>O VALOR DO BOLETO/FATURA {0} {1:0.00} É INFERIOR AO LIMITE DE {2:0.00}</message>
+    <description>O valor do boleto é inferior ao limite de configuração</description>
+  </code>
+  <code number="10299" id="SLIPCANCELLED">
+    <message>BOLETO/FATURA CANCELADO</message>
+    <severity>ERROR</severity>
+    <description>O registro de boleto foi cancelado pelo admnistrador ou processo de cancelamento automático</description>
+  </code>
+  <code number="10300" id="SLIPFAILCLOSE">
+    <message>FALHA NA ATUALIZACAO DE BAIXA DE COBRANCA</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10301" id="SLIPINVALIDRECORD">
+    <message>O BOLETO/FATURA {0} ESTÁ COM O STATUS DE REGISTRO INVALIDO PARA PROCESSAMENTO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10302" id="SLIPINVALIDSTATUS">
+    <message>O BOLETO/FATURA {0} ESTÁ COM O STATUS DE BOLETO/FATURA INVÁLIDO PARA PROCESSAMENTO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10303" id="SLIPINVALIDSTATUS">
+    <message>STATUS DE BOLETO INVÁLIDO PARA BAIXA</message>
+    <severity>ERROR</severity>
+    <description>O Boleto indicado para baixa possui um status diferente do esperado</description>
+  </code>
+  <code number="10304" id="SLIPINVALIDTYPE">
+    <message>TIPO DE BOLETO/FATURA INVÁLIDO PARA PROCESSAMENTO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10305" id="SLIPINVALIDVALUE">
+    <message>O BOLETO/FATURA DIVERGE DA FAIXA DE VALORES PERMITIDOS</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10306" id="SLIPMAXIMUMACHIEVEDUNIT">
+    <message>QUANTIDADE MÁXIMA DE EMISSÃO ATINGIDA</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10307" id="SLIPMAXIMUMACHIEVEDVALUE">
+    <message>VALOR MÁXIMO DE EMISSÃO ATINGIDA</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10308" id="SLIPNOMATCH">
+    <message>O VALOR DO BOLETO POSSUI UM VALOR DIFERENTE</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10309" id="SLIPNOTALLOWED">
+    <message>O USUÁRIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE EMISSÃO DE BOLETO/FATURA</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10310" id="SLIPNOTFOUND">
+    <message>REGISTRO DE BOLETO/FATURA NÃO EXISTENTE</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10311" id="SLIPNOVALUE">
+    <message>O BOLETO NÃO POSSUI VALOR PARA REGISTRO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10312" id="SLIPOWNERDIF">
+    <message>ESTE BOLETO ESTA ASSOCIADO PARA OUTRO CLIENTE</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10313" id="SLIPPAIED">
+    <message>O BOLETO ESTÁ REGISTRADO COMO PAGO, AÇÃO NÃO PODE SER CONCLUIDA</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10314" id="SLIPTYPENOTALLOWEDPAYING">
+    <message>TIPO DE BOLETO NÃO PERMITIDO PARA ESTA OPERAÇÃO</message>
+    <description>O BOLETOINFORMADO ESTA VINCULADO A UM TIPO DE BOLETO NÃO PERMITIDO PARA BAIXA PELA OPERAÇÃO SELECIONADA</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10315" id="SLIPVALUEPAIDEXIST">
+    <message>O BOLETO/FATURA {0} JÁ CONTÊM UM VALOR PAGO DEFINIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10316" id="STATUSRECORDASEQUAL">
+    <message>O STATUS ATUAL NAO PODE SER IGUAL AO ANTERIOR</message>
+    <severity>ERROR</severity>
+    <description>O status de registro é igual ao fornecido para atualização</description>
+  </code>
+  <code number="10317" id="TAXNOTFOUND">
+    <message>NÃO EXISTE TARIFA CADASTRADA PARA ESTA TRANSAÇÃO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10318" id="TOKENINVALIDENDDATE">
+    <message>A DATA FINAL DO TOKEN É INVÁLIDA</message>
+    <description>O TOKEN ESTÁ REGISTRADO SEM UMA DATA FINAL DE VALIDAÇÃO</description>
+  </code>
+  <code number="10319" id="TOKENINVALIDINITIALDATE">
+    <message>A DATA INICIAL DO TOKEN É INVÁLIDA</message>
+    <description>O TOKEN ESTÁ REGISTRADO SEM UMA DATA INICIAL DE VALIDAÇÃO</description>
+  </code>
+  <code number="10320" id="TOKENINVALIDIPREF">
+    <message>O ENDERECO DA REQUISICAO NAO CONFERE COM O REGISTRO DO TOKEN</message>
+    <description>O TOKEN ESTÁ SENDO CHAMADO DE UMA LOCALIZAÇÃO DIFERENTE DA CADASTRADA</description>
+  </code>
+  <code number="10321" id="TOKENINVALIDURL">
+    <message>A URL FORNECIDA NAO CONFERE COM A URL REGISTRADA PARA O TOKEN</message>
+    <description>O TOKEN ESTÁ SENDO CHAMADO DE UMA URL DIFERENTE DA CADASTRADA</description>
+  </code>
+  <code number="10322" id="TRANSACTIONNOTFOUND">
+    <message>TRANSAÇÃO NÃO EXISTENTE</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10323" id="TRANSACTIONNOTHASRECORD">
+    <message>TRANSAÇÃO NÃO POSSUI LANÇAMENTOS CONFIGURADOS PARA ESTORNO/CANCELAMENTO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10324" id="TRANSF_MAX">
+    <message>VALOR MÁXIMO DE TRANSFERÊNCIA ATINGIDO {0}{1:0.00}</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10325" id="TRANSF_MIN">
+    <message>VALOR MÍNIMO DE TRANSFERÊNCIA OBRIGATÓRIO {0}{1:0.00}</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10326" id="TRANSF_RANGE">
+    <message>O VALOR INFORMADO ESTÁ FORA DA FAIXA DE VALORES DE ENTRADA {0} {1:0.00} - {2:0.00}</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10327" id="UNLOCKCARDFAILREQUEST">
+    <message>NÃO FOI POSSÍVEL EFETUAR A REQUISICAO DE DESBLOQUEIO PARA A OPERADORA</message>
+    <description>HOUVE UMA FALHA NA REQUISIÇÃO DE DESBLOQUEIO PARA A OPERADORA (RESPOSTA INVÁLIDA)</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10328" id="UNLOCKFAILREGISTER">
+    <message>O CARTAO FOI BLOQUEADO NA PROCESSADORA POREM NÃO FOI POSSÍVEL ATUALIZAR O REGISTRO DE CONTROLE</message>
+    <description>NÃO FOI POSSIVEL ATUALZAR O REGISTRO DE DESBLOQUEIO DO CARTAO (CRT)</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10329" id="UPLOADFAIL">
+    <message>FALHA NA GRAVAÇÃO DO REGISTRO DE UPLOAD</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10330" id="UPLOADINCOMPLETE">
+    <message>NÃO FOI POSSÍVEL COMPLETAR A OPERAÇÃO DE UPLOAD DE ARQUIVO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10331" id="UPLOADNOTREGISTERED">
+    <message>NAO EXISTEM INFORMACOES PARA A ATUALIZAÇÃO DO UPLOAD DO ARQUIVO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10332" id="UPLOADSUCCESS">
+    <message>UPLOAD DE ARQUIVO EFETUADO COM SUCESSO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10333" id="USEAPIASSCARDNOTALLOWED">
+    <message>O USUARIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE ASSOCIAÇÃO DE CARTAO</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10334" id="USEAPICHANGEPASSWORDNOTALLOWED">
+    <message>O USUARIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE TROCA DE SENHA</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso (PRMCKI)</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10335" id="USEAPICHECKINNOTALLOWED">
+    <message>O USUARIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE CHEKIN</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso (PRMCKI)</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10336" id="USEAPILOCKCARDNOTALLOWED">
+    <message>O USUARIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE BLOQUEIO DE CARTOES</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso (PRMLCR)</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10337" id="USEAPILOCKCARDNOTALLOWED">
+    <message>O USUARIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE DESBLOQUEIO DE CARTOES</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso (PRMUCR)</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10338" id="USEAPINOTALLOWED">
+    <message>O USUARIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE API</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10339" id="USEAPINOTCONFIGURED">
+    <message>O USUARIO/CLIENTE NAO POSSUI CONFIGURACAO DE ACESSO AO RECURSO</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso de API para o usuário ou gestor</description>
+  </code>
+  <code number="10340" id="USERNOTFOUND">
+    <message>REGISTRO DE USUARIO NAO ENCONTRADO</message>
+  </code>
+  <code number="10341" id="USERNOTREAD">
+    <message>NÃO FOI POSSÍVEL EFETUAR A LEITURA DO REGISTRO DE USUÁRIO</message>
+  </code>
+  <code number="10342" id="VALUENOTCLOSE">
+    <message>O VALOR TOTAL NÃO FECHA COM OS ITENS INFORMADOS</message>
+    <description>A operação requer que o valor de entrada coincida com a respectiva operação de saida ou registro</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10343" id="CONVERTINVALIDENTRY">
+    <message>ARQUIVO {0} INVÁLIDO, FORMATO {1} NÃO COINCIDE COM A EXTENSÃO FORNECIDA</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10344" id="CONVERTINVALIDBYTE">
+    <message>ARQUIVO {0} INVÁLIDO, O FORMATO NÃO CORRESPONDE COM A EXTENSÃO FORNECIDA OU É INVÁLIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10345" id="CONVERTFILENOTGIVEN">
+    <message>ARQUIVO {0} NÃO FORNECIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10346" id="CONVERTFILENOTEXIST">
+    <message>ARQUIVO {0} NÃO EXISTENTE</message>
+    <description>O arquivo não foi encontrado</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10347" id="CONVERTFILEISEQUAL">
+    <message>NÃO É POSSIVEL EFETUAR CONVERSOES DE ARQUIVO PARA O MESMO TIPO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+
+  <code number="7" id="INTERNALDETECTERROR">
+    <message>FALHA NA DETECÇÃO DO ERRO OCORRIDO</message>
+    <description>Houve uma falha na deteção do erro ocorrido</description>
+    <severity>ERROR</severity>
+  </code>
+
+  <code number="10348" id="XMLFILEERROR">
+    <message>FALHA NA LEITURA DO ARQUIVO XML ALVO</message>
+    <description>VIDE ERRORMESSAGE PARA MAIORES DETALHE DO ERRO</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10349" id="EMPTYUSERCMF">
+    <message>O CODIGO DO CPF/CNPJ NÃO FOI FORNECIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10350" id="EMPTYUSERTEL">
+    <message>O NUMERO DO TELEFONE NAO FOI FORNECIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10351" id="INTERNALDBPROCMANYARGS">
+    <message>A INSTRUÇÃO DE GRAVAÇÃO NÃO PÔDE SER CONCLUIDA, HÁ UM EXCESSO DE PARÂMETROS INFORMADOS PARA SUA CONCLUSÃO</message>
+    <description>Verificar os parâmetros informados para a procedure e ajustar de acordo com a tabela alvo</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10352" id="INTERNALDBLOGON">
+    <message>ERRO DE LOGON DE USUARIO DO BANCO</message>
+    <description>Verificar a configuração e a parametrização do usuário fornecido para acesso</description>
+    <severity>DBERROR</severity>
+  </code>
+
+  <code number="10353" id="ABORTEDCONNECTION">
+    <message>FALHA DE CONEXÃO, A CONEXAO FOI FECHADA PELO HOST REMOTO</message>
+    <description>A conexão foi fechada de maneira forçada pelo host remoto. Verificar anti-virus, servidores</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10354" id="TRANSACTIONNOTRECORDED">
+    <message>TRANSACAO NAO REGISTRADA NA CONTA CORRENTE</message>
+    <description>A transação não foi registrada no conta corrente, verifique o log de processamento do processamento para verificação</description>
+    <severity>ERROR</severity>
+  </code>
+
+  <code number="10355" id="USEAPIUSEFINANCIALTICKETNOTALLOWED">
+    <message>O USUÁRIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE FINANCIALTICKET</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10356" id="CEINVALIDTYPE">
+    <message>TIPO DE CONTA EXTERNA INVALIDA</message>
+    <description>A conta externa do usuário esta tipificada de forma inválida</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10357" id="APPROVALFAILRECORD">
+    <message>STATUS DE REGISTRO NA ORIGEM INVALIDO PARA APROVACAO</message>
+    <description>O Status do registro é diferente de 1, aprovação negada</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10358" id="APPROVALEXISTING">
+    <message>O REGISTRO JÁ FOI APROVADO</message>
+    <description>O Status do Aprovação está marcado como aprovado</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10359" id="APPROVALFAIL">
+    <message>FALHA NA ATUALIZACAO DO REGISTRO DE APROVACAO</message>
+    <description>Falha na atualização de informações de aprovação do registro, verifique o código de retorno devolvido e analise o processo</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10360" id="APPROVALUSERNOTALLOWED">
+    <message>O USUARIO NAO ESTA AUTORIZADO A UTILIZAR ESTE RECURSO</message>
+    <description>O USUARIO NAO POSSUI PERMISSAO PARA UTILIZAR O RECURSO</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10361" id="INTERNALDBOBJECTERROR">
+    <message>ERRO DE ATRIBUICAO DE OBJETO DE DADOS</message>
+    <description>Verificar se o objeto existe no ambiente de processamento</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10362" id="INTERNALDBCOLUMNFAULT">
+    <message>EXISTE UM CAMPO DE INFORMACAO AUSENTE NA SOLICITACAO DE DADOS</message>
+    <description>Verificar se a coluna foi definida no argumento de saida</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10363" id="PASSWORDFAILWRITE">
+    <message>FALHA NA ALTERACAO DA TROCA DE SENHA DO USUARIO</message>
+    <description>Falha na gravação de senha do usuário, não foi possível efetuar a alteração da senha</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10364" id="PASSWORDEMPTY">
+    <message>A SENHA INFORMADA ESTÁ VAZIA OU NÃO FOI FORNECIDA</message>
+    <description></description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10365" id="PASSWORDINVALID">
+    <message>A SENHA DE ACESSO E INVALIDA</message>
+    <description></description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10366" id="PASSWORDINEQUAL">
+    <message>AS SENHAS DE ACESSO DIVERGEM ENTRE SI</message>
+    <description></description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10367" id="APPROVALWITHOUTID">
+    <message>IDENTIFICADOR DE REGISTRO PARA ATUALIZACAO NAO FORNECIDO</message>
+    <description>Não foi fornecido o ID do registro correspondente para submeter a atualização do registro</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10368" id="APPROVALWITHOUTUSER">
+    <message>USUARIO RESPONSAVEL PELA ACAO DE APROVACAO NAO FORNECIDO</message>
+    <description>Não foi fornecido o ID do usuario para submeter a atualização do registro</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10369" id="APPROVALROLLBACKED">
+    <message>ATUALIZACAO NAO COMPLETADA</message>
+    <description>Foi efetuado um rollback da atualização por erro no processamento</description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10370" id="INVALIDUSERUPDATE">
+    <message>USUARIO RESPONSAVEL PELA ATUALIZACAO NAO FORNECIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10371" id="CONVERTFILENOTXLS">
+    <message>O TIPO DE ARQUIVO FORNECIDO PARA OPERACAO É INVALIDO, CERTIFIQUE-SE QUE O ARQUIVO É UM XLS OU XLSX</message>
+    <description>O processamento está restrito a tipos de arquivos xls e/ou xlsx</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10372" id="APPROVALREFUSED">
+    <message>O USUARIO APROVADOR NAO COINCIDE COM O USUARIO QUE POSTOU O LOTE</message>
+    <description>Para aprovação do lote tem de ser o mesmo usuario que postou o lote, para operacao de usuario tem de ser o mesmo usuario que aprovou o lote</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10373" id="SIZEMAXFILE">
+    <message>O TAMANHO DO ARQUIVO É SUPERIOR AO SUPORTADO {0}</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10374" id="FAILCONNECTIONNET">
+    <message>O CAMINHO DE REDE NAO FOI ENCONTRADO</message>
+    <description>Erro de rede ou específico à instância ao estabelecer conexão com o SQL Server. O servidor não foi encontrado ou não estava acessível. Verifique se o nome da instância está correto e se o SQL Server está configurado para permitir conexões remotas. (provider: Named Pipes Provider, error: 40 - Não foi possível abrir uma conexão com o SQL Server</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10375" id="INVALIDOLDPASSWORD">
+    <message>A SENHA DE ACESSO ANTERIOR E INVALIDA OU NAO EXISTE</message>
+    <description>O usuário forneceu uma senha anterior que não existe ou é inválida ou não está criptografada</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10376" id="EMAIL_INVALID_AUTH">
+    <message>O CPF NÃO POSSUI EMAIL CADASTRADO</message>
+    <severity>WARNING</severity>
+    <description>Não existe um email válido para o Código do CPF/CNPJ fornecido</description>
+  </code>
+  <code number="10377" id="DUEDATEEXPIRED">
+    <message>A DATA DE VENCIMENTO FORNECIDA JA ESTA VENCIDA</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10378" id="PASSWORDINVALIDLEN">
+    <message>A SENHA DE ACESSO DEVERA TER NO MINIMO 3 CARACTERES</message>
+    <description></description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10379" id="PASSWORDINVALIDCOMPARELEN">
+    <message>O COMPRIMENTO DA SENHA DE COMPARACAO DIFERE DA SENHA DE INFORMACAO</message>
+    <description></description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10380" id="CARDPRODUCTACTIVATED">
+    <message>TIPO DE CARTAO BENEFICIO JA ATIVADO PARA O CLIENTE</message>
+    <severity>ERROR</severity>
+    <description>O USUARIO ESTÁ TENTANTO ATIVAR MAIS DE UM TIPO DE CARTAO BENEFICIO DO MESMO PRODUTO</description>
+  </code>
+  <code number="10381" id="REQUIREDUSEROPERATION">
+    <message>ESTA ACAO REQUER UM USUARIO VALIDO</message>
+    <description>O Código de Usuário de Atualização é inválido ou não foi fornecido</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10382" id="EMPTYPROCESS">
+    <message>NENHUM PROCESSAMENTO EFETUADO</message>
+    <description>NÃO FOI APLICADA NENHUMA REGRA DE NEGOCIO POR INCONSISTENCIA OU FALTA DE DADOS</description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10383" id="RECORDFOUND">
+    <message>O REGISTRO JA EXISTE</message>
+    <description></description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10384" id="RECORDNOTFOUND">
+    <message>O REGISTRO NAO EXISTE</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10385" id="INVALIDFORMATFILE">
+    <message>FORMATO INVALIDO DE ARQUIVO</message>
+    <description>O arquivo alvo está em um formato inválido ou não possui definição prévia de entrada de dados</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10386" id="INVALID_VALUE">
+    <message>A DATA FORNECIDA É INVALIDA OU NÃO ESTA NO FORMATO DD/MM/YYYY</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10387" id="SLIPINVALIDID">
+    <message>O NUMERO DO BOLETO É INVÁLIDO OU NÃO FOI FORNECIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10388" id="STATUSINVALIDID">
+    <message>O STATUS DE REGISTRO É INVÁLIDO OU NÃO FOI FORNECIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10389" id="INVALIDREQUEST">
+    <message>O CORPO DE REQUISIÇÃO É INVALIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10390" id="CMFSEQUENCEERROR">
+    <message>O CPF/CNPJ INFORMADO CORRESPONDE A UMA SEQUENCIA INVALIDA</message>
+    <description>Foi informado um Código de CPF/CNPJ como uma sequencia de um numero só</description>
+  </code>
+  <code number="10391" id="CMFINVALIDLENGTH">
+    <message>O CPF/CNPJ POSSUI UM COMPRIMENTO INVÁLIDO</message>
+    <description>CPF deverá ter um comprimento de 11 bytes e CNPJ um comprimento de 14 bytes</description>
+  </code>
+  <code number="10392" id="INVALID_PROCESS_DATE">
+    <message>A DATA INFORMADA NÃO É PERMITIDA PARA PROCESSAMENTO, INFORME UMA DATA MAIOR QUE A DATA FORNECIDA</message>
+    <description>O HORÁRIO DE PROCESSAMENTO DE REGISTRO DE TED'S E ATÉ AS 16:00 H</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10393" id="INVALIDPURPOSECODE">
+    <message>O CÓDIGO DE FINALIDADE PARA A TED É INVALIDO OU NÃO FOI FORNECIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10394" id="BEARERNOTASSOCIATED">
+    <message>NAO FOI POSSIVEL CRIAR UM PORTADOR PARA O CARTAO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10395" id="EMPTYLAUNCHTRANSACTION">
+    <message>NAO EXISTE NENHUM TIPO DE LANCAMENTO PARA A TRANSACAO</message>
+    <severity>ERROR</severity>
+    <description>A tabela de Lançamento interno não contêm nenhum tipo de registro para a gravação da transação</description>
+  </code>
+  <code number="10396" id="INVALIDUSERAPI">
+    <message>O CODIGO/NUMERO DO USUARIO {0} E INVALIDO OU NAO FOI FORNECIDO</message>
+    <description>O Código do Usuário contêm letras ou está vazio</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10397" id="BATCHDELETED">
+    <message>LOTE REMOVIDO COM SUCESSO</message>
+    <description></description>
+    <severity>WARNING</severity>
+  </code>
+  <code number="10398" id="INVALIDBATCHNUMBER">
+    <message>O CODIGO/NUMERO DO LOTE E INVALIDO OU NAO FOI FORNECIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10399" id="APPROVALBATCHMANAGERCARDS">
+    <message>O USUARIO NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE OPERACOES EM LOTE DE CARTOES</message>
+    <description>O usuário não está autorizado a utilizar o recurso de operações em lote de cartões</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10400" id="INVALIDIDENTIFIERREGISTER">
+    <message>CODIGO DO ORGAO REGISTRADOR DO BOLETO INVALIDO OU NAO FORNECIDO</message>
+    <description>NÃO FOI FORNECIDO O CODIGO DE IDENTIFICAÇÃO DO BANCO DE REGISTRO DO BOLETO</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10401" id="INVALIDADDRESS">
+    <message>O ENDERECO/REFERENCIA DE LOCALIZACAO E INVALIDO OU NAO FOI FORNECIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10402" id="INVALIDID">
+    <message>O IDENTIFICADOR DE REGISTRO E INVALIDO OU NAO FOI FORNECIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10403" id="SLIPFAILUPDATELOW">
+    <message>FALHA NA ATUALIZACAO DO REGISTRO DE BAIXA DE BOLETO</message>
+    <severity>ERROR</severity>
+    <description>Falha na tentativa de atualizar o registro de baixa do boleto</description>
+  </code>
+  <code number="10404" id="SLIPNOVALUELOW">
+    <message>O BOLETO NAO POSSUI VALOR EFETIVO DE BAIXA PARA REGISTRO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10405" id="NETWORKERROR">
+    <message>NAO FOI POSSIVEL FAZER UMA CONEXAO COM O PROVEDOR DO SERVICO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10406" id="SLIPFAILUPDATEREVERSELOW">
+    <message>FALHA NA ATUALIZACAO DA REVERSAO DA BAIXA DE BOLETO</message>
+    <severity>ERROR</severity>
+    <description>Falha na tentativa de atualizar a reversão do registro de baixa do boleto</description>
+  </code>
+  <code number="10407" id="XSDERROR">
+    <message>FALHA NA LEITURA DO ARQUIVO SCHEMA DE VALIDACAO</message>
+    <description>VIDE ERRORMESSAGE PARA MAIORES DETALHE DO ERRO</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10408" id="XSLTERROR">
+    <message>FALHA NA LEITURA DO ARQUIVO DE TRANSFORMACAO</message>
+    <description>VIDE ERRORMESSAGE PARA MAIORES DETALHE DO ERRO</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10409" id="LOWSLIPREFEXISTS">
+    <message>A REFERENCIA DE BAIXA JA EXISTE EM NOSSOS REGISTROS</message>
+    <severity>ERROR</severity>
+    <description>Foi efetuada uma tentativa de baixar um boleto com documento de referencia já existente para outro registro. O documento de referencia deverá ser unico</description>
+  </code>
+  <code number="10410" id="EMPTYREFSLIP">
+    <message>O CODIGO DE REFERENCIA PARA A BAIXA DO BOLETO E INVALIDO OU NAO FOI FORNECIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10412" id="RECHARGETEDNOTALLOWED">
+    <message>O USUÁRIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO DE EMISSÃO DE RECARGA DE BOLETO</message>
+    <description>Ausência de parametrização e configuração de acesso ao recurso na tabela de acessos do usuario, Código 812</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10411" id="INVALIDACCOUNTTYPE">
+    <message>O TIPO DE CONTA INFORMADO E INVALIDO PARA ESTA OPERACAO</message>
+    <description>A Operação requer um tipo de conta especifico para operacao</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10413" id="INVALIDACCOUNTSTATUS">
+    <message>O STATUS DA CONTA ESTA INATIVO PARA OPERACAO</message>
+    <description>A conta devera estar com o status 250 para operacao</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10414" id="INVALIDACCOUNTREGISTER">
+    <message>O STATUS DE REGISTRO DA CONTA ESTA INATIVO PARA OPERACAO</message>
+    <description>A conta devera estar com o status de registro = 1 para operacao</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10415" id="INTERNALDBSPPARAM">
+    <message>O NUMERO DE PARAMETROS FORNECIDOS PARA A INSTRUCAO ESTA DUPLICADO</message>
+    <description>Verificar se os parâmetros da procedure estão sendo passados mais de uma vez</description>
+    <severity>DBERROR</severity>
+  </code>
+  <code number="10416" id="PASSWORDEQUALS">
+    <message>A SENHA ANTERIOR É IGUAL A SENHA ATUAL</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10417" id="TOKENEXPIRED">
+    <message>TOKEN EXPIRADO</message>
+    <description>O TEMPO DE VALIDADE DO TOKEN ESGOTOU</description>
+  </code>
+  <code number="10418" id="TOKENINVALIDURLENTRY">
+    <message>A REFERENCIA DE LOCALIZACAO E INVALIDA OU NAO FOI FORNECIDA</message>
+    <description>O IP OU URL DO TOKEN NÃO FOI FORNECIDO OU ESTA VAZIO</description>
+  </code>
+  <code number="10419" id="TOKENINVALIDID">
+    <message>O ID DO TOKEN E INVALIDO OU NAO FOI FORNECIDO</message>
+    <description>O ID DO TOKEN NAO FOI FORNECIDO OU ESTA VAZIO</description>
+  </code>
+  <code number="10420" id="TOKENNOTFOUND">
+    <message>TOKEN NAO EXISTENTE</message>
+    <description>VERIFIQUE SE O ID DO TOKEN EXISTE</description>
+  </code>
+  <code number="10421" id="TRANSACTIONNOTENABLED">
+    <message>A TRANSACAO ESTA INATIVA</message>
+    <description>A transação informada esta inativa</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10422" id="ENCRYPTKEYEMPTY">
+    <message>A CHAVE DE CRIPTOGRAFIA E INVALIDA OU NAO FOI FORNECIDA</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10423" id="CARDPINNOMATCH">
+    <message>A SENHA DE ACESSO NAO CONFERE</message>
+    <severity>ERROR</severity>
+    <description>A SENHA DO CARTAO + NUMERO DO CARTAO GEROU UM PIN BLOCK INVALIDO OU DIFERENTE NO PROCESSO DE DESCRIPTOGRAFIA</description>
+  </code>
+  <code number="10424" id="WEAKKEY">
+    <message>A CHAVE FORNECIDA COMO ARGUMENTO E CONSIDERADA FRACA</message>
+    <severity>ERROR</severity>
+    <description>Na criptografia, uma chave fraca é uma chave que, usada com uma cifra específica, faz com que a cifra se comporte de alguma maneira indesejável. Chaves fracas geralmente representam uma fração muito pequena do espaço de chaves geral, o que geralmente significa que, se alguém gerar uma chave aleatória para criptografar uma mensagem, é muito improvável que as chaves fracas causem um problema de segurança. No entanto, é considerado desejável que uma cifra não possua chaves fracas. Diz-se que uma cifra sem teclas fracas possui um espaço de chave plano ou linear.</description>
+  </code>
+  <code number="10425" id="METHODNOTFOUND">
+    <message>METODO NAO EXISTENTE</message>
+    <severity>SYSERROR</severity>
+    <description>O aplicativo está executando uma chamada que não existe ou está com o número de parametros incorretos</description>
+  </code>
+  <code number="10426" id="SLIPIMAGEEXIST">
+    <message>O BOLETO/FATURA JA POSSUI UMA IMAGEM CADASTRADA, SUBMETA OUTRO BOLETO</message>
+    <severity>SYSERROR</severity>
+    <description>Houve uma tentativa de gerar um registro de boleto para um boleto previamente cadastrado</description>
+  </code>
+  <code number="10427" id="INVALIDFEENUMBER">
+    <message>O CODIGO DA TARIFA E INVALIDO OU NAO FOI FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10428" id="SLIPLOWINVALIDRECORD">
+    <message>NAO E POSSIVEL EFETUAR A BAIXA DE UM BOLETO/VOUCHER JA BAIXADO</message>
+    <severity>ERROR</severity>
+    <description>O STATUS DO REGISTRO ESTA MARCADO COMO BAIXA E UMA NOVA SOLICITACAO DE BAIXA FOI REQUERIDA</description>
+  </code>
+  <code number="10429" id="TRANSACTIONNOTGIVEN">
+    <message>TRANSAÇÃO NÃO FORNECIDA</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10430" id="INVALIDSTATUSRECORD">
+    <message>CODIGO DE STATUS DE FECHAMENTO INVALIDO</message>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10431" id="INVALIDENVUSERLOGGED">
+    <message>O CODIGO/NUMERO DO USUARIO E INVALIDO PARA A SESSAO DE LOGON</message>
+    <description>A Requisição solicitada para o usuário não corresponde ao id o usuário logado</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10432" id="ENCRYPTEDVALUEEMPTY">
+    <message>O ARGUMENTO ENCRIPTADO DE VALIDACAO E INVALIDO OU NAO FOI FORNECIDA</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10433" id="PROCESSCARDREQUESTEXISTS">
+    <message>JA EXISTE UMA SOLICITACAO EM PROCESSAMENTO PARA O CARTAO INFORMADO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10434" id="INVALIDTOKEN">
+    <message>TOKEN INVALIDO PARA ACESSO</message>
+    <description>O token está expirado ou inativo para operações</description>
+  </code>
+  <code number="10435" id="INVALIDTOKENPROVIDED">
+    <message>TOKEN INVALIDO OU NAO INFORMADO</message>
+    <description>O token de acesso não foi fornecido</description>
+  </code>
+  <code number="10436" id="INTERNALTRANSACTIONCANCELED">
+    <message>A TRANSACAO SOLICITADA NAO PODE SER ATUALIZADA</message>
+    <description>A transacao interna esta com status de registro diferente de 1</description>
+  </code>
+  <code number="10437" id="INVALIDSOURCELOCALIZATION">
+    <severity>ERROR</severity>
+    <message>O ENDERECO DA REQUISICAO ATUAL NAO CONFERE COM O REGISTRO DE ACESSO</message>
+    <description>O Localização atual de login não corresponde ao local de acesso da gravação do registro de acesso</description>
+  </code>
+  <code number="10438" id="REGISTERACCESSINVALID">
+    <message>O REGISTRO DE ACESSO E INVALIDO OU NÃO EXISTE OU JÁ FOI UTILIZADO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10439" id="REGISTERACCESSINVALIDUSER">
+    <message>O REGISTRO DE ACESSO NAO ESTA ASSOCIADO A ESTE CARTAO OU USUARIO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+
+  <code number="10440" id="INVALIDDIRECTORY">
+    <message>O DIRETORIO DE LEITURA DE DADOS E INVALIDO OU NAO EXISTE</message>
+    <severity>ERROR</severity>
+    <description>Foi informado um diretório de localizacao de dados que não existe</description>
+  </code>
+  <code number="10441" id="TRANSACTIONBALANCEEXHAUSTED">
+    <message>A TRANSACAO NAO POSSUI SALDO PARA EFETIVAR A OPERACAO</message>
+    <severity>ERROR</severity>
+    <description>O Saldo da transação interna não é suficiente para completar a operação de estorno</description>
+  </code>
+  <code number="10442" id="ADDRESSNOTFOUND">
+    <message>O ENDERECO NAO FOI LOCALIZADO</message>
+    <description>O ID do Endereço do usuário não foi localizado</description>
+  </code>
+  <code number="10443" id="INVALIDCODEBLOCK">
+    <message>O CODIGO DE BLOQUEIO E INVALIDO OU NAO FOI FORNECIDO</message>
+    <description></description>
+  </code>
+  <code number="10443" id="INVALIDDESCCODEBLOCK">
+    <message>A DESCRIÇÃO DO CODIGO DE BLOQUEIO E INVALIDA OU NAO FOI FORNECIDA</message>
+    <description></description>
+  </code>
+  <code number="10443" id="INVALIDPRODUCTCODE">
+    <message>CODIGO DE PRODUTO INVALIDO</message>
+    <description>O Código de Produto obtivo por leitura ou relacionamento de dados é inválido ou não existe</description>
+  </code>
+  <code number="10444" id="CARDNOTBINDED">
+    <message>O CARTAO NÃO POSSUI UMA ASSOCIACAO COM A PROCESSADORA</message>
+    <description></description>
+  </code>
+  <code number="10445" id="CARDINVALIDSTATUSCODEEMPTY">
+    <message>O STATUS PARA ATUALIZACAO DO CARTAO E INVALIDO OU NAO FOI FORNECIDO</message>
+    <description></description>
+  </code>
+  <code number="10446" id="INVALIDCVCNUMBER">
+    <message>O NUMERO DO CVC E INVALIDO</message>
+    <severity>ERROR</severity>
+    <description>O Código do CVC deverá ser um numero até 3 digitos</description>
+  </code>
+  <code number="10447" id="DBPOOLTIMEOUT">
+    <message>FALHA AO ESTABELECER UMA CONEXAO</message>
+    <severity>DBERROR</severity>
+    <description>O período de tempo limite expirou antes de obter uma conexão do pool. Isso pode ter ocorrido porque todas as conexões em pool estavam em uso e o tamanho máximo do pool foi atingido</description>
+  </code>
+  <code number="10448" id="INVALIDLAUNCHINDICATOR">
+    <message>O INDICADOR DE LANCAMENTO E INVALIDO OU NAO FOI FORNECIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+
+  <code number="10449" id="KEYCARDCORRUPT">
+    <message>A CHAVE DO CARTAO ESTA DEFINIDA PARA UM NUMERO PAN DIFERENTE</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10450" id="FAILWRITETED">
+    <message>FALHA NA GRAVAÇÃO DO REGISTRO DE TED</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10451" id="INVALIDCMF">
+    <message>CPF/CNPJ INVALIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10452" id="INVALIDACCESSCODE">
+    <message>CODIGO DE ACESSO INVALIDO</message>
+    <severity>ERROR</severity>
+    <description>O Código de Acesso para a operação não foi fornecido</description>
+  </code>
+  <code number="10453" id="INVALIDRECHARGEVERSIONFILE">
+    <message>A VERSAO DE PROCESSAMENTO DA PLANILHA E INVALIDA</message>
+    <severity>ERROR</severity>
+    <description>A PLANILHA FORNECIDA FOI GERADA EM UMA VERSAO DIFERENTE DO PROCESSO DE LEITURA DO SISTEMA</description>
+  </code>
+  <code number="10454" id="CARDNOTFOUNDPROCESSOR">
+    <message>CARTAO NAO LOCALIZADO (PRC)</message>
+    <description>O CARTAO informado não existe na processadora</description>
+  </code>
+  <code number="10455" id="NOONPERATIVECARD">
+    <message>CARTAO NAO OPERATIVO</message>
+    <description>O CARTAO NÃO POSSUI CHAVE DE ACESSO PARA A PROCESSADORA (KEYCRT)</description>
+  </code>
+  <code number="10456" id="INVALIDPATH">
+    <message>O NOME DE CAMINHO É INVALIDO</message>
+    <description></description>
+  </code>
+  <code number="10457" id="RESTRICTCODEBLOCK">
+    <message>O CODIGO DE BLOQUEIO E RESTRITO PARA ESTA OPERACAO</message>
+    <description>OS CODIGOS DE BLOQUEIO VALIDOS PARA ESTA OPERACAO SAO : 0, 32, 33,34,35,36</description>
+  </code>
+  <code number="10458" id="RESTRICTCODEUNBLOCK">
+    <message>O CODIGO DE DESBLOQUEIO E RESTRITO PARA ESTA OPERACAO</message>
+    <description>OS CODIGOS DE DESBLOQUEIO VALIDOS PARA ESTA OPERACAO SAO : 1</description>
+  </code>
+  <code number="10459" id="RESTRICTCODEBLOCK2">
+    <message>O CODIGO DE BLOQUEIO E RESTRITO PARA ESTA OPERACAO</message>
+    <description>OS CODIGOS DE DESBLOQUEIO VALIDOS PARA ESTA OPERACAO SAO : 1, 18, 21</description>
+  </code>
+  <code number="10460" id="PRODUCTCODENOTFOUND">
+    <message>CODIGO DE PRODUTO INEXISTENTE</message>
+    <description>O Código de Produto não existe na tabela de produtos</description>
+  </code>
+  <code number="10461" id="INVALIDWRITEDIRECTORY">
+    <message>O DIRETORIO DE DESTINO E INVALIDO OU NAO EXISTE</message>
+    <severity>ERROR</severity>
+    <description>NÃO FOI POSSIVEL LOCALIZAR O DIRETORIO DE DESTINO DE DADOS OU CRIA-LO</description>
+  </code>
+  <code number="10462" id="FILEALREADYEXIST">
+    <message>O ARQUIVO JA EXISTE EM NOSSOS REGISTROS</message>
+    <severity>ERROR</severity>
+    <description/>
+  </code>
+  <code number="10463" id="UPLOADTARGETDIREMPTY">
+    <message>NAO FOI FORNECIDO UM DIRETORIO BASE DE UPLOAD</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10464" id="CARDALREADYBLOCKED">
+    <message>O CARTAO JA POSSUI UM BLOQUEIO DEFINIDO</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10465" id="PRECADASSOCIATED">
+    <message>O REGISTRO JÁ POSSUI UM CARTAO ASSOCIADO</message>
+    <severity>ERROR</severity>
+    <description>Foi efetuada uma tentativa de associar um pré-cadastro com uma associação existente à um outro cartão.</description>
+  </code>
+  <code number="10466" id="DRIVERNOTINSTALLED12">
+    <message>DRIVER PADRAO DE CONSUMO NAO INSTALADO</message>
+    <severity>ERROR</severity>
+    <description>O Driver Microsoft.ACE.OLEDB.12.0 NAO ESTA INSTALADO</description>
+  </code>
+  <code number="10467" id="ACCOUNTNOTFOUND">
+    <message>CONTA NAO EXISTENTE</message>
+    <severity>ERROR</severity>
+    <description></description>
+  </code>
+  <code number="10468" id="ACCOUNTNOMOVEMENT">
+    <message>CONTA SEM REGISTROS DE MOVIMENTO</message>
+    <severity>ERROR</severity>
+    <description>Não existe registros de conta corrente para o usuário e indicador de lancamento solicitados</description>
+  </code>
+  <code number="10469" id="MANAGERKEYNOTMATCH">
+    <message>O GESTOR DE PRODUTO INFORMADO NAO CORRESPONDE AO LOTE DE CARTAO</message>
+    <severity>ERROR</severity>
+    <description>Os campos CODUSU e CODPRO não corresponde a um gestor previamento registrado</description>
+  </code>
+
+  <code number="10470" id="KEYREGISTERNOTFOUND">
+    <message>CHAVE DE REGISTRO INVALIDA</message>
+    <severity>ERROR</severity>
+    <description>O CAMPO DE INFORMAÇÃO REGBOL NÃO FOI FORNECIDO OU NAO EXISTE</description>
+  </code>
+  <code number="10471" id="UNKNOWCATALOG">
+    <message>CATALOGO DE DADOS NAO DEFINIDO</message>
+    <severity>ERROR</severity>
+    <description>O NOME DO BANCO DE DADOS NAO FOI ENCONTRADO</description>
+  </code>
+  <code number="10472" id="EMPTYCONNECTIONSTRING">
+    <message>NAO EXISTE CONFIGURACAO PARA A CONEXAO SOLICITADA</message>
+    <description>CONNECTIONSTRING não definida</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10473" id="BADDATASOURCENAME">
+    <message>PARAMETRO DE CONEXAO INVALIDO OU NAO EXISTENTE</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10474" id="CARDINVALIDID">
+    <message>O IDENTIFICADOR DO CARTAO E INVALIDO OU NAO FOI FORNECIDO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10475" id="CARDALREADYBELONGMANAGER">
+    <message>O CARTAO INFORMADO JA PERTENCE AO GESTOR INFORMADO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10476" id="CARDINVALIDPANNUMBER">
+    <message>O NUMERO PAN DO CARTAO E INVALIDO/NAO EXISTE</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10477" id="PATHNOTFOUND">
+    <message>O NOME DE CAMINHO NAO FOI ENCONTRADO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10478" id="TEDALREADYCANCELLED">
+    <message>A TED JA ESTA CANCELADA</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10479" id="INVALIDINT16VALUE">
+    <message>O VALOR FORNECIDO E MUITO GRANDE OU MUITO PEQUENO PARA O CAMPO (MIN:0, MAX:32764)</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10480" id="INVALIDORIGINBATCH">
+    <message>CODIGO DE ORIGEM INVALIDO (1,2)</message>
+    <description>O Código de Origem fornecido é invalido IN(1,2)</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10481" id="FAILUPDATE">
+    <message>FALHA NA ATUALIZACAO DE CAMPO AUXILIAR DE INFORMACAO</message>
+    <description>Não foi possível atualizar um campo auxiliar de informação de processamento</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10482" id="PASSWORDALREADYEXISTS">
+    <message>A SENHA FORNECIDA JA FOI CADASTRADA ANTERIORMENTE, A SENHA DEVERÁ SER DIFERENTE</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10483" id="ATTRIBUTEFOUNDED">
+    <message>O {0} {1} JÁ EXISTE PARA PROCESSAMENTO</message>
+    <description></description>
+    <severity>ERROR</severity>
+  </code>
+
+</messages>
