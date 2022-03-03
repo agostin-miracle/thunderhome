@@ -16,3 +16,8 @@
 /packages
 /ThunderFire/obj/Debug
 /ThunderFireHomeAdmin/bin
+/ThunderFire/bin/Debug
+/ThunderFire.Business/bin/Debug
+/ThunderFire.Domain/bin/Debug
+/ThunderFireHomeAdmin/obj/Debug
+/DbScripts/bin/Debug
