@@ -3,3 +3,12 @@
 ################################################################################
 
 /.vs
+/ThunderFire.Business/obj/Release
+/ThunderFire.Connector/obj/Release
+/ThunderFire.Business/obj/Debug
+/DbScripts/obj/Release
+/ThunderFire.Interface/obj/Release
+/ThunderFire.Interface/obj/Debug
+/ThunderFire.Domain/obj
+/DbScripts/obj/Debug
+/ThunderFire.Connector/obj/Debug
