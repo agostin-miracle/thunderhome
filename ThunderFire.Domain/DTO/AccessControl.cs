@@ -34,6 +34,47 @@ namespace ThunderFire.Domain.DTO
         public bool IsTedApproval { get; set; } = false;
 
         /// <summary>
+        /// Retorna true se o usuário é um Administrador
+        /// </summary>
+        public bool IsAdministrator { get; set; }
+        /// <summary>
+        /// Retorna true se o usuário é UM supervisor
+        /// </summary>
+        public bool IsSupervisor { get; set; }
+
+        /// <summary>
+        /// Id do Registro de Acesso
+        /// </summary>
+        public int LGNNUM { get; set; } = 0;
+
+        /// <summary>
+        /// e-mail do usuário
+        /// </summary>
+        public String Mail { get; set; }
+        /// <summary>
+        /// celular
+        /// </summary>
+        public String Mobile { get; set; }
+
+        /// <summary>
+        /// Retorna true se o usuário é associado a um gestor
+        /// </summary>
+        public bool IsManagerProduct { get; set; } = false;
+
+
+
+
+        public VirtualAccount Account { get; set; } = null;
+
+        public List<MyCards> Cards { get; set; } = null;
+
+        public GeneralRegistry User { get; set; } = null;
+
+        public AddressBook Address { get; set; } = null;
+
+
+
+        /// <summary>
         /// Menu do Usuário
         /// </summary>
         public string Menu { get; internal set; } = "";
@@ -44,28 +85,6 @@ namespace ThunderFire.Domain.DTO
         public List<string> CODMNU { get; set; } = new List<string>();
 
 
-        /// <summary>
-        /// Id do Registro de Acesso
-        /// </summary>
-        public int LGNNUM { get; set; } = 0;
-
-        public VirtualAccount Account { get; set; }
-
-        public List<ActiveCards> Cards { get; set; }
-
-        public GeneralRegistry User { get; set; }
-
-        public AddressBook Address { get; set; } 
-
-        public String Mail { get; set; }
-        public String Mobile { get; set; }
-
-
-
-        /// <summary>
-        /// Retorna true se o usuário é associado a um gestor
-        /// </summary>
-        public bool IsManagerProduct { get; set; } = false;
 
         /// <summary>
         /// Retorna true se o menu correspondente está logado para o usuário
@@ -89,7 +108,7 @@ namespace ThunderFire.Domain.DTO
 
         public AccessControl()
         {
-            this.Cards = new List<ActiveCards>();
+
         }
     }
 }

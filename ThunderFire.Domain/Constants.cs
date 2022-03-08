@@ -44,6 +44,9 @@ namespace ThunderFire.Domain
         #region ** MODULOS **
         public const int MODULO_CADASTRO_GERAL = 1;
         public const int MODULO_CONTAS= 7;
+        public const int MODULO_CARTOES = 5;
+        public const int MODULO_MENSALIDADES = 10;
+        public const int MODULO_POS = 9;
         #endregion ** MODULOS **
         #region ** TABELAS INTERNAS **
 
@@ -63,6 +66,7 @@ namespace ThunderFire.Domain
         public const int TABELA_ESTADO_CIVIL= 76;
         public const int TABELA_NACIONALIDADES = 80;
         public const int TABELA_LOGRADOUROS = 81;
+        public const int TABELA_INTERNAS = 299;
 
         #endregion ** TABELAS INTERNAS **
 

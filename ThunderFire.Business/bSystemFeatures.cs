@@ -25,9 +25,9 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 13/02/2022 12:59
+///Data        : 04/03/2022 21:32
 ///Alias       : systemfeatures
-///Descrição   : Funcionalidades do Sistema
+///Descrição   : System Features
 ///</remarks>
     public partial class SystemFeaturesDao : BusinessBase, ISystemFeatures
     {
@@ -43,7 +43,7 @@ this.KeyTableId =13;
 }
        
     /// <summary>
-    /// Insere um registro na tabela TBSYSFUN (Funcionalidades do Sistema)
+    /// Insere um registro na tabela TBSYSFUN (System Features)
     /// </summary>
     ///<param name="model">SystemFeatures</param>
     /// <returns>int</returns>
@@ -53,17 +53,18 @@ this.KeyTableId =13;
             int RETURN_VALUE = 0;
             int _AUDNUM =0;
             this.HasError =false;
+            this.ProcessCode= 0;
                     using (IDbConnection _conn = ConnectionFactory.GetConnection())
                     {
             try
             {
-string _changed = Objects.GetPropertiesValue("Funcionalidades do Sistema",model,true);
+string _changed = Objects.GetPropertiesValue("System Features",model,true);
 
             var p = new DynamicParameters();
             p.Add("@RETURN_VALUE", 0, dbType:DbType.Int32,  direction: ParameterDirection.Output);
-            p.Add("@SYSFUN", model.SYSFUN, dbType:DbType.Int32,  direction: ParameterDirection.Input);
-            p.Add("@SYSPRF", model.SYSPRF, dbType:DbType.Byte,  direction: ParameterDirection.Input);
-            p.Add("@SYSKEY", model.SYSKEY, dbType:DbType.String,  direction: ParameterDirection.Input);
+            p.Add("@SYSAPL", model.SYSAPL, dbType:DbType.Byte,  direction: ParameterDirection.Input);
+            p.Add("@SYSTBL", model.SYSTBL, dbType:DbType.Int16,  direction: ParameterDirection.Input);
+            p.Add("@SYSROL", model.SYSROL, dbType:DbType.Int16,  direction: ParameterDirection.Input);
             p.Add("@SYSMTH", model.SYSMTH, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@SYSPRC", model.SYSPRC, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@SYSDSC", model.SYSDSC, dbType:DbType.String,  direction: ParameterDirection.Input);
@@ -72,6 +73,7 @@ string _changed = Objects.GetPropertiesValue("Funcionalidades do Sistema",model,
                 _conn.Execute("PRSYSFUNINS", p,commandType: CommandType.StoredProcedure);
                 RETURN_VALUE = (int)p.Get<Int32>("@RETURN_VALUE");
 respond.ReturnValue = RETURN_VALUE;
+string _errormessage="";
                 if(RETURN_VALUE>0)
                 {
                     Auditing audit = new Auditing();
@@ -89,17 +91,23 @@ respond.ReturnValue = RETURN_VALUE;
           _AUDNUM=WriteAuditing.Insert(audit);
           respond.Logged=_AUDNUM>0;
                     respond.MessageToUser ="INCLUSAO EFETUADA COM SUCESSO";
+_errormessage="";
                 }
                 if(RETURN_VALUE==-1)
                 {
                     respond.ErrorCode="FAILALL";
-                    respond.ErrorMessage=ErrorManager.GetStringMsg("FAILALL");
+_errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
+                    respond.ErrorMessage=_errormessage;
                     respond.MessageToUser ="FALHA NA INCLUSAO DO REGISTRO";
+_errormessage="";
                 }
                 if(RETURN_VALUE==-2)
                 {
                     respond.ErrorCode="RECORDFOUND";
-                    respond.ErrorMessage=ErrorManager.GetStringMsg("RECORDFOUND");
+_errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
+                    respond.ErrorMessage=_errormessage;
+                    respond.MessageToUser=_errormessage;
+_errormessage="";
                 }
             }
             catch (Exception Error)
@@ -116,7 +124,8 @@ respond.ReturnValue = RETURN_VALUE;
             respond.SourceError=msg.Source;
             respond.ErrorCode=msg.ErrorCode;
             respond.ErrorObject=Error;
-            respond.ErrorMessage=msg.Message;
+            if(!String.IsNullOrEmpty(msg.Message))
+            respond.MessageToUser = msg.Message;
             respond.Severity=msg.Severity;
             }
             }
@@ -125,7 +134,7 @@ respond.ReturnValue = RETURN_VALUE;
         }
 
     /// <summary>
-    /// Altera um registro da tabela TBSYSFUN (Funcionalidades do Sistema)  de acordo com a chave identity
+    /// Altera um registro da tabela TBSYSFUN (System Features)  de acordo com a chave identity
     /// </summary>
     ///<param name="model">SystemFeatures</param>
     /// <returns>ExecutionResponse</returns>
@@ -134,11 +143,12 @@ respond.ReturnValue = RETURN_VALUE;
 ExecutionResponse respond = new ExecutionResponse();
             int RETURN_VALUE = 0;
             int _AUDNUM = 0;
+            this.ProcessCode= 0;
             this.HasError =false;
                             SystemFeatures ModelAud = Select(model.SYSFUN);
 string _original = Objects.GetPropertiesValue(ModelAud);
 
-            string _changed = Objects.GetPropertiesValue("Funcionalidades do Sistema",model,true);
+            string _changed = Objects.GetPropertiesValue("System Features",model,true);
 
                     using (IDbConnection _conn = ConnectionFactory.GetConnection())
                     {
@@ -147,8 +157,9 @@ string _original = Objects.GetPropertiesValue(ModelAud);
             var p = new DynamicParameters();
             p.Add("@RETURN_VALUE", 0, dbType:DbType.Int32,  direction: ParameterDirection.Output);
             p.Add("@SYSFUN", model.SYSFUN, dbType:DbType.Int32,  direction: ParameterDirection.Input);
-            p.Add("@SYSPRF", model.SYSPRF, dbType:DbType.Byte,  direction: ParameterDirection.Input);
-            p.Add("@SYSKEY", model.SYSKEY, dbType:DbType.String,  direction: ParameterDirection.Input);
+            p.Add("@SYSAPL", model.SYSAPL, dbType:DbType.Byte,  direction: ParameterDirection.Input);
+            p.Add("@SYSTBL", model.SYSTBL, dbType:DbType.Int16,  direction: ParameterDirection.Input);
+            p.Add("@SYSROL", model.SYSROL, dbType:DbType.Int16,  direction: ParameterDirection.Input);
             p.Add("@SYSMTH", model.SYSMTH, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@SYSPRC", model.SYSPRC, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@SYSDSC", model.SYSDSC, dbType:DbType.String,  direction: ParameterDirection.Input);
@@ -158,6 +169,7 @@ string _original = Objects.GetPropertiesValue(ModelAud);
                 _conn.Execute("PRSYSFUNUPD", p,commandType: CommandType.StoredProcedure);
                 RETURN_VALUE = (int)p.Get<Int32>("@RETURN_VALUE");
                 respond.ReturnValue= RETURN_VALUE;
+string _errormessage="";
                 if(RETURN_VALUE>0)
                 {
                     Auditing audit = new Auditing();
@@ -175,16 +187,23 @@ string _original = Objects.GetPropertiesValue(ModelAud);
           _AUDNUM=WriteAuditing.Insert(audit);
           respond.Logged=_AUDNUM>0;
                     respond.MessageToUser ="ALTERACAO EFETUADA COM SUCESSO";
+_errormessage="";
                 }
                 if(RETURN_VALUE==-1)
                 {
                     respond.ErrorCode="FAILALL";
-                    respond.ErrorMessage=ErrorManager.GetStringMsg("FAILALL");
+_errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
+                    respond.ErrorMessage=_errormessage;
+                    respond.MessageToUser=_errormessage;
+_errormessage="";
                 }
                 if(RETURN_VALUE==-2)
                 {
                     respond.ErrorCode="RECORDNOTFOUND";
-                    respond.ErrorMessage=ErrorManager.GetStringMsg("RECORDNOTFOUND");
+_errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
+                    respond.ErrorMessage=_errormessage;
+                    respond.MessageToUser=_errormessage;
+_errormessage="";
                 }
             }
             catch (Exception Error)
@@ -201,7 +220,8 @@ string _original = Objects.GetPropertiesValue(ModelAud);
             respond.SourceError=msg.Source;
             respond.ErrorCode=msg.ErrorCode;
             respond.ErrorObject=Error;
-            respond.ErrorMessage=msg.Message;
+            if(!String.IsNullOrEmpty(msg.Message))
+            respond.MessageToUser = msg.Message;
             respond.Severity=msg.Severity;
             }
             }
@@ -209,19 +229,20 @@ string _original = Objects.GetPropertiesValue(ModelAud);
             return respond;
         }
     /// <summary>
-    /// Seleciona o tipo de contato de acordo com o código
+    /// Obtêm o registro de uma funcionalidade de acordo com o id
     /// </summary>
         /// <param name="pSYSFUN">ID da Funcionalidade</param>
     /// <returns>SystemFeatures</returns>
-    public SystemFeatures Select(int pSYSFUN)
+    public SystemFeatures Select(System.Int32 pSYSFUN)
         {
         this.Found=false;
-    SystemFeatures query=null;
+            this.ProcessCode= 0;
+    SystemFeatures RETURN_VALUE=null;
                     using (IDbConnection _conn = ConnectionFactory.GetConnection())
                     {
                     try
                     {
-            query  = _conn.Query<SystemFeatures>(sql:"PRSYSFUNSEL", param:new {SYSFUN=pSYSFUN
+            RETURN_VALUE  = _conn.Query<SystemFeatures>(sql:"PRSYSFUNSEL", param:new {SYSFUN=pSYSFUN
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
                     this.Found = true;
                     }
@@ -232,23 +253,24 @@ string _original = Objects.GetPropertiesValue(ModelAud);
                     _logger.Info(Error);
             }
             }
-                    return query;
+                    return RETURN_VALUE;
             }
 
     /// <summary>
-    /// Seleciona todos os tipos de contato existentes
+    /// Obtêm todos os registros de funcionalidades específicas para uma tabela
     /// </summary>
-    /// <returns>SystemFeatures</returns>
-    public SystemFeatures List()
+        /// <param name="pSYSTBL">ID da Tabela</param>
+    /// <returns>Listof SystemFeatures</returns>
+    public List<SystemFeatures> List(System.Int16? pSYSTBL)
         {
-        this.Found=false;
-    SystemFeatures query=null;
+            this.ProcessCode= 0;
                     using (IDbConnection _conn = ConnectionFactory.GetConnection())
                     {
                     try
                     {
-            query  = _conn.Query<SystemFeatures>(sql:"PRSYSFUNSELALL", param:new {},  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
+            var result = _conn.Query<SystemFeatures>(sql:"PRSYSFUNSELALL", param:new {SYSTBL=pSYSTBL},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
                     this.Found = true;
+                    return result.ToList();
                     }
                     catch (Exception Error)
                     {
@@ -257,7 +279,7 @@ string _original = Objects.GetPropertiesValue(ModelAud);
                     _logger.Info(Error);
             }
             }
-                    return query;
+                    return null;
             }
 
     }

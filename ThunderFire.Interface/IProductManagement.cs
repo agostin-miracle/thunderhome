@@ -35,6 +35,13 @@ ProductManagement Select(System.Int32 pUSUPRO);
     /// <returns>ProductManagement</returns>
 ProductManagement Select(System.Int32 pCODUSU, System.Int16 pCODPRO);
     /// <summary>
+    /// Obtêm uma lista de gestores, se informada a linha de produto, extrai somente os gestores ligados à linha
+    /// </summary>
+        /// <param name="pLINPRO">Linha de Produto</param>
+
+    /// <returns>List of MyUsers</returns>
+List<MyUsers> List(System.Int16? pLINPRO);
+    /// <summary>
     /// Obtêm uma lista de todos os registros de Gestores de Produtos de acordo com o usuario e/ou  o produto informado
     /// </summary>
         /// <param name="pCODUSU">Código do Usuário</param>

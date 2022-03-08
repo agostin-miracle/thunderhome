@@ -71,6 +71,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-check">
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLMEN">
+                            <label class="form-check-label form-control-sm" for="FAPLMEN">Aplicar Mensalidade</label>
+                        </div>
+                        <label for="FVLRMEN" class="col-form-label col-sm-2 form-control-sm">Valor da Mensalidade</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control form-control-sm money" id="FVLRMEN" size="8" maxlength="8">
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-check">
                     <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLINT" checked>
@@ -245,10 +257,12 @@
                         'APLINT': $("#FAPLINT").is(':checked') ? 1 : 0,
                         'VLRMIN': ToFloat($("#FVLRMIN").val()),
                         'VLRMAX': ToFloat($("#FVLRMAX").val()),
+                        'VLRMEN': ToFloat($("#FVLRMEN").val()),
                         'APLRVC': $("#FAPLRVC").is(':checked') ? 1 : 0,
                         'REGVCT': vREGVCT,
                         'APLCES': $("#FAPLCES").is(':checked') ? 1 : 0,
                         'APLTAD': $("#FAPLTAD").is(':checked') ? 1 : 0,
+                        'APLMEN': $("#FAPLMEN").is(':checked') ? 1 : 0,
                         'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
                     });
                     $.ajax({
@@ -299,9 +313,11 @@
                     $("#FAPLINT").val(result.APLINT);
                     $("#FVLRMIN").val(result.VLRMIN);
                     $("#FVLRMAX").val(result.VLRMAX);
+                    $("#FVLRMEN").val(result.VLRMEN);
                     $("#FAPLRVC").prop('checked', (result.APLRVC == 1));
                     $("#FREGVCT").val(result.REGVCT);
                     $("#FAPLCES").prop('checked', (result.APLCES == 1));
+                    $("#FAPLMEN").prop('checked', (result.APLMEN == 1));
                     $("#FAPLTAD").prop('checked', (result.APLTAD == 1));
                     $("#FSTAREC").prop('checked', (result.STAREC == 1));
                 }

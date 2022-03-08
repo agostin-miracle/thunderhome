@@ -62,8 +62,10 @@
     <Compile Include="bAttributeType.cs" />
     <Compile Include="bContactBook.cs" />
     <Compile Include="bContactType.cs" />
+    <Compile Include="bFeaturesGroup.cs" />
     <Compile Include="bGeneralRegistry.cs" />
     <Compile Include="bGeneralTable.cs" />
+    <Compile Include="bGroups.cs" />
     <Compile Include="bLoginUser.cs" />
     <Compile Include="bProductCards.cs" />
     <Compile Include="bProductLine.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="bVirtualAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support.cs" />
+    <Compile Include="uLoginUser.cs" />
     <Compile Include="WriteAuditing.cs" />
   </ItemGroup>
   <ItemGroup>

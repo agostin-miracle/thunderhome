@@ -58,16 +58,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Docs\tables.xml" />
     <Content Include="Init\Procedures.SQl" />
+    <Content Include="Procedures\dbo.TBSYSFUN.sql" />
     <Content Include="Procedures\script_TBCADCTA.sql" />
+    <Content Include="Procedures\script_TBSYSFXG.sql" />
+    <Content Include="Procedures\script_TBSYSGRP.sql" />
     <Content Include="Procedures\script_TBTIPCTA.sql" />
     <Content Include="Tables\dbo.TBCADPRO.sql" />
+    <Content Include="Tables\dbo.TBCADSTA.sql" />
+    <Content Include="Tables\dbo.TBSYSFUN.sql" />
+    <Content Include="Tables\dbo.TBSYSGRP.sql" />
+    <Content Include="Tables\dbo.TBTIPATR.sql" />
     <Content Include="Tables\dbo.TBTIPEND.sql" />
+    <Content Include="Tables\dbo.TBUSUPRO.sql" />
     <Content Include="Tables\TBCADCTA.SQL" />
     <Content Include="Triggers\script_TBREGCRT.sql" />
     <Content Include="Views\script_TBCADGER.sql" />
     <None Include="App.config" />
-    <Content Include="Docs\access.xml" />
+    <Content Include="Docs\access.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Docs\ProcsName.xml" />
     <Content Include="Init\functions.sql" />
     <Content Include="NLog.config">
@@ -98,7 +109,6 @@
     <Content Include="Procedures\script_TBTIPEND.sql" />
     <Content Include="Procedures\script_TBTIPUSU.sql" />
     <Content Include="Procedures\script_TBUSUPRO.sql" />
-    <Content Include="Scripts\PRGETNXTNUM.SQL" />
     <Content Include="Tables\TBCADCTO.SQL" />
     <Content Include="Tables\TBCADEND.SQL" />
     <Content Include="Tables\TBCADGER.SQL" />
@@ -128,6 +138,9 @@
       <Project>{75c1e1d1-5b16-46e8-9967-8b594a8ad2f9}</Project>
       <Name>ThunderFire.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

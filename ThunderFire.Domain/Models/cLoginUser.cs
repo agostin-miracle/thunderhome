@@ -77,4 +77,26 @@ namespace ThunderFire.Domain.Models
         public int UPDUSU{ get;set;} = 0;
 
     }
+        /// <summary>
+        /// Objeto de Retenção de Informações de Cartões Associados ao usuário
+        /// </summary>
+public  class MyCards
+{
+
+        /// <summary>
+        /// Código do Cartão 
+        /// </summary>
+        /// <remarks>
+/// <para>Tabela de Próximos Números : 5</para>
+/// </remarks>
+        
+        public int CODCRT{ get;set;} = 0;
+
+        /// <summary>
+        /// Número do Cartão
+        /// </summary>
+        
+        public string NUMCRT{get;set;} = "";
+
+}
 }

@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 01/03/2022 17:19
+///Data        : 04/03/2022 15:20
 ///Alias       : virtualaccount
 ///Descrição   : Virtual Account
 ///</remarks>
@@ -99,7 +99,7 @@ string _errormessage="";
           audit.NUMIPA =Environment.MachineName;
           _AUDNUM=WriteAuditing.Insert(audit);
           respond.Logged=_AUDNUM>0;
-                    respond.MessageToUser ="CONTA DIGITAL INCLUIDA COM SUCESSO";
+                    respond.MessageToUser ="CONTA VIRTUAL INCLUIDA COM SUCESSO";
 _errormessage="";
                 }
                 if(RETURN_VALUE==-1)
@@ -108,6 +108,14 @@ _errormessage="";
 _errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
                     respond.ErrorMessage=_errormessage;
                     respond.MessageToUser=_errormessage;
+_errormessage="";
+                }
+                if(RETURN_VALUE==-2)
+                {
+                    respond.ErrorCode="RECORDFOUND";
+_errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
+                    respond.ErrorMessage=_errormessage;
+                    respond.MessageToUser ="O USUARIO JA POSSUI UMA CONTA VIRTUAL REGISTRADA";
 _errormessage="";
                 }
             }
@@ -196,7 +204,7 @@ string _errormessage="";
           audit.NUMIPA =Environment.MachineName;
           _AUDNUM=WriteAuditing.Insert(audit);
           respond.Logged=_AUDNUM>0;
-                    respond.MessageToUser ="CONTA DIGITAL ALTERADA COM SUCESSO";
+                    respond.MessageToUser ="CONTA VIRTUAL ALTERADA COM SUCESSO";
 _errormessage="";
                 }
                 if(RETURN_VALUE==-1)
@@ -526,6 +534,14 @@ _errormessage="";
 _errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
                     respond.ErrorMessage=_errormessage;
                     respond.MessageToUser ="OPERACAO INVALIDA";
+_errormessage="";
+                }
+                if(RETURN_VALUE==-5)
+                {
+                    respond.ErrorCode="APPROVALFAIL";
+_errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
+                    respond.ErrorMessage=_errormessage;
+                    respond.MessageToUser ="O USUÁRIO NÃO ESTÁ OPERACIONAL PARA ESTA ACAO, VIDE O STATUS DO USUARIO";
 _errormessage="";
                 }
         }

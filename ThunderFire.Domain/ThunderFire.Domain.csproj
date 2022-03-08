@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="DTO\AccessControl.cs" />
-    <Compile Include="DTO\ActiveCards.cs" />
     <Compile Include="DTO\DataTableResponse.cs" />
     <Compile Include="DTO\ExecutionResponse.cs" />
     <Compile Include="DTO\Products.cs" />
@@ -55,8 +54,10 @@
     <Compile Include="Models\cAuditing.cs" />
     <Compile Include="Models\cContactBook.cs" />
     <Compile Include="Models\cContactType.cs" />
+    <Compile Include="Models\cFeaturesGroup.cs" />
     <Compile Include="Models\cGeneralRegistry.cs" />
     <Compile Include="Models\cGeneralTable.cs" />
+    <Compile Include="Models\cGroups.cs" />
     <Compile Include="Models\cLoginUser.cs" />
     <Compile Include="Models\cProductCards.cs" />
     <Compile Include="Models\cProductLine.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Models\cProducts.cs" />
     <Compile Include="Models\cSystemFeatures.cs" />
     <Compile Include="Models\cTransactionStatus.cs" />
+    <Compile Include="Models\cUserGroup.cs" />
     <Compile Include="Models\cUserType.cs" />
     <Compile Include="Models\cVirtualAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

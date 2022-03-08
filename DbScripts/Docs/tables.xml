@@ -1,0 +1,19 @@
+<tables>
+  <item id="9" text="TBCADCTO - Tabela de Contatos" />
+  <item id="12" text="TBCADCTA - Virtual Account" />
+  <item id="8" text="TBCADEND - Cadasto de Endereços" />
+  <item id="13" text="TBSYSFUN - System Features" />
+  <item id="21" text="TBSYSGRP - Groups" />
+  <item id="23" text="TBSYSFXG - Features x Group" />
+  <item id="22" text="TBSYSUXG - User Group" />
+  <item id="18" text="TBCADCRT - Cadastro de Cartões" />
+  <item id="1" text="TBCADGER - Cadastro Geral" />
+  <item id="16" text="TBCADPRO - Products" />
+  <item id="5" text="TBTIPATR - Tipo de Atributo" />
+  <item id="6" text="TBCADSTA - Transaction Status" />
+  <item id="20" text="TBTIPCTA - Tipos de Conta" />
+  <item id="15" text="TBLINPRO - Linha de Produto" />
+  <item id="14" text="TBREGCRT - Registro de Cartões Ativos" />
+  <item id="2" text="TBLGNUSU - Login de Usuário" />
+  <item id="17" text="TBUSUPRO - Gerencia de Produtos" />
+</tables>

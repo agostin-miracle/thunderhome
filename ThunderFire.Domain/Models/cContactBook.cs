@@ -97,12 +97,12 @@ public class QueryContactBook
         /// <summary>
         /// Código do Registro de Contato
         /// </summary>
-        public int CODCTO{ get;set;} = 0;
+        public int CODCTO{ get;set;}
 
         /// <summary>
         /// Código do Usuário
         /// </summary>
-        public int CODUSU{ get;set;} = 0;
+        public int CODUSU{ get;set;}
 
         /// <summary>
         /// Nome do usuário
@@ -116,7 +116,7 @@ public class QueryContactBook
         /// <summary>
         /// Código do Endereço
         /// </summary>
-        public int CODEND{ get;set;} = 0;
+        public int CODEND{ get;set;}
 
         /// <summary>
         /// Endereço
@@ -130,7 +130,7 @@ public class QueryContactBook
         /// <summary>
         /// Tipo de Contato
         /// </summary>
-        public byte TIPCTO{ get;set;} = 1;
+        public byte TIPCTO{ get;set;}
 
         /// <summary>
         /// Descrição do Tipo de Contato
@@ -140,7 +140,7 @@ public class QueryContactBook
         /// <summary>
         /// Registro Principal
         /// </summary>
-        public byte REGATV{ get;set;} = 0;
+        public byte REGATV{ get;set;}
 
         /// <summary>
         /// Descrição da Atividade
@@ -150,7 +150,7 @@ public class QueryContactBook
         /// <summary>
         /// Código do Pais
         /// </summary>
-        public short CODPAI{ get;set;} = 55;
+        public short CODPAI{ get;set;}
 
         /// <summary>
         /// País
@@ -160,7 +160,7 @@ public class QueryContactBook
         /// <summary>
         /// Código da Operadora
         /// </summary>
-        public short CODOPR{ get;set;} = 0;
+        public short CODOPR{ get;set;}
 
         /// <summary>
         /// 
@@ -175,7 +175,7 @@ public class QueryContactBook
         /// <summary>
         /// Define se o contato telefônico permite whats app
         /// </summary>
-        public bool ISWHAT{ get;set;} = false;
+        public bool ISWHAT{ get;set;}
 
         /// <summary>
         /// Número do Telefone
@@ -193,7 +193,7 @@ public class QueryContactBook
         /// <remarks>
 /// <para>Tabela Geral 07</para>
 /// </remarks>
-        public byte STAREC{ get;set;} = 1;
+        public byte STAREC{ get;set;}
 
         /// <summary>
         /// Descrição do Status de Registro
@@ -203,17 +203,17 @@ public class QueryContactBook
         /// <summary>
         /// Data de Inclusão ou cadastramento
         /// </summary>
-        public string DATCAD{ get;set;}
+        public string DATCAD{ get;set;} = "";
 
         /// <summary>
         /// Data da Ultima Atualização
         /// </summary>
-        public string DATUPD{ get;set;}
+        public string DATUPD{ get;set;} = "";
 
         /// <summary>
         /// Usuário de Atualização
         /// </summary>
-        public int UPDUSU{ get;set;} = 0;
+        public int UPDUSU{ get;set;}
 
         /// <summary>
         /// Identificação da Chave de Login do Usuário

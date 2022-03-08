@@ -36,29 +36,33 @@ LoginUser Get(System.Int32 pCODUSU);
     /// <summary>
     /// Obtêm o registro de controle de acesso do usuário
     /// </summary>
-        /// <param name="pLGNNUM">ID de Registro de Login</param>
-    /// <returns>AccessControl</returns>
-AccessControl GetAccessControl(System.Int32 pLGNNUM);
+/// <returns>AccessControl</returns>
+AccessControl GetAccessControl( System.Int32 pLGNNUM);
     /// <summary>
     /// Efetua o logoff de um usuario
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  Logoff( System.Int32 pLGNNUM);
     /// <summary>
     /// Efetua um login com base nas credenciais de acesso
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  Login( System.Byte pLGNTYP,System.String pLGNUSU,System.String pPSWUSU);
     /// <summary>
     /// Verifica se o usuario precisa fazer um refresh de senha
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  NeedRefresh( System.Int32 pLGNNUM);
     /// <summary>
     /// Efetua um login com base nas credenciais de acesso
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  ChangePassword( System.String pLGNUSU,System.String pPSWOLD,System.String pPSWUSU);
     /// <summary>
     /// Efetua um login com base nas credenciais de acesso
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  ResetPassword( System.Int32 pLGNNUM,System.String pPSWUSU,System.Int32 pUPDUSU);
 
     }
 }

@@ -1,0 +1,280 @@
+﻿'@model ThunderFireHomeAdmin.Models.SystemFeaturesModel
+@{
+    ViewBag.Title = "Funções do Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group row">
+                <label for="CCODTBL" class="col-sm-2 col-form-label">Tabela</label>
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm" id="CCODTBL">
+                        @if (Model.ListaTabelas != null)
+                        {
+                            foreach (var item in Model.ListaTabelas)
+                            {
+                                <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-4">
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Detalhes</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="griddata" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Regra</th>
+                            <th>Método</th>
+                            <th>Descrição</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalsystemfeatures" tabindex="-1" role="dialog" aria-labelledby="modalab" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-cubes" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FSYSFUN" value="0" />
+                <div class="form-group row">
+                    <label for="FSYSAPL" class="col-sm-2 control-label">Aplicação</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm cep" id="FSYSAPL" name="FSYSAPL" placeholder="" value="" >
+                    </div>
+                    <label for="FSYSROL" class="col-sm-2 control-label">Regra</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm cep" id="FSYSROL" name="FSYSROL" placeholder="" value="" >
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="FSYSTBL" class="col-sm-2 control-label">Tabela</label>
+                    <div class="col-sm-4">
+                        <select class="form-control form-control-sm" id="FSYSTBL">
+                            @if (Model.ListaTabelas != null)
+                            {
+                                foreach (var item in Model.ListaTabelas)
+                                {
+                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="FSYSMTH" class="col-sm-2 control-label">Método</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FSYSMTH" name="FSYSMTH" placeholder="" value="" required maxlength="100">
+                    </div>
+                    <label for="FSYSPRC" class="col-sm-2 control-label">Objeto</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FSYSPRC" name="FSYSPRC" placeholder="" value="" maxlength="=100">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="FSYSDSC" class="col-sm-2 control-label">Descrição</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="FSYSDSC" name="FSYSDSC" placeholder="" value="" maxlength="255" required>
+                    </div>
+                </div>
+                <div class="form-group row ml-4">
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked />
+                        <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="btn_update_end">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var commandquery = "/Admin/QuerySystemFeatures";
+            $('#griddata').DataTable(
+                {
+                    paging: true,
+                    searching: false,
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                    processing: true,
+                    serverSide: true,
+                    orderMulti: false,
+                    responsive: true,
+                    ajax: {
+                        url: commandquery,
+                        type: "POST",
+                        datatype: "json",
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                        data: {
+                            pSYSTBL: function () { return $('#CCODTBL').val() }
+                        }
+                    },
+                    columns: [
+                        { data: "SYSFUN" },
+                        { data: "SYSROL" },
+                        { data: "SYSMTH" },
+                        { data: "SYSDSC" },
+                        { data: "LGNUSU" },
+                        {
+                            "render": function (data, type, row) {
+                                var botoes = "";
+                                botoes += "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.SYSFUN + "');\"> <i class='fa fa-edit'></i></button>&nbsp;"
+                                return botoes;
+                            }
+                        }
+                    ],
+                    "language": {
+                        "processing": "Aguarde, buscando informações",
+                        "loadingRecords": "Carregando",
+                    },
+                    "pageLength": 10,
+                    "oLanguage": {
+                        "sLengthMenu": "Mostrar _MENU_ registros por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                        "sSearch": "Pesquisar: "
+                    },
+                    columnDefs: [
+                        { "targets": [0], "visible": false, "searchable": false },
+                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "2%" },
+                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "4%" },
+                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "30%" },
+                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "2%" },
+                        { className: "text-right", "targets": [5], "visible": true, "searchable": false, "width": "5%" }
+                    ]
+                });
+
+
+
+            $(document).on("click", "#btn_update_end", function () {
+                var mode = $("#OPERATION").val();
+                var vurl = "/Admin/ChangeSystemFeatures?modo=" + mode;
+                var vNUMEND = $('#FNUMEND').val();
+                var VDATA = JSON.stringify({
+                    'SYSFUN': parseInt($("#SYSFUN").val()),
+                    'SYSAPL': parseInt($("#SYSAPL").val()),
+                    'SYSTBL': parseInt($("#SYSTBL").val()),
+                    'SYSROL': parseInt($("#SYSROL").val()),
+                    'SYSMTH': $("#SYSMTH").val(),
+                    'SYSPRC': $("#SYSPRC").val(),
+                    'SYSDSC': $("#SYSDSC").val(),
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                });
+                $.ajax({
+                    type: "POST",
+                    url: vurl,
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) {
+                            $('#modalsystemfeatures').modal('toggle');
+                            location.href = location.href;
+                        }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Endereços', message: result.MessageToUser, effect: 'newspaper' });
+                        };
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Endereços', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+
+            });
+
+
+
+            $('#CCODTBL').on('change', function () {
+                $('#griddata').DataTable().ajax.reload();
+            });
+
+        });
+
+
+
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            $("#FSTAREC").prop('checked', "true");
+            var pCODUSU = $("#CURUSR").val();
+            if (pCODUSU > 0) {
+                $("#FSYSTBL").val(pCODUSU);
+                $("#FSYSTBL").attr('disabled', 'disabled');
+            }
+            $('#modalsystemfeatures').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalsystemfeatures').modal('toggle');
+        }
+
+        function CallForEdit(pSYSFUN) {
+            var commandquery = "/Admin/SelectSystemFeatures";
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: commandquery,
+                data: { pSYSFUN: pSYSFUN },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FSYSFUN").val(result.SYSFUN);
+                    $("#FSYSAPL").val(result.SYSAPL);
+                    $("#FSYSTBL").val(result.SYSTBL);
+                    $("#FSYSROL").val(result.SYSROL);
+                    $("#FSYSMTH").val(result.SYSMTH);
+                    $("#FSYSPRC").val(result.SYSPRC);
+                    $("#FSYSDSC").val(result.SYSDSC);
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                }
+            })
+            $('#modalsystemfeatures').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalsystemfeatures').modal('toggle');
+        }
+
+    </script>
+}
+

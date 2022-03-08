@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 28/02/2022 19:03
+///Data        : 04/03/2022 13:37
 ///Alias       : addressbook
 ///Descrição   : Cadasto de Endereços
 ///</remarks>
@@ -132,7 +132,8 @@ _errormessage="";
             respond.SourceError=msg.Source;
             respond.ErrorCode=msg.ErrorCode;
             respond.ErrorObject=Error;
-            respond.ErrorMessage=msg.Message;
+            if(!String.IsNullOrEmpty(msg.Message))
+            respond.MessageToUser = msg.Message;
             respond.Severity=msg.Severity;
             }
             }
@@ -243,7 +244,8 @@ _errormessage="";
             respond.SourceError=msg.Source;
             respond.ErrorCode=msg.ErrorCode;
             respond.ErrorObject=Error;
-            respond.ErrorMessage=msg.Message;
+            if(!String.IsNullOrEmpty(msg.Message))
+            respond.MessageToUser = msg.Message;
             respond.Severity=msg.Severity;
             }
             }

@@ -11,41 +11,10 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/datatables.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+    <script src="https://kit.fontawesome.com/62a3b6e3e4.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav" style="color:black">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Cadastros", "Index", "Cadastros")</li>
-                        <li>@Html.ActionLink("Gestão", "Index", "Gestao")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container body-content">
-            <div id="divmessage"></div>
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>*@
-
     <div class="content">
         <div class="wrapper">
             <div class="row justify-content-lg-start">
@@ -58,8 +27,8 @@
 
                     <nav class="nav nav-pills nav-fill">
                         <a class="nav-item nav-link active" href="@Url.Action("Index","Cadastros")">Cadastros</a>
-                        <a class="nav-item nav-link" href="#">Link</a>
-                        <a class="nav-item nav-link disabled" href="#">Disabled</a>
+                        <a class="nav-item nav-link" href="@Url.Action("Index","Admin")">Administrador</a>
+                        <a class="nav-item nav-link" href="@Url.Action("Index","Gestao")">Gestor</a>
                     </nav>
 
 

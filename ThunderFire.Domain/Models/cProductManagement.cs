@@ -65,6 +65,16 @@ namespace ThunderFire.Domain.Models
         public byte APLTAD{ get;set;} = 0;
 
         /// <summary>
+        /// Define se deve aplicar a Mensalidade ã distribuição de mensalidade para o cartão
+        /// </summary>
+        public byte APLMEN{ get;set;} = 0;
+
+        /// <summary>
+        /// Valor da Mensalidade
+        /// </summary>
+        public double VLRMEN{ get;set;} = 0;
+
+        /// <summary>
         /// Código do Status de Registro
         /// </summary>
         /// <remarks>
@@ -100,42 +110,42 @@ public class QueryProductManagement
         /// <remarks>
 /// <para>O usuário gestor é determinado pela associação do usuário com o produto</para>
 /// </remarks>
-        public int USUPRO{ get;set;} = 0;
+        public int USUPRO{ get;set;}
 
         /// <summary>
         /// Código do Usuário
         /// </summary>
-        public int CODUSU{ get;set;} = 0;
+        public int CODUSU{ get;set;}
 
         /// <summary>
         /// Codigo do Produto
         /// </summary>
-        public short CODPRO{ get;set;} = 0;
+        public short CODPRO{ get;set;}
 
         /// <summary>
         /// Define se o registro é de aplicação ou controle interno
         /// </summary>
-        public bool APLINT{ get;set;} = false;
+        public bool APLINT{ get;set;}
 
         /// <summary>
         /// Valor Minimo
         /// </summary>
-        public double VLRMIN{ get;set;} = 0;
+        public double VLRMIN{ get;set;}
 
         /// <summary>
         /// Valor Máximo
         /// </summary>
-        public double VLRMAX{ get;set;} = 0;
+        public double VLRMAX{ get;set;}
 
         /// <summary>
         /// Define (1) se aplica a regra de vencimento, caso contrário nçao aplica
         /// </summary>
-        public bool APLRVC{ get;set;} = false;
+        public bool APLRVC{ get;set;}
 
         /// <summary>
         /// 
         /// </summary>
-        public byte REGVCT{ get;set;} = 1;
+        public byte REGVCT{ get;set;}
 
         /// <summary>
         /// Indica se o gestor tem aplicação de geração de conta virtual especial para o cartão
@@ -143,12 +153,22 @@ public class QueryProductManagement
         /// <remarks>
 /// <para>A conta criada será atribuída do código de origem ORGCTA=3</para>
 /// </remarks>
-        public byte APLCES{ get;set;} = 0;
+        public byte APLCES{ get;set;}
 
         /// <summary>
         /// Define se deve aplicar a Tarifa Administrativa
         /// </summary>
-        public byte APLTAD{ get;set;} = 0;
+        public byte APLTAD{ get;set;}
+
+        /// <summary>
+        /// Define se deve aplicar a Mensalidade ã distribuição de mensalidade para o cartão
+        /// </summary>
+        public byte APLMEN{ get;set;}
+
+        /// <summary>
+        /// Valor da Mensalidade
+        /// </summary>
+        public double VLRMEN{ get;set;}
 
         /// <summary>
         /// Código do Status de Registro
@@ -156,22 +176,22 @@ public class QueryProductManagement
         /// <remarks>
 /// <para>Tabela Geral 07</para>
 /// </remarks>
-        public byte STAREC{ get;set;} = 1;
+        public byte STAREC{ get;set;}
 
         /// <summary>
         /// Data de Inclusão ou cadastramento
         /// </summary>
-        public DateTime DATCAD{ get;set;} = DateTime.Now;
+        public DateTime DATCAD{ get;set;}
 
         /// <summary>
         /// Data da Ultima Atualização
         /// </summary>
-        public DateTime DATUPD{ get;set;} = DateTime.Now;
+        public DateTime DATUPD{ get;set;}
 
         /// <summary>
         /// Usuário de Atualização
         /// </summary>
-        public int UPDUSU{ get;set;} = 0;
+        public int UPDUSU{ get;set;}
 
         /// <summary>
         /// Nome do usuário
@@ -220,11 +240,11 @@ public class QueryProductManagement
         /// <summary>
         /// 
         /// </summary>
-        public bool? HASCFG{ get;set;} = false;
+        public bool? HASCFG{ get;set;}
 
         /// <summary>
         /// 
         /// </summary>
-        public int CNTTAR{ get;set;} = 0;
+        public int CNTTAR{ get;set;}
 
 }}

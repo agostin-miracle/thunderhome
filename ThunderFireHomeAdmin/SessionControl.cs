@@ -23,6 +23,10 @@ namespace ThunderFireHomeAdmin
                 return (current.LGNNUM > 0 && current.IsValid);
             return false;
         }
+    
+        
+    
+        
         /// <summary>
         /// Obtêm o tipo do usuário
         /// </summary>
@@ -34,12 +38,12 @@ namespace ThunderFireHomeAdmin
             return 0;
         }
 
+    
         public static AccessControl Current { get { return current; }  }
 
 
         public static ExecutionResponse Authenticate(LoginEntry model)
         {
-            bool falha = true;
             ExecutionResponse result = new ExecutionResponse();
             result.ErrorCode = "FAILALL";
             result.Logged = false;
@@ -73,7 +77,6 @@ namespace ThunderFireHomeAdmin
                                     {
                                         SessionData.LGNNUM = _LGNNUM;
                                         HttpContext.Current.Session[SESSION_NAME] = SessionData;
-                                        falha = false;
                                     }
                                     else
                                         result.MessageToUser = "Não foi possível atribuir o controle de operação";

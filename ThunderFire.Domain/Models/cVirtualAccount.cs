@@ -67,7 +67,7 @@ namespace ThunderFire.Domain.Models
         /// <summary>
         /// Data de Validade
         /// </summary>
-        public DateTime DATVAL{ get;set;} 
+        public DateTime DATVAL{ get;set;} = DateTime.Now;
 
         /// <summary>
         /// Indica se deve ser aplicado a validação de limite de operação
@@ -125,6 +125,11 @@ namespace ThunderFire.Domain.Models
         /// Usuário de Atualização
         /// </summary>
         public int UPDUSU{ get;set;} = 0;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string DATTRF{ get;set;} = "";
 
     }
 public class QueryVirtualAccount

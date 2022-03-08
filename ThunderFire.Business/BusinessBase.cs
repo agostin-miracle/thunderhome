@@ -21,7 +21,7 @@ namespace ThunderFire.Business
         /// </summary>
         public bool Connected { get; internal set; } = false;
         public int KeyTableId { get; internal set; } = 0;
-        public int KeyTableCode { get; internal set; } = 0;
+       // public int KeyTableCode { get; internal set; } = 0;
         public int ProcessCode { get; set; } = 0;
 
         public long GetAuthorizationID()

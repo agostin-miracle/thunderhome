@@ -10,28 +10,30 @@ namespace ThunderFire.Interface
     public interface ISystemFeatures
     {
            /// <summary>
-    /// Insere um registro na tabela TBSYSFUN (Funcionalidades do Sistema)
+    /// Insere um registro na tabela TBSYSFUN (System Features)
     /// </summary>
     ///<param name="model">SystemFeatures</param>
     /// <returns>int</returns>
 ExecutionResponse Insert(SystemFeatures model);
     /// <summary>
-    /// Altera um registro da tabela TBSYSFUN (Funcionalidades do Sistema)  de acordo com a chave identity
+    /// Altera um registro da tabela TBSYSFUN (System Features)  de acordo com a chave identity
     /// </summary>
     ///<param name="model">SystemFeatures</param>
     /// <returns>ExecutionResponse</returns>
 ExecutionResponse Update(SystemFeatures model);
     /// <summary>
-    /// Seleciona o tipo de contato de acordo com o código
+    /// Obtêm o registro de uma funcionalidade de acordo com o id
     /// </summary>
         /// <param name="pSYSFUN">ID da Funcionalidade</param>
     /// <returns>SystemFeatures</returns>
-SystemFeatures Select(int pSYSFUN);
+SystemFeatures Select(System.Int32 pSYSFUN);
     /// <summary>
-    /// Seleciona todos os tipos de contato existentes
+    /// Obtêm todos os registros de funcionalidades específicas para uma tabela
     /// </summary>
-    /// <returns>SystemFeatures</returns>
-SystemFeatures List();
+        /// <param name="pSYSTBL">ID da Tabela</param>
+
+    /// <returns>List of SystemFeatures</returns>
+List<SystemFeatures> List(System.Int16? pSYSTBL);
 
     }
 }

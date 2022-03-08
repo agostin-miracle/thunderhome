@@ -51,8 +51,10 @@
     <Compile Include="IAttributeType.cs" />
     <Compile Include="IContactBook.cs" />
     <Compile Include="IContactType.cs" />
+    <Compile Include="IFeaturesGroup.cs" />
     <Compile Include="IGeneralRegistry.cs" />
     <Compile Include="IGeneralTable.cs" />
+    <Compile Include="IGroups.cs" />
     <Compile Include="ILoginUser.cs" />
     <Compile Include="IProductCards.cs" />
     <Compile Include="IProductLine.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="IProducts.cs" />
     <Compile Include="ISystemFeatures.cs" />
     <Compile Include="ITransactionStatus.cs" />
+    <Compile Include="IUserGroup.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="IVirtualAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

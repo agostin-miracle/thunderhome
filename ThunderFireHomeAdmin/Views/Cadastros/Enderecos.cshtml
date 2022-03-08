@@ -117,7 +117,7 @@
                     </div>
                     <label for="FTIPLOG" class="col-sm-2 control-label">Logradouro</label>
                     <div class="col-sm-4">
-                        <select class="form-control form-control-sm" id="FTIPLOG">
+                        <select class="form-control form-control-sm addr1" id="FTIPLOG">
                             @if (Model.ListaTipoLogradouro != null)
                             {
                                 foreach (var item in Model.ListaTipoLogradouro)
@@ -143,7 +143,7 @@
                     </div>
                     <label for="FCODUFE" class="col-sm-2 control-label">UF</label>
                     <div class="col-sm-4">
-                        <select class="form-control form-control-sm" id="FCODUFE">
+                        <select class="form-control form-control-sm addr1" id="FCODUFE">
                             @if (Model.ListaUF != null)
                             {
                                 foreach (var item in Model.ListaUF)
@@ -159,7 +159,7 @@
                 <div class="form-group row">
                     <label for="FCODCEP" class="col-sm-2 control-label">CEP</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm cep" id="FCODCEP" name="FCODCEP" placeholder="Cep" value="00000000">
+                        <input type="text" class="form-control form-control-sm cep addr1" id="FCODCEP" name="FCODCEP" placeholder="Cep" value="00000000">
                     </div>
                 </div>
 
@@ -170,24 +170,24 @@
                     </div>
                     <label for="FNUMEND" class="col-sm-2 control-label">Número</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control form-control-sm" id="FNUMEND" name="FNUMEND" placeholder="Número" value="0">
+                        <input type="text" class="form-control form-control-sm addr1" id="FNUMEND" name="FNUMEND" placeholder="Número" value="0">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="FDSCCPL" class="col-sm-2 control-label">Complemento</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-sm" id="FDSCCPL" name="FDSCCPL" placeholder="" value="" maxlength="70" required>
+                        <input type="text" class="form-control form-control-sm addr1" id="FDSCCPL" name="FDSCCPL" placeholder="" value="" maxlength="70" required>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="FDSCID" class="col-sm-2 control-label">Endereço</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="FDSCCID" name="FDSCCID" placeholder="Cidade" value="">
+                        <input type="text" class="form-control form-control-sm addr1" id="FDSCCID" name="FDSCCID" placeholder="Cidade" value="">
                     </div>
                     <label for="FDSBAI" class="col-sm-2 control-label">Bairro</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="FDSCBAI" name="FDSCBAI" placeholder="Bairro" value="">
+                        <input type="text" class="form-control form-control-sm addr1" id="FDSCBAI" name="FDSCBAI" placeholder="Bairro" value="">
                     </div>
                 </div>
 
@@ -358,25 +358,12 @@
                 var value = $(this).val();
                 if ((value == 3) || (value == 4)) {
                     $('#FCODCEP').val("00000000");
-                    $('#FCODCEP').attr("disabled", "disabled");
-                    $('#FDSCCPL').attr("disabled", "disabled");
-                    $('#FDSCCID').attr("disabled", "disabled");
-                    $('#FDSCBAI').attr("disabled", "disabled");
-                    $('#FCODUFE').attr("disabled", "disabled");
                     $('#FTIPLOG').val("0");
-                    $('#FTIPLOG').attr("disabled", "disabled");
                     $('#FNUMEND').val("0");
-                    $('#FNUMEND').attr("disabled", "disabled");
-
+                    $('.addr1').attr("disabled", "disabled");
                 }
                 else {
-                    $('#FCODCEP').removeAttr("disabled");
-                    $('#FDSCCPL').removeAttr("disabled");
-                    $('#FDSCCID').removeAttr("disabled");
-                    $('#FDSCBAI').removeAttr("disabled");
-                    $('#FCODUFE').removeAttr("disabled");
-                    $('#FTIPLOG').removeAttr("disabled");
-                    $('#FNUMEND').removeAttr("disabled");
+                    $('.addr1').removeAttr("disabled");
                 }
             });
 

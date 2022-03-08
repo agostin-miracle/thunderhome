@@ -1,49 +1,229 @@
-﻿
+﻿@model ThunderFireHomeAdmin.Models.ManagementModel
 @{
-    ViewBag.Title = "Cartões";
+    ViewBag.Title = "Gestão de Cartões";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Cartões</h4>
-                <div class="form-horizontal">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="CKEYCOD" class="col-sm-2 control-label">Gestor</label>
-                            <select class="form-control form-control-sm" id="CUSUPRO"></select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="CKEYCOD" class="col-sm-2 control-label">Status</label>
-                            <select class="form-control form-control-sm" id="CSTACRT"></select>
-                        </div>
-                    </div>
-                </div>
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
 
-                <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
-                <hr />
-                <div class="table-responsive">
-                    <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Status</th>
-                                <th>Cartão</th>
-                                <th>Origem</th>
-                                <th>Usuário</th>
-                                <th>Portador</th>
-                                <th>Precedente</th>
-                                <th>Bloqueio</th>
-                                <th>&#160;</th>
-                            </tr>
-                        </thead>
-                    </table>
+            <div class="form-group row">
+                <label for="CUSUPRO" class="col-sm-2 col-form-label">Usuário</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(model => model.CUSUPRO, new SelectList(Model.ListaGestor, "CODUSU", "NOMUSU"), " -- Selecione --", new { @class = "form-control form-control-sm" });
                 </div>
+                <label for="CSTACRT" class="col-sm-2 col-form-label">Status</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(model => model.CSTACRT, new SelectList(Model.ListaStatus, "CODSTA", "DSCSTA"), " -- Selecione --", new { @class = "form-control form-control-sm" });
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="CNOMPRT" class="col-sm-2 col-form-label">Portador</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control-sm form-control" id="CNOMPRT" name="CNOMPRT" placeholder="Nome ou parte a procurar" value="">
+                </div>
+                <label for="CNUMCRT" class="col-sm-2 col-form-label">Cartão</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control-sm form-control" id="CNUMCRT" name="CNUMCRT" placeholder="Cartão ou parte a procurar" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Detalhes</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="gridaddress" class="table table-bordered table-striped table-bordered dt-responsive nowrap dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Cartão</th>
+                            <th>Ativação</th>
+                            <th>Canc.</th>
+                            <th>Portador</th>
+                            <th>Validade</th>
+                            <th>Online</th>
+                            <th>Saque</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
 
+
+
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.cep').mask('00000-000');
+
+            var commandquery = "/Gestao/QueryManangementCards";
+            $('#gridaddress').DataTable(
+                {
+                    paging: true,
+                    searching: false,
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                    processing: true,
+                    serverSide: true,
+                    orderMulti: false,
+                    responsive: true,
+                    ajax: {
+                        url: commandquery,
+                        type: "POST",
+                        datatype: "json",
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                        data: {
+                            pUSUPRO: function () { return $('#CUSUPRO').val() },
+                            pSTACRT: function () { return $('#CSTACRT').val() },
+                            pNUMCRT: function () { return $('#CNUMCRT').val() },
+                            pNOMPRT: function () { return $('#CNOMPRT').val() }
+                        }
+                    },
+                    columns: [
+                        { data: "CODCRT" },
+                        { data: "NUMCRT" },
+                        { data: "CNVATV" },
+                        { data: "CNVCAN" },
+                        { data: "NOMPRT" },
+                        { data: "VALCRT" },
+                        {
+                            data: "APLCON",
+                            "render": function (data, type, row) {
+                                var textout = "Sim";
+                                if (data == "0" || data == "false")
+                                    textou = "Não";
+                                return textout;
+                            }
+                        },
+
+                        {
+                            data: "APLSAQ",
+                            "render": function (data, type, row) {
+                                var textout = "Sim";
+                                if (data == "0" || data == "false")
+                                    textou = "Não";
+                                return textout;
+                            }
+                        },
+
+
+                        { data: "LGNUSU" },
+                        {
+                            "render": function (data, type, row) {
+                                var botoes = "";
+                                botoes += "<button id='btnpermitirsaque' title='Comutar a Função Saque' class='btn ChangeOnlineShop btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',1,0);\"> <i class='fa fa-money fa-xs'></i></button>&nbsp;";
+                                botoes += "<button id='btnpermitircompra' title='Comutar a Função Compra On-line' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',2,0);\"> <i class='fa fa-shopping-cart fa-xs'></i></button>&nbsp;";
+
+                                if (row.STACRT != 120) {
+
+                                    if (row.STAPRO != 127) {
+                                        botoes += "<button id='btnmensalremove' title='Remover Mensalidades do Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',3,1);\"> <i class='fa fa-calendar-circle-minus fa-xs'></i></button>&nbsp;";
+                                        botoes += "<button id='btnmensalrestore' title='Restaurar Mensalidades do Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',3,3);\"> <i class='fa fa-calendar-circle-plus fa-xs'></i></button>&nbsp;";
+                                    }
+
+                                    botoes += "<button id='btnblocktempcard' title='Bloquear o Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',4,1);\"> <i class='fa fa-ban fa-xs'></i></button>&nbsp;";
+                                    if (row.STAPRO == 127) {
+                                        botoes += "<button id='btnunblocktempcard' title='Remover o bloqueio do Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',4,2);\"> <i class='fa fa-unlock fa-xs'></i></button>&nbsp;";
+                                    }
+                                    botoes += "<button id='btnblockcard' title='Bloqueio Permanente do Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',4,3);\"> <i class='fa fa-unlock fa-xs'></i></button>&nbsp;";
+                                }
+                                if (row.ASSUSU > 0 && ( row.STACRT == 103 || row.STACRT==107)) {
+                                    botoes += "<button id='btncancelass' title='Cancelar Associação do Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',5,0);\"> <i class='fa fa-stop-circle fa-xs'></i></button>&nbsp;";
+                                }
+                                return botoes;
+                            }
+                        }
+                    ],
+                    "language": {
+                        "processing": "Aguarde, buscando informações",
+                        "loadingRecords": "Carregando",
+                    },
+                    "pageLength": 10,
+                    "oLanguage": {
+                        "sLengthMenu": "Mostrar _MENU_ registros por página",
+                        "sZeroRecords": "Nenhum registro encontrado",
+                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                        "sSearch": "Pesquisar: "
+                    },
+                    columnDefs: [
+                        { "targets": [0], "visible": false, "searchable": false },
+                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "4%" },
+                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "4%" },
+                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "4%" },
+                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "2%" },
+                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "8%" }
+
+                    ]
+                });
+
+
+
+
+
+            $('#CUSUPRO').on('change', function () {
+                $('#gridaddress').DataTable().ajax.reload();
+            });
+            $('#CSTACRT').on('change', function () {
+                $('#gridaddress').DataTable().ajax.reload();
+            });
+            $('#CNOMPRT').on('change', function () {
+                $('#gridaddress').DataTable().ajax.reload();
+            });
+            $('#CNUMCRT').on('change', function () {
+                $('#gridaddress').DataTable().ajax.reload();
+            });
+
+        });
+
+
+
+
+        function ProcessDataOnCard(pCODCRT, pACTION, pCODACT) {
+            var commandquery = "/Gestao/ChangeDataOnCard";
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "POST",
+                url: commandquery,
+                data: { pCODCRT: pCODCRT, pACTION: pACTION, pCODACT: pCODACT },
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+                    var ok = parseInt(result.ReturnValue);
+                    if (ok > 0) {
+
+                        $.alert({ class: 'Warning', title: 'Cartões', message: result.MessageToUser, effect: 'newspaper' });
+
+                    }
+                    else {
+                        $.alert({ class: 'Warning', title: 'Cartões', message: result.MessageToUser, effect: 'newspaper' });
+                    };
+                },
+                error: function (data) {
+                    $.alert({ class: 'danger', title: 'Cartões', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                }
+
+            })
+        }
+
+
+    </script>
+}

@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 01/03/2022 15:17
+///Data        : 04/03/2022 16:42
 ///Alias       : attributetype
 ///Descrição   : Tipo de Atributo
 ///</remarks>

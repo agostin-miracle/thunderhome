@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 01/03/2022 11:58
+///Data        : 04/03/2022 16:58
 ///Alias       : transactionstatus
 ///Descrição   : Transaction Status
 ///</remarks>
@@ -65,6 +65,7 @@ string _changed = Objects.GetPropertiesValue("Transaction Status",model,true);
             p.Add("@CODSTA", model.CODSTA, dbType:DbType.Int16,  direction: ParameterDirection.Input);
             p.Add("@DSCSTA", model.DSCSTA, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@CODMOD", model.CODMOD, dbType:DbType.Byte,  direction: ParameterDirection.Input);
+            p.Add("@SIGOPE", model.SIGOPE, dbType:DbType.Int16,  direction: ParameterDirection.Input);
             p.Add("@NXTSTA", model.NXTSTA, dbType:DbType.Int32,  direction: ParameterDirection.Input);
             p.Add("@CANCHG", model.CANCHG, dbType:DbType.Byte,  direction: ParameterDirection.Input);
             p.Add("@DELMEN", model.DELMEN, dbType:DbType.Byte,  direction: ParameterDirection.Input);
@@ -116,7 +117,8 @@ _errormessage="";
             respond.SourceError=msg.Source;
             respond.ErrorCode=msg.ErrorCode;
             respond.ErrorObject=Error;
-            respond.ErrorMessage=msg.Message;
+            if(!String.IsNullOrEmpty(msg.Message))
+            respond.MessageToUser = msg.Message;
             respond.Severity=msg.Severity;
             }
             }
@@ -150,6 +152,7 @@ string _original = Objects.GetPropertiesValue(ModelAud);
             p.Add("@CODSTA", model.CODSTA, dbType:DbType.Int16,  direction: ParameterDirection.Input);
             p.Add("@DSCSTA", model.DSCSTA, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@CODMOD", model.CODMOD, dbType:DbType.Byte,  direction: ParameterDirection.Input);
+            p.Add("@SIGOPE", model.SIGOPE, dbType:DbType.Int16,  direction: ParameterDirection.Input);
             p.Add("@NXTSTA", model.NXTSTA, dbType:DbType.Int32,  direction: ParameterDirection.Input);
             p.Add("@CANCHG", model.CANCHG, dbType:DbType.Byte,  direction: ParameterDirection.Input);
             p.Add("@DELMEN", model.DELMEN, dbType:DbType.Byte,  direction: ParameterDirection.Input);
@@ -202,7 +205,8 @@ _errormessage="";
             respond.SourceError=msg.Source;
             respond.ErrorCode=msg.ErrorCode;
             respond.ErrorObject=Error;
-            respond.ErrorMessage=msg.Message;
+            if(!String.IsNullOrEmpty(msg.Message))
+            respond.MessageToUser = msg.Message;
             respond.Severity=msg.Severity;
             }
             }

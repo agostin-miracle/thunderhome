@@ -52,9 +52,9 @@
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPUSUSELALL" desc="Obtêm todos os registros de Tipo de Usuário" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRTIPUSUUPD" desc="Altera um registro da tabela TBTIPUSU ()  de acordo com a chave primaria" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFUNINS" desc="Inserção de Registros na Tabela TBSYSFUN" />
-  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFUNSEL" desc="Seleciona o tipo de contato de acordo com o código" />
-  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFUNUPD" desc="Altera um registro da tabela TBSYSFUN ()  de acordo com a chave identity" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRSYSFUNSELALL" desc="Seleciona todos os tipos de contato existentes" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFUNSEL" desc="Obtêm o registro de uma funcionalidade de acordo com o id" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFUNUPD" desc="Altera um registro da tabela TBSYSFUN (System Features)  de acordo com a chave identity" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFUNSELALL" desc="Obtêm todos os registros de funcionalidades específicas para uma tabela" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADPROINS" desc="Inserção de Registros na Tabela TBCADPRO" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADPROSEL" desc="Obtêm o registro do produto de acorco o código de produto informado" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADPROUPD" desc="Altera um registro da tabela TBCADPRO (Products)  de acordo com a chave primaria" />
@@ -68,22 +68,22 @@
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRADMCRTCHGSTA" desc="ADM : Altera o Status de um Cartão" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRADMCRTCHGPSW" desc="Efetua a alteração da senha do cartão" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRADMCRTCHGCVC" desc="Efetua a alteração do número o CVC do Cartão" />
-  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGASS" desc="Efetua o cancelamento da associação de um cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGASS" desc="Cancela a associação de um cartão" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLGNUSUACECTL" desc="Obtêm o registro de controle de acesso do usuário" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTINS" desc="Inserção de Registros na Tabela TBREGCRT" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTSEL" desc="Seleciona o registro de acordo com o Código do Cartão" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTSELCRT" desc="Seleciona o registro de acordo com o Código Extendido do Cartão" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTSELKEY" desc="Obtêm o registro do cartão de acordo com a chave fornecida" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTUPD" desc="Altera um registro da tabela TBREGCRT ()  de acordo com a chave primaria" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTSELALL" desc="Obtêm uma lista de todos os cartões da base ativa conforme parâmetros de pesquisa informados" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGONLPAR" desc="Altera o campo de permissão de compra on-line" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGOWN" desc="Altera o Gestor do Cartão em uso" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGMEN" desc="Executa Ações de Atualização pela manutenção do Cartão" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTGETATV" desc="Verifica se o cartão e o CPF/CNPJ informado são passíveis de ativação" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTLCKCRT" desc="Operação@1 -Bloqueia o Cartão@2 - Reverte o Bloqueio Anterior@3 -Fixa o cartão como aguardando desbloqueio" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGSTA" desc="Altera o Status de um Cartão" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGPSW" desc="Efetua a alteração da senha do cartão" />
-  <item id="1" type="P" status="ACTIVE" tableref="" name="PRREGCRTCHGCVC" desc="Efetua a alteração do número o CVC do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTINS" desc="Inserção de Registros na Tabela TBREGCRT" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTSEL" desc="Seleciona o registro de acordo com o Código do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTSELCRT" desc="Seleciona o registro de acordo com o Código Extendido do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTSELKEY" desc="Obtêm o registro do cartão de acordo com a chave fornecida" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTUPD" desc="Altera um registro da tabela TBREGCRT (Active Cards)  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTSELALL" desc="Obtêm uma lista de todos os cartões da base ativa conforme parâmetros de pesquisa informados" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGONLPAR" desc="Altera o campo de permissão de compra on-line" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGOWN" desc="Altera o Gestor do Cartão em uso" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGMEN" desc="Executa Ações de Atualização pela manutenção do Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTGETATV" desc="Verifica se o cartão e o CPF/CNPJ informado são passíveis de ativação" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTLCKCRT" desc="Operação@1 -Bloqueia o Cartão@2 - Reverte o Bloqueio Anterior@3 -Fixa o cartão como aguardando desbloqueio" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGSTA" desc="Altera o Status de um Cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGPSW" desc="Efetua a alteração da senha do cartão" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGCVC" desc="Efetua a alteração do número o CVC do Cartão" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLINPROINS" desc="Inserção de Registros na Tabela TBLINPRO" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLINPROSEL" desc="Seleciona o registro de acordo com o Código da Linha" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRLINPROUPD" desc="Altera um registro da tabela TBLINPRO ()  de acordo com a chave primaria" />
@@ -111,4 +111,18 @@
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTADELNID" desc="Exclui logicamente um registro de conta" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTACHGSTAACC" desc="Executa a aprovação ou rejeição de uma conta digital" />
   <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADCTALOC" desc="Localiza uma conta virtual a partir do código de usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSGRPINS" desc="Inserção de Registros na Tabela TBSYSGRP" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSGRPSEL" desc="Obtêm o registro do grupo" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSGRPSELALL" desc="Obtêm uma lista de todos os registros de usuário x grupo existentes" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSGRPUPD" desc="Altera um registro da tabela TBSYSGRP (Groups)  de acordo com a chave primaria" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFXGINS" desc="Inserção de Registros na Tabela TBSYSFXG" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRUSUGRPSEL" desc="Obtêm o registro de associação do funcionalidade x grupo" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFXGUPD" desc="Altera um registro da tabela TBSYSFXG (Features x Group)  de acordo com a chave identity" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRSYSFXGSEL" desc="Obtêm o registro de associação do funcionalidade x grupo" />
+  <item id="1" type="P" status="ACTIVE" tableref="" name="PRSYSFXGSELALL" desc="Obtêm uma lista de todos os registros de usuário x grupo existentes" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERSELTIP" desc="Obtêm uma lista de usuários por tipo de usuário" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERSELUSRPRO" desc="Obtêm uma lista de usuários vinculados ao gerenciamento de Produto" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRCADGERSELUSRLIN" desc="Obtêm uma lista de usuários vinculados a uma linha de produto" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRUSUPROSELGSTLIN" desc="Obtêm uma lista de gestores, se informada a linha de produto, extrai somente os gestores ligados à linha" />
+  <item id="1" type="P" status="ACTIVE" tableref="0" name="PRREGCRTCHGSAQPAR" desc="Altera o campo de permissão de saque" />
 </procs>

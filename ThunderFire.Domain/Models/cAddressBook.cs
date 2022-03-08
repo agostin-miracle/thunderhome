@@ -167,12 +167,12 @@ public class QueryAddressBook
         /// <summary>
         /// Código do Endereço
         /// </summary>
-        public int CODEND{ get;set;} = 0;
+        public int CODEND{ get;set;}
 
         /// <summary>
         /// Registro Principal
         /// </summary>
-        public byte REGATV{ get;set;} = 0;
+        public byte REGATV{ get;set;}
 
         /// <summary>
         /// Descrição da Atividade
@@ -182,7 +182,7 @@ public class QueryAddressBook
         /// <summary>
         /// Código do Usuário
         /// </summary>
-        public int CODUSU{ get;set;} = 0;
+        public int CODUSU{ get;set;}
 
         /// <summary>
         /// Nome do usuário
@@ -196,7 +196,7 @@ public class QueryAddressBook
         /// <summary>
         /// Tipo de Endereço
         /// </summary>
-        public byte TIPEND{ get;set;} = 1;
+        public byte TIPEND{ get;set;}
 
         /// <summary>
         /// Descrição do Tipo de Endereço
@@ -208,12 +208,17 @@ public class QueryAddressBook
         }
 
         /// <summary>
+        /// Define se o tipo de endereço tem referencia com o Cadastro de Contatos
+        /// </summary>
+        public bool REFCTO{ get;set;}
+
+        /// <summary>
         /// Tipo de Logradouro
         /// </summary>
         /// <remarks>
 /// <para>Tabela Gral 81</para>
 /// </remarks>
-        public short TIPLOG{ get;set;} = 0;
+        public short TIPLOG{ get;set;}
 
         /// <summary>
         /// Descrição do Logradouro
@@ -260,7 +265,7 @@ public class QueryAddressBook
         /// <summary>
         /// Número do Endereço
         /// </summary>
-        public int NUMEND{ get;set;} = 0;
+        public int NUMEND{ get;set;}
 
         /// <summary>
         /// Cidade
@@ -288,7 +293,7 @@ public class QueryAddressBook
         /// <summary>
         /// Código do Pais
         /// </summary>
-        public int CODPAI{ get;set;} = 55;
+        public int CODPAI{ get;set;}
 
         /// <summary>
         /// País
@@ -298,12 +303,12 @@ public class QueryAddressBook
         /// <summary>
         /// Latitude
         /// </summary>
-        public double? LATITU{ get;set;} = 0;
+        public double? LATITU{ get;set;}
 
         /// <summary>
         /// Longitude
         /// </summary>
-        public double? LONGIT{ get;set;} = 0;
+        public double? LONGIT{ get;set;}
 
         /// <summary>
         /// Código do Status de Registro
@@ -311,7 +316,7 @@ public class QueryAddressBook
         /// <remarks>
 /// <para>Tabela Geral 07</para>
 /// </remarks>
-        public byte STAREC{ get;set;} = 1;
+        public byte STAREC{ get;set;}
 
         /// <summary>
         /// Descrição do Status de Registro
@@ -321,16 +326,17 @@ public class QueryAddressBook
         /// <summary>
         /// Data de Inclusão ou cadastramento
         /// </summary>
-        public string DATCAD{ get;set;}
+        public string DATCAD{ get;set;} = "";
 
         /// <summary>
         /// Data da Ultima Atualização
         /// </summary>
-        public string DATUPD{ get;set;}
+        public string DATUPD{ get;set;} = "";
+
         /// <summary>
         /// Usuário de Atualização
         /// </summary>
-        public int UPDUSU{ get;set;} = 0;
+        public int UPDUSU{ get;set;}
 
         /// <summary>
         /// Identificação da Chave de Login do Usuário

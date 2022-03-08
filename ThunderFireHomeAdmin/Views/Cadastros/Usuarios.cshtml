@@ -423,7 +423,7 @@
                                 if (row.STAREC == 1) {
                                     botoes += "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.CODUSU + "');\"> <i class='fa fa-edit'></i></button>&nbsp;"
                                 }
-                                botoes += "<a id='href_call_address' value='Endereços' class='btn btn-primary btn-sm' href=\"/Cadastros/Enderecos?usercode=" + row.CODUSU + "\" <i class='fa fa-map-marker' aria-hidden='true'></i></a>&nbsp;"
+                                botoes += "<a id='href_call_address' value='Endereços' class='btn btn-primary btn-sm' href=\"/Cadastros/Enderecos?usercode=" + row.CODUSU + "\"> <i class='fa fa-map-marker' aria-hidden='true'></i></a>&nbsp;"
                                 return botoes;
                             }
                         }
@@ -443,14 +443,14 @@
                     },
                     columnDefs: [
                         { "targets": [0], "visible": false, "searchable": false },
-                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "10px" },
-                        { className: "text-center", "targets": [2], "visible": true, "searchable": false, "width": "5px" },
-                        { className: "text-center", "targets": [3], "visible": true, "searchable": false, "width": "5px" },
-                        { className: "text-center", "targets": [4], "visible": true, "searchable": false, "width": "5px" },
-                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "8px" },
-                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "60px" },
-                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "20px" },
-                        { className: "text-left", "targets": [8], "visible": true, "searchable": false, "width": "60px" }
+                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "2%" },
+                        { className: "text-center", "targets": [2], "visible": true, "searchable": false, "width": "3%" },
+                        { className: "text-center", "targets": [3], "visible": true, "searchable": false, "width": "3%" },
+                        { className: "text-center", "targets": [4], "visible": true, "searchable": false, "width": "3%" },
+                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "3%" },
+                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "30%x" },
+                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "14%" },
+                        { className: "text-left", "targets": [8], "visible": true, "searchable": false, "width": "15%" }
                     ]
                 });
 
@@ -486,17 +486,11 @@
                         }
                         else {
 
-
-                            $.notify({
-                                icon: 'ti-gift', message: result.MessageToUser
-                            }, {
-                                type: 'success',
-                                timer: 4000
-                            });
+                            $.alert({ class: 'danger', title: 'Login', message: result.MessageToUser, effect: 'zoom' });
                         }
                     },
                     error: function (data) {
-                        alert("Ocorreu um erro inesperado, por favor tente novamente");
+                        $.alert({ class: 'danger', title: 'Login', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
                     }
                 });
             });
@@ -549,10 +543,12 @@
             });
         }
 
-        function CallForAdd() {
-            $("#OPERATION").val("1");
+        function CallForAddLogin(pCODUSU) {
+            $("#LCODSU").val(pCODUSU);
             $("#FSTAREC").prop('checked', "true");
-            $('#modalgeneralregistry').modal('toggle');
+            $('#modalloginuser').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalloginuser').modal('toggle');
+
         }
     </script>
 }

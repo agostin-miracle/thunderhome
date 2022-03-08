@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 01/03/2022 15:27
+///Data        : 07/03/2022 15:35
 ///Alias       : generalregistry
 ///Descrição   : Cadastro Geral
 ///</remarks>
@@ -462,6 +462,90 @@ _errormessage="";
                     try
                     {
             var result = _conn.Query<GeneralRegistry>(sql:"PRCADGERSELCTA", param:new {},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
+                    this.Found = true;
+                    return result.ToList();
+                    }
+                    catch (Exception Error)
+                    {
+                    this.HasError = true;
+                    this.Found=false;
+                    _logger.Info(Error);
+            }
+            }
+                    return null;
+            }
+
+    /// <summary>
+    /// Obtêm uma lista de registros do cadastro geral conforme parâmetros informados
+    /// </summary>
+        /// <param name="pCODATR">Atributo</param>
+    /// <param name="pSTAUSU">Status do Usuário</param>
+    /// <param name="pSRCUSU">ID do Responsável</param>
+    /// <param name="pNOMUSU">Nome</param>
+    /// <param name="pSTAREC">Status do Registro</param>
+    /// <returns>Listof QueryGeneralRegistry</returns>
+    /// <summary>
+    /// Obtêm uma lista de usuários com contas virtuais ativas
+    /// </summary>
+    /// <returns>Listof GeneralRegistry</returns>
+    /// <summary>
+    /// Obtêm uma lista de usuários vinculados ao gerenciamento de Produto
+    /// </summary>
+        /// <param name="pCODPRO">Código do Produto</param>
+    /// <returns>Listof MyUsers</returns>
+    public List<MyUsers> ListUserByProduct(System.Int16? pCODPRO)
+        {
+            this.ProcessCode= 0;
+                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
+                    {
+                    try
+                    {
+            var result = _conn.Query<MyUsers>(sql:"PRCADGERSELUSRPRO", param:new {CODPRO=pCODPRO},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
+                    this.Found = true;
+                    return result.ToList();
+                    }
+                    catch (Exception Error)
+                    {
+                    this.HasError = true;
+                    this.Found=false;
+                    _logger.Info(Error);
+            }
+            }
+                    return null;
+            }
+
+    /// <summary>
+    /// Obtêm uma lista de registros do cadastro geral conforme parâmetros informados
+    /// </summary>
+        /// <param name="pCODATR">Atributo</param>
+    /// <param name="pSTAUSU">Status do Usuário</param>
+    /// <param name="pSRCUSU">ID do Responsável</param>
+    /// <param name="pNOMUSU">Nome</param>
+    /// <param name="pSTAREC">Status do Registro</param>
+    /// <returns>Listof QueryGeneralRegistry</returns>
+    /// <summary>
+    /// Obtêm uma lista de usuários com contas virtuais ativas
+    /// </summary>
+    /// <returns>Listof GeneralRegistry</returns>
+    /// <summary>
+    /// Obtêm uma lista de usuários vinculados ao gerenciamento de Produto
+    /// </summary>
+        /// <param name="pCODPRO">Código do Produto</param>
+    /// <returns>Listof MyUsers</returns>
+    /// <summary>
+    /// Obtêm uma lista de usuários por tipo de usuário
+    /// </summary>
+        /// <param name="pTIPUSU">Tipo de Usuário</param>
+    /// <param name="pCODUSU">Código do Usuário</param>
+    /// <returns>Listof MyUsers</returns>
+    public List<MyUsers> ListUserByUserType(System.Byte pTIPUSU, System.Int32? pCODUSU)
+        {
+            this.ProcessCode= 0;
+                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
+                    {
+                    try
+                    {
+            var result = _conn.Query<MyUsers>(sql:"PRCADGERSELTIP", param:new {TIPUSU=pTIPUSU,CODUSU=pCODUSU},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
                     this.Found = true;
                     return result.ToList();
                     }

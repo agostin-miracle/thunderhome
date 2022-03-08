@@ -132,7 +132,7 @@
 
                     <label for="FNUMBCO" class="col-sm-2 control-label">Banco</label>
                     <div class="col-sm-4">
-                        <select class="form-control form-control-sm" id="FNUMBCO">
+                        <select class="form-control form-control-sm key1" id="FNUMBCO">
                             @if (Model.ListaBancos != null)
                             {
                                 foreach (var item in Model.ListaBancos)
@@ -144,17 +144,17 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="FNUMAGE" class="col-sm-2 control-label">Tipo</label>
+                    <label for="FNUMAGE" class="col-sm-2 control-label">Agência</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control form-control-sm" id="FNUMAGE" name="FNUMAGE" placeholder="Agência" maxlength="15">
+                        <input type="text" class="form-control form-control-sm key1" id="FNUMAGE" name="FNUMAGE" placeholder="" maxlength="15">
                     </div>
                     <label for="FNUMCTA" class="col-sm-2 control-label">Conta</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control form-control-sm" id="FNUMCTA" name="FNUMCTA" placeholder="Agência" maxlength="15">
+                        <input type="text" class="form-control form-control-sm key1" id="FNUMCTA" name="FNUMCTA" placeholder="" maxlength="15">
                     </div>
                     <label for="FNUMDVE" class="col-sm-2 control-label">DV</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control form-control-sm" id="FNUMDVE" name="FNUMDVE" placeholder="DV" maxlength="1">
+                        <input type="text" class="form-control form-control-sm key1" id="FNUMDVE" name="FNUMDVE" placeholder="" maxlength="1">
                     </div>
                 </div>
 
@@ -162,7 +162,7 @@
                 <div class="form-group row">
                     <label for="FTIPCTA" class="col-sm-2 control-label">Tipo de Conta</label>
                     <div class="col-sm-4">
-                        <select class="form-control form-control-sm" id="FTIPCTA">
+                        <select class="form-control form-control-sm key1" id="FTIPCTA">
                             @if (Model.ListaTipoConta != null)
                             {
                                 foreach (var item in Model.ListaTipoConta)
@@ -175,7 +175,7 @@
 
                     <label for="FTIPBNF" class="col-sm-2 control-label">Beneficiário</label>
                     <div class="col-sm-4">
-                        <select class="form-control form-control-sm" id="FTIPBNF">
+                        <select class="form-control form-control-sm key1" id="FTIPBNF">
                             @if (Model.ListaTipoBeneficiario != null)
                             {
                                 foreach (var item in Model.ListaTipoBeneficiario)
@@ -189,20 +189,20 @@
                 <div class="form-group row">
                     <label for="FNOMBNF" class="col-sm-2 control-label">Beneficiário</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="FNOMBNF" placeholder="Beneficiário" maxlength="70">
+                        <input type="text" class="form-control form-control-sm key1" id="FNOMBNF" placeholder="Beneficiário" maxlength="70">
                     </div>
                     <label for="FCODCMF" class="col-sm-2 control-label">CPF/CNPJ</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="FCODCMF" placeholder="CPF/CNPJ">
+                        <input type="text" class="form-control form-control-sm key1" id="FCODCMF" placeholder="CPF/CNPJ">
                     </div>
                 </div>
 
 
                 <div class="form-group row ml-4">
-                        <div class="form-check col-sm-4">
-                            <input class="form-check-input" type="checkbox" value="" id="FAPLLIM"/>
-                            <label class="form-check-label" for="FAPLLIM">Aplicar limite</label>
-                        </div>
+                    <div class="form-check col-sm-4">
+                        <input class="form-check-input" type="checkbox" value="" id="FAPLLIM" />
+                        <label class="form-check-label" for="FAPLLIM">Aplicar limite</label>
+                    </div>
 
                     <label for="FVLRLIM" class="col-sm-2 control-label">Limite</label>
                     <div class="col-sm-2">
@@ -216,7 +216,7 @@
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                             </span>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="form-group row ml-4">
@@ -326,7 +326,6 @@
                 var mode = $("#OPERATION").val();
                 var vurl = "/Cadastros/ChangeVirtualAccount?modo=" + mode;
                 vDATVAL = ToDateValid($("#FDATVAL").val());
-                console.log(vDATVAL);
                 var VDATA = JSON.stringify({
                     'CODUSU': parseInt($("#FCODUSU").val()),
                     'NUMAGE': $("#FNUMAGE").val(),
@@ -337,12 +336,12 @@
                     'TIPCTA': parseInt($("#FTIPCTA").val()),
                     'STACTA': parseInt($("#FSTACTA").val()),
                     'VLRLIM': ToFloat($('#FVLRLIM').val()),
-                    'DATVAL': vDATVAL,
+                    'DATTRF': vDATVAL,
                     'APLLIM': $("#FAPLLIM").is(':checked') ? 1 : 0,
                     'TIPBNF': parseInt($("#FTIPBNF").val()),
                     'CODCMF': $("#FCODCMF").val(),
                     'NOMBNF': $("#FNOMBNF").val(),
-                        'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
                 });
                 $.ajax({
                     type: "POST",
@@ -369,31 +368,20 @@
 
             });
 
-
             $('#FORGCTA').on('change', function () {
-                var value = $(this).val();
-                if (value == 1) {
-                    $('#FNUMBCO').val("000");
-                    $('#FNUMBCO').attr("disabled", "disabled");
-                    $('#FNUMCTA').attr("disabled", "disabled");
-                    $('#FNUMDVE').attr("disabled", "disabled");
-                    $('#FNUMAGE').attr("disabled", "disabled");
+                var value = parseInt($(this).val());
+                $('.key1').removeAttr("disabled");
+                if (reset == 1) {
+                    $('.key1').attr("disabled", "disabled");
                     $('#FTIPCTA').val("1");
-                    $('#FTIPCTA').attr("disabled", "disabled");
-                    $('#FTIPBNF').val("1");
-                    $('#FTIPBNF').attr("disabled", "disabled");
-                    $('#FNOMBNF').attr("disabled", "disabled");
-                    $('#FCODCMF').attr("disabled", "disabled");
+                    $('#FNUMBCO').val("000");
                 }
             });
-
             $('#CCODUSU').on('change', function () {
                 $('#gridaddress').DataTable().ajax.reload();
             });
 
         });
-
-
 
 
         function CallForAdd() {
@@ -402,19 +390,17 @@
             if (pCODUSU > 0) {
                 $("#FCODUSU").val(pCODUSU);
                 $("#FCODUSU").attr('disabled', 'disabled');
-                $("#FSTACTA").val(253);
+                $("#FSTACTA").val(251);
                 $("#FSTACTA").attr('disabled', 'disabled');
                 $("#FSTAREC").prop('checked', "true");
-                $("#FAPLLIM").prop('checked', "false");
-                $("#FDATVAL").val(FormatDate(addDays(new Date(),720)));
-                
+                $("#FDATVAL").val(FormatDate(addDays(new Date(), 720)));
                 $('#modalvirtualaccount').modal({ backdrop: 'static', Keyboard: 'true' });
                 $('#modalvirtualaccount').modal('toggle');
             }
             else {
                 $.alert({ class: 'danger', title: 'Conta Virtual', message: 'Selecione um usuário válido !!!', effect: 'zoom' });
             }
-            
+
         }
 
         function CallForEdit(pNIDCTA) {
@@ -471,7 +457,7 @@
             }
         }
         function FormatDate(date) {
-            return Right('00' + date.getDate(),2) + '/' + Right('00' + (date.getMonth()+1),2) + '/' + date.getFullYear();
+            return Right('00' + date.getDate(), 2) + '/' + Right('00' + (date.getMonth() + 1), 2) + '/' + date.getFullYear();
         }
 
         function ToFloat(value) {
@@ -479,7 +465,7 @@
             return parseInt(v) / 100;
         }
         function ToDateValid(value) {
-            var d=value;
+            var d = value;
             if ((value === "") || (value == null)) {
                 d = FormatDate(addDays(new Date(), 720));
             }
@@ -490,6 +476,3 @@
 
     </script>
 }
-
-
-

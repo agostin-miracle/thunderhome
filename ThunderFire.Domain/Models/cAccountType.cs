@@ -8,7 +8,11 @@ namespace ThunderFire.Domain.Models
 
     public class AccountType
     {
-               /// <summary>
+                #region "Variáveis Privadas"
+        private string _DSCCTA="";
+        private string _TIPEXT="";
+         #endregion "Variáveis Privadas"
+        /// <summary>
         /// Tipo de Conta
         /// </summary>
         public byte TIPCTA{ get;set;} = 1;
@@ -16,12 +20,30 @@ namespace ThunderFire.Domain.Models
         /// <summary>
         /// Descrição da Conta
         /// </summary>
-        public string DSCCTA{ get;set;} = "";
+        public string DSCCTA
+        { 
+            get { return _DSCCTA;}
+            set { if(!String.IsNullOrWhiteSpace(value))
+_DSCCTA= value .ToUpper().NoAccents();
+else
+_DSCCTA= "";
+}
+
+        }
 
         /// <summary>
         /// Tipo de Boleto Externo
         /// </summary>
-        public string TIPEXT{ get;set;} = "";
+        public string TIPEXT
+        { 
+            get { return _TIPEXT;}
+            set { if(!String.IsNullOrWhiteSpace(value))
+_TIPEXT= value .ToUpper().NoAccents();
+else
+_TIPEXT= "";
+}
+
+        }
 
         /// <summary>
         /// Código do Status de Registro

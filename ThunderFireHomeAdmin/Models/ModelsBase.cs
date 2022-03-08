@@ -9,6 +9,8 @@ namespace ThunderFireHomeAdmin.Models
     public class ModelsBase
     {
 
+        public int KeyTableId { get; set; }=0;
+
         public string ShowDate(DateTime d)
         {
             return d.ToString("dd/MM/yyyy HH:mm");

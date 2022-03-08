@@ -27,6 +27,11 @@ namespace ThunderFire.Domain.Models
         public byte CODMOD{ get;set;} = 1;
 
         /// <summary>
+        /// Sinal da Operação
+        /// </summary>
+        public short SIGOPE{ get;set;} = 0;
+
+        /// <summary>
         /// 
         /// </summary>
         public int NXTSTA{ get;set;} = 0;
@@ -84,6 +89,11 @@ public class QueryTransactionStatus
 /// <para>Tabela Geral 14</para>
 /// </remarks>
         public byte CODMOD{ get;set;}
+
+        /// <summary>
+        /// Sinal da Operação
+        /// </summary>
+        public short SIGOPE{ get;set;}
 
         /// <summary>
         /// 

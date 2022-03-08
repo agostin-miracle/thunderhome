@@ -31,10 +31,12 @@ GeneralRegistry Select(System.Int32 pCODUSU);
     /// Valida um CPF/CNPJ já existente para o mesmo atributo na base de cadastro geral
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  ValidateEntryCMF( short pCODATR,System.Int32 pCODUSU,System.String pCODCMF,System.Int32 pSRCUSU);
     /// <summary>
     /// Verifica se já existe um cadastro com o CPF/CNPJ cadastrado, e retorna o id localizado
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  PesquisarCMF( System.Int16 pCODATR,System.String pCODCMF);
     /// <summary>
     /// Obtêm uma lista de registros do cadastro geral conforme parâmetros informados
     /// </summary>
@@ -51,6 +53,21 @@ List<QueryGeneralRegistry> List(System.Int16? pCODATR, System.Int16? pSTAUSU, Sy
     /// </summary>
     /// <returns>List of GeneralRegistry</returns>
 List<GeneralRegistry> ListUserAccounts();
+    /// <summary>
+    /// Obtêm uma lista de usuários vinculados ao gerenciamento de Produto
+    /// </summary>
+        /// <param name="pCODPRO">Código do Produto</param>
+
+    /// <returns>List of MyUsers</returns>
+List<MyUsers> ListUserByProduct(System.Int16? pCODPRO);
+    /// <summary>
+    /// Obtêm uma lista de usuários por tipo de usuário
+    /// </summary>
+        /// <param name="pTIPUSU">Tipo de Usuário</param>
+    /// <param name="pCODUSU">Código do Usuário</param>
+
+    /// <returns>List of MyUsers</returns>
+List<MyUsers> ListUserByUserType(System.Byte pTIPUSU, System.Int32? pCODUSU);
 
     }
 }

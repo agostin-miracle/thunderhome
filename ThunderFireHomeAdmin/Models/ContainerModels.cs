@@ -12,10 +12,7 @@ namespace ThunderFireHomeAdmin.Models
         public int AccessType { get; set; } = 1;
     }
 
-    public class AttributeTypeModel : ModelsBase
-    {
-        public List<AttributeType> Lista = null;
-    }
+  
 
     public class AccountTypeModel : ModelsBase
     {
@@ -61,19 +58,6 @@ namespace ThunderFireHomeAdmin.Models
     {
         public List<QueryProducts> Lista = null;
         public List<ProductLine> ListaLinhaProduto = null;
-    }
-
-    public class GeneralRegistryModel : ModelsBase
-    {
-        public List<QueryGeneralRegistry> Lista = null;
-        public List<AttributeType> ListaAtributo = null;
-        public List<UserType> ListaTipoUsuario = null;
-        public List<GeneralTable> ListaNivelConfianca = null;
-        public List<GeneralTable> ListaStatusRegistro = null;
-        public List<QueryGeneralRegistry> ListaGestor = null;
-        public List<QueryTransactionStatus> ListaStatusUsuario = null;
-        public List<GeneralTable> ListaGenero = null;
-        public List<GeneralTable> ListaNacionalidade = null;
     }
 
     public class AddressBookModel : ModelsBase
