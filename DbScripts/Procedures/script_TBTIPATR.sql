@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRTIPATRINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 03/03/2022 18:35:07
+     Date : 18/03/2022 18:08:20
  Objetivo : Inserção de Registros na Tabela TBTIPATR
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPATRINS
@@ -11,6 +11,7 @@ CREATE PROCEDURE dbo.PRTIPATRINS
         @DSCATR varchar(40), 
         @USELGN bit = 1, 
         @USEACT bit, 
+        @USETAR bit, 
         @STAREC tinyint = 1, 
         @UPDUSU int = 0,
         @RETURN_VALUE int OUTPUT)
@@ -30,8 +31,8 @@ CREATE PROCEDURE dbo.PRTIPATRINS
 
     IF(@RETURN_VALUE=0)
         BEGIN
-            INSERT INTO TBTIPATR(CODATR, DSCATR, USELGN, USEACT, STAREC, UPDUSU)
-                        VALUES (@CODATR, @DSCATR, @USELGN, @USEACT, @STAREC, @UPDUSU);
+            INSERT INTO TBTIPATR(CODATR, DSCATR, USELGN, USEACT, USETAR, STAREC, UPDUSU)
+                        VALUES (@CODATR, @DSCATR, @USELGN, @USEACT, @USETAR, @STAREC, @UPDUSU);
             IF @@ERROR = 0
                 BEGIN
                     SET @RETURN_VALUE = @CODATR
@@ -49,7 +50,7 @@ IF OBJECT_ID ( 'dbo.PRTIPATRSEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 03/03/2022 18:35:07
+     Date : 18/03/2022 18:08:20
  Objetivo : Obtêm o registro do tipo de atributo informado
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPATRSEL
@@ -64,30 +65,12 @@ AS
 
 GO
 
-IF OBJECT_ID ( 'dbo.PRTIPATRLST', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRTIPATRLST;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 03/03/2022 18:35:07
- Objetivo : Obtêm todos os registros de tipo de atributo cadastrados
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRTIPATRLST
-AS
-    SET NOCOUNT ON
-    SELECT A.*, DSCTAB AS DSCREC, ISNULL(LGNUSU,'') LGNUSU FROM TBTIPATR (NOLOCK) A
-    INNER JOIN TBTABGER (NOLOCK) B ON (B.NUMTAB=7 AND B.KEYCOD = A.STAREC)
-    LEFT JOIN TBLGNUSU (NOLOCK) C ON (C.CODUSU = A.UPDUSU AND C.REGATV=1 AND C.STAREC=1)
-
-     ORDER BY A.CODATR
-GO
-
 IF OBJECT_ID ( 'dbo.PRTIPATRUPD', 'P' ) IS NOT NULL
     DROP PROCEDURE dbo.PRTIPATRUPD;
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 03/03/2022 18:35:07
+     Date : 18/03/2022 18:08:20
  Objetivo : Altera um registro da tabela TBTIPATR (Tipo de Atributo)  de acordo com a chave primaria
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPATRUPD
@@ -95,6 +78,7 @@ CREATE PROCEDURE dbo.PRTIPATRUPD
         @DSCATR varchar(40), 
         @USELGN bit = 1, 
         @USEACT bit, 
+        @USETAR bit, 
         @STAREC tinyint = 1, 
         @DATUPD datetime, 
         @UPDUSU int = 0,
@@ -119,6 +103,7 @@ CREATE PROCEDURE dbo.PRTIPATRUPD
                SET DSCATR=@DSCATR
                   ,USELGN=@USELGN
                   ,USEACT=@USEACT
+                  ,USETAR=@USETAR
                   ,STAREC=@STAREC
                   ,DATUPD=@DATUPD
                   ,UPDUSU=@UPDUSU

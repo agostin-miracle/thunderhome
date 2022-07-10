@@ -122,22 +122,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CadastrosController.cs" />
+    <Compile Include="Controllers\CustomJson.cs" />
+    <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\GestaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TarifacaoController.cs" />
+    <Compile Include="Controllers\Utilities.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="HelperExtensions.cs" />
+    <Compile Include="Models\AccountTypeModel.cs" />
     <Compile Include="Models\AttributeTypeModel.cs" />
     <Compile Include="Models\ContainerAdmin.cs" />
     <Compile Include="Models\ContainerModels.cs" />
     <Compile Include="Models\FeaturesGroupModel.cs" />
-    <Compile Include="Models\GeneralRegistryModel.cs" />
+    <Compile Include="Models\Financeiro.cs" />
+    <Compile Include="Models\LinkedAccountModel.cs" />
+    <Compile Include="Models\OperationsRegisterModel.cs" />
+    <Compile Include="Models\TicketModel.cs" />
+    <Compile Include="Models\UsersModel.cs" />
+    <Compile Include="Models\GeneralTableModel.cs" />
     <Compile Include="Models\LoginEntry.cs" />
     <Compile Include="Models\ManagementModel.cs" />
     <Compile Include="Models\ModelsBase.cs" />
+    <Compile Include="Models\OperationsModel.cs" />
     <Compile Include="Models\SystemFeaturesModel.cs" />
+    <Compile Include="Models\TariffsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionControl.cs" />
     <Compile Include="ThunderExtensions.cs" />
@@ -152,6 +164,7 @@
     <Content Include="Content\datatables.css" />
     <Content Include="Content\datatables.min.css" />
     <Content Include="Content\fonts\themify.svg" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -174,6 +187,7 @@
     <Content Include="Content\fonts\themify.eot" />
     <Content Include="Content\fonts\themify.ttf" />
     <Content Include="Content\fonts\themify.woff" />
+    <Content Include="Scripts\Common.js" />
     <Content Include="Scripts\datatables.js" />
     <Content Include="Scripts\datatables.min.js" />
     <Content Include="Scripts\demo.js" />
@@ -182,6 +196,7 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.mask.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -189,6 +204,26 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Rules\Cadastro_Contatos.js" />
+    <Content Include="Scripts\Rules\CommonRules.js" />
+    <Content Include="Scripts\Rules\scrContaVinculada.js" />
+    <Content Include="Scripts\Rules\scrContaVirtual.js" />
+    <Content Include="Scripts\Rules\Cadastro_Endereco.js" />
+    <Content Include="Scripts\Rules\ExpansaoTarifas.js" />
+    <Content Include="Scripts\Rules\GestaoMensalidades.js" />
+    <Content Include="Scripts\Rules\ConfigurarBoletoGestao.js" />
+    <Content Include="Scripts\Rules\ModalidadeTarifa.js" />
+    <Content Include="Scripts\Rules\Operacoes_Cadastro.js" />
+    <Content Include="Scripts\Rules\StatusTransacao.js" />
+    <Content Include="Scripts\Rules\tarifas.js" />
+    <Content Include="Scripts\Rules\TarifasOperacoes.js" />
+    <Content Include="Scripts\Rules\TipoAtributo.js" />
+    <Content Include="Scripts\Rules\TipoConta.js" />
+    <Content Include="Scripts\Rules\TipoContato.js" />
+    <Content Include="Scripts\Rules\TipoEndereco.js" />
+    <Content Include="Scripts\Rules\TiposExpansao.js" />
+    <Content Include="Scripts\Rules\TipoUsuario.js" />
+    <Content Include="Scripts\Rules\Cadastro_Usuarios.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -227,6 +262,23 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\FuncoesSistema.cshtml" />
     <Content Include="Views\Admin\FuncoesGrupo.cshtml" />
+    <Content Include="Views\Gestao\Mensalidades.cshtml" />
+    <Content Include="Views\Tarifacao\Tarifas.cshtml" />
+    <Content Include="Views\Tarifacao\ExpansaoTarifa.cshtml" />
+    <Content Include="Views\Tarifacao\TiposExpansao.cshtml" />
+    <Content Include="Views\Tarifacao\Index.cshtml" />
+    <Content Include="Views\Tarifacao\TarifasOperacoes.cshtml" />
+    <Content Include="Views\Tarifacao\Modalidades.cshtml" />
+    <Content Include="Views\Gestao\ConfigurarBoleto.cshtml" />
+    <Content Include="Views\Cadastros\Operacoes.cshtml" />
+    <Content Include="Views\Cadastros\ContaVinculada.cshtml" />
+    <Content Include="Views\Financeiro\Index.cshtml" />
+    <Content Include="Views\Financeiro\Boletos.cshtml" />
+    <Content Include="Views\Financeiro\RegistroOperacoes.cshtml" />
+    <Content Include="Views\Financeiro\BaixaBoletoManual.cshtml" />
+    <Content Include="Views\Financeiro\Transferencias.cshtml" />
+    <Content Include="Views\Financeiro\TipoLancamento.cshtml" />
+    <Content Include="Views\Financeiro\CadastroLancamento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

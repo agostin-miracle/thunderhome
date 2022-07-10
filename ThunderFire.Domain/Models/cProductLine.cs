@@ -53,5 +53,15 @@ _DSCLIN= "";
         /// </summary>
         public int UPDUSU{ get;set;} = 0;
 
+        /// <summary>
+        /// Descrição do Status de Registro
+        /// </summary>
+        public string DSCREC{ get;set;} = "";
+
+        /// <summary>
+        /// Identificação da Chave de Login do Usuário
+        /// </summary>
+        public string LGNUSU{ get;set;} = "";
+
     }
 }

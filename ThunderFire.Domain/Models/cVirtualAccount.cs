@@ -3,7 +3,7 @@ using ThunderFire;
 namespace ThunderFire.Domain.Models
 {
 ///<summary>
-/// Class of TBCADCTA Alias Virtual Account
+/// Class of TBCADCTA Alias Cadastro de Contas
 ///</summary>
 
     public class VirtualAccount
@@ -132,7 +132,7 @@ namespace ThunderFire.Domain.Models
         public string DATTRF{ get;set;} = "";
 
     }
-public class QueryVirtualAccount
+public class Accounts
 {
          #region "Variáveis Privadas"
         private string _NOMUSU="";

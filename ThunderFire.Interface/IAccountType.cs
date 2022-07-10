@@ -27,11 +27,6 @@ ExecutionResponse Update(AccountType model);
         /// <param name="pTIPCTA">Tipo de Conta</param>
     /// <returns>AccountType</returns>
 AccountType Select(System.Byte pTIPCTA);
-    /// <summary>
-    /// Obtêm uma lista de todos os tipos de conta
-    /// </summary>
-    /// <returns>List of AccountType</returns>
-List<AccountType> List();
 
     }
 }

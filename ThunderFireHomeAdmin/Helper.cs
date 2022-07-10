@@ -34,5 +34,13 @@ namespace ThunderFireHomeAdmin
             return s;
         }
 
+        public static string GetRequestValue(string name)
+        {
+            string s = "";
+            if (HttpContext.Current.Request[name] != null)
+                s = HttpContext.Current.Request[name].ToString().Trim();
+            return s;
+        }
+
     }
 }

@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 04/03/2022 16:58
+///Data        : 23/03/2022 10:59
 ///Alias       : productline
 ///Descrição   : Linha de Produto
 ///</remarks>
@@ -236,6 +236,8 @@ _errormessage="";
                     {
             RETURN_VALUE  = _conn.Query<ProductLine>(sql:"PRLINPROSEL", param:new {LINPRO=pLINPRO
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
+
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)
@@ -246,31 +248,6 @@ _errormessage="";
             }
             }
                     return RETURN_VALUE;
-            }
-
-    /// <summary>
-    /// Obtêm todos os registros de linha de produtos existentes
-    /// </summary>
-    /// <returns>Listof ProductLine</returns>
-    public List<ProductLine> List()
-        {
-            this.ProcessCode= 110;
-                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
-                    {
-                    try
-                    {
-            var result = _conn.Query<ProductLine>(sql:"PRLINPROSELALL", param:new {},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
-                    this.Found = true;
-                    return result.ToList();
-                    }
-                    catch (Exception Error)
-                    {
-                    this.HasError = true;
-                    this.Found=false;
-                    _logger.Info(Error);
-            }
-            }
-                    return null;
             }
 
     }

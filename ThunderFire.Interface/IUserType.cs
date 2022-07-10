@@ -27,11 +27,6 @@ ExecutionResponse Update(UserType model);
         /// <param name="pTIPUSU">Tipo de Usuário</param>
     /// <returns>UserType</returns>
 UserType Select(System.Byte pTIPUSU);
-    /// <summary>
-    /// Obtêm todos os registros de Tipo de Usuário
-    /// </summary>
-    /// <returns>List of UserType</returns>
-List<UserType> List();
 
     }
 }

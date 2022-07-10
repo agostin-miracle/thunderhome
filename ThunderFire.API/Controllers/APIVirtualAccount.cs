@@ -39,7 +39,7 @@ public VirtualAccountController ()
 }
 
 /// <summary>
-/// Insere um registro na tabela TBCADCTA (Virtual Account)
+/// Insere um registro na tabela TBCADCTA (Cadastro de Contas)
 /// </summary>
 ///<param name="model">VirtualAccount</param>
 /// <returns>ExecutionResponse</returns>
@@ -60,7 +60,7 @@ RETURN_VALUE.StatusCode=(int)go;
 return Content(go, RETURN_VALUE);
 }
 /// <summary>
-/// Insere um registro na tabela TBCADCTA (Virtual Account)
+/// Insere um registro na tabela TBCADCTA (Cadastro de Contas)
 /// </summary>
 ///<param name="model">VirtualAccount</param>
 /// <returns>ExecutionResponse</returns>
@@ -161,36 +161,6 @@ object RETURN_VALUE=null;
 if (Init())
 {
  RETURN_VALUE = WRKOBJ.Select(pCODCMF, pORGCTA.Value);
-if(WRKOBJ.Found)
-{
-go = HttpStatusCode.OK;
-}
-else
-{
-if(WRKOBJ.HasError)
-{
-    go=HttpStatusCode.BadRequest;
-}
-else
-go=HttpStatusCode.NotFound;
-}
-}
-return Content(go, RETURN_VALUE);
-}
-    /// <summary>
-    /// Obtêm todos os registros de contas virtuais registradas conforme parametro fornecido
-    /// </summary>
-        /// <param name="pCODUSU">Usuário</param>
-
-    /// <returns>QueryVirtualAccount</returns>
-[HttpGet]
-    public IHttpActionResult List(System.Int32 pCODUSU= null)
-    {
-HttpStatusCode go = HttpStatusCode.OK;
-object RETURN_VALUE=null;
-if (Init())
-{
- RETURN_VALUE = WRKOBJ.List(pCODUSU);
 if(WRKOBJ.Found)
 {
 go = HttpStatusCode.OK;

@@ -27,11 +27,6 @@ ExecutionResponse Update(AddressType model);
         /// <param name="pTIPEND">Tipo de Endereço</param>
     /// <returns>AddressType</returns>
 AddressType Select(System.Byte pTIPEND);
-    /// <summary>
-    /// Obtêm uma Lista dos Tipos de Endereços
-    /// </summary>
-    /// <returns>List of AddressType</returns>
-List<AddressType> List();
 
     }
 }

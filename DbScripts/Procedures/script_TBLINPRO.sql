@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRLINPROINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 16:58:02
+     Date : 23/03/2022 10:59:26
  Objetivo : Inserção de Registros na Tabela TBLINPRO
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRLINPROINS
@@ -39,7 +39,7 @@ IF OBJECT_ID ( 'dbo.PRLINPROSEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 16:58:03
+     Date : 23/03/2022 10:59:26
  Objetivo : Seleciona o registro de acordo com o Código da Linha
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRLINPROSEL
@@ -59,7 +59,7 @@ IF OBJECT_ID ( 'dbo.PRLINPROUPD', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 16:58:03
+     Date : 23/03/2022 10:59:26
  Objetivo : Altera um registro da tabela TBLINPRO ()  de acordo com a chave primaria
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRLINPROUPD
@@ -97,21 +97,3 @@ CREATE PROCEDURE dbo.PRLINPROUPD
         END
     RETURN @RETURN_VALUE
 GO
-IF OBJECT_ID ( 'dbo.PRLINPROSELALL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRLINPROSELALL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 04/03/2022 16:58:03
- Objetivo : Obtêm todos os registros de linha de produtos existentes
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRLINPROSELALL
-AS
-    SET NOCOUNT ON
-    SELECT *  FROM TBLINPRO (NOLOCK)
-     ORDER BY LINPRO
-
-
-
-GO
-

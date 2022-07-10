@@ -110,36 +110,6 @@ go=HttpStatusCode.NotFound;
 }
 return Content(go, RETURN_VALUE);
 }
-    /// <summary>
-    /// Seleciona todos os registros de status de transações de acordo com o módulo informado
-    /// </summary>
-        /// <param name="pCODMOD">Código do Módulo</param>
-
-    /// <returns>List of QueryTransactionStatus</returns>
-[HttpGet]
-    public IHttpActionResult List(System.Int32? pCODMOD)
-    {
-HttpStatusCode go = HttpStatusCode.OK;
-object RETURN_VALUE=null;
-if (Init())
-{
- RETURN_VALUE = WRKOBJ.List(pCODMOD.Value);
-if(WRKOBJ.Found)
-{
-go = HttpStatusCode.OK;
-}
-else
-{
-if(WRKOBJ.HasError)
-{
-    go=HttpStatusCode.BadRequest;
-}
-else
-go=HttpStatusCode.NotFound;
-}
-}
-return Content(go, RETURN_VALUE);
-}
 
 
 }

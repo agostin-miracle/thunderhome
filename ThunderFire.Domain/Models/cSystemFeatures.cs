@@ -39,7 +39,7 @@ namespace ThunderFire.Domain.Models
         public string SYSPRC{ get;set;} = "";
 
         /// <summary>
-        /// 
+        /// Descrição da aplicação do método
         /// </summary>
         public string SYSDSC{ get;set;} = "";
 

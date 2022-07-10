@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRCADGERINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 15:35:42
+     Date : 23/03/2022 08:10:41
  Objetivo : Inserção de Registros na Tabela TBCADGER
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADGERINS
@@ -62,7 +62,7 @@ IF OBJECT_ID ( 'dbo.PRCADGERSEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 15:35:42
+     Date : 23/03/2022 08:10:50
  Objetivo : Seleciona o registro de acordo com o Código do Usuário
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADGERSEL
@@ -82,7 +82,7 @@ IF OBJECT_ID ( 'dbo.PRCADGERUPD', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 15:35:42
+     Date : 23/03/2022 08:10:50
  Objetivo : Altera um registro da tabela TBCADGER ()  de acordo com a chave primaria
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADGERUPD
@@ -150,163 +150,3 @@ CREATE PROCEDURE dbo.PRCADGERUPD
         END
     RETURN @RETURN_VALUE
 GO
-IF OBJECT_ID ( 'dbo.PRCADGERSELALL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRCADGERSELALL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 07/03/2022 15:35:42
- Objetivo : Obtêm uma lista de registros do cadastro geral conforme parâmetros informados
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRCADGERSELALL
-(
-    @CODATR smallint=NULL,
-    @STAUSU smallint=NULL,
-    @SRCUSU Integer=NULL,
-    @NOMUSU varchar=NULL,
-    @STAREC Tinyint=NULL
-)
-AS
-    SET NOCOUNT ON
-    IF(@NOMUSU = '')
-        SET @NOMUSU = NULL
-    IF(@NOMUSU IS NOT NULL)
-        SET @NOMUSU = '%' +  RTRIM(@NOMUSU) +'%';
-    IF(@NOMUSU='')
-                 SET @NOMUSU=NULL
-              IF(@STAREC<0)
-                 SET @STAREC=NULL
-              IF(@SRCUSU<0)
-                 SET @SRCUSU=NULL
-              IF(@CODATR<0)
-                 SET @CODATR=NULL
-              IF(@STAUSU<0)
-                 SET @STAUSU=NULL
-                  SELECT * FROM VWCADGER A
-     WHERE       (@CODATR IS NULL OR A.CODATR=@CODATR)
-       AND (@STAUSU IS NULL OR A.STAUSU=@STAUSU)
-       AND (@SRCUSU IS NULL OR A.SRCUSU=@SRCUSU)
-       AND (@NOMUSU IS NULL OR A.NOMUSU LIKE @NOMUSU)
-       AND (@STAREC IS NULL OR A.STAREC=@STAREC)
-     ORDER BY A.NOMUSU, A.CODCMF
-
-
-
-GO
-
-IF OBJECT_ID ( 'dbo.PRCADGERSELCTA', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRCADGERSELCTA;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 07/03/2022 15:35:42
- Objetivo : Obtêm uma lista de usuários com contas virtuais ativas
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRCADGERSELCTA
-AS
-    SET NOCOUNT ON
-    SELECT * FROM TBCADGER (NOLOCK) A WHERE CODUSU IN (SELECT CODUSU FROM TBCADCTA (NOLOCK) WHERE STACTA=250 AND ORGCTA IN (1,3,4) AND STAREC=1)
-     ORDER BY A.NOMUSU, A.CODCMF
-
-
-
-GO
-
-IF OBJECT_ID ( 'dbo.PRCADGERSELUSRPRO', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRCADGERSELUSRPRO;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 07/03/2022 15:35:42
- Objetivo : Obtêm uma lista de usuários vinculados ao gerenciamento de Produto
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRCADGERSELUSRPRO
-(
-    @CODPRO smallint=NULL
-)
-AS
-    SET NOCOUNT ON
-    SELECT DISTINCT A.CODUSU, B.NOMUSU, REFCOD=A.CODPRO FROM TBUSUPRO (NOLOCK) A INNER JOIN TBCADGER (NOLOCK) B ON (B.CODUSU = A.CODUSU)
-     WHERE       (@CODPRO IS NULL OR A.CODPRO=@CODPRO)
-
-
-
-GO
-
-IF OBJECT_ID ( 'dbo.PRCADGERSELTIP', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRCADGERSELTIP;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 07/03/2022 15:35:42
- Objetivo : Obtêm uma lista de usuários por tipo de usuário
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRCADGERSELTIP
-(
-    @TIPUSU Tinyint,
-    @CODUSU Integer=NULL
-)
-AS
-    SET NOCOUNT ON
-    SELECT CODUSU, NOMUSU, REFCOD = TIPUSU FROM TBCADGER (NOLOCK) A
-     WHERE       (A.TIPUSU=@TIPUSU)
-       AND (@CODUSU IS NULL OR A.CODUSU=@CODUSU)
-
-
-
-GO
-
-IF OBJECT_ID ( 'dbo.PRCADGERVALENTRCMF', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRCADGERVALENTRCMF;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 07/03/2022 15:35:42
- Objetivo : Valida um CPF/CNPJ já existente para o mesmo atributo na base de cadastro geral
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRCADGERVALENTRCMF
-(
-    @CODATR smallint,
-    @CODUSU Integer,
-    @CODCMF varchar(15),
-    @SRCUSU Integer
-)
-AS
-    SET NOCOUNT ON
-
-    DECLARE @RETURN_VALUE INT =0;
-    SELECT @RETURN_VALUE = ISNULL(CODUSU,0) 
-      FROM TBCADGER (NOLOCK)
-     WHERE CODUSU <> @CODUSU
-    	 AND LTRIM(RTRIM(CODCMF)) = @CODCMF
-    	 AND CODATR = @CODATR
-    	 AND SRCUSU = @SRCUSU   
-    	 AND STAREC = 1
-    RETURN @RETURN_VALUE;
-
-GO
-
-IF OBJECT_ID ( 'dbo.PRCADUSUPSQCMF', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRCADUSUPSQCMF;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 07/03/2022 15:35:42
- Objetivo : Verifica se já existe um cadastro com o CPF/CNPJ cadastrado, e retorna o id localizado
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRCADUSUPSQCMF
-(
-    @CODATR smallint,
-    @CODCMF varchar
-)
-AS
-    SET NOCOUNT ON
-
-    DECLARE @RETURN_VALUE INT =0;
-    SELECT @RETURN_VALUE = ISNULL(CODUSU,0) FROM TBCADGER (NOLOCK) 
-     WHERE CODCMF = @CODCMF
-    	 AND CODATR = @CODATR
-    RETURN @RETURN_VALUE;
-
-GO
-

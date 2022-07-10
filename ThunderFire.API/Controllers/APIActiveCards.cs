@@ -140,39 +140,6 @@ go=HttpStatusCode.NotFound;
 }
 return Content(go, RETURN_VALUE);
 }
-    /// <summary>
-    /// Obtêm uma lista de todos os cartões da base ativa conforme parâmetros de pesquisa informados
-    /// </summary>
-        /// <param name="pUSUPRO">Usuário Gestor</param>
-    /// <param name="pSTACRT">Status do Cartão</param>
-    /// <param name="pNUMCRT">Parte ou Número do Cartão</param>
-    /// <param name="pNOMPRT">Nome ou Parte</param>
-
-    /// <returns>List of QueryActiveCards</returns>
-[HttpGet]
-    public IHttpActionResult List(System.Int32? pUSUPRO= null, System.Int16? pSTACRT= null, System.String pNUMCRT= '', System.String? pNOMPRT= null)
-    {
-HttpStatusCode go = HttpStatusCode.OK;
-object RETURN_VALUE=null;
-if (Init())
-{
- RETURN_VALUE = WRKOBJ.List(pUSUPRO.Value, pSTACRT.Value, pNUMCRT, pNOMPRT.Value);
-if(WRKOBJ.Found)
-{
-go = HttpStatusCode.OK;
-}
-else
-{
-if(WRKOBJ.HasError)
-{
-    go=HttpStatusCode.BadRequest;
-}
-else
-go=HttpStatusCode.NotFound;
-}
-}
-return Content(go, RETURN_VALUE);
-}
 
     /// <summary>
     /// Altera o campo de permissão de compra on-line

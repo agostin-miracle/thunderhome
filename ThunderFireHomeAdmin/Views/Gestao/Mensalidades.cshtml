@@ -1,0 +1,123 @@
+﻿@model ThunderFireHomeAdmin.Models.MonthlyPaymentModel
+@{
+    ViewBag.Title = "Gestão de Mensalidades";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="CUSUPRO" class="col-sm-2 col-form-label">Gestor</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(model => model.CUSUPRO, new SelectList(Model.ListaGestor, "CODUSU", "NOMUSU", Model.CUSUPRO), " -- Selecione --", new { @class = "form-control form-control-sm" })
+                </div>
+                <label for="CTIPMEN" class="col-sm-2 col-form-label">Tipo</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(model => model.CTIPMEN, new SelectList(Model.ListaTipoMensalidade, "KEYCOD", "DSCTAB", Model.CTIPMEN), " -- Selecione --", new { @class = "form-control form-control-sm" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="CCODUSU" class="col-sm-2 col-form-label">Usuário</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(model => model.CCODUSU, new SelectList(Model.Listausuarios, "CODUSU", "NOMUSU", Model.CCODUSU), " -- Selecione --", new { @class = "form-control form-control-sm" })
+                </div>
+                <label for="CSTAMEN" class="col-sm-2 col-form-label">Status</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(model => model.CSTAMEN, new SelectList(Model.ListaStatus, "CODSTA", "DSCSTA", Model.CSTAMEN), " -- Selecione --", new { @class = "form-control form-control-sm" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-detail-tab" data-toggle="tab" href="#nav-detail" role="tab" aria-controls="nav-home" aria-selected="true">Detalhes</a>
+            <a class="nav-item nav-link" id="nav-resume-tab" data-toggle="tab" href="#nav-resume" role="tab" aria-controls="nav-profile" aria-selected="false">Resumo</a>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="nav-detail" role="tabpanel" aria-labelledby="nav-detail-tab">
+
+                <table id="tbdetailmen" class="table-sm table-striped table-bordered dt-responsive nowrap dataTable js-exportable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Cliente</th>
+                            <th>Ref</th>
+                            <th>Tipo</th>
+                            <th>Parcela</th>
+                            <th>Data</th>
+                            <th>Vcto</th>
+                            <th>Valor</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+            <div class="tab-pane fade show" id="nav-resume" role="tabpanel" aria-labelledby="nav-resume-tab">
+
+                <table id="tbresumomen" class="table-sm table-striped table-bordered dt-responsive nowrap dataTable js-exportable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Gestor</th>
+                            <th>Cliente</th>
+                            <th>Tipo</th>
+                            <th>Parcelas</th>
+                            <th>Data</th>
+                            <th>Vcto</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/Rules/GestaoMensalidades.js"></script>
+
+    <script>
+        var ReloadPesquisa;
+        $(document).ready(function () {
+            ReloadPesquisa = false;
+            $('#CUSUPRO').on('change', function () {
+                ReloadPesquisa = true;
+            });
+            $('#CTIPMEN').on('change', function () {
+                ReloadPesquisa = true;
+            });
+            $('#CSTAMEN').on('change', function () {
+                ReloadPesquisa = true;
+            });
+            $('#CCODUSU').on('change', function () {
+                ReloadPesquisa = true;
+            });
+
+            if (ReloadPesquisa) {
+                AtualizaDetalhe();
+            }
+
+
+            $(document).on("click", "#nav-resume-tab", function () {
+                AtualizaResumo();
+            });
+        });
+    </script>
+}

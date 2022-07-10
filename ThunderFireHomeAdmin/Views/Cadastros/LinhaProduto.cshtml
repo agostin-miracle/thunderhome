@@ -1,5 +1,4 @@
-﻿
-@model ThunderFireHomeAdmin.Models.ProductLineModel
+﻿@model ThunderFireHomeAdmin.Models.ProductLineModel
 @{
     ViewBag.Title = "Linha de Produto";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,9 +9,15 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Linha de Produto</h4>
-                <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                <h4 class="card-title">@ViewBag.Title</h4>
                 <hr />
+                <div class="row">
+                    <div class="col-sm-4">
+                        <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
+                        <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                    </div>
+                </div>
+
                 <div class="table-responsive">
                     <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>
@@ -66,21 +71,18 @@
             <div class="modal-body">
                 <input type="hidden" id="OPERATION" value="0" />
                 <input type="hidden" id="FUPDUSU" value="0" />
-                <div class="form-group">
-                    <label for="FLINPRO" class="col-form-label">Linha:</label>
-                    <input type="text" class="form-control" id="FLINPRO" size="4" maxlength="4" disabled>
+                <div class="form-row">
+                    <label for="FLINPRO" class="col-sm-2 control-label form-control-sm">Linha:</label>
+                    <input type="text" class="col-sm-2 form-control form-control-sm" id="FLINPRO" size="4" maxlength="4" disabled>
+                    <label for="FDSCLIN" class="col-sm-2 control-label form-control-sm">Descrição:</label>
+                    <input type="text" class="col-sm-6 form-control form-control-sm" id="FDSCLIN" size="50" maxlength="50" required>
                 </div>
-
-                <div class="form-group">
-                    <label for="FDSCLIN" class="col-form-label">Descrição:</label>
-                    <input type="text" class="form-control" id="FDSCLIN" size="50" maxlength="50" required>
+                <div class="form-row text-right">
+                    <div class="form-check">
+                        <input type="checkbox" class="col-auto form-check-input" id="FSTAREC" checked>
+                        <label class="col-auto form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
                 </div>
-
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
-                    <label class="form-check-label" for="FSTAREC">Ativo</label>
-                </div>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

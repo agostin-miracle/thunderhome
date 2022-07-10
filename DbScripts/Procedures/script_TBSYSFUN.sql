@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRSYSFUNINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 21:32:07
+     Date : 23/03/2022 13:18:54
  Objetivo : Inserção de Registros na Tabela TBSYSFUN
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRSYSFUNINS
@@ -50,7 +50,7 @@ IF OBJECT_ID ( 'dbo.PRSYSFUNSEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 21:32:08
+     Date : 23/03/2022 13:18:54
  Objetivo : Obtêm o registro de uma funcionalidade de acordo com o id
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRSYSFUNSEL
@@ -70,7 +70,7 @@ IF OBJECT_ID ( 'dbo.PRSYSFUNUPD', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 21:32:08
+     Date : 23/03/2022 13:18:54
  Objetivo : Altera um registro da tabela TBSYSFUN (System Features)  de acordo com a chave identity
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRSYSFUNUPD
@@ -132,7 +132,7 @@ IF OBJECT_ID ( 'dbo.PRSYSFUNSELALL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 21:32:08
+     Date : 23/03/2022 13:18:54
  Objetivo : Obtêm todos os registros de funcionalidades específicas para uma tabela
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRSYSFUNSELALL

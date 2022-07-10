@@ -1,12 +1,9 @@
 ﻿@model ThunderFireHomeAdmin.Models.GeneralTableModel
 @{
-    /**/
 
-    ViewBag.Title = "TabelaGeral";
+    ViewBag.Title = "Tabela Geral";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 
 <div class="modal fade" id="modalgeneraltable" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -19,69 +16,62 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="OPERATION" value="0" />
-                <input type="hidden" id="FUPDUSU" value="0" />
+                <input type="hidden" id="FKEYTAB" value="0" />
 
                 <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="FNUMTAB" class="col-form-label">Tabela Associada:</label>
-                        <select class="form-control form-control-md" id="FNUMTAB" disabled>
-                            @if (Model.ListaTabela != null)
-                            {
-                                foreach (var item in Model.ListaTabela)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
-                                }
-                            }
-                        </select>
+                    <label for="FNUMTAB" class="col-sm-2 control-label form-control-sm">Tabela:</label>
+                    <div class="col-sm-10">
+                        @if (Model.ListaTabela != null)
+                        {
+                            @Html.DropDownListFor(model => model.FNUMTAB, new SelectList(Model.ListaTabela, "KEYCOD", "DSCTAB", Model.FNUMTAB), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
+
                 </div>
-
+                <hr />
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="FKEYCOD" class="col-form-label">Código:</label>
-                        <input type="text" class="form-control" id="FKEYCOD" size="8" maxlength="8" required>
+                    <label for="FKEYCOD" class="col-sm-2 control-label form-control-sm">Código:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm numero6" id="FKEYCOD" size="8" maxlength="8" required>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="FKEYTXT" class="col-form-label">Chave:</label>
-                        <input type="text" class="form-control" id="FKEYTXT" size="8" maxlength="8" required>
+                    <label for="FKEYTXT" class="col-sm-2 control-label form-control-sm">Chave:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FKEYTXT" size="10" maxlength="10" required>
                     </div>
-                </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="FDSCTAB" class="col-form-label">Descrição:</label>
-                        <input type="text" class="form-control" id="FDSCTAB" size="40" maxlength="100" required>
+                    <label for="FDSCTAB" class="col-sm-2 control-label form-control-sm">Descrição:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="FDSCTAB" size="40" maxlength="100" required>
                     </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="FNUMREF" class="col-form-label">Referência:</label>
-                        <input type="text" class="form-control" id="FNUMREF" size="8" maxlength="8" required>
+                    <label for="FNUMREF" class="col-sm-2 control-label form-control-sm">Referência:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm numero6" id="FNUMREF" size="8" maxlength="8" required>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="FIDEPRE" class="col-form-label">Precedência:</label>
-                        <input type="text" class="form-control" id="FIDEPRE" size="4" maxlength="4" required>
+                    <label for="FIDEPRE" class="col-sm-2 control-label form-control-sm">Precedência:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm numero1" id="FIDEPRE" size="4" maxlength="4" required>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <input type="checkbox" class="form-check-input ml-md-4" id="FUSRDSP" checked>
-                        <label class="form-check-label ml-md-6" for="FUSRDSP">Disponível para usuário</label>
+                    <div class="col-sm-6">
+                        <div class="form-check text-right">
+                            <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
+                            <label class="form-check-label" for="FUSRDSP">Disponível para usuário</label>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <input type="checkbox" class="form-check-input  ml-md-4" id="FSTAREC" checked>
-                        <label class="form-check-label ml-md-6" for="FSTAREC">Ativo</label>
+                    <div class="col-sm-6">
+                        <div class="form-check text-right">
+                            <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
+                            <label class="form-check-label" for="FSTAREC">Ativo</label>
+                        </div>
                     </div>
-                </div>
-
-
-            </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -94,17 +84,10 @@
                 <div class="form-horizontal">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="CKEYCOD" class="col-sm-2 control-label">Tabelas</label>
-                            <select class="form-control form-control-sm" id="CKEYCOD">
-                                @if (Model.ListaTabela != null)
-                                {
-                                    foreach (var item in Model.ListaTabela)
-                                    {
-                                        <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
-                                    }
-                                }
-
-                            </select>
+                            @if (Model.ListaTabela != null)
+                            {
+                                @Html.DropDownListFor(model => model.CNUMTAB, new SelectList(Model.ListaTabela, "KEYCOD", "DSCTAB", Model.CNUMTAB), new { @class = "form-control form-control-sm" })
+                            }
                         </div>
                     </div>
                 </div>
@@ -136,11 +119,11 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            var pNUMTAB = $('#CKEYCOD').val();
-            if (pNUMTAB == null)
-                pNUMTAB = 0;
-            var commandquery = "/Cadastros/GeneralTableQuery?pnumtab=" + pNUMTAB;
-            commandquery = "/Cadastros/GeneralTableQuery";
+            $('.numero6').mask('000000', { reverse: true });
+            $('.numero1').mask('0', { reverse: true });
+            $(document).on('change', '#CNUMTAB', function () {
+                $('#gridshow').DataTable().ajax.reload();
+            });
             $('#gridshow').DataTable(
                 {
                     paging: true,
@@ -150,37 +133,37 @@
                     serverSide: true,
                     orderMulti: false,
                     ajax: {
-                        url: commandquery,
+                        url: GetUrl("/Cadastros/Listar"),
                         type: "POST",
                         datatype: "json",
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
                         data: {
-                            pNUMTAB: function () { return $('#CKEYCOD').val() }
+                            pNUMTAB: function () { return $('#CNUMTAB').val() }
                         }
                     },
-
-                    //dataSrc: function (json) {
-                    //    console.log(json);
-                    //    data.draw = json.Draw;
-                    //    data.recordsTotal = json.RecordsTotal;
-                    //    data.recordsFiltered = json.RecordsFiltered;
-                    //    data.data = json.Data;
-                    //    alert('x');
-                    //    return data.data;
-
-                    //},
                     columns: [
                         { data: "KEYTAB" },
+                        { data: "DSCREC" },
                         { data: "KEYCOD" },
                         { data: "KEYTXT" },
                         { data: "DSCTAB" },
                         { data: "NUMREF" },
                         { data: "IDEPRE" },
-                        { data: "USRDSP" },
+                        {
+                            data: "USRDSP", "render": function (data, type, row) {
+                                if (data == 1)
+                                    return "Sim";
+                                else
+                                    return "Não";
+                            }
+                        },
                         {
                             "render": function (data, type, row) {
-                                return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallToEdit('" + row.KEYTAB + "');\"> <i class='mdi mdi-content-save'></i></button>&nbsp;"
+
+                                if (((row.STAREC == 2) || (row.USRDSP == 0)) == false) {
+                                    return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.KEYTAB + "');\"> <i class='fas fa-edit'></i></button>&nbsp;"
+                                }
                             }
                         }
                     ],
@@ -199,26 +182,53 @@
                     },
                     columnDefs: [
                         { "targets": [0], "visible": false, "searchable": false },
-                        { className: "text-right", "targets": [1], "visible": true, "searchable": false, "width": "10%" },
-                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "10%" },
-                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "40%" },
-                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "10%" },
+                        { className: "text-right", "targets": [1], "visible": false, "searchable": false, "width": "10%" },
+                        { className: "text-right", "targets": [2], "visible": true, "searchable": false, "width": "10%" },
+                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "10%" },
+                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "40%" },
                         { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "10%" },
                         { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "10%" },
-                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "10%" }
+                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "10%" },
+                        { className: "text-left", "targets": [8], "visible": true, "searchable": false, "width": "10%" }
                     ]
                 });
         });
 
 
         function CallForAdd() {
-            $("#modalcaption").html("Inclusão de Item na Tabela Geral");
             $("#OPERATION").val("1");
             $("#FNUMTAB").val($('#CKEYCOD').val());
             $("#FDSCTAB").val("");
             $("#FIDEPRE").val("0");
             $("#FSTAREC").prop('checked', "true");
             $("#FUSRDSP").prop('checked', "true");
+            $('#modalgeneraltable').modal({ backdrop: "static", keyboard: false });
+            $('#modalgeneraltable').modal('toggle');
+
+        }
+
+
+        function CallForEdit(pKEYTAB) {
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: GetUrl("/Cadastros/SelecionarTabelaGeral"),
+                data: { pKEYTAB: pKEYTAB },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FKEYTAB").val(result.KEYTAB);
+                    $("#FNUMTAB").val(result.pNUMTAB);
+                    $("#FNUMTAB").prop("disabled", true);
+                    $("#FKEYCOD").val(result.KEYCOD);
+                    $("#FKEYTXT").val(result.KEYTXT);
+                    $("#FNUMREF").val(result.NUMREF);
+                    $("#FDSCTAB").val(result.DSCTAB);
+                    $("#FIDEPRE").val(result.IDEPRE);
+                    $("#FUSRDSP").prop('checked', (result.STAREC == 1));
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                }
+            });
+            $('#modalgeneraltable').modal({ backdrop: 'static', Keyboard: 'true' });
             $('#modalgeneraltable').modal('toggle');
         }
 

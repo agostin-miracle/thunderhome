@@ -27,12 +27,11 @@ ExecutionResponse Update(SystemFeatures model);
         /// <param name="pSYSFUN">ID da Funcionalidade</param>
     /// <returns>SystemFeatures</returns>
 SystemFeatures Select(System.Int32 pSYSFUN);
-    /// <summary>
-    /// Obtêm todos os registros de funcionalidades específicas para uma tabela
-    /// </summary>
-        /// <param name="pSYSTBL">ID da Tabela</param>
-
-    /// <returns>List of SystemFeatures</returns>
+/// <summary>
+/// Obtêm todos os registros de funcionalidades específicas para uma tabela
+/// </summary>
+    /// <param name="pSYSTBL">ID da Tabela</param>
+/// <returns>Listof SystemFeatures</returns>
 List<SystemFeatures> List(System.Int16? pSYSTBL);
 
     }

@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRCADENDINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 28/02/2022 19:03:10
+     Date : 18/03/2022 17:51:35
  Objetivo : Inserção de Registros na Tabela TBCADEND
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADENDINS
@@ -77,7 +77,7 @@ IF OBJECT_ID ( 'dbo.PRCADENDSEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 28/02/2022 19:03:11
+     Date : 18/03/2022 17:51:35
  Objetivo : Obtêm o registro de Endereço
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADENDSEL
@@ -92,82 +92,12 @@ AS
 
 GO
 
-IF OBJECT_ID ( 'dbo.PRCADENDSELALL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRCADENDSELALL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 28/02/2022 19:03:11
- Objetivo : Obtêm uma lista de todos os endereços de um usuário
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRCADENDSELALL
-(
-    @CODUSU Integer,
-    @TIPEND smallint=NULL,
-    @REGATV smallint=NULL,
-    @STAREC smallint=NULL
-)
-AS
-    SET NOCOUNT ON
-    IF(@TIPEND<0)
-       SET @TIPEND=NULL
-    IF(@REGATV<0)
-       SET @REGATV=NULL
-    IF(@STAREC<0)
-       SET @STAREC=NULL
-    
-    SELECT CODEND,
-        A.REGATV,
-        DSCATV = CASE WHEN (A.REGATV=1) THEN 'Sim' ELSE 'Não' END,
-        A.CODUSU,
-    	B.NOMUSU,
-        A.TIPEND,
-    	C.DSCTEN,
-        TIPLOG,
-    	DSCLOG = ISNULL(D.DSCTAB,''),
-        CODUFE,
-    	DSCUFE = ISNULL(E.DSCTAB,''),
-        DSCEND,
-    	FULEND =  CASE WHEN A.TIPEND IN (3,4) THEN DSCEND ELSE
-    	(ISNULL(D.DSCTAB,'') + ' ' + DSCEND +  CASE WHEN NUMEND > 0 THEN ',' + CONVERT(VARCHAR,NUMEND) ELSE '' END
-    	+ ' ' + ISNULL(DSCCID,'') + ' ' + ISNULL(DSCBAI,'') +  CASE WHEN CODCEP<>'00000000' THEN ' - ' + dbo.FormatCEP(CODCEP) ELSE '' END) END,
-    	DSCCPL,
-        NUMEND,
-        DSCCID,
-        DSCBAI,
-        CODCEP,
-        CODPAI,
-    	DSCPAI = ISNULL(F.DSCTAB,''),
-        LATITU,
-        LONGIT,
-        A.STAREC,
-        DSCREC = ISNULL(G.DSCTAB,''),
-        DATCAD = FORMAT(A.DATCAD, 'dd/MM/yyyy HH:mm'),
-        DATUPD = FORMAT(A.DATUPD, 'dd/MM/yyyy HH:mm'),
-        A.UPDUSU,
-    	LGNUSU = ISNULL(H.LGNUSU,'')
-      FROM TBCADEND (NOLOCK) A
-     INNER JOIN TBCADGER (NOLOCK) B ON (B.CODUSU = A.CODUSU)
-     INNER JOIN TBTIPEND (NOLOCK) C ON (C.TIPEND = A.TIPEND)
-      LEFT JOIN TBTABGER (NOLOCK) D ON (D.NUMTAB = 81 AND D.KEYCOD = A.TIPLOG)
-     INNER JOIN TBTABGER (NOLOCK) E ON (E.NUMTAB = 2 AND E.KEYTXT = A.CODUFE)
-      LEFT JOIN TBTABGER (NOLOCK) F ON (F.NUMTAB = 1 AND F.KEYCOD = A.CODPAI)
-     INNER JOIN TBTABGER (NOLOCK) G ON (G.NUMTAB = 7 AND G.KEYCOD = A.STAREC)
-      LEFT JOIN TBLGNUSU (NOLOCK) H ON (H.CODUSU = A.UPDUSU AND H.REGATV=1)
-
-    WHERE     (A.CODUSU=@CODUSU)
-     AND (@TIPEND IS NULL OR A.TIPEND=@TIPEND)
-     AND (@REGATV IS NULL OR A.REGATV=@REGATV)
-     AND (@STAREC IS NULL OR A.STAREC=@STAREC)
-
-GO
-
 IF OBJECT_ID ( 'dbo.PRCADENDUPD', 'P' ) IS NOT NULL
     DROP PROCEDURE dbo.PRCADENDUPD;
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 28/02/2022 19:03:11
+     Date : 18/03/2022 17:51:35
  Objetivo : Altera um registro da tabela TBCADEND ()  de acordo com a chave primaria
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADENDUPD
@@ -260,7 +190,7 @@ IF OBJECT_ID ( 'dbo.PRCADENDFND', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 28/02/2022 19:03:11
+     Date : 18/03/2022 17:51:35
  Objetivo : Localiza o ID de um endereço com base nos parametros fornecidos
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADENDFND

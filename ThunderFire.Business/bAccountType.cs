@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 04/03/2022 16:57
+///Data        : 19/03/2022 09:50
 ///Alias       : accounttype
 ///Descrição   : Tipos de Conta
 ///</remarks>
@@ -237,32 +237,8 @@ _errormessage="";
                     {
             RETURN_VALUE  = _conn.Query<AccountType>(sql:"PRTIPCTASEL", param:new {TIPCTA=pTIPCTA
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
-                    this.Found = true;
-                    }
-                    catch (Exception Error)
-                    {
-                    this.HasError = true;
-                    this.Found=false;
-                    _logger.Info(Error);
-            }
-            }
-                    return RETURN_VALUE;
-            }
 
-    /// <summary>
-    /// Obtêm uma lista de todos os tipos de conta
-    /// </summary>
-    /// <returns>List of AccountType</returns>
-    public List<AccountType> List()
-        {
-        this.Found=false;
-            this.ProcessCode= 0;
-    List<AccountType> RETURN_VALUE=null;
-                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
-                    {
-                    try
-                    {
-            RETURN_VALUE = _conn.Query<AccountType>(sql:"PRTIPCTASEL", param:new {},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)

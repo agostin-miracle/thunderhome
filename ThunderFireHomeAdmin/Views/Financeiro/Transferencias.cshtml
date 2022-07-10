@@ -1,0 +1,477 @@
+﻿@model ThunderFireHomeAdmin.Models.TransferRegistrationModel
+@{
+    ViewBag.Title = "Registros de Transferência";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group row">
+                <label for="CTIPLCT" class="col-sm-2 col-form-label">Tipo de Lançamento</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(model => model.CTIPLCT, new SelectList(Model.ListaTipoLancamento, "TIPLCT", "DSCLCT", Model.CTIPLCT), " -- Selecione --", new { @class = "form-control form-control-sm" })
+                </div>
+            </div>
+
+
+            <hr />
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Detalhes</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="tbtransfer" class="table table-bordered table-striped table-bordered dt-responsive nowrap dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Data</th>
+                            <th>Débito</th>
+                            <th>Crédito</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="modaltrf" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-user" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FUSUPRO" value="0" />
+                <input type="hidden" id="FCODUSU" value="0" />
+                <input type="hidden" id="FCODCRT" value="0" />
+                <input type="hidden" id="FCTADEB" value="0" />
+                <input type="hidden" id="FCTACRD" value="0" />
+                <input type="hidden" id="FORGDEB" value="0" />
+                <input type="hidden" id="FORGCRD" value="0" />
+
+                <div class="form-row">
+                    <label for="FTIPLCT" class="col-sm-2 control-label form-control-sm">Tipo:</label>
+                    <div class="col-sm-10">
+                        @if (Model.ListaTipoLancamento != null)
+                        {
+                            @Html.DropDownListFor(model => model.FTIPLCT, new SelectList(Model.ListaTipoLancamento, "TIPLCT", "DSCLCT", Model.FTIPLCT), new { @class = "form-control form-control-sm" })
+                        }
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="FINDDEB" class="col-sm-2 control-label form-control-sm">Débito:</label>
+                    <div class="col-sm-10">
+                        @if (Model.ListaIndicadorDebito != null)
+                        {
+                            @Html.DropDownListFor(model => model.FINDDEB, new SelectList(Model.ListaIndicadorDebito, "KEYCOD", "DSCTAB", Model.FINDDEB), new { @class = "form-control form-control-sm" })
+                        }
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="CCTADEB" class="col-sm-2 control-label form-control-sm">Conta:</label>
+                    <div class="col-sm-10">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-sm" id="CCTADEB" aria-label="Username" aria-describedby="basic-addon1">
+                            <div class="input-group-prepend">
+                                <button class="input-group-text" onclick="$('#CCTADEB').prop('disabled', false); $('#CCTADEB').val('');"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="FINDCRD" class="col-sm-2 control-label form-control-sm">Crédito:</label>
+                    <div class="col-sm-10">
+                        @if (Model.ListaIndicadorCredito != null)
+                        {
+                            @Html.DropDownListFor(model => model.FINDCRD, new SelectList(Model.ListaIndicadorCredito, "KEYCOD", "DSCTAB", Model.FINDCRD), new { @class = "form-control form-control-sm" })
+                        }
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="CCTACRD" class="col-sm-2 control-label form-control-sm">Conta:</label>
+                    <div class="col-sm-10">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-sm" id="CCTACRD" aria-label="Username" aria-describedby="basic-addon1">
+                            <div class="input-group-prepend">
+                                <button class="input-group-text" onclick="$('#CCTACRD').prop('disabled', false); $('#CCTACRD').val('');"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="FOMTSLD" value="option1">
+                    <label class="form-check-label form-control-sm" for="FOMTSLD">Omitir Validação de Saldo</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="FOMTTAR" value="option2">
+                    <label class="form-check-label form-control-sm" for="FOMTTAR">Omitir Tarifa</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="FSTAREC" value="option3">
+                    <label class="form-check-label form-control-sm" for="FSTAREC">Ativo</label>
+                </div>
+
+                <div class="form-row">
+                    <label for="FDATMOV" class="col-sm-2 control-label form-control-sm">Data:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm date" id="FDATMOV" size="10" maxlength="10" required>
+                    </div>
+                    <label for="FVLRMOV" class="col-sm-2 control-label form-control-sm">Valor:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm money" id="FVLRMOV" size="8" maxlength="8" required>
+                    </div>
+                    <label for="FVLRTAR" class="col-sm-2 control-label form-control-sm">Valor:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm money" id="FVLRTAR" size="8" maxlength="8" required>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <label for="FDSCOBS" class="col-sm-2 control-label form-control-sm">Observações</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="FDSCOBS" size="70" maxlength="150">
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/Rules/CommonRules.js"></script>
+
+    <script>
+        var TbDetalhe = null;
+        $(document).ready(function () {
+            $("#CCTADEB").autocomplete({
+                autoFocus: true,
+                source: function (request, response) {
+                    console.log($('#FTIPLCT').val());
+                    console.log($("#CCTADEB").val());
+                    var vDATA = JSON.stringify({ pFUNLCT: parseInt($('#FORGDEB').val()), pNOMUSU: $("#CCTADEB").val() });
+                    $.ajax({
+                        url: GetUrl('Home/ContasporCondicao'),
+                        type: "POST",
+                        dataType: "json",
+                        data: vDATA,
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            console.log(data);
+                            response($.map(data, function (item) {
+                                return { label: item.NOMUSU, value: item.CODUSU, IUSUPRO: item.REFCOD, ICODCRT: item.REFSEL };
+                            }))
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function (event, ui) {
+                    $("#FUSUPRO").val(ui.item.IUSUPRO);
+                    $("#FCODCRT").val(ui.item.ICODUSU);
+                    $("#CCTADEB").val(ui.item.label);
+                    $("#CCTADEB").prop("disabled", true);
+                    $("#FCTADEB").val(ui.item.value);
+                    return false;
+                }
+            }); //.focus(function () { $(this).autocomplete("search"); });
+
+            $("#CCTACRD").autocomplete({
+                autoFocus: true,
+                source: function (request, response) {
+                    console.log($('#FTIPLCT').val());
+                    console.log($("#CCTACRD").val());
+                    var vDATA = JSON.stringify({ pFUNLCT: parseInt($('#FORGCRD').val()), pNOMUSU: $("#CCTACRD").val() });
+                    $.ajax({
+                        url: GetUrl('Home/ContasporCondicao'),
+                        type: "POST",
+                        dataType: "json",
+                        data: vDATA,
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            console.log(data);
+                            response($.map(data, function (item) {
+                                return { label: item.NOMUSU, value: item.CODUSU };
+                            }))
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function (event, ui) {
+                    $("#CCTACRD").val(ui.item.label);
+                    $("#CCTACRD").prop("disabled", true);
+                    $("#FCTACRD").val(ui.item.value);
+                    return false;
+                }
+            });
+
+
+            $("#CCTACRD").autocomplete({
+                autoFocus: true,
+                source: function (request, response) {
+                    var vDATA = JSON.stringify({ pFUNLCT: 1, pTIPLCT: pTIPLCT, 'pNOMUSU': $("#CCTACRD").val() });
+                    $.ajax({
+                        url: GetUrl('Home/ContasporCondicao'),
+                        type: "POST",
+                        dataType: "json",
+                        data: vDATA,
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            console.log(data);
+                            response($.map(data, function (item) {
+                                return { label: item.NOMUSU, value: item.CODUSU };
+                            }))
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function (event, ui) {
+
+                    $("#CCTACRD").val(ui.item.label);
+                    $("#CCTACRD").prop("disabled", true);
+                    $("#FCTACRDB").val(ui.item.value);
+                    return false;
+                }
+            });
+
+
+            $(document).on("click", "#btn_update", function () {
+                var mode = $("#OPERATION").val();
+                var vNIDTRF = parseInt($("#FNIDTRF").val());
+                if (vNIDTRF == null || vNIDTRF == "")
+                    vNIDTRF = 0;
+                var vDSCMOV = $("#FDSCMOV").val();
+                if (vDSCMOV == null || vDSCMOV == "") {
+                    vDSCMOV = ' ';
+                }
+
+                var VDATA = JSON.stringify({
+                    'NIDTRF': vNIDTRF,
+                    'TIPLCT': parseInt($("#FTIPLCT").val()),
+                    'INDDEB': parseInt($("#FINDDEB").val()),
+                    'INDCRD': parseInt($("#FINDCRD").val()),
+                    'ORGDEB': parseInt($("#FORGDEB").val()),
+                    'ORGCRD': parseInt($("#FORGCRD").val()),
+                    'CTADEB': parseInt($("#CTADEB").val()),
+                    'CTACRD': parseInt($("#FCTACRD").val()),
+                    'OMTSLD': $("#FOMTSLD").is(':checked') ? 'S' : 'N',
+                    'OMTTAR': $("#FOMTTAR").is(':checked') ? 'S' : 'N',
+                    'STAMOV': 21,
+                    'DATMOV': toDateIso($("#FDATMOV").val(), "-"),
+                    'DSCMOV': vDSCMOV,
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                });
+                $.ajax({
+                    type: "POST",
+                    url: GetUrl("Financeiro/AtualizarTransferencias?modo=" + mode),
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) {
+                            $('#modaltrf').modal('toggle');
+                            location.href = location.href;
+                        }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Boletos', message: result.MessageToUser, effect: 'newspaper' });
+                        };
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Boletos', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+            });
+
+
+            $('#CTIPLCT').on('change', function () {
+                $('#tbtransfer').DataTable().ajax.reload();
+            });
+
+
+            AtualizaDetalhe();
+        });
+
+
+        function CallForAdd() {
+            var pTIPLCT = $("#CTIPLCT").val();
+            if (pTIPLCT > 0) {
+                $("#OPERATION").val("1");
+                $("#FSTAREC").prop('checked', "true");
+                $("#FOMTSLD").prop('checked', "false");
+                $("#FOMTTAR").prop('checked', "false");
+                $("#FDATMOV").val(GetCurrentDate());
+
+                $.ajax({
+                    type: "GET",
+                    url: GetUrl("Financeiro/SelecionarTipoLancamento"),
+                    data: { pTIPLCT: pTIPLCT },
+                    dataType: 'json',
+                    success: function (result) {
+                        $("#FINDDEB").val(result.INDDEB);
+                        $("#FINDCRD").val(result.INDCRD);
+                        $("#FORGDEB").val(result.ORIDEB);
+                        $("#FORGCRD").val(result.ORICRD);
+                    }
+                })
+
+                $('#modaltrf').modal({ backdrop: 'static', Keyboard: 'true' });
+                $('#modaltrf').modal('toggle');
+            }
+            else
+                $.alert({ class: 'danger', title: 'Transferências', message: 'Selecione um tipo de Lançamento válido', effect: 'zoom' });
+        }
+
+        function CallForEdit(pNIDBOL) {
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: GetUrl("Financeiro/SelecionarTransferencia"),
+                data: { pNIDTRF: pNIDTRF },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FTIPLCT").val(result.TIPLCT);
+                    $("#FSTAMOV").val(result.STAMOV);
+                    $("#FDATEMI").val(fromDate(result.DATMOV));
+                    $("#FINDDEB").val(result.INDDEB);
+                    $("#FCTADEB").val(result.CTADEB);
+                    $("#FINDCRD").val(result.INDCRD);
+                    $("#FCTACRD").val(result.CTACRD);
+                    $("#FVLRMOV").val(new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(result.VLRBOL));
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                    $("#FOMTSLD").prop('checked', (result.OMTSLD == 'S'));
+                    $("#FOMTTAR").prop('checked', (result.OMTTAR == 'S'));
+                    $("#FDSCMOV").val(result.DSCMOV);
+                }
+            })
+            $('#modaltrf').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modaltrf').modal('toggle');
+        }
+
+
+        function AtualizaDetalhe() {
+            try {
+                if (TbDetalhe == null) {
+
+                    TbDetalhe = $('#tbtransfer').DataTable(
+                        {
+                            paging: true,
+                            searching: false,
+                            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                            processing: true,
+                            serverSide: true,
+                            orderMulti: false,
+                            responsive: true,
+                            ajax: {
+                                url: GetUrl("Financeiro/PesquisarTransferencias"),
+                                type: "POST",
+                                datatype: "json",
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                                data: {
+                                    pTIPLCT: function () {
+                                        var value = $('#CTIPLCT').val();
+                                        if (value == null) {
+                                            value = -1
+                                        }
+                                        return value;
+                                    },
+                                    pCODUSU: function () { return -1;},
+                                    pNIDTRA: function () { return ""; },
+                                    pSTAREC: function () { return -1; }
+
+                                }
+                            },
+
+
+                            columns: [
+                                { data: "NIDTRF" },
+                                { data: "DATMOV" },
+                                { data: "NUMDEB" },
+                                { data: "NUMCRD" },
+                                { data: "LGNUSU" },
+                                {
+                                    "render": function (data, type, row) {
+                                        var botoes = "";
+                                        if (row.STAREC == 1) {
+                                            botoes = botoes + "<button id='btn_call_edt' value='Editar' onclick=\"CallForEdit('" + row.NIDBOL + "');\"> <i class='fa fa-edit style='font-size:12px;border:none'></i></button>&nbsp;"
+                                        }
+                                        return botoes;
+                                    }
+                                }
+                            ],
+                            "language": {
+                                "processing": "Aguarde, buscando informações",
+                                "loadingRecords": "Carregando",
+                            },
+                            "pageLength": 10,
+                            "oLanguage": {
+                                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                                "sZeroRecords": "Nenhum registro encontrado",
+                                "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                                "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                                "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                                "sSearch": "Pesquisar: "
+                            },
+                            columnDefs: [
+                                { "targets": [0], "visible": false, "searchable": false },
+                                { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "6%" },
+                                { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "12%" },
+                                { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "12%" }
+
+                            ]
+                        });
+                }
+                else {
+                    TbDetalhe.DataTable().ajax.reload();
+                }
+            }
+            catch (e) {
+            }
+        }
+    </script>
+}
+
+

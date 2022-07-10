@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRTIPCTAINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 16:57:18
+     Date : 19/03/2022 09:50:22
  Objetivo : Inserção de Registros na Tabela TBTIPCTA
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPCTAINS
@@ -42,7 +42,7 @@ IF OBJECT_ID ( 'dbo.PRTIPCTASEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 16:57:18
+     Date : 19/03/2022 09:50:22
  Objetivo : Obtêm o registro do tipo de conta informado
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPCTASEL
@@ -57,28 +57,12 @@ AS
 
 GO
 
-IF OBJECT_ID ( 'dbo.PRTIPCTASEL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRTIPCTASEL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 04/03/2022 16:57:18
- Objetivo : Obtêm uma lista de todos os tipos de conta
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRTIPCTASEL
-AS
-    SET NOCOUNT ON
-    SELECT A.*, B.DSCTAB AS DSCREC, ISNULL(C.LGNUSU,'') LGNUSU FROM TBTIPCTA (NOLOCK) A INNER JOIN TBTABGER (NOLOCK) B ON (B.NUMTAB=7 AND B.KEYCOD = A.STAREC) LEFT JOIN TBLGNUSU (NOLOCK) C ON (C.CODUSU = A.UPDUSU AND C.REGATV=1 AND C.STAREC=1)
-
-
-GO
-
 IF OBJECT_ID ( 'dbo.PRTIPCTAUPD', 'P' ) IS NOT NULL
     DROP PROCEDURE dbo.PRTIPCTAUPD;
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 16:57:18
+     Date : 19/03/2022 09:50:22
  Objetivo : Altera um registro da tabela TBTIPCTA (Tipos de Conta)  de acordo com a chave primaria
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPCTAUPD

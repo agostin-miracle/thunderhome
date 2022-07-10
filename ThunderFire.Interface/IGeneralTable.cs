@@ -28,19 +28,21 @@ ExecutionResponse Update(GeneralTable model);
     /// <returns>GeneralTable</returns>
 GeneralTable Select(System.Int32 pKEYTAB);
     /// <summary>
-    /// Seleciona um Tipo de Tabela Específica ou Todas se o número da tabela não for especificado
-    /// </summary>
-        /// <param name="pNUMTAB">Código da Tabela de Acesso</param>
-    /// <returns>List of GeneralTable</returns>
-List<GeneralTable> List(System.Int32 pNUMTAB);
-    /// <summary>
     /// Obtêm o Id de Registro de uma Tabela Geral Baseada no Código Chave da Tabela
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  FindKey( System.Int32 pNUMTAB,System.Int32 pKEYCOD);
     /// <summary>
     /// Obtêm o Id de Registro de uma Tabela Geral Baseada no Código Chave Texto da Tabela
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  FindKeyText( System.Int32 pNUMTAB,System.String pKEYTXT);
+/// <summary>
+/// Seleciona todos os registros de um Tipo de tabela informado
+/// </summary>
+    /// <param name="pNUMTAB">Código da Tabela de Acesso</param>
+/// <returns>Listof GeneralTable</returns>
+List<GeneralTable> List(System.Int32? pNUMTAB);
 
     }
 }

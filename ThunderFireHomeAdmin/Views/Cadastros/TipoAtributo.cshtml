@@ -16,48 +16,60 @@
                 <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>
                         <tr>
-                            <th width="15px">Tipo</th>
+                            <th width="15px">Atributo</th>
                             <th width="20%">Descrição</th>
                             <th width="15px">Login</th>
+                            <th width="15px">Conta Virtual</th>
                             <th width="15%">Atualização</th>
-                            <th width="15px">Atualizador</th>
+                            <th width="15px">Por</th>
                             <th>&#160;</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.Lista)
                         {
-                        <tr>
-                            <td class="text-right">
-                                @Html.DisplayFor(modelItem => item.CODATR)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DSCATR)
-                            </td>
-                            <td>
-                                @if (item.USELGN)
-                                {
-                                    @:Sim
-                                }
-                                else
-                                {
-                                    @:Não
-                                }
-                            </td>
-                            <td class="text-center">
-                                @Model.ShowDate(item.DATUPD)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LGNUSU)
-                            </td>
+                            <tr>
+                                <td class="text-right">
+                                    @Html.DisplayFor(modelItem => item.CODATR)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSCATR)
+                                </td>
+                                <td>
+                                    @if (item.USELGN)
+                                    {
+                                        @:Sim
+                                    }
+                                    else
+                                    {
+                                        @:Não
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.USEACT)
+                                    {
+                                        @:Sim
+                                    }
+                                    else
+                                    {
+                                        @:Não
+                                    }
+                                </td>
 
-                            <td>
-                                @if (item.STAREC != 2)
-                                {
-                                    <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.CODATR','@item.DSCATR','@item.USELGN','@item.STAREC');"> <i class="fa fa-edit"></i></button>
-                                }
-                            </td>
-                        </tr>
+                                <td class="text-center">
+                                    @Model.ShowDate(item.DATUPD)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LGNUSU)
+                                </td>
+
+                                <td>
+                                    @if (item.STAREC != 2)
+                                    {
+                                        <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.CODATR','@item.DSCATR','@item.USELGN','@item.STAREC','@item.USEACT');"> <i class="fa fa-edit"></i></button>
+                                    }
+                                </td>
+                            </tr>
                         }
 
                     </tbody>
@@ -81,25 +93,33 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="OPERATION" value="0" />
-                <div class="form-group">
-                    <label for="FCODATR" class="col-form-label">Tipo de Atributo:</label>
-                    <input type="text" class="form-control" id="FCODATR" size="4" maxlength="4" disabled>
+                <div class="form-row">
+                    <label for="FCODATR" class="col-sm-2 control-label form-control-sm">Atributo:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm" id="FCODATR" size="4" maxlength="4" disabled>
+                    </div>
+                    <label for="FDSCATR" class="col-sm-2 control-label form-control-sm">Descrição:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-sm" id="FDSCATR" size="40" maxlength="40" required>
+                    </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="FUSELGN" checked>
+                        <label class="form-check-label mr-4" for="FUSELGN">Permitir Login de Acesso</label>
+                    </div>
 
-                <div class="form-group">
-                    <label for="FDSCATR" class="col-form-label">Descrição:</label>
-                    <input type="text" class="form-control" id="FDSCATR" size="40" maxlength="40" required>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="FUSELGN" checked>
-                    <label class="form-check-label" for="FUSELGN">Permitir Login de Acesso</label>
-                </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="FUSEACT" checked>
+                        <label class="form-check-label mr-4" for="FUSEACT">Permitir Conta Virtual</label>
+                    </div>
 
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
-                    <label class="form-check-label" for="FSTAREC">Ativo</label>
-                </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
+                        <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
 
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -113,60 +133,6 @@
 
 
 @section scripts{
-    <script>
-        $(document).ready(function () {
-            $(document).on("click", "#btn_update", function () {
-                var mode = $("#OPERATION").val();
-                var vurl = "/Cadastros/InsertAttributeType";
-                if (mode == 2)
-                    vurl = "/Cadastros/UpdateAttributeType";
 
-                var VDATA = JSON.stringify({
-                    'CODATR': parseInt($("#FCODATR").val()),
-                    'DSCATR': $("#FDSCATR").val(),
-                    'USELGN': $("#FUSELGN").is(':checked') ? 1 : 0,
-                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
-                });
-                $.ajax({
-                    type: "POST",
-                    url: vurl,
-                    data: VDATA,
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    beforeSend: function () { },
-                    success: function (result) {
-                        console.log(result);
-                        var ok = parseInt(result.ReturnValue);
-                        if (ok > 0) { $('#modalattributetype').modal('toggle'); }
-                        else {
-                            $.alert({ class: 'Warning', title: 'Acesso', message: result.MessageToUser, effect: 'newspaper' });
-                        };
-                    },
-                    error: function (data) {
-                        $.alert({ class: 'danger', title: 'Acesso', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
-                    }
-                });
-            });
-
-        });
-
-
-        function CallForAdd() {
-            $("#OPERATION").val("1");
-            $("#FSTAREC").prop('checked', "true");
-            $('#modalattributetype').modal({ backdrop: 'static', Keyboard: 'true' });
-            $('#modalattributetype').modal('toggle');
-        }
-        function CallForEdit(pCODATR, pDSCATR, pUSELGN, pSTAREC) {
-            $("#OPERATION").val("2");
-            $("#FCODATR").val(pCODATR);
-            $("#FDSCATR").val(pDSCATR);
-            $("#FUSELGN").prop('checked', (pUSELGN == 1));
-            $("#FSTAREC").prop('checked', (pSTAREC == 1));
-            $('#modalattributetype').modal({ backdrop: 'static', Keyboard: 'true' });
-            $('#modalattributetype').modal('toggle');
-        }
-    </script>
+    <script src="~/Scripts/Rules/TipoAtributo.js"></script>
 }
-
-

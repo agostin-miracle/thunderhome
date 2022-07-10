@@ -33,45 +33,25 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.UserTypeModel GetUserType()
         {
             ThunderFireHomeAdmin.Models.UserTypeModel model = new Models.UserTypeModel();
-            ThunderFire.Business.UserTypeDao obj = new ThunderFire.Business.UserTypeDao();
-            model.Lista = obj.List();
+            model.Lista = ThunderFire.Business.Lists.UserTypes();
             return model;
         }
 
         [HttpPost]
-        public JsonResult InsertUserType(UserType entry)
+        public JsonResult AtualizarTipoUsuario(byte modo, UserType entry)
         {
             ThunderFire.Business.UserTypeDao obj = new ThunderFire.Business.UserTypeDao();
-            var result = obj.Insert(entry);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public JsonResult UpdateUserType(UserType entry)
-        {
             ExecutionResponse result = new ExecutionResponse();
-            try
-            {
-                if (entry.DSCTUS != "")
-                {
-                    ThunderFire.Business.UserTypeDao obj = new ThunderFire.Business.UserTypeDao();
-                    result = obj.Update(entry);
-                }
-                else
-                {
-                    result.MessageToUser = "A DESCRICAO DO TIPO DE USUARIO DEVERA SER FORNECIDA";
-                    result.ReturnValue = 0;
-                }
-            }
-            catch (Exception Error)
-            {
-                result.ReturnValue = 0;
-                result.MessageToUser = Error.Message;
-                result.ErrorObject = Error;
-            }
+            entry.UPDUSU = SessionControl.Current.User.CODUSU;
+            if (modo == 1)
+                result = obj.Insert(entry);
+            if (modo == 2)
+                result = obj.Update(entry);
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion -- Tipo de Usuário --
+        #endregion
 
 
 
@@ -88,50 +68,22 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.AttributeTypeModel GetAttributeType()
         {
             ThunderFireHomeAdmin.Models.AttributeTypeModel model = new Models.AttributeTypeModel();
-            ThunderFire.Business.AttributeTypeDao obj = new ThunderFire.Business.AttributeTypeDao();
-            model.Lista = obj.List();
+            model.Lista = ThunderFire.Business.Lists.AttributeTypes();
             return model;
         }
 
         [HttpPost]
-        public JsonResult InsertAttributeType(AttributeType entry)
-        {
-            return Json(ChangeAttributeType(1, entry), JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public JsonResult UpdateAttributeType(AttributeType entry)
-        {
-            return Json(ChangeAttributeType(2, entry), JsonRequestBehavior.AllowGet);
-        }
-
-        private ExecutionResponse ChangeAttributeType(byte modo, AttributeType entry)
+        public JsonResult AtualizarTipoAtributo(byte modo, AttributeType entry)
         {
             ExecutionResponse result = new ExecutionResponse();
-            try
-            {
-                if (!String.IsNullOrWhiteSpace(entry.DSCATR))
-                {
-                    ThunderFire.Business.AttributeTypeDao obj = new ThunderFire.Business.AttributeTypeDao();
-                    entry.UPDUSU = SessionControl.Current.User.CODUSU;
-                    if (modo == 1)
-                        result = obj.Insert(entry);
-                    else
-                        result = obj.Update(entry);
-                }
-                else
-                {
-                    result.MessageToUser = "A DESCRICAO DO TIPO DE ATRIBUTO DEVERÁ SER INFORMADA";
-                    result.ReturnValue = 0;
-                }
-            }
-            catch (Exception Error)
-            {
-                result.ReturnValue = 0;
-                result.MessageToUser = Error.Message;
-                result.ErrorObject = Error;
-            }
-            return result;
+            ThunderFire.Business.AttributeTypeDao obj = new ThunderFire.Business.AttributeTypeDao();
+            entry.UPDUSU = SessionControl.Current.User.CODUSU;
+            if (modo == 1)
+                result = obj.Insert(entry);
+            else
+                result = obj.Update(entry);
 
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion -- Tipo de Usuário --
@@ -150,13 +102,12 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.AccountTypeModel GetAccountType()
         {
             ThunderFireHomeAdmin.Models.AccountTypeModel model = new Models.AccountTypeModel();
-            ThunderFire.Business.AccountTypeDao obj = new ThunderFire.Business.AccountTypeDao();
-            model.Lista = obj.List();
+            model.Lista = ThunderFire.Business.Lists.AccountTypes();
             return model;
         }
 
         [HttpPost]
-        public JsonResult ChangeAccountType(byte modo, AccountType entry)
+        public JsonResult AtualizarTipoConta(byte modo, AccountType entry)
         {
             ExecutionResponse result = new ExecutionResponse();
             try
@@ -178,9 +129,7 @@ namespace ThunderFireHomeAdmin.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion -- Tipo de Usuário --
-
-
+        #endregion
 
 
         #region -- Tipo de Endereço --
@@ -197,40 +146,22 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.AddressTypeModel GetAddressType()
         {
             ThunderFireHomeAdmin.Models.AddressTypeModel model = new Models.AddressTypeModel();
-            ThunderFire.Business.AddressTypeDao obj = new ThunderFire.Business.AddressTypeDao();
-            model.Lista = obj.List();
+            model.Lista = ThunderFire.Business.Lists.AddressTypes();
+
             return model;
         }
+
+
         [HttpPost]
-        public JsonResult InsertAddressType(AddressType entry)
+        public JsonResult AtualizarTipoEndereco(byte modo, AddressType entry)
         {
             ThunderFire.Business.AddressTypeDao obj = new ThunderFire.Business.AddressTypeDao();
-            var result = obj.Insert(entry);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public JsonResult UpdateAddressType(AddressType entry)
-        {
             ExecutionResponse result = new ExecutionResponse();
-            try
-            {
-                if (entry.DSCTEN != "")
-                {
-                    ThunderFire.Business.AddressTypeDao obj = new ThunderFire.Business.AddressTypeDao();
-                    result = obj.Update(entry);
-                }
-                else
-                {
-                    result.MessageToUser = "A DESCRICAO DO TIPO DE ENDEREÇO SER FORNECIDA";
-                    result.ReturnValue = 0;
-                }
-            }
-            catch (Exception Error)
-            {
-                result.ReturnValue = 0;
-                result.MessageToUser = Error.Message;
-                result.ErrorObject = Error;
-            }
+            entry.UPDUSU = SessionControl.Current.User.CODUSU;
+            if (modo == 1)
+                result = obj.Insert(entry);
+            else
+                result = obj.Update(entry);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -251,40 +182,20 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.ContactTypeModel GetContactType()
         {
             ThunderFireHomeAdmin.Models.ContactTypeModel model = new Models.ContactTypeModel();
-            ThunderFire.Business.ContactTypeDao obj = new ThunderFire.Business.ContactTypeDao();
-            model.Lista = obj.List();
+            model.Lista = ThunderFire.Business.Lists.ContactTypes();
             return model;
         }
+
         [HttpPost]
-        public JsonResult InsertContactType(AddressType entry)
+        public JsonResult AtualizarTipoContato(byte modo, ContactType entry)
         {
-            ThunderFire.Business.AddressTypeDao obj = new ThunderFire.Business.AddressTypeDao();
-            var result = obj.Insert(entry);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public JsonResult UpdateAContactType(ContactType entry)
-        {
+            ThunderFire.Business.ContactTypeDao obj = new ThunderFire.Business.ContactTypeDao();
             ExecutionResponse result = new ExecutionResponse();
-            try
-            {
-                if (entry.DSCCTO != "")
-                {
-                    ThunderFire.Business.ContactTypeDao obj = new ThunderFire.Business.ContactTypeDao();
-                    result = obj.Update(entry);
-                }
-                else
-                {
-                    result.MessageToUser = "A DESCRICAO DO TIPO DE ENDEREÇO SER FORNECIDA";
-                    result.ReturnValue = 0;
-                }
-            }
-            catch (Exception Error)
-            {
-                result.ReturnValue = 0;
-                result.MessageToUser = Error.Message;
-                result.ErrorObject = Error;
-            }
+            entry.UPDUSU = SessionControl.Current.User.CODUSU;
+            if (modo == 1)
+                result = obj.Insert(entry);
+            if (modo == 2)
+                result = obj.Update(entry);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -306,21 +217,24 @@ namespace ThunderFireHomeAdmin.Controllers
         {
             ThunderFireHomeAdmin.Models.GeneralTableModel model = new Models.GeneralTableModel();
             ThunderFire.Business.GeneralTableDao obj = new ThunderFire.Business.GeneralTableDao();
-            model.Lista = obj.List(0);
             model.ListaTabela = obj.List(0);
+            model.CNUMTAB = 0;
+            model.FNUMTAB = 0;
             return model;
         }
 
+
         [HttpGet]
-        public JsonResult GetTable(int pNUMTAB)
+        public JsonResult SelecionarTabelaGeral(int pKEYTAB)
         {
             ThunderFire.Business.GeneralTableDao obj = new ThunderFire.Business.GeneralTableDao();
-            var result = obj.List(pNUMTAB);
+            var result = obj.Select(pKEYTAB);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+
         [HttpPost]
-        public JsonResult GeneralTableQuery(int pNUMTAB)
+        public JsonResult Listar(int pNUMTAB)
         {
             string draw = "";
             string start = "";
@@ -360,20 +274,17 @@ namespace ThunderFireHomeAdmin.Controllers
             return Json(resultout, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult InsertGeneralTable(GeneralTable entry)
+        public JsonResult AtualizarTabelaGeral(byte modo, GeneralTable entry)
         {
             ThunderFire.Business.GeneralTableDao obj = new ThunderFire.Business.GeneralTableDao();
-            var result = obj.Insert(entry);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public JsonResult UpdateGeneralTable(GeneralTable entry)
-        {
-            ThunderFire.Business.GeneralTableDao obj = new ThunderFire.Business.GeneralTableDao();
-            var result = obj.Update(entry);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+            ExecutionResponse result = new ExecutionResponse();
+            if (modo == 1)
+                result = obj.Insert(entry);
+            if (modo == 2)
+                result = obj.Update(entry);
 
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
 
@@ -391,28 +302,22 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.ProductLineModel GetProductLine()
         {
             ThunderFireHomeAdmin.Models.ProductLineModel model = new Models.ProductLineModel();
-            ThunderFire.Business.ProductLineDao obj = new ThunderFire.Business.ProductLineDao();
-            model.Lista = obj.List();
+            model.Lista = ThunderFire.Business.Lists.ProductLines();
             return model;
         }
         [HttpPost]
-        public JsonResult ChangeProductLine(byte modo,ProductLine entry)
+        public JsonResult AtualizarLinhaProduto(byte modo, ProductLine entry)
         {
             ThunderFire.Business.ProductLineDao obj = new ThunderFire.Business.ProductLineDao();
             ExecutionResponse result = new ExecutionResponse();
             if (modo == 1)
-            {
                 result = obj.Insert(entry);
-            }
             if (modo == 2)
-            {
                 result = obj.Update(entry);
-            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
-
 
         #region -- Usuarios --
         public ActionResult Usuarios()
@@ -422,63 +327,71 @@ namespace ThunderFireHomeAdmin.Controllers
                 return RedirectToAction("logon", "home");
             }
 
-            ThunderFireHomeAdmin.Models.GeneralRegistryModel model = GetGeneralRegistry();
+            ThunderFireHomeAdmin.Models.UsersModel model = GetGeneralRegistry();
             return View(model);
         }
-        private ThunderFireHomeAdmin.Models.GeneralRegistryModel GetGeneralRegistry()
+        private ThunderFireHomeAdmin.Models.UsersModel GetGeneralRegistry()
         {
-            ThunderFireHomeAdmin.Models.GeneralRegistryModel model = new Models.GeneralRegistryModel();
-            ThunderFire.Business.UserTypeDao obj = new ThunderFire.Business.UserTypeDao();
-            model.ListaTipoUsuario = obj.List();
-            ThunderFire.Business.GeneralTableDao obj1 = new ThunderFire.Business.GeneralTableDao();
-            model.ListaNivelConfianca = obj1.List(ThunderFire.Domain.Constants.TABELA_NIVEL_CONFIANCA);
-            model.ListaGenero = obj1.List(ThunderFire.Domain.Constants.TABELA_GENERO);
-            model.ListaNacionalidade = obj1.List(ThunderFire.Domain.Constants.TABELA_NACIONALIDADES);
-            model.ListaStatusRegistro = obj1.List(ThunderFire.Domain.Constants.TABELA_STATUS_REGISTRO);
-            ThunderFire.Business.GeneralRegistryDao obj3 = new ThunderFire.Business.GeneralRegistryDao();
-            model.ListaGestor = obj3.List(ThunderFire.Domain.Constants.ATRIBUTO_GESTORES, null, null, null, null);
-            ThunderFire.Business.TransactionStatusDao obj4 = new ThunderFire.Business.TransactionStatusDao();
-            model.ListaStatusUsuario = obj4.List(ThunderFire.Domain.Constants.MODULO_CADASTRO_GERAL);
-            ThunderFire.Business.AttributeTypeDao obj5 = new ThunderFire.Business.AttributeTypeDao();
-            model.ListaAtributo = obj5.List();
+            ThunderFireHomeAdmin.Models.UsersModel model = new Models.UsersModel();
+            model.ListaTipoUsuario = ThunderFire.Business.Lists.UserTypes();
+            model.ListaNivelConfianca = ThunderFire.Business.Lists.TrustLevel();
+            model.ListaGenero = ThunderFire.Business.Lists.Genders();
+            model.ListaNacionalidade = ThunderFire.Business.Lists.Nationalities();
+            model.ListaStatusRegistro = ThunderFire.Business.Lists.RegistrationStatus();
+            model.ListaGestor = ThunderFire.Business.Lists.Managers();
+            model.ListaGestor.Add(new MyUsers(0, "GESTOR NAO ASSOCIADO"));
+            model.ListaGestor = model.ListaGestor.OrderBy(P => P.CODUSU).ToList();
+            model.ListaStatusUsuario = ThunderFire.Business.Lists.Transactions((int)ThunderFire.Domain.MODULOS.CADASTRO_GERAL);
+            model.ListaAtributo = ThunderFire.Business.Lists.AttributeTypes();
+
+
+            model.CListaAtributo = ThunderFire.Domain.Constants.AddSeletorBase(model.ListaAtributo);
+            model.CCODATR = -1;
+            model.CListaStatusUsuario = ThunderFire.Domain.Constants.AddSeletorBase(model.ListaStatusUsuario);
+            model.CSTAUSU = -1;
+            model.ListaStatusRegistro = ThunderFire.Domain.Constants.AddSeletorBase(model.ListaStatusRegistro);
+            model.CSTAREC = -1;
+            model.CListaGestor = model.ListaGestor;
+            model.CListaGestor.Add(new MyUsers(-1, "-- SELECIONE --"));
+            model.CListaGestor = model.CListaGestor.OrderBy(P => P.CODUSU).ToList();
+            model.CSRCUSU = -1;
             return model;
         }
+
         [HttpPost]
-        public JsonResult InsertGeneralRegistry(GeneralRegistry entry)
+        public JsonResult AtualizarUsuarios(byte modo, Users entry)
         {
-            ThunderFire.Business.GeneralRegistryDao obj = new ThunderFire.Business.GeneralRegistryDao();
-            var result = obj.Insert(entry);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public JsonResult UpdateGeneralRegistry(GeneralRegistry entry)
-        {
-            ThunderFire.Business.GeneralRegistryDao obj = new ThunderFire.Business.GeneralRegistryDao();
-            var result = obj.Update(entry);
+            ThunderFire.Business.UsersDao obj = new ThunderFire.Business.UsersDao();
+            ExecutionResponse result = new ExecutionResponse();
+            entry.UPDUSU = SessionControl.Current.User.CODUSU;
+            if (modo == 1)
+                result = obj.Insert(entry);
+            if (modo == 2)
+                result = obj.Update(entry);
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SelectGeneralRegistry(int id)
+        public ContentResult SelecionarUsuario(int id)
         {
-            ThunderFire.Business.GeneralRegistryDao obj = new ThunderFire.Business.GeneralRegistryDao();
-            ////ExecutionResponse respond = new ExecutionResponse();
-            //if (id > 0)
-            //{
-            //    var result = obj.Select(id);
-            //    if (obj.Found)
-            //    {
-            //        respond.ReturnValue = result;
-            //    }
-            //    else
-            //    {
-            //        respond.ReturnValue = null;
-            //        respond.MessageToUser = "NAO ENCONTRADO";
-            //    }
-            //}
-            return Json(obj.Select(id), JsonRequestBehavior.AllowGet);
+            ThunderFire.Business.UsersDao obj = new ThunderFire.Business.UsersDao();
+            return Content(CreateJson<Users>(obj.Select(id)), "application/json");
         }
 
-        public JsonResult GeneralRegistryQuery(System.Int16? pCODATR, System.Int16? pSTAUSU, System.Int32? pSRCUSU, string pNOMUSU, System.Byte? pSTAREC)
+        public ContentResult LoginPadrao(int pCODUSU)
+        {
+            ThunderFire.Business.UsersDao obj = new ThunderFire.Business.UsersDao();
+            Users retorno = obj.Select(pCODUSU);
+            if (obj.Found)
+            {
+                string _NOMUSU = retorno.NOMUSU;
+                retorno.NOMUSU = obj.GetDefaultLoginName(_NOMUSU);
+            }
+            return Content(CreateJson<Users>(retorno), "application/json");
+        }
+
+        [HttpPost]
+        public ContentResult PesquisarUsuarios(System.Int16? pCODATR, System.Int16? pSTAUSU, System.Int32? pSRCUSU, string pNOMUSU, System.Byte? pSTAREC)
         {
             string draw = "";
             string start = "";
@@ -499,10 +412,8 @@ namespace ThunderFireHomeAdmin.Controllers
             if (!String.IsNullOrWhiteSpace(length))
                 pageSize = Convert.ToInt32(length);
 
-            ThunderFire.Business.GeneralRegistryDao obj = new ThunderFire.Business.GeneralRegistryDao();
-            var result = obj.List(pCODATR, pSTAUSU, pSRCUSU, pNOMUSU, pSTAREC);
+            List<QueryUsers> result = ThunderFire.Business.Lists.Users(pCODATR, pSTAUSU, pSRCUSU, pNOMUSU, pSTAREC);
             int count = 0;
-            List<QueryGeneralRegistry> data = null;
             if (result != null)
                 count = result.Count;
             var resultout = new DataTableResponse
@@ -512,19 +423,16 @@ namespace ThunderFireHomeAdmin.Controllers
                 recordsFiltered = count
             };
 
+
+            string response = "";
             if (result != null)
             {
-                data = result.Skip(skip).Take(pageSize).ToList();
-
-                if (result != null)
-                {
-                    resultout.data = data.ToArray();
-                }
-
+                response = CreateJson<QueryUsers>(resultout, result.Skip(skip).Take(pageSize).ToList());
             }
+            else
+                response = CreateJson<Operations>(resultout, null);
+            return Content(response, "application/json");
 
-            obj = null;
-            return Json(resultout, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -537,41 +445,39 @@ namespace ThunderFireHomeAdmin.Controllers
                 return RedirectToAction("logon", "home");
             }
 
-            ThunderFireHomeAdmin.Models.ProductManagementModel model = GetProductManagement();
+            ThunderFireHomeAdmin.Models.ProductManagerModel model = GetProductManager();
             return View(model);
         }
 
-        private ThunderFireHomeAdmin.Models.ProductManagementModel GetProductManagement()
+        private ThunderFireHomeAdmin.Models.ProductManagerModel GetProductManager()
         {
-            ThunderFireHomeAdmin.Models.ProductManagementModel model = new Models.ProductManagementModel();
-            ThunderFire.Business.ProductsDao obj = new ThunderFire.Business.ProductsDao();
-            ThunderFire.Business.GeneralRegistryDao obj1 = new ThunderFire.Business.GeneralRegistryDao();
-            model.ListaGestor = obj1.List(ThunderFire.Domain.Constants.ATRIBUTO_GESTORES, null, null, null, null);
+            ThunderFireHomeAdmin.Models.ProductManagerModel model = new Models.ProductManagerModel();
+            model.ListaProduto = ThunderFire.Business.Lists.Products(null);
+            model.ListaGestor = ThunderFire.Business.Lists.UsersManagers();
             return model;
         }
 
-        public JsonResult InsertProductManagement(ProductManagement entry)
+        public JsonResult AtualizarGestorProduto(byte modo, ProductManager entry)
         {
-            ThunderFire.Business.ProductManagementDao obj = new ThunderFire.Business.ProductManagementDao();
-            var result = obj.Insert(entry);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public JsonResult UpdateProductManagement(ProductManagement entry)
-        {
+            ThunderFire.Business.ProductManagerDao obj = new ThunderFire.Business.ProductManagerDao();
             ExecutionResponse result = new ExecutionResponse();
-            if (entry.USUPRO > 0)
-            {
-                ThunderFire.Business.ProductManagementDao obj = new ThunderFire.Business.ProductManagementDao();
+            if (String.IsNullOrEmpty(entry.INSBC1))
+                entry.INSBC1 = "";
+            if (String.IsNullOrEmpty(entry.INSBC2))
+                entry.INSBC3 = "";
+            if (String.IsNullOrEmpty(entry.INSBC3))
+                entry.INSBC3 = "";
+            entry.UPDUSU = SessionControl.Current.User.CODUSU;
+            if (modo == 1)
+                result = obj.Insert(entry);
+            if (modo == 2)
                 result = obj.Update(entry);
-            }
-            else
-            {
-                result.MessageToUser = "O IDENTIFICADOR DO GESTOR NAO FOI FORNECIDO";
-            }
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult QueryProductManangement(System.Int32? pCODUSU, System.Int16? pCODPRO)
+
+        [HttpPost]
+        public JsonResult PesquisarGestorProduto(System.Int32? pCODUSU, System.Int16? pCODPRO)
         {
             string draw = "";
             string start = "";
@@ -592,10 +498,10 @@ namespace ThunderFireHomeAdmin.Controllers
             if (!String.IsNullOrWhiteSpace(length))
                 pageSize = Convert.ToInt32(length);
 
-            ThunderFire.Business.ProductManagementDao obj = new ThunderFire.Business.ProductManagementDao();
-            var result = obj.List(pCODUSU, pCODPRO);
+
+            var result = ThunderFire.Business.Lists.ProductManagers(pCODUSU, pCODPRO);
             int count = 0;
-            List<QueryProductManagement> data = null;
+            List<ProductManager> data = null;
             if (result != null)
                 count = result.Count;
             var resultout = new DataTableResponse
@@ -616,18 +522,18 @@ namespace ThunderFireHomeAdmin.Controllers
 
             }
 
-            obj = null;
+
             return Json(resultout, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult SelectProductManagement(int pUSUPRO)
+        public JsonResult SelecionarGestorProduto(int pUSUPRO)
         {
-            ThunderFire.Business.ProductManagementDao obj = new ThunderFire.Business.ProductManagementDao();
+            ThunderFire.Business.ProductManagerDao obj = new ThunderFire.Business.ProductManagerDao();
             var result = obj.Select(pUSUPRO);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        #endregion -- Usuario Gestor --
+        #endregion
 
 
         #region -- Produtos --
@@ -638,24 +544,25 @@ namespace ThunderFireHomeAdmin.Controllers
                 return RedirectToAction("logon", "home");
             }
 
-            ThunderFireHomeAdmin.Models.ProductsModel model = GetProducts();
+            ThunderFireHomeAdmin.Models.ProductModel model = GetProducts();
             return View(model);
         }
 
-        private ThunderFireHomeAdmin.Models.ProductsModel GetProducts()
+        private ThunderFireHomeAdmin.Models.ProductModel GetProducts()
         {
-            ThunderFireHomeAdmin.Models.ProductsModel model = new Models.ProductsModel();
-            ThunderFire.Business.ProductsDao obj = new ThunderFire.Business.ProductsDao();
-            ThunderFire.Business.ProductLineDao obj1 = new ThunderFire.Business.ProductLineDao();
-            model.ListaLinhaProduto = obj1.List();
+            ThunderFireHomeAdmin.Models.ProductModel model = new Models.ProductModel();
+            model.CListaLinhaProduto = ThunderFire.Business.Lists.ProductLines();
+            model.CListaLinhaProduto.Add(new ProductLine { LINPRO = -1, DSCLIN = "-- SELECIONE --" });
+            model.CListaLinhaProduto = model.CListaLinhaProduto.OrderBy(P => P.LINPRO).ToList();
+            model.ListaLinhaProduto = ThunderFire.Business.Lists.ProductLines();
             return model;
         }
 
         [HttpPost]
-        public JsonResult ChangeProducts(byte modo, Products entry)
+        public JsonResult AtualizarProduto(byte modo, Product entry)
         {
             ExecutionResponse result = new ExecutionResponse();
-            ThunderFire.Business.ProductsDao obj = new ThunderFire.Business.ProductsDao();
+            ThunderFire.Business.ProductDao obj = new ThunderFire.Business.ProductDao();
             entry.UPDUSU = SessionControl.Current.User.CODUSU;
             if (modo == 1)
                 result = obj.Insert(entry);
@@ -665,7 +572,7 @@ namespace ThunderFireHomeAdmin.Controllers
         }
 
 
-        public JsonResult QueryProducts(System.Int16 pLINPRO)
+        public JsonResult PesquisarProduto(System.Int16 pLINPRO)
         {
             string draw = "";
             string start = "";
@@ -688,10 +595,10 @@ namespace ThunderFireHomeAdmin.Controllers
 
 
 
-            ThunderFire.Business.ProductsDao obj = new ThunderFire.Business.ProductsDao();
-            var result = obj.List(pLINPRO);
+
+            var result = ThunderFire.Business.Lists.Products(pLINPRO);
             int count = 0;
-            List<QueryProducts> data = null;
+            List<Product> data = null;
             if (result != null)
                 count = result.Count;
             var resultout = new DataTableResponse
@@ -711,20 +618,18 @@ namespace ThunderFireHomeAdmin.Controllers
                 }
             }
 
-            obj = null;
+
             return Json(resultout, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult SelectProducts(short pCODPRO)
+        public JsonResult SelecionarProduto(short pCODPRO)
         {
-            ThunderFire.Business.ProductsDao obj = new ThunderFire.Business.ProductsDao();
+            ThunderFire.Business.ProductDao obj = new ThunderFire.Business.ProductDao();
             var result = obj.Select(pCODPRO);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-
-        #endregion -- Produtos --
+        #endregion 
 
 
 
@@ -749,8 +654,6 @@ namespace ThunderFireHomeAdmin.Controllers
             ThunderFire.Business.LoginUserDao obj = new ThunderFire.Business.LoginUserDao();
             return Json(obj.Get(id), JsonRequestBehavior.AllowGet);
         }
-
-
         #endregion
 
 
@@ -770,39 +673,26 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.AddressBookModel GetAddressBook()
         {
             ThunderFireHomeAdmin.Models.AddressBookModel model = new Models.AddressBookModel();
-            int _usercode = 0;
             int _usersel = 0;
+            int _usercode = 0;
             try
             {
-                _usercode = int.Parse(HttpContext.Request["usercode"].FirstOrDefault().ToString());
+                _usercode = int.Parse(HttpContext.Request["uc"].FirstOrDefault().ToString());
             }
             catch { }
 
-            try
-            {
-                _usersel = int.Parse(HttpContext.Request["USRSEL"].FirstOrDefault().ToString());
-            }
-            catch { }
-
-            model.CodigoUsuario = _usercode;
+            model.CCODUSU = _usercode;
             model.UsuarioSelecionado = _usersel;
-            ThunderFire.Business.GeneralRegistryDao obj1 = new ThunderFire.Business.GeneralRegistryDao();
-            model.ListaUsuario = obj1.List(null, null, null, null, null);
-            if (_usercode > 0)
-                model.ListaUsuario = model.ListaUsuario.Where(p => p.CODUSU == _usercode).ToList();
-
-            ThunderFire.Business.GeneralTableDao obj2 = new ThunderFire.Business.GeneralTableDao();
-            model.ListaUF = obj2.List(ThunderFire.Domain.Constants.TABELA_UNIDADES_FEDERACAO);
-
-            model.ListaTipoLogradouro = obj2.List(ThunderFire.Domain.Constants.TABELA_LOGRADOUROS);
-            ThunderFire.Business.AddressTypeDao obj3 = new ThunderFire.Business.AddressTypeDao();
-            model.ListaTipoEndereco = obj3.List();
-            model.ListaPais = obj2.List(ThunderFire.Domain.Constants.TABELA_PAISES);
+            model.ListaUsuario = ThunderFire.Business.Lists.Users(_usercode, null);
+            model.ListaUF = ThunderFire.Business.Lists.UF();
+            model.ListaTipoLogradouro = ThunderFire.Business.Lists.PublicPlaces();
+            model.ListaTipoEndereco = ThunderFire.Business.Lists.AddressTypes();
+            model.ListaPais = ThunderFire.Business.Lists.Countries();
             return model;
         }
 
         [HttpPost]
-        public JsonResult ChangeAddressBook(byte modo, AddressBook entry)
+        public JsonResult AtualizarEnderecos(byte modo, AddressBook entry)
         {
             ExecutionResponse result = new ExecutionResponse();
             ThunderFire.Business.AddressBookDao obj = new ThunderFire.Business.AddressBookDao();
@@ -813,7 +703,7 @@ namespace ThunderFireHomeAdmin.Controllers
                 result = obj.Update(entry);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult QueryAddressBook(System.Int32 pCODUSU, short pTIPEND, short pREGATV, short pSTAREC)
+        public JsonResult PesquisarEnderecos(System.Int32 pCODUSU, short pTIPEND, short pREGATV, short pSTAREC)
         {
             string draw = "";
             string start = "";
@@ -834,10 +724,8 @@ namespace ThunderFireHomeAdmin.Controllers
             if (!String.IsNullOrWhiteSpace(length))
                 pageSize = Convert.ToInt32(length);
 
-        
 
-            ThunderFire.Business.AddressBookDao obj = new ThunderFire.Business.AddressBookDao();
-            var result = obj.List(pCODUSU, pTIPEND, pREGATV,pSTAREC);
+            var result = ThunderFire.Business.Lists.Addresses(pCODUSU, pTIPEND, pREGATV, pSTAREC);
             int count = 0;
             List<QueryAddressBook> data = null;
             if (result != null)
@@ -858,19 +746,17 @@ namespace ThunderFireHomeAdmin.Controllers
                     resultout.data = data.ToArray();
                 }
             }
-
-            obj = null;
             return Json(resultout, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult SelectAddressBook(int pCODEND)
+        public JsonResult SelecionarEndereco(int pCODEND)
         {
             ThunderFire.Business.AddressBookDao obj = new ThunderFire.Business.AddressBookDao();
             var result = obj.Select(pCODEND);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        #endregion -- Enderecos --
+        #endregion 
 
         #region  -- Contatos --
 
@@ -887,40 +773,29 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.ContactBookModel GetContactBook()
         {
             ThunderFireHomeAdmin.Models.ContactBookModel model = new Models.ContactBookModel();
-            int _usercode = 0;
-            int _addresscode = 0;
             try
             {
-                _usercode = int.Parse(HttpContext.Request["usercode"].FirstOrDefault().ToString());
-                _addresscode = int.Parse(HttpContext.Request["addresscode"].FirstOrDefault().ToString());
+                model.PCODUSU = int.Parse(HttpContext.Request["uc"].FirstOrDefault().ToString());
             }
             catch { }
 
             try
             {
-                _addresscode = int.Parse(HttpContext.Request["USRSEL"].FirstOrDefault().ToString());
+                model.CCODEND = int.Parse(HttpContext.Request["ce"].FirstOrDefault().ToString());
             }
             catch { }
 
-            model.CodigoUsuario = _usercode;
-            model.CodigoEndereco = _addresscode;
-
-            ThunderFire.Business.GeneralRegistryDao obj1 = new ThunderFire.Business.GeneralRegistryDao();
-            model.ListaUsuario = obj1.List(null, null, null, null, null);
-            if (_usercode > 0)
-                model.ListaUsuario = model.ListaUsuario.Where(p => p.CODUSU == _usercode).ToList();
-
-            ThunderFire.Business.GeneralTableDao obj2 = new ThunderFire.Business.GeneralTableDao();
-            model.ListaOperadora = obj2.List(ThunderFire.Domain.Constants.TABELA_OPERADORAS_TELEFONIA);
-            model.ListaPais = obj2.List(ThunderFire.Domain.Constants.TABELA_PAISES);
-            ThunderFire.Business.ContactTypeDao obj3 = new ThunderFire.Business.ContactTypeDao();
-            model.ListaTipoContato = obj3.List();
+            model.ListaUsuario = ThunderFire.Business.Lists.Users(model.PCODUSU, null);
+            model.ListaOperadora = ThunderFire.Business.Lists.TelephoneOperators();
+            model.ListaPais = ThunderFire.Business.Lists.Countries();
+            model.ListaTipoContato = ThunderFire.Business.Lists.ContactTypes();
+            model.CCODUSU = model.PCODUSU;
             return model;
         }
 
 
         [HttpPost]
-        public JsonResult ChangeContactBook(byte modo, ContactBook entry)
+        public JsonResult AtualizarContato(byte modo, ContactBook entry)
         {
             ExecutionResponse result = new ExecutionResponse();
             ThunderFire.Business.ContactBookDao obj = new ThunderFire.Business.ContactBookDao();
@@ -931,7 +806,7 @@ namespace ThunderFireHomeAdmin.Controllers
                 result = obj.Update(entry);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult QueryContactBook(System.Int32 pCODUSU)
+        public JsonResult PesquisarContatos(System.Int32 pCODUSU)
         {
             string draw = "";
             string start = "";
@@ -954,8 +829,7 @@ namespace ThunderFireHomeAdmin.Controllers
 
 
 
-            ThunderFire.Business.ContactBookDao obj = new ThunderFire.Business.ContactBookDao();
-            var result = obj.List(pCODUSU);
+            var result = ThunderFire.Business.Lists.Contacts(pCODUSU);
             int count = 0;
             List<QueryContactBook> data = null;
             if (result != null)
@@ -976,20 +850,18 @@ namespace ThunderFireHomeAdmin.Controllers
                     resultout.data = data.ToArray();
                 }
             }
-
-            obj = null;
             return Json(resultout, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult SelectContactBook(int pCODCTO)
+        public JsonResult SelecionarContato(int pCODCTO)
         {
             ThunderFire.Business.ContactBookDao obj = new ThunderFire.Business.ContactBookDao();
             var result = obj.Select(pCODCTO);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        #endregion -- Endereços --
+        #endregion 
 
 
         #region -- Status Transacao --
@@ -1007,13 +879,14 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.TransactionStatusModel GetTransactionStatus()
         {
             ThunderFireHomeAdmin.Models.TransactionStatusModel model = new Models.TransactionStatusModel();
-            ThunderFire.Business.GeneralTableDao obj = new ThunderFire.Business.GeneralTableDao();
-            model.ListaModulos = obj.List(ThunderFire.Domain.Constants.TABELA_MODULOS);
+            model.ListaModulos = ThunderFire.Business.Lists.Modules();
+            model.CCODMOD = 1;
+            model.FCODMOD = 1;
             return model;
         }
 
         [HttpPost]
-        public JsonResult ChangeTransactionStatus(byte modo, TransactionStatus entry)
+        public JsonResult AtualizarStatusTransacao(byte modo, TransactionStatus entry)
         {
             ExecutionResponse result = new ExecutionResponse();
             ThunderFire.Business.TransactionStatusDao obj = new ThunderFire.Business.TransactionStatusDao();
@@ -1022,11 +895,28 @@ namespace ThunderFireHomeAdmin.Controllers
                 result = obj.Insert(entry);
             if (modo == 2)
                 result = obj.Update(entry);
+
+
+            if (obj.HasError)
+            {
+                result = GetNewResponse(result);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        private ExecutionResponse GetNewResponse(ExecutionResponse result)
+        {
+            ExecutionResponse r = new ExecutionResponse();
+            r.ReturnValue = result.ReturnValue;
+            r.StatusCode = result.StatusCode;
+            r.ErrorMessage = result.ErrorMessage;
+            r.SourceError = result.SourceError;
+            r.ErrorCode = result.ErrorCode;
+            r.MessageToUser = result.MessageToUser;
+            return r;
+        }
 
-        public JsonResult QueryTransactionStatus(System.Int16 pCODMOD)
+        public JsonResult PesquisarStatusTransacao(System.Int16 pCODMOD)
         {
             string draw = "";
             string start = "";
@@ -1048,11 +938,10 @@ namespace ThunderFireHomeAdmin.Controllers
                 pageSize = Convert.ToInt32(length);
 
 
+            var result = ThunderFire.Business.Lists.Transactions(pCODMOD);
 
-            ThunderFire.Business.TransactionStatusDao obj = new ThunderFire.Business.TransactionStatusDao();
-            var result = obj.List(pCODMOD);
             int count = 0;
-            List<QueryTransactionStatus> data = null;
+            List<TransactionStatus> data = null;
             if (result != null)
                 count = result.Count;
             var resultout = new DataTableResponse
@@ -1072,23 +961,112 @@ namespace ThunderFireHomeAdmin.Controllers
                 }
             }
 
-            obj = null;
+
             return Json(resultout, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult SelectTransactionStatus(short pCODSTA)
+        public JsonResult SelecionarStatusTransacao(short pCODSTA)
         {
             ThunderFire.Business.TransactionStatusDao obj = new ThunderFire.Business.TransactionStatusDao();
             var result = obj.Select(pCODSTA);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        #endregion 
+
+        #region -- Operacoes --
+        public ActionResult Operacoes()
+        {
+            if (!SessionControl.IsLogged())
+            {
+                return RedirectToAction("logon", "home");
+            }
+
+            ThunderFireHomeAdmin.Models.OperationsModel model = GetOperations();
+            return View(model);
+        }
+
+        private ThunderFireHomeAdmin.Models.OperationsModel GetOperations()
+        {
+            ThunderFireHomeAdmin.Models.OperationsModel model = new Models.OperationsModel();
+            ThunderFire.Business.GeneralTableDao obj = new ThunderFire.Business.GeneralTableDao();
+            model.ListaSinais = ThunderFire.Business.Lists.Signals();
+            model.ListaSubSistema = ThunderFire.Business.Lists.Subsystems();
+            model.ListaCondicaoBloqueio = ThunderFire.Business.Lists.BlockingCondition();
+            model.FSIGOPE = 0;
+            model.CSUBSYS = 1;
+            model.FCNDBLO = 1;
+            model.FSIGOPE = 1;
+            return model;
+        }
+
+        [HttpPost]
+        public JsonResult AtualizarOperacao(byte modo, Operations entry)
+        {
+            ExecutionResponse result = new ExecutionResponse();
+            ThunderFire.Business.OperationsDao obj = new ThunderFire.Business.OperationsDao();
+            entry.UPDUSU = SessionControl.Current.User.CODUSU;
+            if (modo == 1)
+                result = obj.Insert(entry);
+            if (modo == 2)
+                result = obj.Update(entry);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult SelecionarOperacao(short pCODMOV)
+        {
+            ThunderFire.Business.OperationsDao obj = new ThunderFire.Business.OperationsDao();
+            var result = obj.Select(pCODMOV);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ContentResult ListarOperacoes(byte? pSUBSYS)
+        {
+            string draw = "";
+            string start = "";
+            string length = "";
+            int skip = 0;
+            int pageSize = 0;
+            try
+            {
+                draw = HttpContext.Request.Form["draw"].FirstOrDefault().ToString();
+                start = Request.Form["start"].ToString();
+                length = Request.Form["length"].ToString();
+            }
+            catch { }
+
+            if (!String.IsNullOrWhiteSpace(start))
+                skip = Convert.ToInt32(start);
+
+            if (!String.IsNullOrWhiteSpace(length))
+                pageSize = Convert.ToInt32(length);
 
 
-        #endregion -- StatusTransacao --
+            var result = ThunderFire.Business.Lists.Operations(pSUBSYS);
+            int count = 0;
+
+            if (result != null)
+                count = result.Count;
+            var resultout = new DataTableResponse
+            {
+                draw = int.Parse(draw),
+                recordsTotal = count,
+                recordsFiltered = count
+            };
+
+            string response = "";
+            if (result != null)
+            {
+                response = CreateJson<Operations>(resultout, result.Skip(skip).Take(pageSize).ToList());
+            }
+            else
+                response = CreateJson<Operations>(resultout, null);
+            return Content(response, "application/json");
+        }
+        #endregion
 
         #region -- Conta Virtual --
-
         public ActionResult ContaVirtual()
         {
             if (!SessionControl.IsLogged())
@@ -1103,21 +1081,34 @@ namespace ThunderFireHomeAdmin.Controllers
         private ThunderFireHomeAdmin.Models.VirtualAccountModel GetVirtualAccount()
         {
             ThunderFireHomeAdmin.Models.VirtualAccountModel model = new Models.VirtualAccountModel();
-            ThunderFire.Business.GeneralTableDao obj = new ThunderFire.Business.GeneralTableDao();
-            model.ListaBancos = obj.List(ThunderFire.Domain.Constants.TABELA_BANCOS);
-            model.ListaOrigemConta = obj.List(ThunderFire.Domain.Constants.TABELA_ORIGEM_CONTA);
-            model.ListaTipoBeneficiario = obj.List(ThunderFire.Domain.Constants.TABELA_TIPO_BENEFICIARIO);
-            ThunderFire.Business.TransactionStatusDao obj1 = new ThunderFire.Business.TransactionStatusDao();
-            model.ListaStatusConta = obj1.List(ThunderFire.Domain.Constants.MODULO_CONTAS);
-            ThunderFire.Business.GeneralRegistryDao obj2 = new ThunderFire.Business.GeneralRegistryDao();
-            model.ListaUsuario = obj2.ListUserAccounts();
-            ThunderFire.Business.AccountTypeDao obj3 = new ThunderFire.Business.AccountTypeDao();
-            model.ListaTipoConta = obj3.List();
+
+            int _CODUSU = SessionControl.Current.User.CODUSU;
+
+            try
+            {
+                model.PCODUSU = int.Parse(HttpContext.Request["uc"].FirstOrDefault().ToString());
+            }
+            catch { }
+
+
+            model.ListaBancos = ThunderFire.Business.Lists.Banks();
+            model.ListaOrigemConta = ThunderFire.Business.Lists.AccountOrigin();
+            model.ListaStatusConta = ThunderFire.Business.Lists.Transactions((int)ThunderFire.Domain.MODULOS.CONTAS);
+            model.CListaStatusConta = ThunderFire.Business.Lists.Transactions((int)ThunderFire.Domain.MODULOS.CONTAS);
+            model.CListaStatusConta.Add(new TransactionStatus { CODSTA = -1, DSCSTA = "-- SELECIONE --" });
+            model.ListaTipoBeneficiario = ThunderFire.Business.Lists.BeneficiaryTypes();
+            model.ListaTipoConta = ThunderFire.Business.Lists.AccountTypes();
+            model.ListaUsuario = ThunderFire.Business.Lists.UsersAccounts(model.PCODUSU);
+            model.CListaUsuario = ThunderFire.Business.Lists.UsersAccounts(model.PCODUSU);
+            model.CListaUsuario.Add(new MyUsers { CODUSU = -1, NOMUSU = "-- SELECIONE --" });
+            model.APPROVAL_ACCOUNT = ThunderFire.Business.Actions.GetUserAccess(model.PROCESS_ID, 205, _CODUSU) == 1;
+            model.CListaStatusConta = model.CListaStatusConta.OrderBy(p => p.CODSTA).ToList();
+            model.CListaUsuario = model.CListaUsuario.OrderBy(p => p.CODUSU).ToList();
             return model;
         }
 
         [HttpPost]
-        public JsonResult ChangeVirtualAccount(byte modo, VirtualAccount entry)
+        public JsonResult AtualizarContaVirtual(byte modo, VirtualAccount entry)
         {
             ExecutionResponse result = new ExecutionResponse();
             ThunderFire.Business.VirtualAccountDao obj = new ThunderFire.Business.VirtualAccountDao();
@@ -1130,16 +1121,16 @@ namespace ThunderFireHomeAdmin.Controllers
         }
 
         [HttpGet]
-        public JsonResult SelectVirtualAccount(short pNIDCTA)
+        public ContentResult SelecionarContaVirtual(int pNIDCTA)
         {
             ThunderFire.Business.VirtualAccountDao obj = new ThunderFire.Business.VirtualAccountDao();
-            var result = obj.Select(pNIDCTA);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Content(CreateJson<VirtualAccount>(obj.Select(pNIDCTA)), "application/json");
+
         }
 
-        public JsonResult QueryVirtualAccount()
+        public ContentResult PesquisarContasVirtuais(short? pSTACTA, string pNOMUSU="")
         {
-            string draw = "";
+            string draw = "1";
             string start = "";
             string length = "";
             int skip = 0;
@@ -1159,11 +1150,8 @@ namespace ThunderFireHomeAdmin.Controllers
                 pageSize = Convert.ToInt32(length);
 
 
-
-            ThunderFire.Business.VirtualAccountDao obj = new ThunderFire.Business.VirtualAccountDao();
-            var result = obj.List();
+            var result = ThunderFire.Business.Lists.Accounts (pSTACTA,pNOMUSU);
             int count = 0;
-            List<QueryVirtualAccount> data = null;
             if (result != null)
                 count = result.Count;
             var resultout = new DataTableResponse
@@ -1173,21 +1161,171 @@ namespace ThunderFireHomeAdmin.Controllers
                 recordsFiltered = count
             };
 
+            string response = "";
             if (result != null)
             {
-                data = result.Skip(skip).Take(pageSize).ToList();
+                response = CreateJson<Accounts>(resultout, result.Skip(skip).Take(pageSize).ToList());
+            }
+            else
+                response = CreateJson<Accounts>(resultout, null);
+            return Content(response, "application/json");
+        }
 
-                if (result != null)
-                {
-                    resultout.data = data.ToArray();
-                }
+        #endregion
+
+
+        #region -- Contas Vinculadas --
+        public ActionResult ContaVinculada()
+        {
+            if (!SessionControl.IsLogged())
+            {
+                return RedirectToAction("logon", "home");
             }
 
-            obj = null;
-            return Json(resultout, JsonRequestBehavior.AllowGet);
+            ThunderFireHomeAdmin.Models.LinkedAccountModel model = GetLinkedAccount();
+            return View(model);
+        }
+
+        private ThunderFireHomeAdmin.Models.LinkedAccountModel GetLinkedAccount()
+        {
+            ThunderFireHomeAdmin.Models.LinkedAccountModel model = new Models.LinkedAccountModel();
+            int _CODUSU = SessionControl.Current.User.CODUSU;
+            try
+            {
+                model.PCODUSU = int.Parse(HttpContext.Request["uc"].FirstOrDefault().ToString());
+            }
+            catch { }
+
+            model.CanRemoveLinkId = 1;
+            if (ThunderFire.Business.Support.HasAccess(35, 200, SessionControl.Current.User.CODUSU))
+                model.CanRemoveLinkId = 0;
+
+            model.ListaUsuario = ThunderFire.Business.Lists.Users(null,null);
+            return model;
+        }
+
+        [HttpPost]
+        public JsonResult AtualizarContaVinculada(byte modo, LinkedAccount entry)
+        {
+            ExecutionResponse result = new ExecutionResponse();
+            ThunderFire.Business.LinkedAccountDao obj = new ThunderFire.Business.LinkedAccountDao();
+            entry.UPDUSU = SessionControl.Current.User.CODUSU;
+            if (modo == 1)
+                result = obj.Insert(entry);
+            if (modo == 2)
+                result = obj.Update(entry);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult RemoverContaVinculada(int pNIDCVL)
+        {
+            ExecutionResponse result = new ExecutionResponse();
+            if (pNIDCVL > 0)
+            {
+                ThunderFire.Business.LinkedAccountDao obj = new ThunderFire.Business.LinkedAccountDao();
+                LinkedAccount data = obj.Select(pNIDCVL);
+                if (obj.Found)
+                {
+                    int return_value = obj.RemoveLinkedID(data.CODUSU, data.NIDCTA, SessionControl.Current.User.CODUSU);
+                    result.ReturnValue = return_value;
+                    if (return_value > 0)
+                        result.MessageToUser = "CONTA REMOVIDA COM SUCESSO";
+                    else
+                    {
+
+                        result.MessageToUser =obj.MessageToUser;
+                    }
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult CarregarUsuariosLinkados(int pCODUSU)
+        {
+            var result = ThunderFire.Business.Lists.UsersLinkeds(pCODUSU);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
 
-        #endregion -- Conta Virtual --
+        public ContentResult PesquisarContasVinculadas(string pNOMUSU = "")
+        {
+            string draw = "1";
+            string start = "";
+            string length = "";
+            int skip = 0;
+            int pageSize = 0;
+            try
+            {
+                draw = HttpContext.Request.Form["draw"].FirstOrDefault().ToString();
+                start = Request.Form["start"].ToString();
+                length = Request.Form["length"].ToString();
+            }
+            catch { }
+
+            if (!String.IsNullOrWhiteSpace(start))
+                skip = Convert.ToInt32(start);
+
+            if (!String.IsNullOrWhiteSpace(length))
+                pageSize = Convert.ToInt32(length);
+
+
+            var result = ThunderFire.Business.Lists.LinkedAccounts(pNOMUSU);
+            int count = 0;
+            if (result != null)
+                count = result.Count;
+            var resultout = new DataTableResponse
+            {
+                draw = int.Parse(draw),
+                recordsTotal = count,
+                recordsFiltered = count
+            };
+
+            string response = "";
+            if (result != null)
+            {
+                response = CreateJson<LinkedAccount>(resultout, result.Skip(skip).Take(pageSize).ToList());
+            }
+            else
+                response = CreateJson<Accounts>(resultout, null);
+            return Content(response, "application/json");
+        }
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region -- Métodos Privados --
+        private string CreateJson<T>(DataTableResponse resultout, List<T> dados)
+        {
+            string b = "\"draw\":{0},\"recordsTotal\":{1},\"recordsFiltered\":{2},\"error\":{3},\"data\":{4}";
+            string _list = "";
+            if (dados != null)
+            {
+                _list = ThunderFire.JsonUtil.Serialize<List<T>>(dados);
+            }
+            string json = String.Format(b, resultout.draw, resultout.recordsTotal, resultout.recordsFiltered, "null", _list);
+            return "{" + json + "}";
+        }
+        private string CreateJson<T>(T dados)
+        {
+            return ThunderFire.JsonUtil.Serialize<T>(dados);
+        }
+
+        #endregion
+
+
     }
 }

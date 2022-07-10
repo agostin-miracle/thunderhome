@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Financeiro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">@ViewBag.Title</h5>
+    </div>
+    <div class="card-body">
+        <div class="row text-center pad-top">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="~/Financeiro/TipoLancamento">
+                        <i class="fa-solid fa-list-tree" style="font-size:36px"></i>
+                        <h5>Tipos de Lançamento</h5>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="~/Financeiro/Boletos">
+                        <i class="fa fa-ticket" style="font-size:36px"></i>
+                        <h5>Boletos</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="~/Financeiro/BaixaBoletoManual">
+                        <i class="fa-solid fa-money-check" style="font-size:36px"></i>
+                        <h5>Baixa Manual</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
+                <div class="div-square">
+                    <a href="~/Financeiro/Transferencias">
+                        <i class="fa-solid fa-money-check" style="font-size:36px"></i>
+                        <h5>Transferencias</h5>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

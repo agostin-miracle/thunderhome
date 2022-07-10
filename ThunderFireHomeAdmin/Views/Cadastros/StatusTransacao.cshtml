@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="modal fade" id="modaltransactionstatus" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+<div class="modal fade" id="modaltransacoes" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,38 +16,40 @@
             <div class="modal-body">
                 <input type="hidden" id="OPERATION" value="0" />
                 <input type="hidden" id="FNXTSTA" value="0" />
-                <div class="form-group row">
+                <div class="form-row">
                     <label for="FCODMOD" class="col-sm-2 control-label form-control-sm">Linha:</label>
                     <div class="col-sm-10">
-                        <select class="form-control form-control-sm" id="FCODMOD" style="max-width:80%;">
-                            @if (Model.ListaModulos != null)
-                            {
-                                foreach (var item in Model.ListaModulos)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
-                                }
-                            }
-                        </select>
+
+                        @if (Model.ListaModulos != null)
+                        {
+                            @Html.DropDownListFor(model => model.FCODMOD, new SelectList(Model.ListaModulos, "KEYCOD", "DSCTAB", Model.FCODMOD), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-row">
                     <label for="FCODSTA" class="col-sm-2 control-label form-control-sm">Código:</label>
-                    <input type="text" class="form-control" id="FCODPRO" size="6" maxlength="6" required>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm numero" id="FCODSTA" size="6" maxlength="6" required>
+                    </div>
+                    <label for="FDSCSTA" class="col-sm-2 control-label form-control-sm">Descrição:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-" id="FDSCSTA" size="50" maxlength="70" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="FDSCSTA" class="col-form-label">Descrição:</label>
-                    <input type="text" class="form-control" id="FDSCSTA" size="50" maxlength="50" required>
-                </div>
-                <div class="form-check">
+                <div class="form-check form-check-inline" ">
                     <input class="form-check-input form-control-sm" type="checkbox" value="" id="FCANCHG" checked>
-                    <label class="form-check-label form-control-sm" for="FCANCHG">Altera movimento</label>
+                    <label class="form-check-label form-control-sm" for="FCANCHG">Alterar movimento</label>
                 </div>
-                <div class="form-check">
+
+
+                <div class="form-check form-check-inline" ">
                     <input class="form-check-input form-control-sm" type="checkbox" value="" id="FDELMEN">
                     <label class="form-check-label form-control-sm" for="FDELMEN">Excluir Mensalidade</label>
                 </div>
-                <div class="form-check">
+
+
+                <div class="form-check form-check-inline" ">
                     <input class="form-check-input form-control-sm" type="checkbox" value="" id="FSTAREC" checked>
                     <label class="form-check-label form-control-sm" for="FSTAREC">Ativo</label>
                 </div>
@@ -68,28 +70,22 @@
         </div>
         <div class="card-body">
             <div class="form-group row">
-                <label for="CCODMOD" class="col-sm-2 control-label form-control-sm">Linha:</label>
+                <label for="CCODMOD" class="col-sm-2 control-label form-control-sm">Módulo:</label>
                 <div class="col-sm-10">
-                    <select class="form-control form-control-sm" id="CCODMOD" style="max-width:80%;">
-                        <option value="-1">Selecione</option>
-                        @if (Model.ListaModulos != null)
-                        {
-                            foreach (var item in Model.ListaModulos)
-                            {
-                                <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
-                            }
-                        }
-                    </select>
+                    @if (Model.ListaModulos != null)
+                    {
+                        @Html.DropDownListFor(model => model.CCODMOD, new SelectList(Model.ListaModulos, "KEYCOD", "DSCTAB", Model.CCODMOD), new { @class = "form-control form-control-sm" })
+                    }
                 </div>
             </div>
 
             <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
             <hr />
             <div class="table-responsive">
-                <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                <table id="tbtransacoes" class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>Código</th>
                             <th>Status</th>
                             <th>Módulo</th>
                             <th>Descrição</th>
@@ -107,141 +103,8 @@
 
 
 @section scripts{
-    <script>
-        $(document).ready(function () {
-            commandquery = "/Cadastros/QueryProducts";
-            $('#gridshow').DataTable(
-                {
-                    paging: true,
-                    searching: false,
-                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
-                    processing: true,
-                    serverSide: true,
-                    orderMulti: false,
-                    ajax: {
-                        url: commandquery,
-                        type: "POST",
-                        datatype: "json",
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-                        data: {
-                            pLINPRO: function () { return $('#CLINPRO').val() }
-                        }
-                    },
 
-                    columns: [
-                        { data: "CODSTA" },
-                        { data: "DSCREC" },
-                        { data: "DSCMOD" },
-                        { data: "DSCSTA" },
-                        { data: "LGNUSU" },
-                        {
-                            "render": function (data, type, row) {
-                                return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.CODPRO + "');\"> <i class='fas fa-edit'></i></button>&nbsp;"
-                            }
-                        }
-                    ],
-                    "language": {
-                        "processing": "Aguarde, buscando informações",
-                        "loadingRecords": "Carregando",
-                    },
-                    "pageLength": 10,
-                    "oLanguage": {
-                        "sLengthMenu": "Mostrar _MENU_ registros por página",
-                        "sZeroRecords": "Nenhum registro encontrado",
-                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
-                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
-                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
-                        "sSearch": "Pesquisar: "
-                    },
-                    columnDefs: [
-                        { "targets": [0], "visible": true, "searchable": false },
-                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "12px" },
-                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "60px" },
-                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "60px" },
-                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "15px" },
-                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "30px" },
-                    ]
-                });
-
-
-
-
-            $(document).on("click", "#btn_update", function () {
-                var mode = $("#OPERATION").val();
-                var vurl = "/Cadastros/ChangeTransactionStatus?modo=" + mode;
-                var vNOMFAN = $('#FNOMFAN').val();
-                if (vNOMFAN === "" || vNOMFAN == null)
-                    vNOMFAN = "";
-                var VDATA = JSON.stringify({
-                    'CODSTA': parseInt($("#FCODSTA").val()),
-                    'DSCSTA': $("#FDSCSTA").val(),
-                    'CODMOD': parseInt($("#FCODMOD").val()),
-                    'NXTSTA': $("#FNXTSTA").val(),
-                    'CANCHG': $("#FCANCHG").is(':checked') ? 1 : 0,
-                    'DELMEN': $("#FDELMEN").is(':checked') ? 1 : 0,
-                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
-                });
-                $.ajax({
-                    type: "POST",
-                    url: vurl,
-                    data: VDATA,
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    beforeSend: function () { },
-                    success: function (result) {
-                        console.log(result);
-                        var ok = parseInt(result.ReturnValue);
-                        if (ok > 0) { $('#modaltransactionstatus').modal('toggle'); }
-                        else { Alertar(result.MessageToUser, 'alert-danger') };
-                    },
-                    error: function (data) {
-                        $.alert({ class: 'danger', title: 'Produtos', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
-                    }
-                });
-            });
-
-        });
-
-
-        function CallForAdd() {
-
-            var value = $('#CCODMOD').val();
-            if (value > 0) {
-                $("#OPERATION").val("1");
-                $("#FSTAREC").prop('checked', "true");
-                $("#FCODMOD").val(value);
-                $("#FCODMOD").prop('disabled', true);
-                $('#modaltransactionstatus').modal({ backdrop: 'static', Keyboard: 'true' });
-                $('#modaltransactionstatus').modal('toggle');
-            }
-            else {
-                $.alert({ class: 'danger', title: 'Produtos', message: 'Selecione uma Módulo válido', effect: 'zoom' });
-            }
-        }
-        function CallForEdit(pCODSTA) {
-            $("#OPERATION").val("2");
-            $.ajax({
-                type: "GET",
-                url: "/Cadastros/SelecTransactionStatus",
-                data: { pCODSTA: pCODSTA },
-                dataType: 'json',
-                success: function (result) {
-                    $("#FCODSTA").val(result.CODSTA);
-                    $("#FDSCSTA").val(result.DSCSTA);
-                    $("#FCODMOD").val(result.CODMOD);
-                    $("#FCODMOD").prop('disabled', true);
-                    $("#FNXTSTA").val(result.NXTSTA);
-                    $("#FNOMFAN").val(result.NOMFAN);
-                    $("#FDELMEN").prop('checked', (result.DELMEN == 1));
-                    $("#CANCHG").prop('checked', (result.CANCHG == 1));
-                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
-                }
-            });
-            $('#modaltransactionstatus').modal({ backdrop: 'static', Keyboard: 'true' });
-            $('#modaltransactionstatus').modal('toggle');
-        }
-    </script>
+    <script src="~/Scripts/Rules/StatusTransacao.js"></script>
 }
 
 

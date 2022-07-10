@@ -68,11 +68,11 @@ namespace ThunderFire.Domain.DTO
 
         public List<MyCards> Cards { get; set; } = null;
 
-        public GeneralRegistry User { get; set; } = null;
+        public Users User { get; set; } = null;
 
         public AddressBook Address { get; set; } = null;
 
-
+        public bool IsLogged { get; set; } = false;
 
         /// <summary>
         /// Menu do Usuário
@@ -86,24 +86,24 @@ namespace ThunderFire.Domain.DTO
 
 
 
-        /// <summary>
-        /// Retorna true se o menu correspondente está logado para o usuário
-        /// </summary>
-        /// <param name="pCODMNU">Código do Menu</param>
-        /// <returns>true, se estiver logado</returns>
-        public bool IsLogged(string pCODMNU)
-        {
-            bool found = false;
-            foreach (string item in CODMNU)
-            {
-                if (item == pCODMNU)
-                {
-                    found = true;
-                    break;
-                }
-            }
-            return found;
-        }
+        ///// <summary>
+        ///// Retorna true se o menu correspondente está logado para o usuário
+        ///// </summary>
+        ///// <param name="pCODMNU">Código do Menu</param>
+        ///// <returns>true, se estiver logado</returns>
+        //public bool IsLogged(string pCODMNU)
+        //{
+        //    bool found = false;
+        //    foreach (string item in CODMNU)
+        //    {
+        //        if (item == pCODMNU)
+        //        {
+        //            found = true;
+        //            break;
+        //        }
+        //    }
+        //    return found;
+        //}
 
 
         public AccessControl()

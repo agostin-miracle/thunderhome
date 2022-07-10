@@ -1,0 +1,137 @@
+﻿@model ThunderFireHomeAdmin.Models.OperationsModel
+@{
+    ViewBag.Title = "Operações";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="modal fade" id="modaloperacoes" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-folder-plus" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <div class="form-row">
+                    <label for="FSUBSYS" class="col-sm-2 col-form-label">Subsistema:</label>
+                    <div class="col-sm-4">
+                        @if (Model.ListaSubSistema != null)
+                        {
+                            @Html.DropDownListFor(model => model.FSUBSYS, new SelectList(Model.ListaSubSistema, "KEYCOD", "DSCTAB", Model.FSUBSYS), new { @class = "form-control form-control-sm" })
+                        }
+                    </div>
+                    <label for="FCNDBLO" class="col-sm-2 col-form-label">Bloqueio:</label>
+                    <div class="col-sm-4">
+                        @if (Model.ListaCondicaoBloqueio != null)
+                        {
+                            @Html.DropDownListFor(model => model.FCNDBLO, new SelectList(Model.ListaCondicaoBloqueio, "KEYCOD", "DSCTAB", Model.FCNDBLO), new { @class = "form-control form-control-sm" })
+                        }
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <label for="FCODMOV" class="col-sm-2 col-form-label">Código:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm numero" id="FCODMOV" size="6" maxlength="6" required>
+                    </div>
+                    <label for="FDSCMOV" class="col-sm-2 col-form-label">Descrição:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-sm" id="FDSCMOV" size="30" maxlength="50" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="FDSCEXT" class="col-sm-2 col-form-label">Complemento:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="FDSCEXT" size="50" maxlength="100">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="FDSCEXC" class="col-sm-2 col-form-label">Externa:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control form-control-sm" id="FDSCEXC" size="50" maxlength="100">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="FSIGOPE" class="col-sm-2 col-form-label">Operação:</label>
+                    <div class="col-sm-10">
+                        @if (Model.ListaSinais != null)
+                        {
+                            @Html.DropDownListFor(model => model.FSIGOPE, new SelectList(Model.ListaSinais, "KEYCOD", "DSCTAB", Model.FSIGOPE), new { @class = "form-control form-control-sm" })
+                        }
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="FNUMDIA" class="col-sm-2 col-form-label">Dias:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm numero3" id="FNUMDIA" size="3" maxlength="3" required>
+                    </div>
+                    <label for="FCODEST" class="col-sm-2 col-form-label">Estorno:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm numero" id="FCODEST" size="6" maxlength="6" required>
+                    </div>
+                    <label for="FCODCAN" class="col-sm-2 col-form-label">Cancelamento:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm numero" id="FCODCAN" size="6" maxlength="6" required>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FSTAREC" checked>
+                    <label class="form-check-label form-control-sm" for="FSTAREC">Ativo</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card col-sm-12">
+    <div class="card-header">
+        <h5 class="card-title">@ViewBag.Title</h5>
+    </div>
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="CSUBSYS" class="col-sm-2 col-form-label">Subsistema:</label>
+            <div class="col-sm-4">
+                @if (Model.ListaSubSistema != null)
+                {
+                    @Html.DropDownListFor(model => model.CSUBSYS, new SelectList(Model.ListaSubSistema, "KEYCOD", "DSCTAB", Model.CSUBSYS), new { @class = "form-control form-control-sm" })
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-4">
+                <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+            </div>
+        </div>
+        <hr />
+        <table id="tboperacoes" class="table-sm table-striped table-bordered dt-responsive nowrap dataTable js-exportable" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descrição</th>
+                    <th>Complemento</th>
+                    <th>Operação</th>
+                    <th>Por</th>
+                    <th>&#160;</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Scripts/Rules/Operacoes_Cadastro.js"></script>
+}

@@ -20,10 +20,30 @@ namespace ThunderFire.Business
         /// Retorna true se o objeto corrente está conectado
         /// </summary>
         public bool Connected { get; internal set; } = false;
-        public int KeyTableId { get; internal set; } = 0;
+        public short KeyTableId { get; internal set; } = 0;
        // public int KeyTableCode { get; internal set; } = 0;
-        public int ProcessCode { get; set; } = 0;
+        public short ProcessCode { get; set; } = 0;
 
+
+        /// <summary>
+        /// Objeto de Retorno
+        /// </summary>
+        public object ReturnValue { get; set; }
+
+        /// <summary>
+        /// Retorna a última mensagem de alerta ou informação
+        /// </summary>
+        public string MessageToUser { get; set; } = "";
+
+        /// <summary>
+        /// Código do Erro
+        /// </summary>
+        public string ErrorCode { get; set; } = "OK";
+
+        /// <summary>
+        /// Chave base processamento
+        /// </summary>
+        /// <returns></returns>
         public long GetAuthorizationID()
         {
             try

@@ -25,7 +25,7 @@ namespace ThunderFire.Business
     ///Produto     : SQLDBTools
     ///Titulo      : SQLDBTools
     ///Version     : 1.3.0.0
-    ///Data        : 01/03/2022 09:42
+    ///Data        : 19/03/2022 09:24
     ///Alias       : addresstype
     ///Descrição   : Address Type
     ///</remarks>
@@ -129,7 +129,8 @@ namespace ThunderFire.Business
                         respond.SourceError = msg.Source;
                         respond.ErrorCode = msg.ErrorCode;
                         respond.ErrorObject = Error;
-                        respond.ErrorMessage = msg.Message;
+                        if (!String.IsNullOrEmpty(msg.Message))
+                            respond.MessageToUser = msg.Message;
                         respond.Severity = msg.Severity;
                     }
                 }
@@ -179,7 +180,7 @@ namespace ThunderFire.Business
                         audit.AUDIDR = RETURN_VALUE;
                         audit.AUDIMS = 0;
                         audit.AUDTSK = this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name;
-                        audit.AUDOBJ = "PRTIPENDINS";
+                        audit.AUDOBJ = "PRTIPENDUPD";
                         audit.AUDSRC = _original;
                         audit.AUDCHG = _changed;
                         audit.NIDTOK = 0;
@@ -228,7 +229,8 @@ namespace ThunderFire.Business
                         respond.SourceError = msg.Source;
                         respond.ErrorCode = msg.ErrorCode;
                         respond.ErrorObject = Error;
-                        respond.ErrorMessage = msg.Message;
+                        if (!String.IsNullOrEmpty(msg.Message))
+                            respond.MessageToUser = msg.Message;
                         respond.Severity = msg.Severity;
                     }
                 }
@@ -243,43 +245,22 @@ namespace ThunderFire.Business
         public AddressType Select(System.Byte pTIPEND)
         {
             this.Found = false;
-            this.ProcessCode = 0;
+            this.ProcessCode = 100;
             AddressType RETURN_VALUE = null;
             using (IDbConnection _conn = ConnectionFactory.GetConnection())
             {
                 try
                 {
-                    RETURN_VALUE = _conn.Query<AddressType>(sql: "PRTIPENDSEL", param: new
+                    string _sql = @"SELECT A.*, DSCREC = B.DSCTAB, LGNUSU  = ISNULL(C.LGNUSU,'')
+  FROM TBTIPEND (NOLOCK) A
+ INNER JOIN TBTABGER (NOLOCK) B ON (B.NUMTAB=7 AND B.KEYCOD=A.STAREC)
+  LEFT JOIN TBLGNUSU (NOLOCK) C ON (C.CODUSU = A.UPDUSU AND C.REGATV=1) WHERE (A.TIPEND=@TIPEND)";
+                    RETURN_VALUE = _conn.Query<AddressType>(sql: _sql, param: new
                     {
                         TIPEND = pTIPEND
-                    }, commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
-                    this.Found = true;
-                }
-                catch (Exception Error)
-                {
-                    this.HasError = true;
-                    this.Found = false;
-                    _logger.Info(Error);
-                }
-            }
-            return RETURN_VALUE;
-        }
-
-        /// <summary>
-        /// Obtêm uma Lista dos Tipos de Endereços
-        /// </summary>
-        /// <returns>List of AddressType</returns>
-        public List<AddressType> List()
-        {
-            this.Found = false;
-            this.ProcessCode = 0;
-            List<AddressType> RETURN_VALUE = null;
-            using (IDbConnection _conn = ConnectionFactory.GetConnection())
-            {
-                try
-                {
-                    RETURN_VALUE = _conn.Query<AddressType>(sql: "PRTIPENDSELALL", param: new { }, commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
-                    this.Found = true;
+                    }, commandType: CommandType.Text, commandTimeout: 120).FirstOrDefault();
+                    if (RETURN_VALUE != null)
+                        this.Found = true;
                 }
                 catch (Exception Error)
                 {

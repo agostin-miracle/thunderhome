@@ -1,4 +1,4 @@
-﻿@model ThunderFireHomeAdmin.Models.ProductsModel
+﻿@model ThunderFireHomeAdmin.Models.ProductModel
 @{
     ViewBag.Title = "Produtos";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,55 +15,47 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="OPERATION" value="0" />
-                <div class="form-group row">
+                <div class="form-row">
                     <label for="FLINPRO" class="col-sm-2 control-label form-control-sm">Linha:</label>
                     <div class="col-sm-10">
-                        <select class="form-control form-control-sm" id="FLINPRO" style="max-width:80%;">
-                            <option value="-1">Selecione</option>
-                            @if (Model.ListaLinhaProduto != null)
-                            {
-                                foreach (var item in Model.ListaLinhaProduto)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.LINPRO)">@Html.DisplayFor(modelItem => item.DSCLIN)</option>
-                                }
-                            }
-                        </select>
+                        @if (Model.ListaLinhaProduto != null)
+                        {
+                            @Html.DropDownListFor(model => model.FLINPRO, new SelectList(Model.ListaLinhaProduto, "LINPRO", "DSCLIN", Model.FLINPRO), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-row">
                     <label for="FCODPRO" class="col-sm-2 control-label form-control-sm">Produto:</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <input type="text" class="form-control form-control-sm codigo" id="FCODPRO" size="6" maxlength="6">
                     </div>
 
-                    <label for="FDSCPRO" class="col-sm-2 col-form-label">Descrição:</label>
-                    <div class="col-sm-6">
+                    <label for="FDSCPRO" class="col-sm-2 control-label form-control-sm">Descrição:</label>
+                    <div class="col-sm-7">
                         <input type="text" class="form-control form-control-sm" id="FDSCPRO" size="50" maxlength="50" required>
                     </div>
 
                 </div>
-                <div class="form-group">
-                    <label for="FNOMFAN" class="col-form-label">Nome Fantasia:</label>
-                    <input type="text" class="form-control" id="FNOMFAN" size="50" maxlength="50" required>
+                <div class="form-row">
+                    <label for="FNOMFAN" class="col-sm-2 control-label form-control-sm">Nome Fantasia:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="FNOMFAN" size="50" maxlength="50" required>
+                    </div>
                 </div>
 
-                <div class="form-group row ml-4">
-                    <div class="form-check">
-                        <input class="form-check-input form-control-sm" type="checkbox" value="" id="FATVCDT" checked>
-                        <label class="form-check-label form-control-sm" for="FATVCDT">Ativação Cadastral</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input form-control-sm" type="checkbox" value="" id="FATVGPA">
-                        <label class="form-check-label form-control-sm" for="FATVGPA">Gerar Senha Automática</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input form-control-sm" type="checkbox" value="" id="FINDBNF" checked>
-                        <label class="form-check-label form-control-sm" for="FINDBNF">Benefício</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input form-control-sm" type="checkbox" value="" id="FSTAREC" checked>
-                        <label class="form-check-label form-control-sm" for="FSTAREC">Ativo</label>
+                <div class="form-row">
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="FATVCDT" checked>
+                            <label class="form-check-label mr-4" for="FATVCDT">Ativação Cadastral</label>
+                            <input class="form-check-input" type="checkbox" value="" id="FATVGPA">
+                            <label class="form-check-label mr-4" for="FATVGPA">Gerar Senha Automática</label>
+                            <input class="form-check-input" type="checkbox" value="" id="FINDBNF" checked>
+                            <label class="form-check-label mr-4" for="FINDBNF">Benefício</label>
+                            <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked>
+                            <label class="form-check-label" for="FSTAREC">Ativo</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,23 +77,21 @@
             <div class="form-group row">
                 <label for="CLINPRO" class="col-sm-2 control-label form-control-sm">Linha:</label>
                 <div class="col-sm-10">
-                    <select class="form-control form-control-sm" id="CLINPRO" style="max-width:80%;">
-                        <option value="-1">Selecione</option>
-                        @if (Model.ListaLinhaProduto != null)
-                        {
-                            foreach (var item in Model.ListaLinhaProduto)
-                            {
-                                <option value="@Html.DisplayFor(modelItem => item.LINPRO)">@Html.DisplayFor(modelItem => item.DSCLIN)</option>
-                            }
-                        }
-                    </select>
+                    @if (Model.CListaLinhaProduto != null)
+                    {
+                        @Html.DropDownListFor(model => model.CLINPRO, new SelectList(Model.CListaLinhaProduto, "LINPRO", "DSCLIN", Model.CLINPRO), new { @class = "form-control form-control-sm" })
+                    }
                 </div>
             </div>
-
-            <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
             <hr />
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
             <div class="table-responsive">
-                <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                <table id="tbprodutos" class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -126,76 +116,16 @@
 
 @section scripts{
     <script>
+        var TbDetalhe = null;
+
         $(document).ready(function () {
             $('.codigo').mask('0000');
-
-            commandquery = "/Cadastros/QueryProducts";
-            $('#gridshow').DataTable(
-                {
-                    paging: true,
-                    searching: false,
-                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
-                    processing: true,
-                    serverSide: true,
-                    orderMulti: false,
-                    ajax: {
-                        url: commandquery,
-                        type: "POST",
-                        datatype: "json",
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-                        data: {
-                            pLINPRO: function () { return $('#CLINPRO').val() }
-                        }
-                    },
-
-                    columns: [
-                        { data: "CODPRO" },
-                        { data: "DSCREC" },
-                        { data: "DSCPRO" },
-                        { data: "NOMFAN" },
-                        { data: "DSCCDT" },
-                        { data: "DSCGPA" },
-                        { data: "DSCBNF" },
-                        { data: "LGNUSU" },
-                        {
-                            "render": function (data, type, row) {
-                                return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.CODPRO + "');\"> <i class='fas fa-edit'></i></button>&nbsp;"
-                            }
-                        }
-                    ],
-                    "language": {
-                        "processing": "Aguarde, buscando informações",
-                        "loadingRecords": "Carregando",
-                    },
-                    "pageLength": 10,
-                    "oLanguage": {
-                        "sLengthMenu": "Mostrar _MENU_ registros por página",
-                        "sZeroRecords": "Nenhum registro encontrado",
-                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
-                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
-                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
-                        "sSearch": "Pesquisar: "
-                    },
-                    columnDefs: [
-                        { "targets": [0], "visible": false, "searchable": false },
-                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "5%" },
-                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "20%" },
-                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "20%" },
-                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "5%" },
-                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "5%" },
-                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "5%" },
-                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "12%" },
-                        { className: "text-right", "targets": [8], "visible": true, "searchable": false, "width": "15%" }
-                    ]
-                });
 
 
 
 
             $(document).on("click", "#btn_update", function () {
                 var mode = $("#OPERATION").val();
-                var vurl = "/Cadastros/ChangeProducts?modo=" + mode;
                 var vNOMFAN = $('#FNOMFAN').val();
                 if (vNOMFAN === "" || vNOMFAN == null)
                     vNOMFAN = " ";
@@ -211,7 +141,7 @@
                 });
                 $.ajax({
                     type: "POST",
-                    url: vurl,
+                    url: GetUrl("Cadastros/AtualizarProduto?modo=" + mode),
                     data: VDATA,
                     dataType: 'json',
                     contentType: 'application/json',
@@ -233,10 +163,12 @@
             });
 
 
+
             $('#CLINPRO').on('change', function () {
-                $('#gridshow').DataTable().ajax.reload();
+                $('#tbprodutos').DataTable().ajax.reload();
             });
 
+            AtualizaDetalhe();
         });
 
 
@@ -261,11 +193,12 @@
             $("#OPERATION").val("2");
             $.ajax({
                 type: "GET",
-                url: "/Cadastros/SelectProducts",
+                url: GetUrl("Cadastros/SelecionarProduto"),
                 data: { pCODPRO: pCODPRO },
                 dataType: 'json',
                 success: function (result) {
-                    $("#FCODPRO").val(result.USUPRO);
+                    $("#FCODPRO").val(result.CODPRO);
+                    $("#CODPRO").prop('disabled', true);
                     $("#FDSCPRO").val(result.CODUSU);
                     $("#FLINPRO").val(result.LINPRO);
                     $("#FLINPRO").prop('disabled', true);
@@ -279,6 +212,81 @@
             });
             $('#modalproducts').modal({ backdrop: 'static', Keyboard: 'true' });
             $('#modalproducts').modal('toggle');
+        }
+
+
+        function AtualizaDetalhe() {
+            try {
+                if (TbDetalhe == null) {
+
+                    TbDetalhe = $('#tbprodutos').DataTable(
+                        {
+                            paging: true,
+                            searching: false,
+                            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                            processing: true,
+                            serverSide: true,
+                            orderMulti: false,
+                            ajax: {
+                                url: GetUrl("Cadastros/PesquisarProduto"),
+                                type: "POST",
+                                datatype: "json",
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                                data: {
+                                    pLINPRO: function () { return $('#CLINPRO').val() }
+                                }
+                            },
+
+                            columns: [
+                                { data: "CODPRO" },
+                                { data: "DSCREC" },
+                                { data: "DSCPRO" },
+                                { data: "NOMFAN" },
+                                { data: "DSCCDT" },
+                                { data: "DSCGPA" },
+                                { data: "DSCBNF" },
+                                { data: "LGNUSU" },
+                                {
+                                    "render": function (data, type, row) {
+                                        return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.CODPRO + "');\"> <i class='fas fa-edit'></i></button>&nbsp;"
+                                    }
+                                }
+                            ],
+                            "language": {
+                                "processing": "Aguarde, buscando informações",
+                                "loadingRecords": "Carregando",
+                            },
+                            "pageLength": 10,
+                            "oLanguage": {
+                                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                                "sZeroRecords": "Nenhum registro encontrado",
+                                "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                                "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                                "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                                "sSearch": "Pesquisar: "
+                            },
+                            columnDefs: [
+                                { "targets": [0], "visible": false, "searchable": false },
+                                { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "5%" },
+                                { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "20%" },
+                                { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "20%" },
+                                { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "5%" },
+                                { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "5%" },
+                                { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "5%" },
+                                { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "12%" },
+                                { className: "text-right", "targets": [8], "visible": true, "searchable": false, "width": "15%" }
+                            ]
+                        });
+
+
+                }
+                else {
+                    TbDetalhe.DataTable().ajax.reload();
+                }
+            }
+            catch (e) {
+            }
         }
     </script>
 }

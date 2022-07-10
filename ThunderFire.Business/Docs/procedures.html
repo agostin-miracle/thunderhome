@@ -1,0 +1,2295 @@
+<html>
+<meta charset="utf-8">
+<head>
+<style>
+table { width: 820px; border-collapse}
+th, td { border:solid 1px #ddd;}
+</style>
+</head>
+<body>
+<table>
+<tr>
+<td>1</td>
+<th>Tipo</th><td align='left'>SQL_SCALAR_FUNCTION</td>
+<th>Nome</th><td align='left'>CreateAccountBase</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr style='border-bottom:solid 2px #000066'><td style='align:right' colspan='3'>RETURN varchar(11)</td> </tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NEXTID</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr>
+<td>2</td>
+<th>Tipo</th><td align='left'>SQL_SCALAR_FUNCTION</td>
+<th>Nome</th><td align='left'>FormatCard</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr style='border-bottom:solid 2px #000066'><td style='align:right' colspan='3'>RETURN varchar(100)</td> </tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NUMCRT</td><td style='align:left'>varchar(20)</td><td style='align:left' colspan='2'>Número do Cartão</td></tr>
+<tr>
+<td>3</td>
+<th>Tipo</th><td align='left'>SQL_SCALAR_FUNCTION</td>
+<th>Nome</th><td align='left'>FormatCEP</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr style='border-bottom:solid 2px #000066'><td style='align:right' colspan='3'>RETURN varchar(20)</td> </tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCEP</td><td style='align:left'>varchar(8)</td><td style='align:left' colspan='2'>CEP</td></tr>
+<tr>
+<td>4</td>
+<th>Tipo</th><td align='left'>SQL_SCALAR_FUNCTION</td>
+<th>Nome</th><td align='left'>FormatCMF</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr style='border-bottom:solid 2px #000066'><td style='align:right' colspan='3'>RETURN varchar(100)</td> </tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCMF</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>CPF/CNPJ</td></tr>
+<tr>
+<td>5</td>
+<th>Tipo</th><td align='left'>SQL_SCALAR_FUNCTION</td>
+<th>Nome</th><td align='left'>GetLoginName</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr style='border-bottom:solid 2px #000066'><td style='align:right' colspan='3'>RETURN varchar(50)</td> </tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NOMUSU</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Nome do usuário</td></tr>
+<tr>
+<td>6</td>
+<th>Tipo</th><td align='left'>SQL_SCALAR_FUNCTION</td>
+<th>Nome</th><td align='left'>GetUserAcess</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr style='border-bottom:solid 2px #000066'><td style='align:right' colspan='3'>RETURN int(4)</td> </tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSFUN</td><td style='align:left'>bigint(8)</td><td style='align:left' colspan='2'>ID da funcionalidade</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr>
+<td>7</td>
+<th>Tipo</th><td align='left'>SQL_SCALAR_FUNCTION</td>
+<th>Nome</th><td align='left'>LASTDATE</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr style='border-bottom:solid 2px #000066'><td style='align:right' colspan='3'>RETURN date(3)</td> </tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@DATVAL</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data de Validade</td></tr>
+<tr>
+<td>8</td>
+<th>Tipo</th><td align='left'>SQL_SCALAR_FUNCTION</td>
+<th>Nome</th><td align='left'>Modulo11</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr style='border-bottom:solid 2px #000066'><td style='align:right' colspan='3'>RETURN char(1)</td> </tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@VALOR</td><td style='align:left'>varchar(60)</td><td style='align:left' colspan='2'></td></tr>
+<tr>
+<td>9</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRAUDDATINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@AUDDAT</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Auditoria</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@AUDKEY</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Tabela Chave</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@AUDIDR</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID Associado a Tabela</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@AUDIMS</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID Auxiliar de Identificação da Operação</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@AUDTSK</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@AUDOBJ</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@AUDSRC</td><td style='align:left'>varchar(4000)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@AUDCHG</td><td style='align:left'>varchar(4000)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@NIDTOK</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do Registro de Token</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@NUMIPA</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>IP de Origem</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>10</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTADELNID</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDCTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID da Conta Virtual</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr>
+<td>11</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTAINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NUMAGE</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>Número da Agência</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@NUMBCO</td><td style='align:left'>char(3)</td><td style='align:left' colspan='2'>Código do Banco</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NUMCTA</td><td style='align:left'>char(15)</td><td style='align:left' colspan='2'>Número da Conta</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@NUMDVE</td><td style='align:left'>char(1)</td><td style='align:left' colspan='2'>Digito Verificador</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@ORGCTA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código de Origem da Conta</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@TIPCTA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Conta</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@STACTA</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status da Conta</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@DATVAL</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data de Validade</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@APLLIM</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se deve ser aplicado a validação de limite de operação</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@VLRLIM</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor limite</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@TIPBNF</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Tipo de Beneficiário</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@CODCMF</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>CPF/CNPJ</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@NOMBNF</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome do Beneficiário</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>12</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTALOC</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@ORGCTA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código de Origem da Conta</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPCTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Tipo de Conta</td></tr>
+<tr>
+<td>13</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTASEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDCTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID da Conta Virtual</td></tr>
+<tr>
+<td>14</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTASELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr>
+<td>15</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTASELCMF</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCMF</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>CPF/CNPJ</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@ORGCTA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código de Origem da Conta</td></tr>
+<tr>
+<td>16</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTASELCTA</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NUMBCO</td><td style='align:left'>varchar(3)</td><td style='align:left' colspan='2'>Código do Banco</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NUMAGE</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>Número da Agência</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@NUMCTA</td><td style='align:left'>varchar(11)</td><td style='align:left' colspan='2'>Número da Conta</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NUMDVE</td><td style='align:left'>varchar(1)</td><td style='align:left' colspan='2'>Digito Verificador</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@ORGCTA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código de Origem da Conta</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@TIPCTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Tipo de Conta</td></tr>
+<tr>
+<td>17</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTAUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDCTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID da Conta Virtual</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@NUMAGE</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>Número da Agência</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NUMBCO</td><td style='align:left'>char(3)</td><td style='align:left' colspan='2'>Código do Banco</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@NUMCTA</td><td style='align:left'>char(15)</td><td style='align:left' colspan='2'>Número da Conta</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@NUMDVE</td><td style='align:left'>char(1)</td><td style='align:left' colspan='2'>Digito Verificador</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@ORGCTA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código de Origem da Conta</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@TIPCTA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Conta</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@STACTA</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status da Conta</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@DATVAL</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data de Validade</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@APLLIM</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se deve ser aplicado a validação de limite de operação</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@VLRLIM</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor limite</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@TIPBNF</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Tipo de Beneficiário</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@CODCMF</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>CPF/CNPJ</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@NOMBNF</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome do Beneficiário</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@DATUPD</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>20</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>18</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTOFIN</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODEND</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Endereço</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPCTO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Tipo de Contato</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NUMTEL</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>Número do Telefone</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@CODPAI</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Pais</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CODOPR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Operadora</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@NUMDDD</td><td style='align:left'>varchar(4)</td><td style='align:left' colspan='2'>Número do DDD</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr>
+<td>19</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTOINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODEND</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Endereço</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPCTO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Contato</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@CODPAI</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Pais</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CODOPR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Operadora</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@NUMDDD</td><td style='align:left'>varchar(4)</td><td style='align:left' colspan='2'>Número do DDD</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@ISWHAT</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o contato telefônico permite whats app</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@NUMTEL</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>Número do Telefone</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@DSCOBS</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Observações</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>20</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTOSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCTO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Registro de Contato</td></tr>
+<tr>
+<td>21</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTOSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr>
+<td>22</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTOSELCTO</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@TIPCTO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Contato</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr>
+<td>23</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADCTOUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCTO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Registro de Contato</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODEND</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Endereço</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@TIPCTO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Contato</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CODPAI</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Pais</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@CODOPR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Operadora</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@NUMDDD</td><td style='align:left'>varchar(4)</td><td style='align:left' colspan='2'>Número do DDD</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@ISWHAT</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o contato telefônico permite whats app</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@NUMTEL</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>Número do Telefone</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@DSCOBS</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Observações</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>24</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADENDFND</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCEND</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Endereço</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPEND</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Endereço</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr>
+<td>25</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADENDINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPEND</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Endereço</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@TIPLOG</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Tipo de Logradouro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@CODUFE</td><td style='align:left'>char(2)</td><td style='align:left' colspan='2'>UF</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@DSCEND</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Endereço</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@DSCCPL</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Complemento do Endereço</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@NUMEND</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Número do Endereço</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@DSCCID</td><td style='align:left'>varchar(40)</td><td style='align:left' colspan='2'>Cidade</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@DSCBAI</td><td style='align:left'>varchar(40)</td><td style='align:left' colspan='2'>Bairro</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@CODCEP</td><td style='align:left'>varchar(8)</td><td style='align:left' colspan='2'>CEP</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@CODPAI</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Pais</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@LATITU</td><td style='align:left'>decimal(9)</td><td style='align:left' colspan='2'>Latitude</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@LONGIT</td><td style='align:left'>decimal(9)</td><td style='align:left' colspan='2'>Longitude</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>26</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADENDSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODEND</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Endereço</td></tr>
+<tr>
+<td>27</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADENDSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@TIPEND</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Tipo de Endereço</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@REGATV</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr>
+<td>28</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADENDSELUSU</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@TIPEND</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Endereço</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr>
+<td>29</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADENDUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODEND</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Endereço</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@TIPEND</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Endereço</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@TIPLOG</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Tipo de Logradouro</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CODUFE</td><td style='align:left'>char(2)</td><td style='align:left' colspan='2'>UF</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@DSCEND</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Endereço</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@DSCCPL</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Complemento do Endereço</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@NUMEND</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Número do Endereço</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@DSCCID</td><td style='align:left'>varchar(40)</td><td style='align:left' colspan='2'>Cidade</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@DSCBAI</td><td style='align:left'>varchar(40)</td><td style='align:left' colspan='2'>Bairro</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@CODCEP</td><td style='align:left'>varchar(8)</td><td style='align:left' colspan='2'>CEP</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@CODPAI</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Pais</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@LATITU</td><td style='align:left'>decimal(9)</td><td style='align:left' colspan='2'>Latitude</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@LONGIT</td><td style='align:left'>decimal(9)</td><td style='align:left' colspan='2'>Longitude</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>30</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODATR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Atributo do Cadastro</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@SRCUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário associado ou vinculado ao registro de usuário</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NIVCFA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Nível de Confiança</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@STAUSU</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status do Usuário</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@TIPUSU</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Usuário</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@TIPPES</td><td style='align:left'>char(1)</td><td style='align:left' colspan='2'>Gênero</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@CODPJU</td><td style='align:left'>char(1)</td><td style='align:left' colspan='2'>Personalidade Juridica</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@NUMIRG</td><td style='align:left'>char(20)</td><td style='align:left' colspan='2'>Número do RG para pessoa física/Inscrição Estadual para pessoa jurídica </td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@CODCMF</td><td style='align:left'>char(15)</td><td style='align:left' colspan='2'>CPF/CNPJ</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@NOMUSU</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome do usuário</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@NOMMAE</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome da mãe</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@DATNAC</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data de Nascimento</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@ATRPPE</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Pessoa Políticamente Exposta</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@DSCOCO</td><td style='align:left'>varchar(1024)</td><td style='align:left' colspan='2'>Ocorrências de Registro do Cadastro</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@CODNAC</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Nacionalidade</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>31</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr>
+<td>32</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODATR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Atributo do Cadastro</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@STAUSU</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@SRCUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário associado ou vinculado ao registro de usuário</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NOMUSU</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome do usuário</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr>
+<td>33</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERSELNAM</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NOMUSU</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome do usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODATR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Atributo do Cadastro</td></tr>
+<tr>
+<td>34</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERSELRED</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@SRCUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário associado ou vinculado ao registro de usuário</td></tr>
+<tr>
+<td>35</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERSELTIP</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPUSU</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr>
+<td>36</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERSELUSRLIN</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LINPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Linha de Produto</td></tr>
+<tr>
+<td>37</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERSELUSRPRO</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Produto</td></tr>
+<tr>
+<td>38</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODATR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Atributo do Cadastro</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@SRCUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário associado ou vinculado ao registro de usuário</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NIVCFA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Nível de Confiança</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@STAUSU</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status do Usuário</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@TIPUSU</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Usuário</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@TIPPES</td><td style='align:left'>char(1)</td><td style='align:left' colspan='2'>Gênero</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@CODPJU</td><td style='align:left'>char(1)</td><td style='align:left' colspan='2'>Personalidade Juridica</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@NUMIRG</td><td style='align:left'>char(20)</td><td style='align:left' colspan='2'>Número do RG para pessoa física/Inscrição Estadual para pessoa jurídica </td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@CODCMF</td><td style='align:left'>char(15)</td><td style='align:left' colspan='2'>CPF/CNPJ</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@NOMUSU</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome do usuário</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@NOMMAE</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome da mãe</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@DATNAC</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data de Nascimento</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@ATRPPE</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Pessoa Políticamente Exposta</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@DSCOCO</td><td style='align:left'>varchar(1024)</td><td style='align:left' colspan='2'>Ocorrências de Registro do Cadastro</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@CODNAC</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Nacionalidade</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>20</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>39</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADGERVALENTRCMF</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODATR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Atributo do Cadastro</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODCMF</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>CPF/CNPJ</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@SRCUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário associado ou vinculado ao registro de usuário</td></tr>
+<tr>
+<td>40</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADPROINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Produto</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCPRO</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição do Produto</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@LINPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Linha de Produto</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NOMFAN</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Nome Fantasia</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@ATVCDT</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o produto deverá sofrer processo de ativação cadastral do portador</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@ATVGPA</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o produto deverá sofrer processo de geração de senha de acesso</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@INDBNF</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Indicador de Marcação de Produto Benefício</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>41</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADPROSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Codigo do Produto</td></tr>
+<tr>
+<td>42</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADPROSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LINPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Linha de Produto</td></tr>
+<tr>
+<td>43</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADPROUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Produto</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCPRO</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição do Produto</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@LINPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Linha de Produto</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NOMFAN</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Nome Fantasia</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@ATVCDT</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o produto deverá sofrer processo de ativação cadastral do portador</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@ATVGPA</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o produto deverá sofrer processo de geração de senha de acesso</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@INDBNF</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Indicador de Marcação de Produto Benefício</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>44</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADSTAINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODSTA</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCSTA</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Descrição do Status</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODMOD</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Módulo de Operação</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@SIGOPE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Sinal da Operação</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@NXTSTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CANCHG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Define se o código de status de transação pode sofrer alterações externas</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@DELMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Define se o código de status de transação permite a exclusão de uma mensalidade</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>45</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADSTASEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODSTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Status</td></tr>
+<tr>
+<td>46</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADSTASELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODMOD</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Módulo de Operação</td></tr>
+<tr>
+<td>47</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADSTAUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODSTA</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCSTA</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Descrição do Status</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODMOD</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Módulo de Operação</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@SIGOPE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Sinal da Operação</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@NXTSTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CANCHG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Define se o código de status de transação pode sofrer alterações externas</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@DELMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Define se o código de status de transação permite a exclusão de uma mensalidade</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>48</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADTARCALV2</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODTAR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@VLRBAS</td><td style='align:left'>decimal(9)</td><td style='align:left' colspan='2'>Valor Base da Operação</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@NUMPCL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Número da Parcela</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CURPCL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Parcela corrente</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@DATVL1</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data de Validação Inicial</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@DATVL2</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data de Validação Final</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@FINLIV</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@CODBND</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Bandeira</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@TIPLIN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Linha</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@MODCRT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Modalidade de Aplicação do Cartão</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@TARNID</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr>
+<td>49</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADTARFND</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUCFG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NIVCFG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Id do Nível de Configuração do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODTAR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@CODBND</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Bandeira</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@TIPLIN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Linha</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@MODCRT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Modalidade de Aplicação do Cartão</td></tr>
+<tr>
+<td>50</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADTARFNDTAR</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUCFG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODTAR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@CODBND</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Bandeira</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@TIPLIN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Linha</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@MODCRT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Modalidade de Aplicação do Cartão</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>51</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADTARGETARBOL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@USUCED</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do usuario cedente</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPBOL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Boleto</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@VLRBOL</td><td style='align:left'>float(8)</td><td style='align:left' colspan='2'>Valor do Boleto</td></tr>
+<tr>
+<td>52</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADTARGETEXPTAR</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDTAR</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do Registro de Tarifação</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@VLRTRA</td><td style='align:left'>float(8)</td><td style='align:left' colspan='2'>Valor da Transação</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>53</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADTARINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIVCFG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Id do Nível de Configuração do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@USUCFG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODTAR</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@CODBND</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Bandeira</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@TIPLIN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Linha</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@MODCRT</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Modalidade de Aplicação do Cartão</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@CODEXP</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Expansão de Tarifa</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@CODMOE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo da Moeda</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@FMTCOB</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Formato de Cobrança</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@RSPTAR</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Responsável pela Tarifa </td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@TARBAS</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Mínimo da Tarifa Básica</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@TARMAX</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Máximo da Tarifa Básica</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@PCTTAR</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>% de Tarifação</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@VLRTAR</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor da Tarifa</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@VLRINF</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Mínimo</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@VLRMAX</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Máximo</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>54</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADTARSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDTAR</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do Registro de Tarifação</td></tr>
+<tr>
+<td>55</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADTARSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUCFG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NIVCFG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Id do Nível de Configuração do Usuário</td></tr>
+<tr>
+<td>56</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADTARUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDTAR</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do Registro de Tarifação</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NIVCFG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Id do Nível de Configuração do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@USUCFG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@CODTAR</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@CODBND</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Bandeira</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@TIPLIN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Linha</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@MODCRT</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Modalidade de Aplicação do Cartão</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@CODEXP</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Expansão de Tarifa</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@CODMOE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo da Moeda</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@FMTCOB</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Formato de Cobrança</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@TARBAS</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Mínimo da Tarifa Básica</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@PCTTAR</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>% de Tarifação</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@VLRTAR</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor da Tarifa</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@VLRINF</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Mínimo</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@VLRMAX</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Máximo</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@TARMAX</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Máximo da Tarifa Básica</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@RSPTAR</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Responsável pela Tarifa </td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@DATUPD</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>20</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>21</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>57</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCADUSUPSQCMF</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODATR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Atributo do Cadastro</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODCMF</td><td style='align:left'>varchar(1)</td><td style='align:left' colspan='2'>CPF/CNPJ</td></tr>
+<tr>
+<td>58</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCFGBOLINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUCFG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NIVCFG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Id do Nível de Configuração do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPBOL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Boleto</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@CODTAR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@TIPEXT</td><td style='align:left'>char(2)</td><td style='align:left' colspan='2'>Tipo de Boleto Externo</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@INSBC1</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Instrução Bancária 1</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@INSBC2</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Instrução Bancária 2</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@INSBC3</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Instrução Bancária 3</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>59</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCFGBOLOCREC</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@USUCED</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do usuario cedente</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPBOL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Boleto</td></tr>
+<tr>
+<td>60</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCFGBOLSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDCBL</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Id do Registro de Configuração de Boleto</td></tr>
+<tr>
+<td>61</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCFGBOLSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUCFG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NIVCFG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Id do Nível de Configuração do Usuário</td></tr>
+<tr>
+<td>62</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRCFGBOLUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDCBL</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Id do Registro de Configuração de Boleto</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@USUCFG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@NIVCFG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Id do Nível de Configuração do Usuário</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@TIPBOL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Boleto</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@CODTAR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@TIPEXT</td><td style='align:left'>char(2)</td><td style='align:left' colspan='2'>Tipo de Boleto Externo</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@INSBC1</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Instrução Bancária 1</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@INSBC2</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Instrução Bancária 2</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@INSBC3</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Instrução Bancária 3</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>63</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PREXPTARINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPEXP</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@LVLAPL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Nível de Aplicação</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@VLRTAR</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor da Tarifa</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@VLRMIN</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Minimo</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@VLRMAX</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Máximo</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>64</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PREXPTARSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPEXP</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'></td></tr>
+<tr>
+<td>65</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PREXPTARUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDEXP</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID de registro de Código da Expansão de Tarifa</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@TIPEXP</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@LVLAPL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Nível de Aplicação</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@VLRTAR</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor da Tarifa</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@VLRMIN</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Minimo</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@VLRMAX</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Máximo</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>66</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRGETNXTNUM</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODTBI</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código da Tabela Controle de Indexação e Serialização</td></tr>
+<tr>
+<td>67</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLGNUSUACECTL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LGNNUM</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr>
+<td>68</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLGNUSUCHGPSW</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LGNUSU</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Identificação da Chave de Login do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@PSWOLD</td><td style='align:left'>varchar(255)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@PSWUSU</td><td style='align:left'>varchar(255)</td><td style='align:left' colspan='2'>Senha criptografada do usuário</td></tr>
+<tr>
+<td>69</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLGNUSUGET</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr>
+<td>70</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLGNUSUINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@LGNUSU</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Identificação da Chave de Login do Usuário</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@PSWUSU</td><td style='align:left'>varchar(512)</td><td style='align:left' colspan='2'>Senha criptografada do usuário</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@RSTPSW</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@NUMACE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>71</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLGNUSULOG</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LGNTYP</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@LGNUSU</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Identificação da Chave de Login do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@PSWUSU</td><td style='align:left'>varchar(512)</td><td style='align:left' colspan='2'>Senha criptografada do usuário</td></tr>
+<tr>
+<td>72</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLGNUSUREF</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LGNNUM</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr>
+<td>73</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLGNUSURSTPSW</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LGNNUM</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@PSWUSU</td><td style='align:left'>varchar(512)</td><td style='align:left' colspan='2'>Senha criptografada do usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr>
+<td>74</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLGNUSUSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LGNNUM</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr>
+<td>75</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLGNUSUUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LGNNUM</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@REGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Registro Principal</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@LGNUSU</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Identificação da Chave de Login do Usuário</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@PSWUSU</td><td style='align:left'>varchar(512)</td><td style='align:left' colspan='2'>Senha criptografada do usuário</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RSTPSW</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@NUMACE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>76</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLINPROINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LINPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Linha de Produto</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCLIN</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição da Linha de Produto</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>77</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLINPROSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LINPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código da Linha de Produto</td></tr>
+<tr>
+<td>78</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRLINPROUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LINPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Linha de Produto</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCLIN</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição da Linha de Produto</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>79</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRMODTARINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@MODCRT</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Modalidade de Aplicação do Cartão</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCMOD</td><td style='align:left'>varchar(25)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@PARINI</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Número da Parcela Inicial</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@PARFIN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Número da Parcela Final/Máxima</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>80</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRMODTARSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@MODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Modalidade de Aplicação do Cartão</td></tr>
+<tr>
+<td>81</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRMODTARUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@MODCRT</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Modalidade de Aplicação do Cartão</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCMOD</td><td style='align:left'>varchar(25)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@PARINI</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Número da Parcela Inicial</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@PARFIN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Número da Parcela Final/Máxima</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>82</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTCALMEN</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr>
+<td>83</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTCHGASS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>84</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTCHGCVC</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NUMCVC</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de  Verificação do Cartão, código adicional impresso no verso do cartão de débito ou crédito. Na maioria dos cartões (Visa, MasterCard, cartões de bancos, etc.) é os últimos três dígitos impressos na faixa para assinatura localizada no verso do cartão.</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>85</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTCHGMEN</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODACT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código de Ação</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>86</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTCHGONLPAR</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@APLCON</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o cartão pode fazer compras on line</td></tr>
+<tr>
+<td>87</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTCHGOWN</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr>
+<td>88</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTCHGPSW</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@PSWCRT</td><td style='align:left'>varchar(10)</td><td style='align:left' colspan='2'>Senha do Cartão</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NUMIPA</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>IP de Origem</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>89</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTCHGSAQPAR</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@APLSAQ</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o cartão pode fazer saques</td></tr>
+<tr>
+<td>90</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTCHGSTA</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@STACRT</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status do Cartão</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@CODBLO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de bloqueio</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@DSCMOT</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição do Motivo de Bloqueio ou Aprovação</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>91</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTGETATV</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NUMCRT</td><td style='align:left'>varchar(16)</td><td style='align:left' colspan='2'>Número do Cartão</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODCMF</td><td style='align:left'>varchar(15)</td><td style='align:left' colspan='2'>CPF/CNPJ</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>92</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NIDCTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID da Conta Virtual</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@TIPPRO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Produto associado ao registro de cartão</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@ORGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Origem da Ativação do Cartão</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@ASSUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário associado ao cartão</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@SECLVL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Nível de Segurança</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@DATATV</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data de Ativação</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@DATCAN</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data do Cancelamento</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@CALMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>0 - Não distribuir a mensalidade para o cartão@1 - Distribuir a mensalidade para o cartão@2 - Mensalidade distribuida@9 - Não existe configuração</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@USUMEN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de débito da mensalidade</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@NOMPRT</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome do Portador do Cartão</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@NUMCRT</td><td style='align:left'>varchar(25)</td><td style='align:left' colspan='2'>Número do Cartão</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@VALCRT</td><td style='align:left'>varchar(5)</td><td style='align:left' colspan='2'>Validade do Cartão</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@PSWCRT</td><td style='align:left'>varchar(6)</td><td style='align:left' colspan='2'>Senha do Cartão</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@NUMCVC</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de  Verificação do Cartão, código adicional impresso no verso do cartão de débito ou crédito. Na maioria dos cartões (Visa, MasterCard, cartões de bancos, etc.) é os últimos três dígitos impressos na faixa para assinatura localizada no verso do cartão.</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@STAPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status de Processamento</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@STACRT</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status do Cartão</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@NOMCR1</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Parte 1 do Nome do Portador</td></tr>
+<tr><td style='align:right'>20</td><td style='align:left'>@NOMCR2</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Parte 2 do Nome do Portador</td></tr>
+<tr><td style='align:right'>21</td><td style='align:left'>@NOMCR3</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Parte 3 do Nome do Portador</td></tr>
+<tr><td style='align:right'>22</td><td style='align:left'>@OPRCRT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Operadora ou processadora do cartão.</td></tr>
+<tr><td style='align:right'>23</td><td style='align:left'>@DATEXT</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data da ultima solicitação de extrato</td></tr>
+<tr><td style='align:right'>24</td><td style='align:left'>@CODBLO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código de bloqueio</td></tr>
+<tr><td style='align:right'>25</td><td style='align:left'>@TIPPRT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Portador</td></tr>
+<tr><td style='align:right'>26</td><td style='align:left'>@DSCMOT</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição do Motivo de Bloqueio ou Aprovação</td></tr>
+<tr><td style='align:right'>27</td><td style='align:left'>@APLCON</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o cartão pode fazer compras on line</td></tr>
+<tr><td style='align:right'>28</td><td style='align:left'>@APLSAQ</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o cartão pode fazer saques</td></tr>
+<tr><td style='align:right'>29</td><td style='align:left'>@LOTMIG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>NEXT NUMBER:41 ID do Controle Interno de Lote de Migração de Cartoes</td></tr>
+<tr><td style='align:right'>30</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>31</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>32</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>93</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTLCKCRT</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPOPE</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Operação</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>94</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr>
+<td>95</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@STACRT</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status do Cartão</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@NUMCRT</td><td style='align:left'>varchar(16)</td><td style='align:left' colspan='2'>Número do Cartão</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@NOMPRT</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Nome do Portador do Cartão</td></tr>
+<tr>
+<td>96</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTSELCRT</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NUMCRT</td><td style='align:left'>varchar(16)</td><td style='align:left' colspan='2'>Número do Cartão</td></tr>
+<tr>
+<td>97</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGCRTUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NIDCTA</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID da Conta Virtual</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@TIPPRO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Produto associado ao registro de cartão</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@ORGATV</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Origem da Ativação do Cartão</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@ASSUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário associado ao cartão</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@SECLVL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Nível de Segurança</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@DATATV</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data de Ativação</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@DATCAN</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data do Cancelamento</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@CALMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>0 - Não distribuir a mensalidade para o cartão@1 - Distribuir a mensalidade para o cartão@2 - Mensalidade distribuida@9 - Não existe configuração</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@USUMEN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de débito da mensalidade</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@NOMPRT</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Nome do Portador do Cartão</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@NUMCRT</td><td style='align:left'>varchar(25)</td><td style='align:left' colspan='2'>Número do Cartão</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@VALCRT</td><td style='align:left'>varchar(5)</td><td style='align:left' colspan='2'>Validade do Cartão</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@PSWCRT</td><td style='align:left'>varchar(6)</td><td style='align:left' colspan='2'>Senha do Cartão</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@NUMCVC</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de  Verificação do Cartão, código adicional impresso no verso do cartão de débito ou crédito. Na maioria dos cartões (Visa, MasterCard, cartões de bancos, etc.) é os últimos três dígitos impressos na faixa para assinatura localizada no verso do cartão.</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@STAPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status de Processamento</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@STACRT</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status do Cartão</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@NOMCR1</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Parte 1 do Nome do Portador</td></tr>
+<tr><td style='align:right'>20</td><td style='align:left'>@NOMCR2</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Parte 2 do Nome do Portador</td></tr>
+<tr><td style='align:right'>21</td><td style='align:left'>@NOMCR3</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Parte 3 do Nome do Portador</td></tr>
+<tr><td style='align:right'>22</td><td style='align:left'>@OPRCRT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Operadora ou processadora do cartão.</td></tr>
+<tr><td style='align:right'>23</td><td style='align:left'>@DATEXT</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data da ultima solicitação de extrato</td></tr>
+<tr><td style='align:right'>24</td><td style='align:left'>@CODBLO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código de bloqueio</td></tr>
+<tr><td style='align:right'>25</td><td style='align:left'>@TIPPRT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Portador</td></tr>
+<tr><td style='align:right'>26</td><td style='align:left'>@DSCMOT</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição do Motivo de Bloqueio ou Aprovação</td></tr>
+<tr><td style='align:right'>27</td><td style='align:left'>@APLCON</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o cartão pode fazer compras on line</td></tr>
+<tr><td style='align:right'>28</td><td style='align:left'>@APLSAQ</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o cartão pode fazer saques</td></tr>
+<tr><td style='align:right'>29</td><td style='align:left'>@LOTMIG</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>NEXT NUMBER:41 ID do Controle Interno de Lote de Migração de Cartoes</td></tr>
+<tr><td style='align:right'>30</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>31</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>32</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>33</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>98</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGMENCRTMENCRT</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODCRT</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Cartão </td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr>
+<td>99</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGMENINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@USRREF</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Origem do Débito, utilizado para identificar o usuário que transferiu a mensalidade para outro pagador</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@TIPMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Mensalidade</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@CODREF</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código de Referência</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@MODREG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Modo de Registro</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@REGBXA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Identificar de Processsamento de Baixa de um Boleto</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@STAMEN</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status da Mensalidade</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@SRCCAN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Origem do Cancelamento</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@NUMMES</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>MÊS</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@NUMANO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>ANO</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@NUMPCL</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Número da Parcela</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@DATMEN</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data da Mensalidade</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@DATVCT</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data de Vencimento</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@SIGOPE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Sinal da Operação</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@VLRCOB</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor de Cobrança</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@LOTINS</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Número do Lote de Inscrição</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@NUMTEN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Numero de Tentativas de Registro</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>20</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>21</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>100</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGMENRESALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@TIPMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Mensalidade</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAMEN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Status da Mensalidade</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr>
+<td>101</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGMENSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@TIPMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Mensalidade</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAMEN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Status da Mensalidade</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr>
+<td>102</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGMENSELMEN</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPMEN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Tipo de Mensalidade</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODREF</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código de Referência</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@REGBXA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Identificar de Processsamento de Baixa de um Boleto</td></tr>
+<tr>
+<td>103</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRREGMENUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDMEN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do Registro de Mensalidade</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@USRREF</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Origem do Débito, utilizado para identificar o usuário que transferiu a mensalidade para outro pagador</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@TIPMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Mensalidade</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CODREF</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código de Referência</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@MODREG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Modo de Registro</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@REGBXA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Identificar de Processsamento de Baixa de um Boleto</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@STAMEN</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código do Status da Mensalidade</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@SRCCAN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Origem do Cancelamento</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@NUMMES</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>MÊS</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@NUMANO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>ANO</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@NUMPCL</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Número da Parcela</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@DATMEN</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data da Mensalidade</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@DATVCT</td><td style='align:left'>date(3)</td><td style='align:left' colspan='2'>Data de Vencimento</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@SIGOPE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Sinal da Operação</td></tr>
+<tr><td style='align:right'>17</td><td style='align:left'>@VLRCOB</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor de Cobrança</td></tr>
+<tr><td style='align:right'>18</td><td style='align:left'>@LOTINS</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Número do Lote de Inscrição</td></tr>
+<tr><td style='align:right'>19</td><td style='align:left'>@NUMTEN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Numero de Tentativas de Registro</td></tr>
+<tr><td style='align:right'>20</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>21</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>22</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>23</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>104</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSFUNINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSAPL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>ID de aplicação de funcionalidade</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@SYSTBL</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>ID de identificação da tabela de aplicação da funcionalidade</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@SYSROL</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>ID de identificação da regra de aplicação</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@SYSMTH</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Nome do Método da regra de aplicação</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@SYSPRC</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Nome do objeto nativo de aplicação da regra</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@SYSDSC</td><td style='align:left'>varchar(255)</td><td style='align:left' colspan='2'>Descrição da aplicação do método</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>105</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSFUNSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSFUN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID da funcionalidade</td></tr>
+<tr>
+<td>106</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSFUNSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSTBL</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>ID de identificação da tabela de aplicação da funcionalidade</td></tr>
+<tr>
+<td>107</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSFUNUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSFUN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID da funcionalidade</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@SYSAPL</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>ID de aplicação de funcionalidade</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@SYSTBL</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>ID de identificação da tabela de aplicação da funcionalidade</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@SYSROL</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>ID de identificação da regra de aplicação</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@SYSMTH</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Nome do Método da regra de aplicação</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@SYSPRC</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Nome do objeto nativo de aplicação da regra</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@SYSDSC</td><td style='align:left'>varchar(255)</td><td style='align:left' colspan='2'>Descrição da aplicação do método</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>108</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSFXGINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSFUN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID da funcionalidade</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@SYSGRP</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do grupo</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>109</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSFXGSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@FUNGRP</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do registro de funcionalidade x grupo</td></tr>
+<tr>
+<td>110</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSFXGSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSGRP</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do grupo</td></tr>
+<tr>
+<td>111</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSFXGUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@FUNGRP</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do registro de funcionalidade x grupo</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@SYSFUN</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID da funcionalidade</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@SYSGRP</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do grupo</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>112</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSGRPINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSGRP</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do grupo</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCGRP</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Descrição do Grupo</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>113</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSGRPSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSGRP</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do grupo</td></tr>
+<tr>
+<td>114</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRSYSGRPUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SYSGRP</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID do grupo</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCGRP</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Descrição do Grupo</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>115</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTABGERCOD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NUMTAB</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código da Tabela</td></tr>
+<tr>
+<td>116</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTABGERFNDKEY</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NUMTAB</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código da Tabela</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@KEYCOD</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Chave Numérica</td></tr>
+<tr>
+<td>117</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTABGERFNDTXT</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NUMTAB</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código da Tabela</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@KEYTXT</td><td style='align:left'>varchar(1)</td><td style='align:left' colspan='2'>Chave Texto</td></tr>
+<tr>
+<td>118</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTABGERINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NUMTAB</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código da Tabela</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@USECOD</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@KEYCOD</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Chave Numérica</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@KEYTXT</td><td style='align:left'>char(10)</td><td style='align:left' colspan='2'>Chave Texto</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@NUMREF</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Valor de Informação ou Controle</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@DSCTAB</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Descrição do Item da Tabela Geral</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@USRDSP</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o registro deve Valor do Pagamento</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@IDEPRE</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indicador de Precedência</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>119</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTABGERSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@KEYTAB</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID de Registro da Tabela Geral</td></tr>
+<tr>
+<td>120</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTABGERUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@KEYTAB</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>ID de Registro da Tabela Geral</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@NUMTAB</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código da Tabela</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@USECOD</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@KEYCOD</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Chave Numérica</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@KEYTXT</td><td style='align:left'>char(10)</td><td style='align:left' colspan='2'>Chave Texto</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@NUMREF</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Valor de Informação ou Controle</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@DSCTAB</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Descrição do Item da Tabela Geral</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@USRDSP</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o registro deve Valor do Pagamento</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@IDEPRE</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indicador de Precedência</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>121</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTARMOVINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODTAR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODMOV</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Movimento</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@IDEPRE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Indicador de Precedência</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>122</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTARMOVSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDTXM</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr>
+<td>123</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTARMOVUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@NIDTXM</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODTAR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODMOV</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Movimento</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@IDEPRE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Indicador de Precedência</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>124</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPATRINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODATR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Atributo do Cadastro</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCATR</td><td style='align:left'>varchar(40)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@USELGN</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Indica se o atributo deve logar no sistema</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@USEACT</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@USETAR</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>125</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPATRSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODATR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Atributo do Cadastro</td></tr>
+<tr>
+<td>126</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPATRUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODATR</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Atributo do Cadastro</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCATR</td><td style='align:left'>varchar(40)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@USELGN</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Indica se o atributo deve logar no sistema</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@USEACT</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@USETAR</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>127</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPCTAINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPCTA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Conta</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCCTA</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Descrição da Conta</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPEXT</td><td style='align:left'>char(2)</td><td style='align:left' colspan='2'>Tipo de Boleto Externo</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>128</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPCTAUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPCTA</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Conta</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCCTA</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Descrição da Conta</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@TIPEXT</td><td style='align:left'>char(2)</td><td style='align:left' colspan='2'>Tipo de Boleto Externo</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>129</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPCTOINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPCTO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Contato</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCCTO</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Descrição do Tipo de Contato</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>130</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPCTOUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPCTO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Contato</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCCTO</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Descrição do Tipo de Contato</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>131</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPENDINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPEND</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Endereço</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCTEN</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Descrição do Tipo de Endereço</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@REFCTO</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o tipo de endereço tem referencia com o Cadastro de Contatos</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>132</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPENDSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPEND</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Endereço</td></tr>
+<tr>
+<td>133</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPENDUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPEND</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Endereço</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCTEN</td><td style='align:left'>varchar(30)</td><td style='align:left' colspan='2'>Descrição do Tipo de Endereço</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@REFCTO</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o tipo de endereço tem referencia com o Cadastro de Contatos</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>134</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPEXPINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPEXP</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCEXP</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Descrição da Expansão de Tarifa</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@LVLREG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Nível de Registro aplicado à Expansão de Tarifas</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>135</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPEXPUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPEXP</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCEXP</td><td style='align:left'>varchar(70)</td><td style='align:left' colspan='2'>Descrição da Expansão de Tarifa</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@LVLREG</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Nível de Registro aplicado à Expansão de Tarifas</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>136</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPMOVINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODMOV</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Movimento</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@SUBSYS</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@DSCMOV</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição do Movimento</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@DSCEXT</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Descrição Externa</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@SIGOPE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Sinal da Operação</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CNDBLO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Condição de Bloqueio de Operações</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@NUMDIA</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Número de Dias</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@CODEST</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Estorno</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@CODCAN</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Cancelamento</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@DSCEXC</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Descrição Externa do Cancelamento/Estorno</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>137</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPMOVSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@SUBSYS</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr>
+<td>138</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPMOVUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODMOV</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Movimento</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@SUBSYS</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@DSCMOV</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição do Movimento</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@DSCEXT</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Descrição Externa</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@SIGOPE</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Sinal da Operação</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@CNDBLO</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Condição de Bloqueio de Operações</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@NUMDIA</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Número de Dias</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@CODEST</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Estorno</td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@CODCAN</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Cancelamento</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@DSCEXC</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>Descrição Externa do Cancelamento/Estorno</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>139</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPTARINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODTAR</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCTAR</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição da Tarifa</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODMOV</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Movimento</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>140</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPTARUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODTAR</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código da Tarifa</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCTAR</td><td style='align:left'>varchar(50)</td><td style='align:left' colspan='2'>Descrição da Tarifa</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODMOV</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código de Movimento</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>141</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPUSUINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPUSU</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCTUS</td><td style='align:left'>varchar(40)</td><td style='align:left' colspan='2'>Descrição do Tipo de Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>142</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPUSUSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPUSU</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Usuário</td></tr>
+<tr>
+<td>143</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRTIPUSUUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TIPUSU</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Tipo de Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DSCTUS</td><td style='align:left'>varchar(40)</td><td style='align:left' colspan='2'>Descrição do Tipo de Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>144</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRUSUPROINS</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Produto</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@APLINT</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o registro é de aplicação ou controle interno</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@VLRMIN</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Minimo</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@VLRMAX</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Máximo</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@APLRVC</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define (1) se aplica a regra de vencimento, caso contrário nçao aplica</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@REGVCT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@APLCES</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o gestor tem aplicação de geração de conta virtual especial para o cartão</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@APLTAD</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Define se deve aplicar a Tarifa Administrativa</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@APLMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Define se deve aplicar a Mensalidade ã distribuição de mensalidade para o cartão</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@VLRMEN</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor da Mensalidade</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>145</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRUSUPROLOC</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Produto</td></tr>
+<tr>
+<td>146</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRUSUPROLSTUSU</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr>
+<td>147</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRUSUPROSEL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr>
+<td>148</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRUSUPROSELALL</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Produto</td></tr>
+<tr>
+<td>149</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRUSUPROSELGSTLIN</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@LINPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Código da Linha de Produto</td></tr>
+<tr>
+<td>150</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRUSUPROSELUSR</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr>
+<td>151</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>PRUSUPROUPD</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@USUPRO</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário Gestor</td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Código do Usuário</td></tr>
+<tr><td style='align:right'>3</td><td style='align:left'>@CODPRO</td><td style='align:left'>smallint(2)</td><td style='align:left' colspan='2'>Codigo do Produto</td></tr>
+<tr><td style='align:right'>4</td><td style='align:left'>@APLINT</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define se o registro é de aplicação ou controle interno</td></tr>
+<tr><td style='align:right'>5</td><td style='align:left'>@VLRMIN</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Minimo</td></tr>
+<tr><td style='align:right'>6</td><td style='align:left'>@VLRMAX</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor Máximo</td></tr>
+<tr><td style='align:right'>7</td><td style='align:left'>@APLRVC</td><td style='align:left'>bit(1)</td><td style='align:left' colspan='2'>Define (1) se aplica a regra de vencimento, caso contrário nçao aplica</td></tr>
+<tr><td style='align:right'>8</td><td style='align:left'>@REGVCT</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>9</td><td style='align:left'>@APLCES</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Indica se o gestor tem aplicação de geração de conta virtual especial para o cartão</td></tr>
+<tr><td style='align:right'>10</td><td style='align:left'>@APLTAD</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Define se deve aplicar a Tarifa Administrativa</td></tr>
+<tr><td style='align:right'>11</td><td style='align:left'>@APLMEN</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Define se deve aplicar a Mensalidade ã distribuição de mensalidade para o cartão</td></tr>
+<tr><td style='align:right'>12</td><td style='align:left'>@VLRMEN</td><td style='align:left'>money(8)</td><td style='align:left' colspan='2'>Valor da Mensalidade</td></tr>
+<tr><td style='align:right'>13</td><td style='align:left'>@STAREC</td><td style='align:left'>tinyint(1)</td><td style='align:left' colspan='2'>Código do Status de Registro</td></tr>
+<tr><td style='align:right'>14</td><td style='align:left'>@DATUPD</td><td style='align:left'>datetime(8)</td><td style='align:left' colspan='2'>Data da Ultima Atualização</td></tr>
+<tr><td style='align:right'>15</td><td style='align:left'>@UPDUSU</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>Usuário de Atualização</td></tr>
+<tr><td style='align:right'>16</td><td style='align:left'>@RETURN_VALUE</td><td style='align:left'>int(4)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>152</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>SPK_CREATECODIFIEDKEY</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TEXT_VALUE</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@CODIFIED</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>153</td>
+<th>Tipo</th><td align='left'>SQL_STORED_PROCEDURE</td>
+<th>Nome</th><td align='left'>SPK_CREATEDECODIFIEDKEY</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@TEXT_VALUE</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'></td></tr>
+<tr><td style='align:right'>2</td><td style='align:left'>@DECODIFIED</td><td style='align:left'>varchar(100)</td><td style='align:left' colspan='2'>OUTPUT</td></tr>
+<tr>
+<td>154</td>
+<th>Tipo</th><td align='left'>SQL_SCALAR_FUNCTION</td>
+<th>Nome</th><td align='left'>ValidadeCartao</td>
+</tr>
+<tr>
+<th>Uso</th><td colspan='4' align='left'></td>
+</tr>
+<tr><th>#</th><th>Parâmetro</th><th>Tipo</th><th colspan='2'>Descrição</th></tr>
+<tr style='border-bottom:solid 2px #000066'><td style='align:right' colspan='3'>RETURN varchar(10)</td> </tr>
+<tr><td style='align:right'>1</td><td style='align:left'>@VALCRT</td><td style='align:left'>varchar(5)</td><td style='align:left' colspan='2'>Validade do Cartão</td></tr>
+</table>
+</body>
+</html>

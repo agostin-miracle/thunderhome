@@ -1,0 +1,561 @@
+﻿@model ThunderFireHomeAdmin.Models.AccountEntryPostingModel
+@{
+    ViewBag.Title = "Cadastro de Lançamentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="form-row">
+                <label for="CUSUPRO" class="col-sm-2 form-control-sm">Gestor:</label>
+                <div class="col-sm-4">
+                    @if (Model.ListaTipoLancamento != null)
+                    {
+                        @Html.DropDownListFor(model => model.CTIPLCT, new SelectList(Model.ListaTipoLancamento, "TIPLCT", "DSCLCT", Model.CTIPLCT), new { @class = "form-control form-control-sm" })
+                    }
+                </div>
+            </div>
+
+            <hr />
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                    <button id="btn_copy_lct" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForCopy();"><i class="fa fa-clone" aria-hidden="true"></i> Copiar</button>
+                    <button id="btn_delete_lct" value="Adicionar" class="btn btn-danger btn-sm" onclick="CallForDelete();"><i class="fa fa-trash" aria-hidden="true"></i> Remover</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <table id="tbcadlan" class="table-sm table-striped table-bordered dt-responsive nowrap dataTable js-exportable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Tipo</th>
+                            <th>Linha</th>
+                            <th>Transação</th>
+                            <th>Ordem</th>
+                            <th>Débito</th>
+                            <th>Crédito</th>
+                            <th>Status</th>
+                            <th>#</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalcadlan" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-address-book" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FNIDLCT" value="0" />
+                <div class="modal-body">
+                    <div class="form-row">
+                        <label for="FLINLCT" class="col-sm-2 form-control-sm">Linha:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control-sm numero" id="FLINLCT" name="FLINLCT" placeholder="" value="" required>
+                        </div>
+
+                        <label for="FTIPLCT" class="col-sm-2 form-control-sm">Tipo:</label>
+                        <div class="col-sm-6">
+                            @if (Model.ListaTipoLancamento != null)
+                            {
+                                @Html.DropDownListFor(model => model.FTIPLCT, new SelectList(Model.ListaTipoLancamento, "TIPLCT", "DSCLCT", Model.FTIPLCT), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="FNUMORD" class="col-sm-2 form-control-sm">Ordem:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control-sm numero" id="FNUMORD" name="FNUMORD" placeholder="" value="" required>
+                        </div>
+
+                        <label for="FCODTRM" class="col-sm-2 form-control-sm">Movimento:</label>
+                        <div class="col-sm-6">
+                            @if (Model.ListaTransacaoMovimento != null)
+                            {
+                                @Html.DropDownListFor(model => model.FCODTRM, new SelectList(Model.ListaTransacaoMovimento, "KEYCOD", "DSCTAB", Model.FCODTRM), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="FINDDEB" class="col-sm-3 form-control-sm">Indicador Débito:</label>
+                        <div class="col-sm-9">
+                            @if (Model.ListaIndicador != null)
+                            {
+                                @Html.DropDownListFor(model => model.FINDDEB, new SelectList(Model.ListaIndicador, "KEYCOD", "DSCTAB", Model.FINDDEB), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+
+                        <label for="FMOVDEB" class="col-sm-3 form-control-sm">Operação:</label>
+                        <div class="col-sm-9">
+                            @if (Model.ListaOperacao != null)
+                            {
+                                @Html.DropDownListFor(model => model.FMOVDEB, new SelectList(Model.ListaOperacao, "CODMOV", "DSCMOV", Model.FMOVDEB), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+
+                        <label for="FINDCRD" class="col-sm-3 form-control-sm">Indicador Débito:</label>
+                        <div class="col-sm-9">
+                            @if (Model.ListaIndicador != null)
+                            {
+                                @Html.DropDownListFor(model => model.FINDCRD, new SelectList(Model.ListaIndicador, "KEYCOD", "DSCTAB", Model.FINDCRD), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                        <label for="FMOVCRB" class="col-sm-3 form-control-sm">Operação:</label>
+                        <div class="col-sm-9">
+                            @if (Model.ListaOperacao != null)
+                            {
+                                @Html.DropDownListFor(model => model.FMOVCRD, new SelectList(Model.ListaOperacao, "CODMOV", "DSCMOV", Model.FMOVCRD), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+
+                        <label for="FSTAREG" class="col-sm-3 form-control-sm">Status:</label>
+                        <div class="col-sm-9">
+                            @if (Model.ListaStatusTransacao != null)
+                            {
+                                @Html.DropDownListFor(model => model.FSTAREG, new SelectList(Model.ListaStatusTransacao, "CODSTA", "DSCSTA", Model.FSTAREG), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+
+                        <label for="FIDEPRE" class="col-sm-3 form-control-sm">Precedência:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control-sm numero" id="FIDEPRE" name="FIDEPRE" placeholder="" value="" required>
+                        </div>
+
+                    </div>
+                    <div class="form-group row ml-4">
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="FSTAREC" />
+                            <label class="form-check-label" for="FSTAREC">Ativo</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalcadlancopy" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-address-book" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <label for="FTIPLCT" class="col-sm-2 form-control-sm">De:</label>
+                        <div class="col-sm-6">
+                            @if (Model.ListaTipoLancamento != null)
+                            {
+                                @Html.DropDownListFor(model => model.FTIPLCT1, new SelectList(Model.ListaTipoLancamento, "TIPLCT", "DSCLCT", Model.FTIPLCT1), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="FCPYLCT" class="col-sm-2 form-control-sm">Para:</label>
+                        <div class="col-sm-6">
+                            @if (Model.ListaTipoLancamento != null)
+                            {
+                                @Html.DropDownListFor(model => model.FTIPLCT2, new SelectList(Model.ListaTipoLancamento, "TIPLCT", "DSCLCT", Model.FTIPLCT2), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" id="btn_copy">Copiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalcadlandelete" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-address-book" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <label for="FTIPLCT" class="col-sm-2 form-control-sm">De:</label>
+                        <div class="col-sm-6">
+                            @if (Model.ListaTipoLancamento != null)
+                            {
+                                @Html.DropDownListFor(model => model.FTIPLCT3, new SelectList(Model.ListaTipoLancamento, "TIPLCT", "DSCLCT", Model.FTIPLCT3), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-danger" id="btn_delete">Remover</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+
+    <script src="~/Scripts/Rules/CommonRules.js"></script>
+    <script>
+        var TbDetalhe = null;
+
+        $(document).ready(function () {
+
+            $('.numero').mask('000');
+
+            $(document).on("click", "#btn_update", function () {
+                if (PrimaryValidation()) {
+                    var mode = $("#OPERATION").val();
+                    var VDATA = JSON.stringify({
+                        'NIDLCT': parseInt($("#FNIDLCT").val()),
+                        'TIPLCT': parseInt($("#FTIPLCT").val()),
+                        'LINLCT': parseInt($("#FLINLCT").val()),
+                        'CODTRM': parseInt($("#FCODTRM").val()),
+                        'NUMORD': parseInt($("#FNUMORD").val()),
+                        'INDDEB': parseInt($("#FINDDEB").val()),
+                        'INDCRD': parseInt($("#FINDCRD").val()),
+                        'MOVDEB': parseInt($("#FMOVDEB").val()),
+                        'MOVCRD': parseInt($("#FMOVCRD").val()),
+                        'STAREG': parseInt($("#FSTAREG").val()),
+                        'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: GetUrl("Financeiro/AtualizarCadastroLancamento?modo=" + mode),
+                        data: VDATA,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        beforeSend: function () { },
+                        success: function (result) {
+                            console.log(result);
+                            var ok = parseInt(result.ReturnValue);
+                            if (ok > 0) {
+                                $('#modaltipolancamento').modal('toggle');
+                                location.href = location.href;
+                            }
+                            else {
+                                $.alert({ class: 'Warning', title: 'Cadastro de Lançamento', message: result.MessageToUser, effect: 'newspaper' });
+                            };
+                        },
+                        error: function (data) {
+                            $.alert({ class: 'danger', title: 'Cadastro de Lançamento', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                        }
+                    });
+                }
+            });
+
+
+            $(document).on("click", "#btn_copy", function () {
+                if (CopyValidation()) {
+                    $.ajax({
+                        type: "POST",
+                            url: GetUrl("Financeiro/CopiarCadastroLancamento"),
+                        data: JSON.stringify({
+                            'pTIPLCT1': parseInt($("#FTIPLCT1").val()),
+                            'pTIPLCT2': parseInt($("#FTIPLCT2").val()),
+                        }),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        beforeSend: function () { },
+                        success: function (result) {
+                            console.log(result);
+                            var ok = parseInt(result.ReturnValue);
+                            if (ok > 0) {
+                                $.alert({ class: 'success', title: 'Cadastro de Lançamento', message: result.MessageToUser, effect: 'newspaper' });                            }
+                            else {
+                                $.alert({ class: 'danger', title: 'Cadastro de Lançamento', message: result.MessageToUser, effect: 'newspaper' });
+                            };
+                        },
+                        error: function (data) {
+                            $.alert({ class: 'danger', title: 'Cadastro de Lançamento', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                        }
+                    });
+                }
+            });
+
+            $(document).on("click", "#btn_delete", function () {
+
+                if (confirm("Confirma a remoção do lançamento ?")) {
+                    $.ajax({
+                        type: "POST",
+                        url: GetUrl("Financeiro/DeleteCadastroLancamento"),
+                        data: JSON.stringify({'pTIPLCT': parseInt($("#FTIPLCT3").val()) }),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        beforeSend: function () { },
+                        success: function (result) {
+                            var ok = parseInt(result.ReturnValue);
+                            if (ok > 0) {
+                                $.alert({ class: 'success', title: 'Cadastro de Lançamento', message: result.MessageToUser, effect: 'newspaper' });
+                            }
+                            else {
+                                $.alert({ class: 'danger', title: 'Cadastro de Lançamento', message: result.MessageToUser, effect: 'newspaper' });
+                            };
+                        },
+                        error: function (data) {
+                            $.alert({ class: 'danger', title: 'Cadastro de Lançamento', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                        }
+                    });
+                }
+            });
+
+            $('#CTIPLCT').on('change', function () {
+                $('#tbcadlan').DataTable().ajax.reload();
+            });
+
+            AtualizaDetalhe();
+
+        });
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            $("#FSTAREC").prop('checked', "true");
+            $("#FNIDLCT").val("0");
+            $('#modalcadlan').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalcadlan').modal('toggle');
+        }
+
+        function CallForCopy() {
+            $("#FTIPLCT1").val($("#CTIPLCT").val());
+            $('#modalcadlancopy').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalcadlancopy').modal('toggle');
+        }
+
+        function CallForDelete() {
+            $("#FTIPLCT3").val($("#CTIPLCT").val());
+            $('#modalcadlandelete').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalcadlandelete').modal('toggle');
+        }
+
+        function CallForEdit(pNIDLCT) {
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: GetUrl("Financeiro/SelecionarCadastroLancamento"),
+                data: { pNIDLCT: pNIDLCT },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FNIDLCT").val(result.NIDLCT);
+                    $("#FTIPLCT").val(result.TIPLCT);
+                    $("#FTIPLCT").attr('disabled', 'disabled');
+                    $("#FLINLCT").val(result.LINLCT);
+                    $("#FCODTRM").val(result.CODTRM);
+                    $("#FNUMORD").val(result.NUMORD);
+                    $("#FINDDEB").val(result.INDDEB);
+                    $("#FINDCRD").val(result.INDCRD);
+                    $("#FMOVDEB").val(result.MOVDEB);
+                    $("#FMOVCRD").val(result.MOVDEB);
+                    $("#FIDEPRE").val(result.IDEPRE);
+                    $("#FSTAREG").val(result.STAREG);
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                }
+            })
+            $('#modalcadlan').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalcadlan').modal('toggle');
+        }
+
+        function PrimaryValidation() {
+
+            var aval;
+            var msg = '';
+            var ret = true;
+
+            var modo = parseInt($("#FOPERATION").val());
+            if (modo == null || (modo < 1 && modo > 2)) {
+                msg = 'Operação invalida';
+                ret = false;
+            }
+
+            if (ret === true) {
+                aval = parseInt($("#FTIPLCT").val());
+                if (aval <= 0) {
+                    msg = 'Tipo de Lançamento Inválido';
+                    ret = false;
+                }
+            }
+
+            if (ret === false) {
+                $.alert({ class: 'danger', title: 'Cadastro de Lançamento', message: msg, effect: 'zoom' });
+            }
+            return ret;
+        }
+
+        function CopyValidation() {
+
+            var aval;
+            var msg = '';
+            var ret = true;
+
+            if (ret === true) {
+                aval = parseInt($("#FTIPLCT1").val());
+                if (aval <= 0) {
+                    msg = 'Tipo de Lançamento Inválido';
+                    ret = false;
+                }
+            }
+            if (ret === true) {
+                aval = parseInt($("#FTIPLCT2").val());
+                if (aval <= 0) {
+                    msg = 'Tipo de Lançamento de destino Inválido';
+                    ret = false;
+                }
+            }
+
+            if (ret === true) {
+                var equal = $("#FTIPLCT2").val() != $("#FTIPLCT1").val();
+                if (equal==false) {
+                    msg = 'O Tipo de Lançamento de Origem não pode ser igual ao tipo de Lançamento de Destino';
+                    ret = false;
+                }
+            }
+
+            if (ret === false) {
+                $.alert({ class: 'danger', title: 'Cadastro de Lançamento', message: msg, effect: 'zoom' });
+            }
+            return ret;
+        }
+
+
+        function AtualizaDetalhe() {
+            try {
+                if (TbDetalhe == null) {
+
+                    TbDetalhe = $('#tbcadlan').DataTable(
+                        {
+                            paging: true,
+                            searching: false,
+                            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                            processing: true,
+                            serverSide: true,
+                            orderMulti: false,
+                            responsive: true,
+                            ajax: {
+                                url: GetUrl("Financeiro/PesquisarCadastroLancamento"),
+                                type: "POST",
+                                datatype: "json",
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                                data: {
+                                    pTIPLCT: function () {
+                                        var value = $('#CTIPLCT').val();
+                                        if (value == null) {
+                                            value = -1
+                                        }
+                                        return value;
+                                    }
+                                }
+                            },
+
+                            columns: [
+                                { data: "NIDLCT" },
+                                { data: "DSCREC" },
+                                { data: "DSCLCT" },
+                                { data: "LINLCT" },
+                                { data: "DSCTRM" },
+                                { data: "NUMORD" },
+                                {
+                                    render: function (data, type, row) {
+                                        return row.DSCIDB + '<br/>' + row.DSCMDB;
+                                    }
+                                },
+                                {
+                                    render: function (data, type, row) {
+                                        return row.DSCICR + '<br/>' + row.DSCMCR;
+                                    }
+                                },
+                                { data: "DSCSTA" },
+                                { data: "IDEPRE" },
+                                { data: "LGNUSU" },
+                                {
+                                    "render": function (data, type, row) {
+                                        var botoes = "";
+                                        if (row.STAREC == 1) {
+                                            botoes = botoes + "<button id='btn_call_edt' value='Editar' onclick=\"CallForEdit(" + row.NIDLCT + ");\"> <i class='fa fa-edit'></i></button>&nbsp;"
+                                        }
+                                        return botoes;
+                                    }
+                                }
+                            ],
+                            "language": {
+                                "processing": "Aguarde, buscando informações",
+                                "loadingRecords": "Carregando",
+                            },
+                            "pageLength": 10,
+                            "oLanguage": {
+                                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                                "sZeroRecords": "Nenhum registro encontrado",
+                                "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                                "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                                "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                                "sSearch": "Pesquisar: "
+                            },
+                            columnDefs: [
+                                { "targets": [0], "visible": false, "searchable": false },
+                                { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "4%" },
+                                { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "12%" },
+                                { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "4%" },
+                                { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "10%" },
+                                { className: "text-left", "targets": [8], "visible": true, "searchable": false, "width": "10%" },
+                                { className: "text-left", "targets": [9], "visible": true, "searchable": false, "width": "10%" },
+                                { className: "text-left", "targets": [10], "visible": true, "searchable": false, "width": "10%" },
+                                { className: "text-left", "targets": [11], "visible": true, "searchable": false, "width": "10%" }
+
+                            ]
+                        });
+
+                }
+                else {
+                    TbDetalhe.DataTable().ajax.reload();
+                }
+            }
+            catch (e) {
+            }
+        }
+
+    </script>
+}
+
+

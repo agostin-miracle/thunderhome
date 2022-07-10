@@ -46,7 +46,7 @@ namespace ThunderFire.Domain.Models
 /// <para>24 - TARIFAS E LIMITES</para>
 /// <para>25 - TIPOS DE BOLETO COMISSIONAMENTO</para>
 /// <para>26 - ACOES DO ROTEIRO</para>
-/// <para>29 - TIPO DE VALOR PARA PROCESSAMENTO</para>
+/// <para>29 - CONDICOES DE BLOQUEIO</para>
 /// <para>30 - FORMA DE COBRANCA DE TARIFA</para>
 /// <para>31 - TIPO DE REGISTRO DE LOTE</para>
 /// <para>32 - OPERACOES DE CREDITO (CARTAO)</para>
@@ -99,6 +99,8 @@ namespace ThunderFire.Domain.Models
 /// <para>80 - NACIONALIDADES</para>
 /// <para>81 - LOGRADOUROS</para>
 /// <para>82 - TIPO DE LOGIN</para>
+/// <para>92 - PERSONALIDADE JURIDICA</para>
+/// <para>93 - SUBSISTEMAS DE APOIO</para>
 /// <para>94 - APLICACAO EXPANSAO TARIFA</para>
 /// <para>95 - LINK DE PRODUTO</para>
 /// <para>96 - RMC</para>
@@ -110,6 +112,8 @@ namespace ThunderFire.Domain.Models
 /// <para>105 - RESPONSABILIDADE TARIFA</para>
 /// <para>201 - CODIGO DE ATIVACAO DO CARTAO</para>
 /// <para>201 - CODIGO DE ATIVACAO DO CARTAO</para>
+/// <para>298 - MOEDAS</para>
+/// <para>299 - TABELAS DO SISTEMA</para>
 /// <para>300 - SEGMENTOS</para>
 /// <para>301 - ORGAOS DE PAGAMENTO</para>
 /// <para>301 - SEGMENTOS DE ARRECADACAO</para>
@@ -167,6 +171,11 @@ namespace ThunderFire.Domain.Models
 /// <para></para>
 /// </remarks>
         public int NUMTAB{ get;set;} = 0;
+
+        /// <summary>
+        /// Define se o tipo especificado na Tabela Geral (0)  usa o campo KEYCODd comO indexador
+        /// </summary>
+        public byte USECOD{ get;set;} = 1;
 
         /// <summary>
         /// Chave Numérica
@@ -229,6 +238,16 @@ _DSCTAB= "";
         /// Usuário de Atualização
         /// </summary>
         public int UPDUSU{ get;set;} = 0;
+
+        /// <summary>
+        /// Descrição do Status de Registro
+        /// </summary>
+        public string DSCREC{ get;set;} = "";
+
+        /// <summary>
+        /// Identificação da Chave de Login do Usuário
+        /// </summary>
+        public string LGNUSU{ get;set;} = "";
 
     }
 }

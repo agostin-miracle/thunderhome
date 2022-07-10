@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 28/02/2022 19:03
+///Data        : 23/03/2022 14:58
 ///Alias       : generaltable
 ///Descrição   : Tabela Geral do Sistema
 ///</remarks>
@@ -63,6 +63,7 @@ string _changed = Objects.GetPropertiesValue("Tabela Geral do Sistema",model,tru
             var p = new DynamicParameters();
             p.Add("@RETURN_VALUE", 0, dbType:DbType.Int32,  direction: ParameterDirection.Output);
             p.Add("@NUMTAB", model.NUMTAB, dbType:DbType.Int32,  direction: ParameterDirection.Input);
+            p.Add("@USECOD", model.USECOD, dbType:DbType.Byte,  direction: ParameterDirection.Input);
             p.Add("@KEYCOD", model.KEYCOD, dbType:DbType.Int32,  direction: ParameterDirection.Input);
             p.Add("@KEYTXT", model.KEYTXT, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@NUMREF", model.NUMREF, dbType:DbType.Int32,  direction: ParameterDirection.Input);
@@ -125,7 +126,8 @@ _errormessage="";
             respond.SourceError=msg.Source;
             respond.ErrorCode=msg.ErrorCode;
             respond.ErrorObject=Error;
-            respond.ErrorMessage=msg.Message;
+            if(!String.IsNullOrEmpty(msg.Message))
+            respond.MessageToUser = msg.Message;
             respond.Severity=msg.Severity;
             }
             }
@@ -158,6 +160,7 @@ string _original = Objects.GetPropertiesValue(ModelAud);
             p.Add("@RETURN_VALUE", 0, dbType:DbType.Int32,  direction: ParameterDirection.Output);
             p.Add("@KEYTAB", model.KEYTAB, dbType:DbType.Int32,  direction: ParameterDirection.Input);
             p.Add("@NUMTAB", model.NUMTAB, dbType:DbType.Int32,  direction: ParameterDirection.Input);
+            p.Add("@USECOD", model.USECOD, dbType:DbType.Byte,  direction: ParameterDirection.Input);
             p.Add("@KEYCOD", model.KEYCOD, dbType:DbType.Int32,  direction: ParameterDirection.Input);
             p.Add("@KEYTXT", model.KEYTXT, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@NUMREF", model.NUMREF, dbType:DbType.Int32,  direction: ParameterDirection.Input);
@@ -213,7 +216,8 @@ _errormessage="";
             respond.SourceError=msg.Source;
             respond.ErrorCode=msg.ErrorCode;
             respond.ErrorObject=Error;
-            respond.ErrorMessage=msg.Message;
+            if(!String.IsNullOrEmpty(msg.Message))
+            respond.MessageToUser = msg.Message;
             respond.Severity=msg.Severity;
             }
             }
@@ -236,34 +240,8 @@ _errormessage="";
                     {
             RETURN_VALUE  = _conn.Query<GeneralTable>(sql:"PRTABGERSEL", param:new {KEYTAB=pKEYTAB
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
-                    this.Found = true;
-                    }
-                    catch (Exception Error)
-                    {
-                    this.HasError = true;
-                    this.Found=false;
-                    _logger.Info(Error);
-            }
-            }
-                    return RETURN_VALUE;
-            }
 
-    /// <summary>
-    /// Seleciona um Tipo de Tabela Específica ou Todas se o número da tabela não for especificado
-    /// </summary>
-        /// <param name="pNUMTAB">Código da Tabela de Acesso</param>
-    /// <returns>List of GeneralTable</returns>
-    public List<GeneralTable> List(System.Int32 pNUMTAB)
-        {
-        this.Found=false;
-            this.ProcessCode= 105;
-    List<GeneralTable> RETURN_VALUE=null;
-                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
-                    {
-                    try
-                    {
-            RETURN_VALUE = _conn.Query<GeneralTable>(sql:"PRTABGERCOD", param:new {NUMTAB=pNUMTAB
-},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)
@@ -367,6 +345,32 @@ string _errormessage="";
         }
         return respond;
     }
+
+/// <summary>
+/// Seleciona todos os registros de um Tipo de tabela informado
+/// </summary>
+    /// <param name="pNUMTAB">Código da Tabela de Acesso</param>
+/// <returns>Listof GeneralTable</returns>
+    public List<GeneralTable> List(System.Int32? pNUMTAB)
+        {
+            this.ProcessCode= 105;
+                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
+                    {
+                    try
+                    {
+            var result = _conn.Query<GeneralTable>(sql:"PRTABGERCOD", param:new {NUMTAB=pNUMTAB},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
+                    this.Found = true;
+                    return result.ToList();
+                    }
+                    catch (Exception Error)
+                    {
+                    this.HasError = true;
+                    this.Found=false;
+                    _logger.Info(Error);
+            }
+            }
+                    return null;
+            }
 
     }
 }

@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 04/03/2022 21:32
+///Data        : 23/03/2022 13:18
 ///Alias       : systemfeatures
 ///Descrição   : System Features
 ///</remarks>
@@ -244,6 +244,8 @@ _errormessage="";
                     {
             RETURN_VALUE  = _conn.Query<SystemFeatures>(sql:"PRSYSFUNSEL", param:new {SYSFUN=pSYSFUN
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
+
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)
@@ -256,11 +258,11 @@ _errormessage="";
                     return RETURN_VALUE;
             }
 
-    /// <summary>
-    /// Obtêm todos os registros de funcionalidades específicas para uma tabela
-    /// </summary>
-        /// <param name="pSYSTBL">ID da Tabela</param>
-    /// <returns>Listof SystemFeatures</returns>
+/// <summary>
+/// Obtêm todos os registros de funcionalidades específicas para uma tabela
+/// </summary>
+    /// <param name="pSYSTBL">ID da Tabela</param>
+/// <returns>Listof SystemFeatures</returns>
     public List<SystemFeatures> List(System.Int16? pSYSTBL)
         {
             this.ProcessCode= 0;

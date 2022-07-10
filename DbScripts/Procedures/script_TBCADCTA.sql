@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRCADCTAINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 21:23:11
+     Date : 11/04/2022 17:46:12
  Objetivo : Inserção de Registros na Tabela TBCADCTA
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADCTAINS
@@ -29,11 +29,16 @@ CREATE PROCEDURE dbo.PRCADCTAINS
     SET NOCOUNT ON
     SET @RETURN_VALUE = 0
 
+    IF(@NUMBCO='' OR @NUMBCO IS NULL)
+       SET @NUMBCO='000';
+    
     IF(@ORGCTA IN (1,3,4))
         BEGIN
-            IF(EXISTS(SELECT 1 FROM TBCADCTA (NOLOCK) WHERE CODUSU =@CODUSU AND ORGCTA=@ORGCTA))              
+            IF(EXISTS(SELECT 1 
+                        FROM TBCADCTA (NOLOCK) 
+                       WHERE CODUSU =@CODUSU AND ORGCTA=@ORGCTA))              
                 BEGIN
-                    SELECT @RETURN_VALUE = ISNULL(NIDCTA,0) FROM TBCADCTA (NOLOCK) WHERE CODUSU =@CODUSU AND ORGCTA=@ORGCTA AND NUMCTA<>''
+                    SET @RETURN_VALUE=-2
                 END
         END
             
@@ -48,10 +53,18 @@ CREATE PROCEDURE dbo.PRCADCTAINS
             SET @NUMAGE = '0001';
             SET @NUMBCO = '000'
             SET @TIPBNF = 0
-            SET @CODCMF = '000000000000000'
-            SET @NOMBNF = ' '
         END
-    SELECT @NUMBCO = LTRIM(RTRIM(RIGHT('000' + ISNULL(@NUMBCO, '0'),3)))
+    
+    SELECT @NUMBCO = LTRIM(RTRIM(RIGHT('000' + ISNULL(@NUMBCO, '0'),3)))      
+    
+    IF(@ORGCTA IN (1,3,4) AND (@CODCMF='' OR @CODCMF IS NULL) )
+       BEGIN
+           SELECT @CODCMF = CODCMF FROM TBCADGER (NOLOCK) WHERE CODUSU=@CODUSU
+       END
+    IF(@ORGCTA IN (1,3,4) AND (@NOMBNF='' OR @NOMBNF IS NULL) )
+       BEGIN
+           SELECT @NOMBNF = NOMUSU FROM TBCADGER (NOLOCK) WHERE CODUSU=@CODUSU
+       END
 
     IF(@RETURN_VALUE=0)
         BEGIN
@@ -66,7 +79,11 @@ CREATE PROCEDURE dbo.PRCADCTAINS
                     SET @RETURN_VALUE = -1
                 END
     IF(@RETURN_VALUE>0 AND @ORGCTA=2)
-          UPDATE TBCADCTA SET REGATV=0 WHERE CODUSU=@CODUSU AND ORGCTA=2 AND NIDCTA<>@RETURN_VALUE
+          UPDATE TBCADCTA 
+             SET REGATV=0 
+            WHERE CODUSU=@CODUSU 
+              AND ORGCTA=2 
+              AND NIDCTA<>@RETURN_VALUE
         END
     RETURN @RETURN_VALUE
 
@@ -76,7 +93,7 @@ IF OBJECT_ID ( 'dbo.PRCADCTASEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 21:23:11
+     Date : 11/04/2022 17:46:13
  Objetivo : Seleciona o registro de conta virtual de acordo com o id da conta
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADCTASEL
@@ -96,7 +113,7 @@ IF OBJECT_ID ( 'dbo.PRCADCTASELCTA', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 21:23:11
+     Date : 11/04/2022 17:46:13
  Objetivo : Seleciona o registro de conta virtual de acordo com os parâmetros fornecidos
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADCTASELCTA
@@ -128,7 +145,7 @@ IF OBJECT_ID ( 'dbo.PRCADCTASELCMF', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 21:23:11
+     Date : 11/04/2022 17:46:13
  Objetivo : Obtêm o registro de conta virtual de acordo com o cpf/cnpj informado
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADCTASELCMF
@@ -148,8 +165,8 @@ IF OBJECT_ID ( 'dbo.PRCADCTAUPD', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 21:23:11
- Objetivo : Altera um registro da tabela TBCADCTA (Virtual Account)  de acordo com a chave identity
+     Date : 11/04/2022 17:46:13
+ Objetivo : Altera um registro da tabela TBCADCTA ()  de acordo com a chave identity
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADCTAUPD
         (@NIDCTA int, 
@@ -178,7 +195,14 @@ CREATE PROCEDURE dbo.PRCADCTAUPD
     IF(@RETURN_VALUE=0)
         BEGIN
             UPDATE TBCADCTA
-               SET REGATV=@REGATV
+               SET CODUSU=@CODUSU
+                  ,NUMAGE=@NUMAGE
+                  ,NUMBCO=@NUMBCO
+                  ,NUMCTA=@NUMCTA
+                  ,NUMDVE=@NUMDVE
+                  ,ORGCTA=@ORGCTA
+                  ,REGATV=@REGATV
+                  ,TIPCTA=@TIPCTA
                   ,STACTA=@STACTA
                   ,DATVAL=@DATVAL
                   ,APLLIM=@APLLIM
@@ -207,69 +231,12 @@ CREATE PROCEDURE dbo.PRCADCTAUPD
         END
     RETURN @RETURN_VALUE
 GO
-IF OBJECT_ID ( 'dbo.PRCADCTASELALL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRCADCTASELALL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 01/03/2022 21:23:11
- Objetivo : Obtêm todos os registros de contas virtuais registradas conforme parametro fornecido
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRCADCTASELALL
-(
-    @CODUSU Integer=NULL
-)
-AS
-    SET NOCOUNT ON
-    SELECT
-        A.NIDCTA
-        ,A.CODUSU
-    	,B.NOMUSU
-        ,A.NUMAGE
-        ,A.NUMBCO
-    	,DSCBCO = ISNULL(C.DSCTAB,'')
-        ,A.NUMCTA
-        ,A.NUMDVE
-        ,A.ORGCTA
-    	,DSCORG = ISNULL(D.DSCTAB,'')
-        ,A.TIPCTA
-    	,E.DSCCTA
-    	,E.TIPEXT
-        ,A.STACTA
-    	,F.DSCSTA
-        ,A.DATVAL
-        ,A.APLLIM
-        ,A.VLRLIM
-        ,A.TIPBNF
-        ,DSCBNF = ISNULL(G.DSCTAB,'')
-        ,CODCMF = dbo.FormatCMF(A.CODCMF)
-        ,A.NOMBNF
-        ,A.STAREC
-        ,DSCREC = ISNULL(H.DSCTAB,'')
-        ,A.UPDUSU
-    	,LGNUSU = ISNULL(I.LGNUSU,'')
-      ,DATTRF = CONVERT(VARCHAR,DATVAL,112)
-     FROM TBCADCTA (NOLOCK) A 
-     INNER JOIN TBCADGER (NOLOCK) B ON (B.CODUSU = A.CODUSU)
-      LEFT JOIN TBTABGER (NOLOCK) C ON (C.NUMTAB = 12 AND C.KEYTXT = A.NUMBCO)
-     INNER JOIN TBTABGER (NOLOCK) D ON (D.NUMTAB = 23 AND D.KEYCOD = A.ORGCTA)
-     INNER JOIN TBTIPCTA (NOLOCK) E ON (E.TIPCTA = A.TIPCTA)
-     INNER JOIN TBCADSTA (NOLOCK) F ON (F.CODSTA = A.STACTA)
-     INNER JOIN TBTABGER (NOLOCK) G ON (G.NUMTAB = 20 AND G.KEYCOD = A.TIPBNF)
-     INNER JOIN TBTABGER (NOLOCK) H ON (H.NUMTAB =  7 AND H.KEYCOD = A.STAREC)
-      LEFT JOIN TBLGNUSU (NOLOCK) I ON (I.CODUSU = A.UPDUSU AND I.REGATV = 1)
-     WHERE       (@CODUSU IS NULL OR A.CODUSU=@CODUSU)
-
-
-
-GO
-
 IF OBJECT_ID ( 'dbo.PRCADCTADELNID', 'P' ) IS NOT NULL
     DROP PROCEDURE dbo.PRCADCTADELNID;
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 21:23:11
+     Date : 11/04/2022 17:46:14
  Objetivo : Exclui logicamente um registro de conta
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADCTADELNID
@@ -285,7 +252,7 @@ AS
        SET @RETURN_VALUE=-2
     IF(EXISTS(SELECT 1 FROM TBCADCTA (NOLOCK) WHERE NIDCTA=@NIDCTA) AND @RETURN_VALUE=0)         
        BEGIN
-          UPDATE TBCADCTA SET STAREC=0, STACTA=253, UPDUSU=@UPDUSU, DATUPD=GETDATE() WHERE NIDCTA = @NIDCTA
+          UPDATE TBCADCTA SET STAREC=1, STACTA=253, UPDUSU=@UPDUSU, DATUPD=GETDATE() WHERE NIDCTA = @NIDCTA
           SET @RETURN_VALUE=1
        END
     ELSE
@@ -299,7 +266,7 @@ IF OBJECT_ID ( 'dbo.PRCADCTACHGSTAACC', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 21:23:11
+     Date : 11/04/2022 17:46:14
  Objetivo : Executa a aprovação ou rejeição de uma conta digital
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADCTACHGSTAACC
@@ -316,8 +283,8 @@ AS
     DECLARE @NOMUSU VARCHAR(70)=N'';
     DECLARE @CODACE INT=0;
     DECLARE @CODUSU INT=0;
-    DECLARE @LGNUSU  VARCHAR(50)=N'';
-    
+    DECLARE @LGNUSU VARCHAR(50)=N'';
+    DECLARE @STACTA SMALLINT;
     IF(@NIDCTA=0)
       SET @RETURN_VALUE = -1
       
@@ -335,36 +302,49 @@ AS
     
     IF(@UPDUSU>0)
       SELECT @LGNUSU = LGNUSU FROM TBLGNUSU (NOLOCK) WHERE CODUSU=@UPDUSU AND REGATV=1 
-      
-    BEGIN TRAN
     
-    IF (@CODUSU>0 AND @RETURN_VALUE=0 AND @STAREC>=0)
+    SELECT @STACTA = STACTA
+      FROM TBCACSTA (NOLOCK)
+     WHERE NIDCTA = @NIDCTA  
+     
+    IF(@STACTA <> 253)
+       SET @RETURN_VALUE=-6;
+    
+    
+    IF(@RETURN_VALUE=0)
+       BEGIN
+          IF( NOT (EXISTS (SELECT 1 
+                      FROM TBCADGER (NOLOCK) 
+                     WHERE CODUSU IN (SELECT CODUSU 
+                                        FROM TBCADCTA (NOLOCK) 
+                                       WHERE NIDCTA=@NIDCTA) 
+                       AND STAREC=1 AND STAUSU=61)))
+              BEGIN
+                  SET @RETURN_VALUE=-5;
+              END          
+       END
+    
+    IF (@CODUSU>0 AND @RETURN_VALUE=0)
     	BEGIN
     		UPDATE TBCADCTA
-    		   SET STACTA = CASE WHEN (@CODOPE=1) THEN 250 ELSE 251 END
+    		   SET STACTA = CASE WHEN (@CODOPE=1) THEN 250 ELSE 252 END
               ,STAREC = CASE WHEN (@CODOPE=1) THEN 1 ELSE 0 END
               ,UPDUSU = @UPDUSU
               ,DATUPD = GETDATE()
              WHERE NIDCTA = @NIDCTA
-             IF(@@ERROR=0)
-    			      BEGIN
-    				        UPDATE TBCADGER
-    				           SET STAUSU = CASE WHEN (@CODOPE=1) THEN 61 ELSE 3 END
-                          ,STAREC = CASE WHEN (@CODOPE=1) THEN 1 ELSE 13 END
-                          ,UPDUSU = @UPDUSU
+         IF(@@ERROR=0)
+    	      BEGIN
+    				        UPDATE TBCADGER SET UPDUSU = @UPDUSU
                           ,DATUPD = GETDATE()
-                          ,DSCOCO = LTRIM(RTRIM(DSCOCO)) + CHAR(13)+ 'REGISTRO '+ CASE WHEN (@CODOPE=1) THEN 'APROVADO' ELSE 'CANCELADO' END  + ' POR ' + LTRIM(RTRIM(@LGNUSU))  + ' COM STATUS DE REGISTRO : ' + CONVERT(VARCHAR(3),@STAREC)
+                          ,DSCOCO = LTRIM(RTRIM(DSCOCO)) + CHAR(13)+ 'REGISTRO '+ CASE WHEN (@CODOPE=1) THEN 'APROVADO' ELSE 'CANCELADO' END  + ' POR ' + LTRIM(RTRIM(@LGNUSU))  + ' COM STATUS DE CONTA ORIGINAL: ' + CONVERT(VARCHAR(3),@STACTA)
     				         WHERE CODUSU IN (SELECT CODUSU FROM TBCADCTA WHERE NIDCTA = @NIDCTA)
                      IF(@@ERROR=0)
                         BEGIN
                             SET @RETURN_VALUE = 1;
-      			      END
-    	END               
+      			            END
+    	      END               
+      END
       
-    IF(@RETURN_VALUE=1)
-       COMMIT TRANSACTION
-    ELSE
-       ROLLBACK TRANSACTION
     RETURN @RETURN_VALUE
 
 GO
@@ -374,7 +354,7 @@ IF OBJECT_ID ( 'dbo.PRCADCTALOC', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 21:23:11
+     Date : 11/04/2022 17:46:14
  Objetivo : Localiza uma conta virtual a partir do código de usuário
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADCTALOC

@@ -1,6 +1,6 @@
 ﻿@model ThunderFireHomeAdmin.Models.AddressTypeModel
 @{
-    ViewBag.Title = "Tipo de Endereco";
+    ViewBag.Title = "Tipo de Endereço";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,34 +17,41 @@
                 <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>
                         <tr>
-                            <th>Tipo</th>
+                            <th>Status</th>
                             <th>Descrição</th>
                             <th width="15%">Atualização</th>
+                            <th width="15%">Por</th>
                             <th>&#160;</th>
                         </tr>
                     </thead>
 
-                    @foreach (var item in Model.Lista)
+                    @if (Model.Lista != null)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TIPEND)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DSCTEN)
-                        </td>
-                        <td class="text-center">
-                            @Model.ShowDate(item.DATUPD)
-                        </td>
-                        <td>
-                            @if (item.STAREC != 2)
-                            {
-                                <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.TIPEND','@item.DSCTEN','@item.STAREC');"> <i class="fa fa-edit"></i></button>
-                            }
-                        </td>
-                    </tr>
-                    }
+                        foreach (var item in Model.Lista)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSCREC)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSCTEN)
+                                </td>
+                                <td class="text-center">
+                                    @Model.ShowDate(item.DATUPD)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.LGNUSU)
+                                </td>
 
+                                <td>
+                                    @if (item.STAREC != 2)
+                                    {
+                                        <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.TIPEND','@item.DSCTEN','@item.STAREC','@item.REFCTO');"> <i class="fa fa-edit"></i></button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
                 </table>
             </div>
         </div>
@@ -66,14 +73,15 @@
             <div class="modal-body">
                 <input type="hidden" id="OPERATION" value="0" />
                 <input type="hidden" id="FUPDUSU" value="0" />
-                <div class="form-group">
-                    <label for="FTIPEND" class="col-form-label">Tipo de Endereço:</label>
-                    <input type="text" class="form-control" id="FTIPEND" size="4" maxlength="4" disabled>
-                </div>
-
-                <div class="form-group">
-                    <label for="FDSCTEN" class="col-form-label">Descrição:</label>
-                    <input type="text" class="form-control" id="FDSCTEN" size="30" maxlength="30" required>
+                <div class="form-row">
+                    <label for="FTIPEND" class="col-sm-2 control-label form-control-sm">Código:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm" id="FTIPEND" size="4" maxlength="4" disabled>
+                    </div>
+                    <label for="FDSCTEN" class="col-sm-2 control-label form-control-sm">Descrição:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-sm money" id="FDSCTEN" size="30" maxlength="30" required>
+                    </div>
                 </div>
 
                 <div class="form-group row ml-4">
@@ -81,9 +89,9 @@
                         <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked />
                         <label class="form-check-label" for="FSTAREC">Ativo</label>
                     </div>
-                    <div class="form-check col-sm-3">
+                    <div class="form-check col-sm-9">
                         <input class="form-check-input" type="checkbox" value="" id="FREFCTO" checked />
-                        <label class="form-check-label" for="FREGATV">Contatosl</label>
+                        <label class="form-check-label" for="FREGATV">Habilitar referência Contatos</label>
                     </div>
                 </div>
             </div>
@@ -98,62 +106,6 @@
 
 
 @section scripts{
-    <script>
-
-        function CallForEdit(pTIPEND, pDSCTEN, pSTAREC) {
-            $("#modalcaption").html("Alteração de Tipo de Usuário");
-            $("#OPERATION").val("2");
-            $("#FTIPEND").val(pTIPEND);
-            $("#FDSCTEN").val(pDSCTEN);
-            $("#FSTAREC").prop('checked', (pSTAREC==1));
-            $('#modaladdresstype').modal({ backdrop: "static", keyboard: false});
-            $('#modaladdresstype').modal('toggle');
-        }
-        function CallForAdd() {
-            $("#modalcaption").html("Inclusão de Tipo de Usuário");
-            $("#OPERATION").val("1");
-            $("#FTIPEND").val("0");
-            $("#FDSCTEN").val("");
-            $("#FSTAREC").prop('checked', "true");
-            $('#modaladdresstype').modal({ backdrop: "static", keyboard: false });
-            $('#modaladdresstype').modal('toggle');
-        }
-
-        $(document).ready(function () {
-            $(document).on("click", "#btn_update", function () {
-
-                var mode = $("#OPERATION").val();
-                var vurl = "/Cadastros/InsertAddressType/";
-                if (mode == 2)
-                    vurl = "/Cadastros/UpdateAddressType/";
-                var VDATA = JSON.stringify(
-                    {
-                        'TIPEND': $("#FTIPEND").val(),
-                        'DSCTEN': $("#FDSCTEN").val(),
-                        'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0,
-                        'REFCTO': $("#FREFCTO").is(':checked') ? 1 : 0
-                    });
-                $.ajax({
-                    type: "POST",
-                    url: vurl,
-                    data: VDATA,
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    beforeSend: function () { },
-                    success: function (result) {
-                        console.log(result);
-                        var ok = parseInt(result.ReturnValue);
-                        if (ok > 0) { $('#modaladdresstype').modal('toggle'); }
-                        else {
-                            $.alert({ class: 'Warning', title: 'Acesso', message: result.MessageToUser, effect: 'newspaper' });
-                        };
-                    },
-                    error: function (data) {
-                        $.alert({ class: 'danger', title: 'Acesso', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
-                    }
-                });
-            });
-        });
-    </script>
+<script src="~/Scripts/Rules/TipoEndereco.js"></script>
 }
 

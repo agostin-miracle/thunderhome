@@ -1,0 +1,275 @@
+﻿@model ThunderFireHomeAdmin.Models.OperationsRegisterModel
+@{
+    ViewBag.Title = "Registro de Operacoes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="modalregoperacoes" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-address-book" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FNIDOPE" value="0" />
+                <input type="hidden" id="FNIDCAL" value="0" />
+                <input type="hidden" id="FSUBSYS" value="@Model.pSUBSYS" />
+                <input type="hidden" id="FNIDREF" value="@Model.pNIDREF" />
+                <div class="form-row">
+                    <label for="FCODMOV" class="col-sm-2 form-control-sm">Movimento:</label>
+                    <div class="col-sm-6">
+                        @if (Model.ListaOperacoes != null)
+                        {
+                            @Html.DropDownListFor(model => model.FCODMOV, new SelectList(Model.ListaOperacoes, "CODMOV", "DSCMOV", Model.FCODMOV), new { @class = "form-control form-control-sm autorizado" })
+                        }
+                    </div>
+                    <label for="FDATOPE" class="col-sm-2 form-control-sm">Data:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm datepicker date autorizado" id="FDATOPE" name="FDATOPE" placeholder="" value="" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="FVLRBAS" class="col-sm-2 form-control-sm">Valor Base</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm money autorizado" id="FVLRBAS" name="FVLRBAS" placeholder="" value="" required>
+                    </div>
+                    <label for="FVLRPCT" class="col-sm-2 form-control-sm">%</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm money autorizado" id="FVLRPCT" name="FVLRPCT" placeholder="" value="" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="FSIGOPE" class="col-sm-2 form-control-sm">Operação:</label>
+                    <div class="col-sm-4">
+                        @if (Model.ListaSinal != null)
+                        {
+                            @Html.DropDownListFor(model => model.FSIGOPE, new SelectList(Model.ListaSinal, "KEYCOD", "DSCTAB", Model.FSIGOPE), new { @class = "form-control form-control-sm autorizado" })
+                        }
+                    </div>
+                    <label for="FVLROPE" class="col-sm-2 form-control-sm">Valor</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm money autorizado" id="FVLROPE" name="FVLROPE" placeholder="" value="" required>
+                    </div>
+                </div>
+
+                <div class="form-group row ml-4">
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input autorizado" type="checkbox" value="" id="FSTAREC" />
+                        <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input autorizado" type="checkbox" value="" id="FVLRPCP" />
+                        <label class="form-check-label" for="FVLRPCP">Principal</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary autorizado" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <hr />
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <table id="tbregoperacoes" class="table-sm table-striped table-bordered dt-responsive nowrap dataTable js-exportable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th>Operação</th>
+                            <th>Valor</th>
+                            <th>Atualização</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        @foreach (var item in Model.Lista)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSCREC)
+                                </td>
+                                <td>
+                                    @Html.Raw(Model.ShowDate(item.DATOPE))
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSCMOV)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSCOPE)
+                                </td>
+                                <td style="text-align:right">
+                                    @Html.Raw(Model.ShowMoney(item.VLROPE))
+                                </td>
+                                <td>
+                                    @Html.Raw(Model.ShowDate(item.DATUPD))
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LGNUSU)
+                                </td>
+                                <td>
+                                    @if (item.STAREC != 2)
+                                    {
+                                        <button id='btn_edit' value='Editar' class='btn btn-primary btn-sm' onclick="CallForEdit('@item.NIDOPE');"> <i class="fa fa-edit"></i></button>
+                                    }
+                                    else
+                                    {
+                                        <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.NIDOPE');"> <i class="fa fa-edit"></i></button>
+                                    }
+
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" style="text-align:right">TOTAL LÍQUIDO</td>
+                            <td style="text-align:right">
+                                @if (Model.Lista.Count > 0)
+                                {
+                                    @Html.Raw(Model.ShowMoney(Model.Lista[0].VLRTOT))
+                                }
+
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Rules/CommonRules.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('.date').mask('00/00/0000');
+            $('.money').mask('000.000,00', { reverse: true });
+            $('.datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: "pt-BR",
+                minViewMode: 0,
+                orientation: 'auto',
+                startDate: new Date(2022, 03, 01),
+                autoclose: true,
+                daysOfWeekDisabled: ['0']
+            });
+
+
+
+            $(document).on("click", "#btn_update", function () {
+                var mode = $("#OPERATION").val();
+                vDATOPE = FormatDateValue($("#FDATOPE").val(), '-');
+                vSIGOPE = parseInt($("#FSIGOPE").val());
+                var VDATA = JSON.stringify({
+                    'NIDOPE': parseInt($("#FNIDOPE").val()),
+                    'SUBSYS': parseInt($("#FSUBSYS").val()),
+                    'NIDREF': parseInt($("#FNIDREF").val()),
+                    'NIDCAL': parseInt($("#FNIDCAL").val()),
+                    'DATOPE': vDATOPE,
+                    'CODMOV': parseInt($("#FCODMOV").val()),
+                    'VLRBAS': ToFloat($("#FVLRBAS").val()),
+                    'VLRPCT': ToFloat($("#FVLRPCT").val()),
+                    'SIGOPE': vSIGOPE,
+                    'VLRPCP': $("#FVLRPCP").is(':checked') ? 1 : 0,
+                    'VLROPE': ToFloat($('#FVLROPE').val()),
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                });
+                $.ajax({
+                    type: "POST",
+                    url: GetUrl("/Financeiro/AtualizarRegistroOperacoes?modo=" + mode),
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) {
+                            $('#modalregoperacoes').modal('toggle');
+                            location.href = location.href;
+                        }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Registro de Operações', message: result.MessageToUser, effect: 'newspaper' });
+                        };
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Registro de Operações', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+
+            });
+        });
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            $("#FSTAREC").prop('checked', "true");
+            $("#FVLRBAS").val("0");
+            $("#FVLRPCT").val("0");
+            $("#FDATOPE").val(GetCurrentDate());
+            $('#modalregoperacoes').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalregoperacoes').modal('toggle');
+        }
+
+        function CallForEdit(pNIDOPE) {
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: GetUrl("Financeiro/SelecionarRegistropOperacoes"),
+                data: { pNIDOPE: pNIDOPE },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FNIDOPE").val(result.NIDOPE);
+                    $("#FNIDCAL").val(result.NIDCAL);
+                    $("#FDATOPE").val(fromDate(result.DATOPE));
+                    $("#FCODMOV").val(result.CODMOV);
+                    $("#FVLRBAS").val(new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(result.VLRBAS));
+                    $("#FVLRPCT").val(new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(result.VLRPCT));
+                    $("#FSIGOPE").val(result.SIGOPE);
+                    $("#FVLRPCP").prop('checked', (result.VLRPCP == 1));
+                    $("#FVLROPE").val(new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(result.VLROPE));
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+
+                    if (result.STAREC == 2) {
+                        $('.autorizado').attr("disabled", "disabled");
+                    }
+                    else
+                        $(".autorizado").removeAttr('disabled');
+                }
+            })
+            $('#modalregoperacoes').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalregoperacoes').modal('toggle');
+        }
+
+    </script>
+
+}

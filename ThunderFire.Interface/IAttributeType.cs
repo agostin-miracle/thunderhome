@@ -27,11 +27,6 @@ ExecutionResponse Update(AttributeType model);
         /// <param name="pCODATR">Código do Atributo</param>
     /// <returns>AttributeType</returns>
 AttributeType Select(short pCODATR);
-    /// <summary>
-    /// Obtêm todos os registros de tipo de atributo cadastrados
-    /// </summary>
-    /// <returns>List of AttributeType</returns>
-List<AttributeType> List();
 
     }
 }

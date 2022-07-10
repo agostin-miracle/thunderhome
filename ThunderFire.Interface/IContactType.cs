@@ -27,11 +27,6 @@ ExecutionResponse Update(ContactType model);
         /// <param name="pTIPCTO">Tipo de Contato</param>
     /// <returns>ContactType</returns>
 ContactType Select(System.Int32 pTIPCTO);
-    /// <summary>
-    /// Obtêm uma lista de todos os tipos de contatos
-    /// </summary>
-    /// <returns>List of ContactType</returns>
-List<ContactType> List();
 
     }
 }

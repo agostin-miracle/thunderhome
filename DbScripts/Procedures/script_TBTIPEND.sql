@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRTIPENDINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 09:42:48
+     Date : 19/03/2022 09:20:25
  Objetivo : Inserção de Registros na Tabela TBTIPEND
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPENDINS
@@ -27,7 +27,7 @@ CREATE PROCEDURE dbo.PRTIPENDINS
                         VALUES (@TIPEND, @DSCTEN, @REFCTO, @STAREC, @UPDUSU);
             IF @@ERROR = 0
                 BEGIN
-                    SET @RETURN_VALUE = 1
+                    SET @RETURN_VALUE = @TIPEND
                 END
             ELSE
                 BEGIN
@@ -37,48 +37,12 @@ CREATE PROCEDURE dbo.PRTIPENDINS
     RETURN @RETURN_VALUE
 
 GO
-IF OBJECT_ID ( 'dbo.PRTIPENDSEL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRTIPENDSEL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 01/03/2022 09:42:48
- Objetivo : Obtêm o registro de Tipo de Endereço com base no id informado
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRTIPENDSEL
-(
-    @TIPEND Tinyint
-)
-AS
-    SET NOCOUNT ON
-    SELECT * FROM TBTIPEND (NOLOCK) A
-
-    WHERE     (A.TIPEND=@TIPEND)
-
-GO
-
-IF OBJECT_ID ( 'dbo.PRTIPENDSELALL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRTIPENDSELALL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 01/03/2022 09:42:48
- Objetivo : Obtêm uma Lista dos Tipos de Endereços
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRTIPENDSELALL
-AS
-    SET NOCOUNT ON
-    SELECT * FROM TBTIPEND (NOLOCK) A
-
-     ORDER BY A.TIPEND
-GO
-
 IF OBJECT_ID ( 'dbo.PRTIPENDUPD', 'P' ) IS NOT NULL
     DROP PROCEDURE dbo.PRTIPENDUPD;
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 01/03/2022 09:42:48
+     Date : 19/03/2022 09:20:25
  Objetivo : Altera um registro da tabela TBTIPEND (Address Type)  de acordo com a chave primaria
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPENDUPD
@@ -112,7 +76,7 @@ CREATE PROCEDURE dbo.PRTIPENDUPD
                 BEGIN
                     IF (@@ERROR = 0)
                         BEGIN
-                            SET @RETURN_VALUE = 1
+                            SET @RETURN_VALUE = @TIPEND
                         END
                     ELSE
                         BEGIN

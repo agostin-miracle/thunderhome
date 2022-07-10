@@ -29,7 +29,10 @@ namespace ThunderFire.Domain.Models
         /// <summary>
         /// Sinal da Operação
         /// </summary>
-        public short SIGOPE{ get;set;} = 0;
+        /// <remarks>
+/// <para>Tabela geral 10</para>
+/// </remarks>
+        public short SIGOPE{ get;set;} = 1;
 
         /// <summary>
         /// 
@@ -69,70 +72,6 @@ namespace ThunderFire.Domain.Models
         /// </summary>
         public int UPDUSU{ get;set;} = 0;
 
-    }
-public class QueryTransactionStatus
-{
-        /// <summary>
-        /// Código do Status
-        /// </summary>
-        public short CODSTA{ get;set;}
-
-        /// <summary>
-        /// Descrição do Status
-        /// </summary>
-        public string DSCSTA{ get;set;} = "";
-
-        /// <summary>
-        /// Módulo de Operação
-        /// </summary>
-        /// <remarks>
-/// <para>Tabela Geral 14</para>
-/// </remarks>
-        public byte CODMOD{ get;set;}
-
-        /// <summary>
-        /// Sinal da Operação
-        /// </summary>
-        public short SIGOPE{ get;set;}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int NXTSTA{ get;set;}
-
-        /// <summary>
-        /// Define se o código de status de transação pode sofrer alterações externas
-        /// </summary>
-        public byte CANCHG{ get;set;}
-
-        /// <summary>
-        /// Define se o código de status de transação permite a exclusão de uma mensalidade
-        /// </summary>
-        public byte DELMEN{ get;set;}
-
-        /// <summary>
-        /// Código do Status de Registro
-        /// </summary>
-        /// <remarks>
-/// <para>Tabela Geral 07</para>
-/// </remarks>
-        public byte STAREC{ get;set;}
-
-        /// <summary>
-        /// Data de Inclusão ou cadastramento
-        /// </summary>
-        public DateTime DATCAD{ get;set;}
-
-        /// <summary>
-        /// Data da Ultima Atualização
-        /// </summary>
-        public DateTime DATUPD{ get;set;}
-
-        /// <summary>
-        /// Usuário de Atualização
-        /// </summary>
-        public int UPDUSU{ get;set;}
-
         /// <summary>
         /// 
         /// </summary>
@@ -146,16 +85,17 @@ public class QueryTransactionStatus
         /// <summary>
         /// Descrição do Status de Registro
         /// </summary>
-        public int DSCREC{ get;set;}
+        public string DSCREC{ get;set;} = "";
 
         /// <summary>
         /// 
         /// </summary>
-        public int DSCMOD{ get;set;}
+        public string DSCMOD{ get;set;} = "";
 
         /// <summary>
         /// Identificação da Chave de Login do Usuário
         /// </summary>
         public string LGNUSU{ get;set;} = "";
 
-}}
+    }
+}

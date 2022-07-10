@@ -44,7 +44,7 @@ namespace ThunderFire.Business
                     try
                     {
                         string SQL = "SELECT * FROM TBCADGER (NOLOCK) WHERE CODUSU = (SELECT CODUSU FROM TBLGNUSU (NOLOCK) WHERE LGNNUM=@LGNNUM)";
-                        GeneralRegistry user = _conn.Query<GeneralRegistry>(sql: SQL, param: new
+                        Users user = _conn.Query<Users>(sql: SQL, param: new
                         {
                             LGNNUM = pLGNNUM
                         }, commandType: CommandType.Text, commandTimeout: 120).FirstOrDefault();
@@ -136,7 +136,10 @@ namespace ThunderFire.Business
 
                 /* objeto carregado*/
                 if (!HasError)
+                {
                     RETURN_VALUE.IsValid = true;
+                    RETURN_VALUE.IsLogged = true;
+                }
 
             }
             return RETURN_VALUE;

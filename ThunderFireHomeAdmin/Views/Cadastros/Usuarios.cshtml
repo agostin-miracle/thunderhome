@@ -1,11 +1,10 @@
-﻿@model ThunderFireHomeAdmin.Models.GeneralRegistryModel
+﻿@model ThunderFireHomeAdmin.Models.UsersModel
 @{
     ViewBag.Title = "Cadastro Geral";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<div class="modal fade" id="modalgeneralregistry" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+<div class="modal fade" id="modalusuarios" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,114 +14,94 @@
                 </button>
             </div>
             <div class="modal-body">
-
+                <input type="hidden" id="FCODUSU" value="0" />
+                <input type="hidden" id="OPMODE" value="0" />
+                <input type="hidden" id="FDSCOCO" value="" />
                 <div class="form-group row">
                     <label for="FCODATR" class="col-sm-2 control-label">Atributo</label>
                     <div class="col-sm-4">
-                        <select class="form-control form-control-sm" id="FCODATR">
-                            @if (Model.ListaAtributo != null)
-                            {
-                                foreach (var item in Model.ListaAtributo)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.CODATR)">@Html.DisplayFor(modelItem => item.DSCATR)</option>
-                                }
-                            }
-                        </select>
+                        @if (Model.ListaAtributo != null)
+                        {
+                            @Html.DropDownListFor(model => model.FCODATR, new SelectList(Model.ListaAtributo, "CODATR", "DSCATR", Model.FCODATR), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                     <label for="FSTAUSU" class="col-sm-2 control-label">Status</label>
                     <div class="col-sm-4">
-                        <select class="form-control form-control-sm" id="FSTAUSU">
-                            @if (Model.ListaStatusUsuario != null)
-                            {
-                                foreach (var item in Model.ListaStatusUsuario)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.CODSTA)">@Html.DisplayFor(modelItem => item.DSCSTA)</option>
-                                }
-                            }
-                        </select>
+                        @if (Model.ListaStatusUsuario != null)
+                        {
+                            @Html.DropDownListFor(model => model.FSTAUSU, new SelectList(Model.ListaStatusUsuario, "CODSTA", "DSCSTA", Model.FSTAUSU), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="FSRCUSU" class="col-sm-2 control-label">Gestor</label>
                     <div class="col-sm-10">
-                        <select class="form-control form-control-sm" id="FSRCUSU">
-                            <option value="0">Não Aplicável</option>
-                            @if (Model.ListaGestor != null)
-                            {
-                                foreach (var item in Model.ListaGestor)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
-                                }
-                            }
-                        </select>
+                        @if (Model.ListaGestor != null)
+                        {
+                            @Html.DropDownListFor(model => model.FSRCUSU, new SelectList(Model.ListaGestor, "CODUSU", "NOMUSU", Model.FSTAUSU), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-sm-3">
                         <label for="FTIPPES" class="control-label">Gênero</label>
-                        <select class="form-control form-control-sm" id="FTIPPES">
-                            @if (Model.ListaGenero != null)
-                            {
-                                foreach (var item in Model.ListaGenero)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.KEYTXT)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
-                                }
-                            }
-
-                        </select>
+                        @if (Model.ListaGenero != null)
+                        {
+                            @Html.DropDownListFor(model => model.FTIPPES, new SelectList(Model.ListaGenero, "KEYTXT", "DSCTAB", Model.FTIPPES), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                     <div class="form-group col-sm-3">
                         <label for="FNIVCFA" class="control-label">Nível de Confiança</label>
-                        <select class="form-control form-control-sm" id="FNIVCFA">
-                            @if (Model.ListaNivelConfianca != null)
-                            {
-                                foreach (var item in Model.ListaNivelConfianca)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
-                                }
-                            }
-
-                        </select>
-
+                        @if (Model.ListaNivelConfianca != null)
+                        {
+                            @Html.DropDownListFor(model => model.FNIVCFA, new SelectList(Model.ListaNivelConfianca, "KEYCOD", "DSCTAB", Model.FNIVCFA), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                     <div class="form-group col-sm-3">
                         <label for="FTIPUSU" class="control-label">Tipo de Usuário</label>
-                        <select class="form-control form-control-sm" id="FTIPUSU">
-                            @if (Model.ListaTipoUsuario != null)
-                            {
-                                foreach (var item in Model.ListaTipoUsuario)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.TIPUSU)">@Html.DisplayFor(modelItem => item.DSCTUS)</option>
-                                }
-                            }
-
-                        </select>
+                        @if (Model.ListaTipoUsuario != null)
+                        {
+                            @Html.DropDownListFor(model => model.FTIPUSU, new SelectList(Model.ListaTipoUsuario, "TIPUSU", "DSCTUS", Model.FTIPUSU), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                     <div class="form-group col-sm-3">
                         <label for="FCODNAC" class="control-label">Nacionalidade</label>
-                        <select class="form-control form-control-sm" id="FCODNAC">
-                            @if (Model.ListaNacionalidade != null)
-                            {
-                                foreach (var item in Model.ListaNacionalidade)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
-                                }
-                            }
-
-                        </select>
+                        @if (Model.ListaNacionalidade != null)
+                        {
+                            @Html.DropDownListFor(model => model.FCODNAC, new SelectList(Model.ListaNacionalidade, "KEYCOD", "DSCTAB", Model.FCODNAC), new { @class = "form-control form-control-sm" })
+                        }
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-check form-check-inlin">
+                        <input class="form-check-input" type="radio"  name="FCODPJU" value="F" checked>
+                        <label class="form-check-label mr-4" for="FCODPJU1">
+                            Física
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inlin">
+                        <input class="form-check-input" type="radio"  name="FCODPJU" value="J">
+                        <label class="form-check-label mr-4" for="FCODPJU2">
+                            Jurídica
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inlin">
+                        <input class="form-check-input" type="radio" name="FCODPJU" value="I">
+                        <label class="form-check-label" for="FCODPJU3l">
+                            Indeterminado
+                        </label>
                     </div>
                 </div>
 
-
                 <div class="form-group row">
-                    <label for="FCODATR" class="col-sm-2 control-label">CPF/CNPJ</label>
+                    <label for="FCODCMF" class="col-sm-2 control-label">CPF/CNPJ</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm" id="FCODCMF" name="FCODCMF" placeholder="CPF/CNPJ" value="" required>
                     </div>
                     <label for="FNUMIRG" class="col-sm-2 control-label">RG</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="FNUMIRG" name="FNUMIRG" placeholder="RG" value="" required>
+                        <input type="text" class="form-control form-control-sm" id="FNUMIRG" name="FNUMIRG" placeholder="RG" value="">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -134,14 +113,14 @@
                 <div class="form-group row">
                     <label for="FNOMMAE" class="col-sm-3 control-label">Nome Mãe/Fantasia</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control form-control-sm" id="FNOMMAE" name="FNOMMAE" placeholder="" value="" maxlength="70" required>
+                        <input type="text" class="form-control form-control-sm" id="FNOMMAE" name="FNOMMAE" placeholder="" value="" maxlength="70">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="FDATNAC" class="col-sm-3 control-label">Nascimento/fundação</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="FDATNAC" name="FDATNAC" required>
+                        <input type="text" class="form-control form-control-sm datepicker" id="FDATNAC" name="FDATNAC" required>
                     </div>
                 </div>
                 <div class="form-group row ml-4">
@@ -168,7 +147,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width:400px;">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 style="color:red;float:left"><i class="fa fa-user" aria-hidden="true"> </i>@ViewBag.Title - Login de Usuário</h5>
+                <h5 style="color:red;float:left"><i class="fa fa-user" aria-hidden="true"> </i>@ViewBag.Title - Registro de Login</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -181,15 +160,13 @@
                         <input type="text" class="form-control form-control-sm" id="FLGNUSU" placeholder="Entre com o login o usuário" size="50" maxlength="50" required>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-row">
                     <label for="PSWUSU" class="col-sm-2 control-label">Senha</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm" id="FPSWUSU" name="FPSWUSU" placeholder="" value="" min="3" size="50" maxlength="50" required>
                     </div>
-                </div>
-                <div class="form-group row">
                     <label for="FRSTPSW" class="col-sm-2 control-label">Resetar</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="form-check form-check-inline">
                             <input type="checkbox" class="form-check-input" id="FRSTPSW">
                         </div>
@@ -205,7 +182,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalDataRef" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+<div class="modal fade" id="modaldataref" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -281,71 +258,51 @@
             <h5 class="card-title">@ViewBag.Title</h5>
         </div>
         <div class="card-body">
-            <div class="form-group row">
+            <div class="form-row">
                 <label for="CCODATR" class="col-sm-2 col-form-label">Atributo</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-sm" id="CCODATR">
-                        <option value="-1">Selecione</option>
-                        @if (Model.ListaAtributo != null)
-                        {
-                            foreach (var item in Model.ListaAtributo)
-                            {
-                                <option value="@Html.DisplayFor(modelItem => item.CODATR)">@Html.DisplayFor(modelItem => item.DSCATR)</option>
-                            }
-                        }
-                    </select>
+                    @if (Model.CListaAtributo != null)
+                    {
+                        @Html.DropDownListFor(model => model.CCODATR, new SelectList(Model.CListaAtributo, "CODATR", "DSCATR", Model.CCODATR), new { @class = "form-control form-control-sm" })
+                    }
                 </div>
                 <label for="CSTAUSU" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-sm" id="CSTAUSU">
-                        <option value="-1">Selecione</option>
-                        @if (Model.ListaStatusUsuario != null)
-                        {
-                            foreach (var item in Model.ListaStatusUsuario)
-                            {
-                                <option value="@Html.DisplayFor(modelItem => item.CODSTA)">@Html.DisplayFor(modelItem => item.DSCSTA)</option>
-                            }
-                        }
-                    </select>
+                    @if (Model.ListaStatusUsuario != null)
+                    {
+                        @Html.DropDownListFor(model => model.CSTAUSU, new SelectList(Model.ListaStatusUsuario, "CODSTA", "DSCSTA", Model.CSTAUSU), new { @class = "form-control form-control-sm" })
+                    }
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-row">
                 <label for="TNOMUSU" class="col-sm-2 control-label">Nome</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control-sm form-control" id="TNOMUSU" name="TNOMUSU" placeholder="Nome ou parte a procurar" value="">
                 </div>
                 <label for="CSTAREC" class="col-sm-2 control-label">Status do Registro</label>
-                <div class="form-control-sm col-sm-4">
-                    <select class="form-control form-control-sm" id="CSTAREC">
-                        <option value="-1">Selecione</option>
-                        @if (Model.ListaStatusRegistro != null)
-                        {
-                            foreach (var item in Model.ListaStatusRegistro)
-                            {
-                                <option value="@Html.DisplayFor(modelItem => item.KEYCOD)">@Html.DisplayFor(modelItem => item.DSCTAB)</option>
-                            }
-                        }
 
-                    </select>
+                <div class="col-sm-4">
+                    @if (Model.ListaStatusRegistro != null)
+                    {
+                        @Html.DropDownListFor(model => model.CSTAREC, new SelectList(Model.ListaStatusRegistro, "KEYCOD", "DSCTAB", Model.CSTAREC), new { @class = "form-control form-control-sm" })
+                    }
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-row">
                 <label for="CSRCUSU" class="col-sm-2 control-label">Responsável</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-sm" id="CSRCUSU">
-                        <option value="-1">Selecione</option>
-                        @if (Model.ListaGestor != null)
-                        {
-                            foreach (var item in Model.ListaGestor)
-                            {
-                                <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
-                            }
-                        }
-                    </select>
+                    @if (Model.ListaGestor != null)
+                    {
+                        @Html.DropDownListFor(model => model.CSRCUSU, new SelectList(Model.ListaGestor, "CODUSU", "NOMUSU", Model.CSRCUSU), new { @class = "form-control form-control-sm" })
+                    }
                 </div>
+
+            </div>
+            <hr />
+            <div class="row">
                 <div class="col-sm-4">
+                    <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
                     <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
-                    <button id="btn_add2" value="Login" class="btn btn-primary btn-sm" onclick="CallForAddLogin();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
                 </div>
             </div>
 
@@ -357,16 +314,17 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                <table id="tbusuarios" class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Registro</th>
-                            <th><i class="fa fa-credit-card" aria-hidden="true"></i></th>
-                            <th><i class="fa fa-envelope" aria-hidden="true"></i></th>
-                            <th><i class="fa fa-mobile" aria-hidden="true"></i></th>
+                            <th title="Conta Virtual"><i class="fa fa-credit-card" aria-hidden="true"></i></th>
+                            <th title="Endereços cadastrados"><i class="fa fa-envelope" aria-hidden="true"></i></th>
+                            <th title="Contatos cadastrados"><i class="fa fa-mobile" aria-hidden="true"></i></th>
                             <th>Status</th>
                             <th>Nome</th>
+                            <th>Tipo</th>
                             <th>CNPJ/CPF</th>
                             <th>&#160;</th>
                         </tr>
@@ -379,176 +337,5 @@
 
 
 @section scripts{
-    <script>
-        $(document).ready(function () {
-            var commandquery = "/Cadastros/GeneralRegistryQuery";
-            $('#gridshow').DataTable(
-                {
-                    paging: true,
-                    searching: false,
-                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
-                    processing: true,
-                    serverSide: true,
-                    orderMulti: false,
-                    responsive: true,
-                    ajax: {
-                        url: commandquery,
-                        type: "POST",
-                        datatype: "json",
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-                        data: {
-                            pCODATR: function () { return $('#CCODATR').val() },
-                            pSTAUSU: function () { return $('#CSTAUSU').val() },
-                            pSRCUSU: function () { return $('#CSRCUSU').val() },
-                            pNOMUSU: function () { return $('#TNOMUSU').val() },
-                            pSTAREC: function () { return $('#CSTAREC').val() }
-                        }
-                    },
-                    columns: [
-                        { data: "CODUSU" },
-                        { data: "DSCREC" },
-                        { data: "CNTCTA" },
-                        { data: "CNTMAL" },
-                        { data: "CNTCEL" },
-                        { data: "DSCSTA" },
-                        { data: "NOMUSU" },
-                        { data: "CODCMF" },
-                        {
-                            "render": function (data, type, row) {
-                                var botoes = "";
-                                if (row.USELGN == 1 && row.STAREC == 1) {
-                                    botoes += "<button id='btn_call_lgn' value='Criar Logon' class='btn btn-primary btn-sm' onclick=\"CallForAddLogin('" + row.CODUSU + "');\"><i class='fa fa-key' aria-hidden='true'></i> </button>&nbsp;"
-                                }
-                                if (row.STAREC == 1) {
-                                    botoes += "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.CODUSU + "');\"> <i class='fa fa-edit'></i></button>&nbsp;"
-                                }
-                                botoes += "<a id='href_call_address' value='Endereços' class='btn btn-primary btn-sm' href=\"/Cadastros/Enderecos?usercode=" + row.CODUSU + "\"> <i class='fa fa-map-marker' aria-hidden='true'></i></a>&nbsp;"
-                                return botoes;
-                            }
-                        }
-                    ],
-                    "language": {
-                        "processing": "Aguarde, buscando informações",
-                        "loadingRecords": "Carregando",
-                    },
-                    "pageLength": 10,
-                    "oLanguage": {
-                        "sLengthMenu": "Mostrar _MENU_ registros por página",
-                        "sZeroRecords": "Nenhum registro encontrado",
-                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
-                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
-                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
-                        "sSearch": "Pesquisar: "
-                    },
-                    columnDefs: [
-                        { "targets": [0], "visible": false, "searchable": false },
-                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "2%" },
-                        { className: "text-center", "targets": [2], "visible": true, "searchable": false, "width": "3%" },
-                        { className: "text-center", "targets": [3], "visible": true, "searchable": false, "width": "3%" },
-                        { className: "text-center", "targets": [4], "visible": true, "searchable": false, "width": "3%" },
-                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "3%" },
-                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "30%x" },
-                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "14%" },
-                        { className: "text-left", "targets": [8], "visible": true, "searchable": false, "width": "15%" }
-                    ]
-                });
-
-
-
-            $(document).on("click", "#btn_update_lgn", function () {
-                var mode = $("#OPERATION").val();
-                var commandquery = "/Cadastros/ChangeLoginUser";
-
-
-                var VDATA = JSON.stringify({
-                    'LGNNUM': 0,
-                    'CODUSU': parseInt($("#LCODUSU").val()),
-                    'LGNTYP': $("#FLGNTYP").is(':checked') ? 1 : 0,
-                    'LGNUSU': $("#FLGNUSU").val(),
-                    'PSWUSU': $("#FPSWUSU").val(),
-                    'RSTPSW': $("#FRSTPSW").is(':checked') ? 1 : 0,
-                    'STAREC': 1
-                });
-                $.ajax({
-                    type: "POST",
-                    url: commandquery,
-                    data: VDATA,
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    beforeSend: function () { },
-                    success: function (result) {
-                        console.log(result);
-                        var ok = parseInt(result.ReturnValue);
-                        if (ok > 0)
-                        {
-                            $('#modalloginuser').modal('toggle');
-                        }
-                        else {
-
-                            $.alert({ class: 'danger', title: 'Login', message: result.MessageToUser, effect: 'zoom' });
-                        }
-                    },
-                    error: function (data) {
-                        $.alert({ class: 'danger', title: 'Login', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
-                    }
-                });
-            });
-        });
-
-
-        function CallForAdd() {
-            $("#OPERATION").val("1");
-            $("#FSTAREC").prop('checked', "true");
-            $('#modalgeneralregistry').modal('toggle');
-        }
-
-        function CallForEdit(pCODUSU) {
-            var commandquery = "/Cadastros/SelectGeneralRegistry";
-            $.ajax({
-                type: "GET",
-                url: commandquery,
-                data: { id: pCODUSU },
-                dataType: 'json',
-                success: function (result) {
-                    $("#FCODATR").val(result.CODATR);
-                    $("#FSTAUSU").val(result.STAUSU);
-                    $("#FSRCUSU").val(result.SRCUSU);
-                    $("#FTIPPES").val(result.TIPPES);
-                    $("#FNIVCFA").val(result.NIVCFA);
-                    $("#FTIPUSU").val(result.TIPUSU);
-                    $("#FCODNAC").val(result.CODNAC);
-                    $("#FCODCMF").val(result.CODCMF);
-                    $("#FNUMIRG").val(result.NUMIRG);
-                    $("#FNOMUSU").val(result.NOMUSU);
-                    $("#FNOMAME").val(result.NOMMAE);
-                    $("#FDATNAC").val(result.DATNAC);
-                    $("#FSTAREC").val(result.STAREC);
-                    $("#FATRPPE").val(result.ATRPPE);
-                }
-            })
-            $('#modalgeneralregistry').modal({ backdrop: 'static', Keyboard: 'true' });
-            $('#modalgeneralregistry').modal('toggle');
-        }
-
-        function CallAddress (pCODUSU) {
-            $.ajax({
-                type: "GET",
-                url: '/Cadastros/Enderecos',
-                data: { usercode: pCODUSU },
-                dataType: 'json',
-                success: function (result) {
-                    window.Location = '/Cadastros/Enderecos';
-                }
-            });
-        }
-
-        function CallForAddLogin(pCODUSU) {
-            $("#LCODSU").val(pCODUSU);
-            $("#FSTAREC").prop('checked', "true");
-            $('#modalloginuser').modal({ backdrop: 'static', Keyboard: 'true' });
-            $('#modalloginuser').modal('toggle');
-
-        }
-    </script>
+    <script src="~/Scripts/Rules/Cadastro_Usuarios.js"></script>
 }

@@ -83,16 +83,6 @@ ExecutionResponse  ChangeCVC( System.Int32 pCODCRT,System.Int16 pNUMCVC,System.I
     /// </summary>
 /// <returns>ExecutionResponse</returns>
 ExecutionResponse  CancelAssociation( System.Int32 pCODCRT,System.Int32 pUPDUSU);
-    /// <summary>
-    /// Obtêm uma lista de todos os cartões da base ativa conforme parâmetros de pesquisa informados
-    /// </summary>
-        /// <param name="pUSUPRO">Usuário Gestor</param>
-    /// <param name="pSTACRT">Status do Cartão</param>
-    /// <param name="pNUMCRT">Parte ou Número do Cartão</param>
-    /// <param name="pNOMPRT">Nome ou Parte</param>
-
-    /// <returns>List of QueryActiveCards</returns>
-List<QueryActiveCards> List(System.Int32? pUSUPRO= null, System.Int16? pSTACRT= null, string pNUMCRT= "", string pNOMPRT= null);
 
     }
 }

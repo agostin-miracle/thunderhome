@@ -110,36 +110,6 @@ go=HttpStatusCode.NotFound;
 }
 return Content(go, RETURN_VALUE);
 }
-    /// <summary>
-    /// Obtêm uma lista de todos os produtos
-    /// </summary>
-        /// <param name="pLINPRO">Linha de Produto</param>
-
-    /// <returns>List of QueryProducts</returns>
-[HttpGet]
-    public IHttpActionResult List(System.Int16 pLINPRO)
-    {
-HttpStatusCode go = HttpStatusCode.OK;
-object RETURN_VALUE=null;
-if (Init())
-{
- RETURN_VALUE = WRKOBJ.List(pLINPRO);
-if(WRKOBJ.Found)
-{
-go = HttpStatusCode.OK;
-}
-else
-{
-if(WRKOBJ.HasError)
-{
-    go=HttpStatusCode.BadRequest;
-}
-else
-go=HttpStatusCode.NotFound;
-}
-}
-return Content(go, RETURN_VALUE);
-}
 
 
 }

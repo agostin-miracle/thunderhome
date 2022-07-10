@@ -1,0 +1,840 @@
+﻿@model ThunderFireHomeAdmin.Models.TicketModel
+@{
+    ViewBag.Title = "Boletos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <label for="CUSUPRO" class="col-sm-2 form-control-sm">Gestor:</label>
+                <div class="col-sm-4">
+                    @if (Model.ListaGestores != null)
+                    {
+                        @Html.DropDownListFor(model => model.CUSUPRO, new SelectList(Model.ListaGestores, "CODUSU", "NOMUSU", Model.CUSUPRO), new { @class = "form-control form-control-sm" })
+                    }
+                </div>
+                <label for="CUSUCED" class="col-sm-2 form-control-sm">Cedente:</label>
+                <div class="col-sm-4">
+                    @if (Model.ListaCedentes != null)
+                    {
+                        @Html.DropDownListFor(model => model.CUSUCED, new SelectList(Model.ListaCedentes, "CODUSU", "NOMUSU", Model.CUSUCED), new { @class = "form-control form-control-sm" })
+                    }
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="CUSUSAC" class="col-sm-2 form-control-sm">Cedente:</label>
+                <div class="col-sm-4">
+                    @if (Model.ListaSacados != null)
+                    {
+                        @Html.DropDownListFor(model => model.CUSUSAC, new SelectList(Model.ListaSacados, "CODUSU", "NOMUSU", Model.CUSUSAC), new { @class = "form-control form-control-sm" })
+                    }
+                </div>
+                <label for="CSTABOL" class="col-sm-2 form-control-sm">Status:</label>
+                <div class="col-sm-4">
+                    @if (Model.ListaStatusBoleto != null)
+                    {
+                        @Html.DropDownListFor(model => model.CSTABOL, new SelectList(Model.ListaStatusBoleto, "CODSTA", "DSCSTA", Model.CSTABOL), new { @class = "form-control form-control-sm" })
+                    }
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <label for="CTIPBOL" class="col-sm-2 form-control-sm">Tipo:</label>
+                <div class="col-sm-4">
+                    @if (Model.ListaTipoBoleto != null)
+                    {
+                        @Html.DropDownListFor(model => model.CTIPBOL, new SelectList(Model.ListaTipoBoleto, "KEYCOD", "DSCTAB", Model.CTIPBOL), new { @class = "form-control form-control-sm" })
+                    }
+                </div>
+                <label for="CNIDBOL" class="col-sm-2 form-control-sm">N° Boleto :</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control form-control-sm" id="CNIDBOL" name="CNIDBOL" value="" size="8" maxlength="8" required>
+                </div>
+
+            </div>
+
+            <div class="form-row form-inline">
+                <label for="CDATEMI1" class="col-sm-2 form-control-sm">Data de Emissão:</label>
+                <input type="text" class="col-sm-1 form-control form-control-sm datepicker" id="CDATEMI1" size="10" maxlength="10">
+                <input type="text" class="col-sm-1 form-control form-control-sm datepicker" id="CDATEMI2" size="10" maxlength="10">
+                <label for="CDATVCT1" class="col-sm-2 form-control-sm">Vencimento:</label>
+                <input type="text" class="col-sm-1 form-control form-control-sm datepicker" id="CDATVCT1" size="10" maxlength="10">
+                <input type="text" class="col-sm-1 form-control form-control-sm datepicker" id="CDATVCT2" size="10" maxlength="10">
+                <label for="CDATPGT1" class="col-sm-2 form-control-sm">Pagamento:</label>
+                <input type="text" class="col-sm-1 form-control form-control-sm datepicker" id="CDATPGT1" size="10" maxlength="10">
+                <input type="text" class="col-sm-1 form-control form-control-sm datepicker" id="CDATPGT2" size="10" maxlength="10">
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <table id="tbboletos" class="table-sm table-striped table-bordered dt-responsive nowrap dataTable js-exportable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Status</th>
+                            <th>Tipo</th>
+                            <th>Emissão</th>
+                            <th>Cedente</th>
+                            <th>Sacado</th>
+                            <th>Valor</th>
+                            <th>Tarifa</th>
+                            <th>Líquido</th>
+                            <th>Key</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalboletos" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-address-book" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <div class="modal-body">
+
+                    <div class="form-row">
+                        <label for="FUSUPRO" class="col-sm-1 form-control-sm">Gestor:</label>
+                        <div class="col-sm-5">
+                            @if (Model.ListaGestores != null)
+                            {
+                                @Html.DropDownListFor(model => model.FUSUPRO, new SelectList(Model.ListaGestores, "CODUSU", "NOMUSU", Model.FUSUPRO), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+
+                        <label for="FUSUCED" class="col-sm-1 form-control-sm">Cedente:</label>
+                        <div class="col-sm-5">
+                            @if (Model.ListaCedentes != null)
+                            {
+                                @Html.DropDownListFor(model => model.FUSUCED, new SelectList(Model.ListaCedentes, "CODUSU", "NOMUSU", Model.FUSUCED), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="FUSUSAC" class="col-sm-1 form-control-sm">Sacado:</label>
+                        <div class="col-sm-5">
+                            @if (Model.ListaSacados != null)
+                            {
+                                @Html.DropDownListFor(model => model.FUSUSAC, new SelectList(Model.ListaSacados, "CODUSU", "NOMUSU", Model.FUSUSAC), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                        <label for="FCODAVA" class="col-sm-1 form-control-sm">Avalista:</label>
+                        <div class="col-sm-5">
+                            @if (Model.ListaAvalistas != null)
+                            {
+                                @Html.DropDownListFor(model => model.FCODAVA, new SelectList(Model.ListaAvalistas, "CODUSU", "NOMUSU", Model.FCODAVA), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="FSTABOL" class="col-sm-1 form-control-sm">Status:</label>
+                        <div class="col-sm-3">
+                            @if (Model.ListaStatusBoleto != null)
+                            {
+                                @Html.DropDownListFor(model => model.FSTABOL, new SelectList(Model.ListaStatusBoleto, "CODSTA", "DSCSTA", Model.FSTABOL), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                        <label for="FTIPBOL" class="col-sm-1 form-control-sm">Tipo:</label>
+                        <div class="col-sm-3">
+                            @if (Model.ListaTipoBoleto != null)
+                            {
+                                @Html.DropDownListFor(model => model.FTIPBOL, new SelectList(Model.ListaTipoBoleto, "KEYCOD", "DSCTAB", Model.FTIPBOL), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+                        <label for="FRSPTAR" class="col-sm-1 form-control-sm">Responsável:</label>
+                        <div class="col-sm-3">
+                            @if (Model.ListaResponsavel != null)
+                            {
+                                @Html.DropDownListFor(model => model.FRSPTAR, new SelectList(Model.ListaResponsavel, "KEYCOD", "DSCTAB", Model.FRSPTAR), new { @class = "form-control form-control-sm" })
+                            }
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label for="FDATEMI" class="col-sm-2 form-control-sm">Emissão</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control-sm datepicker date" id="FDATEMI" name="FDATEMI" placeholder="" value="" required>
+                        </div>
+                        <label for="FDATVCT" class="col-sm-2 form-control-sm">Vencimento:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control-sm datepicker date" id="FDATVCT" name="FDATVCT" placeholder="" value="" required>
+                        </div>
+                        <label for="FDATVAL" class="col-sm-2 form-control-sm">Validade:</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control-sm datepicker date" id="FDATVAL" name="FDATVAL" placeholder="" value="" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="FCODESP" class="col-sm-2 form-control-sm">Espécie</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control form-control-sm" id="FCODESP" name="FCODESP" value="00" size="3" maxlength="3" required>
+                        </div>
+                        <label for="FNUMCTR" class="col-sm-2 form-control-sm">Carteira</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control form-control-sm" id="FNUMCTR" name="FNUMCTR" value="000" size="3" maxlength="3" required>
+                        </div>
+                        <label for="FNOSNUM" class="col-sm-3 form-control-sm">Nosso Número</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm" id="FNOSNUM" name="FNOSNUM" value="" size="3" maxlength="3" readonly>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <label for="FINSBC1" class="col-sm-1 form-control-sm">Instr. #1</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm" id="FINSBC1" name="FINSBC1" placeholder="" value="" maxlength="30">
+                        </div>
+                        <label for="FINSBC2" class="col-sm-1 form-control-sm">Instr. #2</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm" id="FINSBC2" name="FINSBC2" placeholder="" value="" maxlength="30">
+                        </div>
+                        <label for="FINSBC3" class="col-sm-1 form-control-sm">Instr. #3</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm" id="FINSBC3" name="FINSBC3" placeholder="" value="" maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="FVLRBOL" class="col-sm-1 form-control-sm">Valor:</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm money" id="FVLRBOL" name="FVLRBOL" placeholder="" value="" required>
+                        </div>
+                        <label for="FVLRTAR" class="col-sm-1 form-control-sm">Tarifa :</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm money" id="FVLRTAR" name="FVLRTAR" placeholder="" value="">
+                        </div>
+                        <label for="FVLRTDP" class="col-sm-1 form-control-sm">Taxa Dep.:</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control form-control-sm money" id="FVLRTDP" name="FVLRTDP" placeholder="" value="">
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <label for="FINSBC1" class="col-sm-2 form-control-sm">Linha</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-sm" id="FLINDIG" name="FLINDIG" placeholder="" value="" maxlength="64">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="FNIDBOL" class="col-sm-2 form-control-sm">Chave</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control-sm" id="FNIDBOL" name="FNIDBOL" placeholder="" value="" maxlength="8" readonly>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-sm" id="FKEYBOL" name="FKEYBOL" placeholder="" value="" maxlength="40" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group row ml-4">
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="FSTAREC" />
+                            <label class="form-check-label" for="FSTAREC">Ativo</label>
+                        </div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="FINDCNC" />
+                            <label class="form-check-label" for="FINDCNC">Conciliado</label>
+                        </div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="FIMGSAV" />
+                            <label class="form-check-label" for="FIMGSAV">Imagem Salva</label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+
+
+    <script src="~/Scripts/Rules/CommonRules.js"></script>
+    <script>
+        var TbDetalhe = null;
+
+        $(document).ready(function () {
+
+            $('.date').mask('00/00/0000');
+            $('.money').mask('000.000,00', { reverse: true });
+            $('.datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: "pt-BR",
+                minViewMode: 0,
+                orientation: 'auto',
+                startDate: new Date(2022, 03, 01),
+                autoclose: true,
+                daysOfWeekDisabled: ['0']
+            });
+
+
+            $('#FTIPBOL').on('change', function () {
+                var pTIPBOL = $(this).val();
+                if (pTIPBOL > 0) {
+                    $("#FINSBC1").val('');
+                    $("#FINSBC2").val('');
+                    $("#FINSBC3").val('');
+                    var pUSUPRO = $("#FUSUPRO").val();
+                    var pUSUCED = $("#FUSUCED").val();
+                    $.ajax({
+                        type: "GET",
+                        url: GetUrl("Financeiro/ConfiguracaoBoleto"),
+                        data: { pUSUPRO: pUSUPRO, pUSUCED: pUSUCED, pTIPBOL: pTIPBOL },
+                        dataType: 'json',
+                        success: function (result) {
+                            $("#FINSBC1").val(result.INSBC1);
+                            $("#FINSBC2").val(result.INSBC2);
+                            $("#FINSBC3").val(result.INSBC3);
+                        }
+                    });
+                }
+            });
+
+            
+
+            $(document).on("click", "#btn_update", function () {
+                var mode = $("#OPERATION").val();
+                var vNIDBOL = parseInt($("#FNIDBOL").val());
+                if (vNIDBOL == null || vNIDBOL=="")
+                    vNIDBOL = 0;
+                var vNOSNUM = parseInt($("#FNOSNUM").val());
+                if (vNOSNUM == null || vNOSNUM == "") {
+                    vNOSNUM = 0;
+                }
+                var vCODESP = $("#FCODESP").val();
+                if (vCODESP == null || vCODESP == "") {
+                    vCODESP = "00";
+                }
+
+                var VDATA = JSON.stringify({
+                    'NIDBOL': 0,
+                    'USUPRO': parseInt($("#FUSUPRO").val()),
+                    'USUCED': parseInt($("#FUSUCED").val()),
+                    'USUSAC': parseInt($("#FUSUSAC").val()),
+                    'CODAVA': parseInt($("#FCODAVA").val()),
+                    'STABOL': parseInt($("#FSTABOL").val()),
+                    'TIPBOL': parseInt($("#FTIPBOL").val()),
+                    'RSPTAR': parseInt($("#FRSPTAR").val()),
+                    'DATEMI': toDateIso($("#FDATEMI").val(),"-"),
+                    'DATVCT': toDateIso($("#FDATVCT").val(),"-"),
+                    'DATVAL': toDateIso($("#FDATVAL").val(),"-"),
+                    'CODESP': vCODESP,
+                    'NUMCTR': $("#FNUMCTR").val(),
+                    'INSBC1': $("#FINSBC1").val(),
+                    'INSBC2': $("#FINSBC2").val(),
+                    'INSBC3': $("#FINSBC3").val(),
+                    'VLRBOL':ToFloat($("#FVLRBOL").val()),
+                    'VLRTAR':ToFloat($("#FVLRTAR").val()),
+                    'VLRTDP':ToFloat($("#FVLRTDP").val()),
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                });
+                $.ajax({
+                    type: "POST",
+                    url: GetUrl("Financeiro/AtualizarBoleto?modo=" + mode),
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) {
+                            $('#modalboletos').modal('toggle');
+                            location.href = location.href;
+                        }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Boletos', message: result.MessageToUser, effect: 'newspaper' });
+                        };
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Boletos', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+
+            });
+
+
+
+            $('#CUSUPRO').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+            $('#CUSUCED').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+            $('#CUSUSAC').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+            $('#CSTABOL').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+            $('#CTIPBOL').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+
+            $('#CNIDBOL').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+
+            $('#CDATEMI1').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+            $('#CDATEMI2').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+            $('#CDATVCT1').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+            $('#CDATVCT2').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+            $('#CDATPGT1').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+            $('#CDATPGT2').on('change', function () {
+                $('#tbboletos').DataTable().ajax.reload();
+            });
+
+            AtualizaDetalhe();
+
+        });
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            $("#FSTABOL").val(1);
+            $("#FSTAREC").prop('checked', "true");
+            $("#FIMGSAV").attr('disabled', 'disabled');
+            $("#FINDCNC").attr('disabled', 'disabled');
+            $("#FDATEMI").val(GetDate());
+            $('#modalboletos').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalboletos').modal('toggle');
+        }
+
+        function CallForEdit(pNIDBOL) {
+            $("#OPERATION").val("2");
+            $.ajax({
+                type: "GET",
+                url: GetUrl("Financeiro/SelecionarBoleto"),
+                data: { pNIDBOL: pNIDBOL},
+                dataType: 'json',
+                success: function (result) {
+                    $("#FUSUPRO").val(result.USUPRO);
+                    $("#FUSUCED").val(result.USUCED);
+                    $("#FUSUSAC").val(result.USUSAC);
+                    $("#FCODAVA").val(result.CODAVA);
+                    $("#FSTABOL").val(result.STABOL);
+                    $("#FTIPBOL").val(result.TIPBOL);
+                    $("#FRSPTAR").val(result.RSPTAR);
+                    $("#FDATEMI").val(fromDate(result.DATEMI));
+                    $("#FDATVCT").val(fromDate(result.DATVCT));
+                    $("#FDATVAL").val(fromDate(result.DATVAL));
+                    $("#FCODESP").val(result.CODESP);
+                    $("#FNUMCTR").val(result.NUMCTR);
+                    $("#FNOSNUM").val(result.NOSNUM);
+                    $("#FINSBC1").val(result.INSBC1);
+                    $("#FINSBC2").val(result.INSBC2);
+                    $("#FINSBC3").val(result.INSBC3);
+                    $("#FVLRBOL").val(new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(result.VLRBOL));
+                    $("#FVLRTAR").val(new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(result.VLRTAR));
+                    $("#FVLRTDP").val(new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(result.VLRTDP));
+                    $("#FLINDIG").val(result.LINDIG);
+                    $("#FNIDBOL").val(result.NIDBOL);
+                    $("#FNOSNUM").val(result.NOSNUM);
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                    $("#FINDCNC").prop('checked', (result.INDCNC == 1));
+                    $("#FIMGSAV").prop('checked', (result.IMGSAV == 1));
+                    $("#FIMGSAV").attr('disabled', 'disabled');
+                    $("#FINDCNC").attr('disabled', 'disabled');
+                }
+            })
+            $('#modalboletos').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalboletos').modal('toggle');
+        }
+
+        /*
+         *  VALOR DO BOLETO
+         */
+        $('#FVLRBOL').focusout(function () {
+            var pVLRBOL = ToFloat($(this).val());
+            if (pVLRBOL > 0) {
+                var pUSUPRO = $("#FUSUPRO").val();
+                var pUSUCED = $("#FUSUCED").val();
+                var pTIPBOL = $("#FTIPBOL").val();
+                var pCODTAR = 0;
+                var pAPLTDP = 0;
+                $.ajax({
+                    type: "GET",
+                    url: GetUrl("Financeiro/ConfiguracaoBoleto"),
+                    data: { pUSUPRO: pUSUPRO, pUSUCED: pUSUCED, pTIPBOL: pTIPBOL },
+                    dataType: 'json',
+                    success: function (result) {
+                        pCODTAR = result.CODTAR;
+                        pAPLTDP = result.APLTDP;
+                    },
+
+                    complete: function () {
+
+                        $.ajax({
+                            type: "GET",
+                            url: GetUrl("Financeiro/TarifasSobreBoleto"),
+                            data: { pUSUPRO: pUSUPRO, pUSUCED: pUSUCED, pTIPBOL: pTIPBOL, pCODTAR: pCODTAR, pVLRREF: pVLRBOL, pAPLTDP: pAPLTDP },
+                            dataType: 'json',
+                            success: function (values) {
+                                console.log(values);
+                                var val =
+                                    $("#FVLRTAR").val(new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(values.VLRTAR));
+                                $("#FVLRTDP").val(new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(values.VLRTDP));
+                            },
+                            error: function (request, status, error) {
+                                alert(request.responseText);
+                                $("#FVLRTAR").val(0);
+                                $("#FVLRTDP").val(0);
+                            }
+                        });
+
+                    }
+                });
+            }
+        });
+
+        /*
+         * Calculo das tarifas sobre boletos
+         */
+        function CalcularTarifaSobreBoleto(pUSUPRO, pUSUCED, pTIPBOL, pCODTAR, pVLRBOL, pAPLTDP) {
+            $.ajax({
+                type: "GET",
+                url: GetUrl("Financeiro/TarifasSobreBoleto"),
+                data: { pUSUPRO: pUSUPRO, pUSUCED: pUSUCED, pTIPBOL: pTIPBOL, pCODTAR: pCODTAR, pVLRREF: pVLRBOL, pAPLTDP: pAPLTDP },
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+                    $("#FVLRTAR").val(result.VLRTAR);
+                    $("#FVLRTDP").val(result.VLRTDP);
+                },
+                error: function (erro) {
+                    console.log(erro);
+                    $("#FVLRTAR").val(0);
+                    $("#FVLRTDP").val(0);
+                }
+            });
+        }
+
+
+        function LoadUsers(pUSUPRO) {
+            $.ajax({
+                type: "GET",
+                url: GetUrl("Financeiro/CarregarUsuariosGestor"),
+                data: { pUSUPRO: pUSUPRO },
+                dataType: 'json',
+                success: function (result) {
+                    var dropdata = $('#FUSUCED');
+                    $("#FUSUCED > option").remove();
+                    console.log(result);
+                    for (i = 0; i < result.length; i++) {
+                        dropdata.append($("<option />").val(result[i].CODUSU).text(result[i].NOMUSU));
+                    }
+                }
+            });
+        }
+
+
+        function ToFloat(value) {
+            var v = value.replace('.', '').replace(',', '');
+            return parseInt(v) / 100;
+        }
+
+
+        function GetDate() {
+            return FormatDate(new Date());
+        }
+
+        function addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+        }
+
+        function FormatDate(date) {
+            return Right('00' + date.getDate(), 2) + '/' + Right('00' + (date.getMonth() + 1), 2) + '/' + date.getFullYear();
+        }
+
+
+        function PrimaryValidation() {
+
+            var aval;
+            var msg = '';
+            var ret = true;
+
+            var modo = parseInt($("#FOPERATION").val());
+            if (modo == null || (modo < 1 && modo > 2)) {
+                msg = 'Operação invalida';
+                ret = false;
+            }
+
+            if (ret === true) {
+                aval = parseInt($("#FDATVCT").val());
+                if (aval <= 0) {
+                    msg = 'Data de Vencimento inválida';
+                    ret = false;
+                }
+            }
+            if (ret === true) {
+                aval = parseInt($("#FDATVAL").val());
+                if (aval <= 0) {
+                    msg = 'Data de Validade inválida';
+                    ret = false;
+                }
+            }
+
+            if (ret === false) {
+                $.alert({ class: 'danger', title: 'Boleto', message: msg, effect: 'zoom' });
+            }
+            return ret;
+        }
+
+
+
+        function AtualizaDetalhe() {
+            try {
+                if (TbDetalhe == null) {
+
+                    TbDetalhe = $('#tbboletos').DataTable(
+                        {
+                            paging: true,
+                            searching: false,
+                            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                            processing: true,
+                            serverSide: true,
+                            orderMulti: false,
+                            responsive: true,
+                            ajax: {
+                                url: GetUrl("Financeiro/PesquisarBoletos"),
+                                type: "POST",
+                                datatype: "json",
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                                data: {
+                                    pUSUPRO: function () {
+                                        var value = $('#CUSUPRO').val();
+                                        if (value == null) {
+                                            value=-1
+                                        }
+                                        return value;
+                                    },
+                                    pUSUCED: function () {
+                                        var value = $('#CUSUCED').val();
+                                        if (value == null) {
+                                            value = -1
+                                        }
+                                        return value;
+                                    },
+                                    pUSUSAC: function () {
+                                        var value = $('#CUSUSAC').val();
+                                        if (value == null) {
+                                            value = -1
+                                        }
+                                        return value;
+                                    },
+
+                                    pCODAVA: function () {
+                                        var value = $('#CCODAVA').val();
+                                        if (value == null) {
+                                            value = -1
+                                        }
+                                        return value;
+                                    },
+                                    pSTABOL: function () {
+                                        var value = $('#CSTABOL').val();
+                                        if (value == null) {
+                                            value = -1
+                                        }
+                                        return value;
+                                    },
+                                    pTIPBOL: function () {
+                                        var value = $('#CTIPBOL').val();
+                                        if ((value == null)||(value==0)) {
+                                            value = -1
+                                        }
+                                        return value;
+                                    },
+                                    pNIDBOL: function () {
+                                        var value = $('#CNIDBOL').val();
+                                        if ((value == null) || (value == 0)) {
+                                            value = -1
+                                        }
+                                        return value;
+                                    },
+                                    pDATEMI1: function () {
+                                        var value = $('#CDATEMI1').val();
+                                        if (value == null) {
+                                            value = ""
+                                        }
+                                        if (value !== "") {
+                                            return stringToDate(value, "dd/MM/yyyy", "/");
+                                        }
+                                        return value;
+                                    },
+                                    pDATEMI2: function () {
+                                        var value = $('#CDATEMI2').val();
+                                        if (value == null) {
+                                            value = ""
+                                        }
+                                        if (value !== "") {
+                                            return stringToDate(value, "dd/MM/yyyy", "/") + " 23:59:59";
+                                        }
+                                        return value;
+                                    },
+                                    pDATVCT1: function () {
+                                        var value = $('#CDATVCT1').val();
+                                        if (value == null) {
+                                            value = ""
+                                        }
+                                        if (value !== "") {
+                                            return stringToDate(value, "dd/MM/yyyy", "/");
+                                        }
+                                        return value;
+
+                                    },
+                                    pDATVCT2: function () {
+                                        var value = $('#CDATVCT2').val();
+                                        if (value == null) {
+                                            value = ""
+                                        }
+                                        if (value !== "") {
+                                            return stringToDate(value, "dd/MM/yyyy", "/") + " 23:59:59";
+                                        }
+                                        return value;
+                                    },
+
+                                    pDATPGT1: function () {
+                                        var value = $('#CDATPGT1').val();
+                                        if (value == null) {
+                                            value = ""
+                                        }
+                                        if (value !== "") {
+                                            return stringToDate(value, "dd/MM/yyyy", "/");
+                                        }
+                                        return value;
+
+                                    },
+                                    pDATPGT2: function () {
+                                        var value = $('#CDATPGT2').val();
+                                        if (value == null) {
+                                            value = ""
+                                        }
+                                        if (value !== "") {
+                                            return stringToDate(value, "dd/MM/yyyy", "/") + " 23:59:59";
+                                        }
+                                        return value;
+                                    }
+                                }
+                            },
+
+                            columns: [
+                                { data: "NIDBOL" },
+                                { data: "DSCSTA" },
+                                { data: "DSCBLT" },
+                                {
+                                    data: "DATEMI", render: function (data, type, row) {
+                                        return fromDate(data);
+                                    }
+                                },
+                                { data: "CEDNOM" },
+                                { data: "SACNOM" },
+                                {
+                                    data: "VLRBOL",  render: $.fn.dataTable.render.number('.', ',', 2, '')
+                                },
+                                {
+                                    data: "VLRTAR", render: $.fn.dataTable.render.number('.', ',', 2, '')
+                                },
+                                {
+                                    data: "VLRLIQ", render: $.fn.dataTable.render.number('.', ',', 2, '')
+                                },
+
+                                { data: "KEYBOL" },
+                                { data: "LGNUSU" },
+                                {
+                                    "render": function (data, type, row) {
+                                        var botoes = "";
+                                        if ((row.STABOL == 1 || row.STABOL == 4) && (row.STAREC == 1)) {
+                                            botoes = botoes + "<button id='btn_call_edt' value='Editar' onclick=\"CallForEdit('" + row.NIDBOL + "');\"> <i class='fa fa-edit style='font-size:12px;border:none'></i></button>&nbsp;"
+                                        }
+
+                                        botoes = botoes + "<a title='Registro de Operações' id='IREGOPE' value='Registro de Operações' href='" +GetUrl('Financeiro/RegistroOperacoes?qsubsys=' + row.SUBSYS +  '&qnidref='+ row.NIDBOL) +"'> <i class='fa fa-tag' style='font-size: 12px;border:none''></i></a>&nbsp;"
+                                        return botoes;
+                                    }
+                                }
+                            ],
+                            "language": {
+                                "processing": "Aguarde, buscando informações",
+                                "loadingRecords": "Carregando",
+                            },
+                            "pageLength": 10,
+                            "oLanguage": {
+                                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                                "sZeroRecords": "Nenhum registro encontrado",
+                                "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                                "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                                "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                                "sSearch": "Pesquisar: "
+                            },
+                            columnDefs: [
+                                { "targets": [0], "visible": false, "searchable": false },
+                                { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "6%" },
+                                { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "12%" },
+                                { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "12%" },
+                                { className: "text-right", "targets": [6], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-right", "targets": [7], "visible": true, "searchable": false, "width": "10%" },
+                                { className: "text-right", "targets": [8], "visible": true, "searchable": false, "width": "10%" },
+                                { className: "text-left", "targets": [9], "visible": true, "searchable": false, "width": "10%" },
+                                { className: "text-left", "targets": [10], "visible": true, "searchable": false, "width": "10%" },
+                                { className: "text-left", "targets": [11], "visible": true, "searchable": false, "width": "10%" }
+
+                            ]
+                        });
+
+                }
+                else {
+                    TbDetalhe.DataTable().ajax.reload();
+                }
+            }
+            catch (e) {
+            }
+        }
+
+    </script>
+}

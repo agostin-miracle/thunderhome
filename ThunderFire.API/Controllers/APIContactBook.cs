@@ -143,36 +143,6 @@ go=HttpStatusCode.NotFound;
 }
 return Content(go, RETURN_VALUE);
 }
-    /// <summary>
-    /// Seleciona todos os registros de contato do usuário fornecido
-    /// </summary>
-        /// <param name="pCODUSU">Usuário</param>
-
-    /// <returns>List of QueryContactBook</returns>
-[HttpGet]
-    public IHttpActionResult List(System.Int32? pCODUSU)
-    {
-HttpStatusCode go = HttpStatusCode.OK;
-object RETURN_VALUE=null;
-if (Init())
-{
- RETURN_VALUE = WRKOBJ.List(pCODUSU.Value);
-if(WRKOBJ.Found)
-{
-go = HttpStatusCode.OK;
-}
-else
-{
-if(WRKOBJ.HasError)
-{
-    go=HttpStatusCode.BadRequest;
-}
-else
-go=HttpStatusCode.NotFound;
-}
-}
-return Content(go, RETURN_VALUE);
-}
 
     /// <summary>
     /// Localiza um contato com base nos parâmetros fornecidos

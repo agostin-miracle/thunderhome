@@ -7,7 +7,7 @@ using ThunderFire.Domain.Models;
 
 namespace ThunderFire.Domain.DTO
 {
-    public class ProductsAll:Products
+    public class ProductsAll:Product
     {
         public string DSCREC { get; set; }
         public string DSCUPD { get; set; }

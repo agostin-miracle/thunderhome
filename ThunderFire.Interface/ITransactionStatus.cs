@@ -27,13 +27,6 @@ ExecutionResponse Update(TransactionStatus model);
         /// <param name="pCODSTA">Código do Status</param>
     /// <returns>TransactionStatus</returns>
 TransactionStatus Select(System.Int32 pCODSTA);
-    /// <summary>
-    /// Seleciona todos os registros de status de transações de acordo com o módulo informado
-    /// </summary>
-        /// <param name="pCODMOD">Código do Módulo</param>
-
-    /// <returns>List of QueryTransactionStatus</returns>
-List<QueryTransactionStatus> List(System.Int32? pCODMOD);
 
     }
 }

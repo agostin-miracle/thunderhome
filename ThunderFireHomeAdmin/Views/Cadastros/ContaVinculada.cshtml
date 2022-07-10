@@ -1,0 +1,336 @@
+﻿@model ThunderFireHomeAdmin.Models.LinkedAccountModel
+@{
+    ViewBag.Title = "Contas Vinculada";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <input type="hidden" id="PCODUSU" value="0" />
+            <input type="hidden" id="ECANDEL" value="@Model.CanRemoveLinkId" />
+            <div class="form-row">
+                <div class="col-sm-6">
+                    <div class="input-group mb-3">
+                        <label for="CNOMUSU" class="col-form-label form-control-sm">Nome :</label>
+                        <input type="text" class="form-control form-control-sm" id="CNOMUSU" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend">
+                            <button class="input-group-text" onclick="$('#CNOMUSU').prop('disabled', false); $('#CNOMUSU').val('');"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Detalhes</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="tbcontasvinculadas" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Tipo</th>
+                            <th title="Agência . Conta . Dv">Conta</th>
+                            <th>Banco</th>
+                            <th>Usuário</th>
+                            <th>Beneficiario</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalcontavinculada" tabindex="-1" role="dialog" aria-labelledby="modalab" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-folder" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FNIDCVL" value="0" />
+                <div class="form-row">
+                    <label for="FCODUSU" class="col-sm-2 control-label">Usuário</label>
+                    <div class="col-sm-10">
+                        @if (Model.ListaUsuario != null)
+                        {
+                            @Html.DropDownListFor(model => model.FCODUSU, new SelectList(Model.ListaUsuario, "CODUSU", "NOMUSU", Model.FCODUSU), new { @class = "form-control form-control-sm" })
+                        }
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="FNIDCTA" class="col-sm-2 control-label">Conta</label>
+                    <div class="col-sm-10">
+                        <select class="form-control form-control-sm" id="FNIDCTA">
+                            </select>
+                    </div>
+                </div>
+
+                <div class="form-group row ml-4">
+                    <div class="form-check col-sm-3">
+                        <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked />
+                        <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        var TbDetalhe = null;
+
+        $(document).ready(function () {
+            $("#CNOMUSU").autocomplete({
+                source: function (request, response) {
+                    var vDATA = JSON.stringify({ 'pNOMUSU': $("#CNOMUSU").val() });
+                    $.ajax({
+                        url: GetUrl('Home/UsuariosPorNome'),
+                        type: "POST",
+                        dataType: "json",
+                        data: vDATA,
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { label: item.NOMUSU, value: item.CODUSU  };
+                            }))
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $("#CNOMUSU").val(ui.item.label);
+                    $("#CNOMUSU").prop("disabled", true);
+                    $("#PCODUSU").val(ui.item.value);
+                    return false;
+                },
+                minLength: 1
+            });
+
+            $(document).on("click", "#btn_update", function () {
+                var mode = $("#OPERATION").val();
+
+                var VDATA = JSON.stringify({
+                    'CODUSU': parseInt($("#FCODUSU").val()),
+                    'NIDCTA': parseInt($("#FNIDCTA").val()),
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                });
+                $.ajax({
+                    type: "POST",
+                    url: GetUrl("/Cadastros/AtualizarContaVinculada?modo=" + mode),
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        console.log(result);
+                        var ok = parseInt(result.ReturnValue);
+                        if (ok > 0) {
+                            $('#modalcontavinculada').modal('toggle');
+                            location.href = location.href;
+                        }
+                        else {
+                            $.alert({ class: 'Warning', title: 'Endereços', message: result.MessageToUser, effect: 'newspaper' });
+                        };
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Endereços', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+            });
+
+
+            $('#CNOMUSU').on('change', function () {
+                $('#tbcontas').DataTable().ajax.reload();
+            });
+            AtualizaDetalhe();
+
+        });
+
+
+        function CallForAdd() {
+            $("#OPERATION").val("1");
+            var pCODUSU = $("#PCODUSU").val();
+            if (pCODUSU > 0) {
+                $("#FCODUSU").val(pCODUSU);
+                $("#FCODUSU").attr('disabled', 'disabled');
+                $("#FSTAREC").prop('checked', "true");
+                $('#modalcontavinculada').modal({ backdrop: 'static', Keyboard: 'true' });
+                $('#modalcontavinculada').modal('toggle');
+
+                LoadUsers(pCODUSU);
+            }
+            else {
+                $.alert({ class: 'danger', title: 'Conta Virtual', message: 'Selecione um usuário válido !!!', effect: 'zoom' });
+            }
+        }
+
+
+        function LoadUsers(pCODUSU) {
+            $.ajax({
+                type: "GET",
+                url: GetUrl("Cadastros/CarregarUsuariosLinkados"),
+                data: { pCODUSU: pCODUSU },
+                dataType: 'json',
+                success: function (result) {
+
+                    var dropdata = $('#FNIDCTA');
+                    $("#FNIDCTA > option").remove();
+                    console.log(result);
+                    for (i = 0; i < result.length; i++) {
+                        dropdata.append($("<option />").val(result[i].CODUSU).text(result[i].NOMUSU));
+                    }
+                }
+            });
+        }
+
+        function CallForEdit(pNIDCVL, pCODUSU, pNIDCTA, pSTAREC) {
+            $("#OPERATION").val("2");
+            $("#FNIDCVL").val(pNIDCVL);
+            $("#FNIDCTA").val(pNIDCTA);
+            $("#FCODUSU").val(pCODUSU);
+            $("#FSTAREC").prop('checked', (result.STAREC == 1));
+            $('#modalcontavinculada').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalcontavinculada').modal('toggle');
+        }
+
+        function CallForDelete(pNIDCVL) {
+
+            if (pNIDCVL > 0) {
+                if (confirm('Você tem certeza que deseja efetuar esta operação?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: GetUrl("Cadastros/RemoverContaVinculada"),
+                        data: { pNIDCVL: pNIDCVL },
+                        dataType: 'json',
+                        success: function (result) {
+
+                            var ok = parseInt(result.ReturnValue);
+                            if (ok > 0) {
+                                $('#modalcontavinculada').modal('toggle');
+                                location.href = location.href;
+                            }
+                            else {
+                                $.alert({ class: 'Warning', title: 'Contas Vinculadas', message: result.MessageToUser, effect: 'newspaper' });
+                            };
+
+                        }
+                    });
+
+                }
+            }
+        }
+
+
+
+        function AtualizaDetalhe() {
+            try {
+                if (TbDetalhe == null) {
+
+                    TbDetalhe = $('#tbcontasvinculadas').DataTable(
+                        {
+                            paging: true,
+                            searching: false,
+                            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                            processing: true,
+                            serverSide: true,
+                            orderMulti: false,
+                            responsive: true,
+                            ajax: {
+                                url: GetUrl("Cadastros/PesquisarContasVinculadas"),
+                                type: "POST",
+                                datatype: "json",
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                                data: {
+                                    pSTACTA: function () { return $('#CSTACTA').val() },
+                                    pNOMUSU: function () { return $('#CNOMUSU').val() }
+                                }
+                            },
+                            columns: [
+                                { data: "NIDCVL" },
+                                { data: "DSCCTA" },
+                                {
+                                    render: function (data, type, row) {
+                                        return row.NUMAGE + ' ' + row.NUMCTA + '-' + row.NUMDVE;
+                                    }
+                                },
+                                { data: "DSCBCO" },
+                                { data: "NOMUSU" },
+                                { data: "NOMBNF" },
+                                { data: "LGNUSU" },
+                                {
+                                    "render": function (data, type, row) {
+                                        var botoes = "";
+                                        botoes += "<button id='btn_call_edt' value='Editar' onclick=\"CallForEdit(" + row.NIDCVL + "," + row.CODUSU + "," + row.NIDCTA + "," + row.STAREC + ");\"> <i class='fa fa-edit' style='font-size:12px;border:none'></i></button>&nbsp;"
+                                        //if ($('#CANDEL').val() == 1)
+                                            botoes += "<button id='btn_call_del' value='Remover Link' onclick=\"CallForDelete(" + row.NIDCVL + ");\"> <i class='fa fa-remove' style='font-size:12px;border:none;color:red'></i></button>&nbsp;"
+                                        return botoes;
+                                    }
+                                }
+                            ],
+                            "language": {
+                                "processing": "Aguarde, buscando informações",
+                                "loadingRecords": "Carregando",
+                            },
+                            "pageLength": 10,
+                            "oLanguage": {
+                                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                                "sZeroRecords": "Nenhum registro encontrado",
+                                "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                                "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                                "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                                "sSearch": "Pesquisar: "
+                            },
+                            columnDefs: [
+                                { "targets": [0], "visible": false, "searchable": false },
+                                { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "6%" },
+                                { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "12%" },
+                                { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "12%" },
+                                { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "8%" },
+                                { className: "text-right", "targets": [7], "visible": true, "searchable": false, "width": "10%" }
+                            ]
+                        });
+
+                }
+                else {
+                    TbDetalhe.DataTable().ajax.reload();
+                }
+            }
+            catch (e) {
+            }
+        }
+    </script>
+}
+

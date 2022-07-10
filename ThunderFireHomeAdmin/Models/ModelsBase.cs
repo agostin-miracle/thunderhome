@@ -22,6 +22,11 @@ namespace ThunderFireHomeAdmin.Models
             return ShowDate(dt);
         }
 
+        public string ShowMoney(double value)
+        {
+            return string.Format("{0:#,#.00}", value); 
+        }
+
         //public DateTime GetDateFromJSON(long jsonDateTime, bool shorter = false)
         //{
         //    return JsonConvert.DeserializeObject<DateTime>($"\"\\/Date({ (shorter ? jsonDateTime * 1000 : jsonDateTime) })\\/\"", new JsonSerializerSettings

@@ -3,11 +3,12 @@ IF OBJECT_ID ( 'dbo.PRTABGERINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 28/02/2022 19:03:33
+     Date : 23/03/2022 14:58:11
  Objetivo : Inserção de Registros na Tabela TBTABGER
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTABGERINS
         (        @NUMTAB int, 
+        @USECOD tinyint = 1, 
         @KEYCOD int = 0, 
         @KEYTXT char(10) = null, 
         @NUMREF int = 0, 
@@ -29,8 +30,8 @@ CREATE PROCEDURE dbo.PRTABGERINS
 
     IF(@RETURN_VALUE=0)
         BEGIN
-            INSERT INTO TBTABGER(NUMTAB, KEYCOD, KEYTXT, NUMREF, DSCTAB, USRDSP, IDEPRE, STAREC, UPDUSU)
-                        VALUES (@NUMTAB, @KEYCOD, @KEYTXT, @NUMREF, @DSCTAB, @USRDSP, @IDEPRE, @STAREC, @UPDUSU);
+            INSERT INTO TBTABGER(NUMTAB, USECOD, KEYCOD, KEYTXT, NUMREF, DSCTAB, USRDSP, IDEPRE, STAREC, UPDUSU)
+                        VALUES (@NUMTAB, @USECOD, @KEYCOD, @KEYTXT, @NUMREF, @DSCTAB, @USRDSP, @IDEPRE, @STAREC, @UPDUSU);
             IF @@ERROR = 0
                 BEGIN
                     SET @RETURN_VALUE = @@IDENTITY
@@ -48,7 +49,7 @@ IF OBJECT_ID ( 'dbo.PRTABGERSEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 28/02/2022 19:03:33
+     Date : 23/03/2022 14:58:11
  Objetivo : Seleciona o registro de acordo com o id de registro da tabela geral
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTABGERSEL
@@ -57,30 +58,13 @@ CREATE PROCEDURE dbo.PRTABGERSEL
 )
 AS
     SET NOCOUNT ON
-    SELECT * FROM TBTABGER (nolock) A
+    SELECT A.*, DSCREC = B.DSCTAB, LGNUSU  = ISNULL(C.LGNUSU,'')
+      FROM TBTABGER (NOLOCK) A
+     INNER JOIN TBTABGER (NOLOCK) B ON (B.NUMTAB=7 AND B.KEYCOD=A.STAREC)
+      LEFT JOIN TBLGNUSU (NOLOCK) C ON (C.CODUSU = A.UPDUSU AND C.REGATV=1)
 
     WHERE     (A.KEYTAB=@KEYTAB)
 
-GO
-
-IF OBJECT_ID ( 'dbo.PRTABGERCOD', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRTABGERCOD;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 28/02/2022 19:03:33
- Objetivo : Seleciona um Tipo de Tabela Específica ou Todas se o número da tabela não for especificado
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRTABGERCOD
-(
-    @NUMTAB Integer=NULL
-)
-AS
-    SET NOCOUNT ON
-    SELECT KEYCOD, KEYTXT=LTRIM(RTRIM(KEYTXT)) , DSCTAB, NUMREF FROM TBTABGER (NOLOCK) A WHERE STAREC NOT IN (0,13) AND USRDSP=1
-
- AND     (@NUMTAB IS NULL OR A.NUMTAB=@NUMTAB)
-     ORDER BY A.KEYCOD
 GO
 
 IF OBJECT_ID ( 'dbo.PRTABGERUPD', 'P' ) IS NOT NULL
@@ -88,12 +72,13 @@ IF OBJECT_ID ( 'dbo.PRTABGERUPD', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 28/02/2022 19:03:33
+     Date : 23/03/2022 14:58:11
  Objetivo : Altera um registro da tabela TBTABGER ()  de acordo com a chave identity
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTABGERUPD
         (@KEYTAB int, 
         @NUMTAB int, 
+        @USECOD tinyint = 1, 
         @KEYCOD int = 0, 
         @KEYTXT char(10) = null, 
         @NUMREF int = 0, 
@@ -111,6 +96,7 @@ CREATE PROCEDURE dbo.PRTABGERUPD
         BEGIN
             UPDATE TBTABGER
                SET NUMTAB=@NUMTAB
+                  ,USECOD=@USECOD
                   ,KEYCOD=@KEYCOD
                   ,KEYTXT=@KEYTXT
                   ,NUMREF=@NUMREF
@@ -138,12 +124,38 @@ CREATE PROCEDURE dbo.PRTABGERUPD
         END
     RETURN @RETURN_VALUE
 GO
+IF OBJECT_ID ( 'dbo.PRTABGERCOD', 'P' ) IS NOT NULL
+    DROP PROCEDURE dbo.PRTABGERCOD;
+GO
+/* ===================================================================================================
+   Author : Agostin
+     Date : 23/03/2022 14:58:11
+ Objetivo : Seleciona todos os registros de um Tipo de tabela informado
+ ==================================================================================================== */
+CREATE PROCEDURE dbo.PRTABGERCOD
+(
+    @NUMTAB Integer=NULL
+)
+AS
+    SET NOCOUNT ON
+    SELECT A.*, DSCREC = B.DSCTAB, LGNUSU  = ISNULL(C.LGNUSU,'')
+      FROM TBTABGER (NOLOCK) A
+     INNER JOIN TBTABGER (NOLOCK) B ON (B.NUMTAB=7 AND B.KEYCOD=A.STAREC)
+      LEFT JOIN TBLGNUSU (NOLOCK) C ON (C.CODUSU = A.UPDUSU AND C.REGATV=1)          
+    WHERE A.STAREC NOT IN (0,13)
+ AND       (@NUMTAB IS NULL OR A.NUMTAB=@NUMTAB)
+     ORDER BY A.KEYCOD
+
+
+
+GO
+
 IF OBJECT_ID ( 'dbo.PRTABGERFNDKEY', 'P' ) IS NOT NULL
     DROP PROCEDURE dbo.PRTABGERFNDKEY;
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 28/02/2022 19:03:33
+     Date : 23/03/2022 14:58:11
  Objetivo : Obtêm o Id de Registro de uma Tabela Geral Baseada no Código Chave da Tabela
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTABGERFNDKEY
@@ -154,7 +166,7 @@ CREATE PROCEDURE dbo.PRTABGERFNDKEY
 AS
     SET NOCOUNT ON
 
-    SELECT COALESCE(ISNULL(KEYTAB,0),0) AS KEYTAB FROM TBTABGER (NOLOCK) A WHERE STAREC NOT IN (0,13))
+    SELECT COALESCE(ISNULL(KEYTAB,0),0) AS KEYTAB FROM TBTABGER (NOLOCK) A WHERE STAREC NOT IN (0,13)
  AND     (A.NUMTAB=@NUMTAB)
      AND (A.KEYCOD=@KEYCOD)
 
@@ -165,7 +177,7 @@ IF OBJECT_ID ( 'dbo.PRTABGERFNDTXT', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 28/02/2022 19:03:33
+     Date : 23/03/2022 14:58:11
  Objetivo : Obtêm o Id de Registro de uma Tabela Geral Baseada no Código Chave Texto da Tabela
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTABGERFNDTXT

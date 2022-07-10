@@ -21,39 +21,40 @@
                             <th>Descrição</th>
                             <th>Sigla</th>
                             <th width="15%">Atualização</th>
-                            <th width="15%">Atualizador</th>
+                            <th width="15%">Por</th>
                             <th>&#160;</th>
                         </tr>
                     </thead>
-
-                    @foreach (var item in Model.Lista)
+                    @if (Model.Lista != null)
                     {
-                    <tr>
-                        <td class="text-right">
-                            @Html.DisplayFor(modelItem => item.TIPCTA)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DSCCTA)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TIPEXT)
-                        </td>
-                        <td class="text-center">
-                            @Model.ShowDate(item.DATUPD)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.LGNUSU)
-                        </td>
+                        foreach (var item in Model.Lista)
+                        {
+                            <tr>
+                                <td class="text-right">
+                                    @Html.DisplayFor(modelItem => item.TIPCTA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DSCCTA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TIPEXT)
+                                </td>
+                                <td class="text-center">
+                                    @Model.ShowDate(item.DATUPD)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.LGNUSU)
+                                </td>
 
-                        <td>
-                            @if (item.STAREC != 2)
-                            {
-                                <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.TIPCTA','@item.DSCCTA','@item.TIPEXT','@item.STAREC');"> <i class="fa fa-edit"></i></button>
-                            }
-                        </td>
-                    </tr>
+                                <td>
+                                    @if (item.STAREC != 2)
+                                    {
+                                        <button id='btn_edit' value='Editar' class='btn btn-danger btn-sm' onclick="CallForEdit('@item.TIPCTA','@item.DSCCTA','@item.TIPEXT','@item.STAREC');"> <i class="fa fa-edit"></i></button>
+                                    }
+                                </td>
+                            </tr>
+                        }
                     }
-
                 </table>
             </div>
         </div>
@@ -74,24 +75,30 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="OPERATION" value="0" />
-                <input type="hidden" id="FUPDUSU" value="0" />
-                <div class="form-group">
-                    <label for="FTIPCTA" class="col-form-label">Tipo de Endereço:</label>
-                    <input type="text" class="form-control" id="FTIPCTA" size="4" maxlength="4" disabled>
+
+                <div class="form-row">
+                    <label for="FTIPCTA" class="col-sm-2 control-label form-control-sm">Tipo:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm" id="FTIPCTA" size="4" maxlength="4" disabled>
+                    </div>
+                    <label for="FDSCCTA" class="col-sm-2 control-label form-control-sm">Descrição:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-sm" id="FDSCCTA" size="30" maxlength="30" required>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="FDSCCTA" class="col-form-label">Descrição:</label>
-                    <input type="text" class="form-control" id="FDSCCTA" size="30" maxlength="30" required>
-                </div>
+                <div class="form-row">
+                    <label for="FTIPEXT" class="col-sm-2 control-label form-control-sm">Externo:</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control form-control-sm" id="FTIPEXT" size="2" maxlength="2" required>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-check text-right">
+                            <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
+                            <label class="form-check-label" for="FSTAREC">Ativo</label>
+                        </div>
 
-                <div class="form-group">
-                    <label for="FTIPEXT" class="col-form-label">Externo:</label>
-                    <input type="text" class="form-control" id="FTIPEXT" size="2" maxlength="2" required>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="FSTAREC" checked>
-                    <label class="form-check-label" for="FSTAREC">Ativo</label>
+                    </div>
                 </div>
 
             </div>
@@ -106,61 +113,6 @@
 
 
 @section scripts{
-    <script>
-
-        function CallForEdit(pTIPCTA, pDSCCTA, pTIPEXT, pSTAREC) {
-            $("#modalcaption").html("Alteração de Tipo de Usuário");
-            $("#OPERATION").val("2");
-            $("#FTIPCTA").val(pTIPCTA);
-            $("#FDSCCTA").val(pDSCCTA);
-            $("#FTIPEXT").val(pTIPEXT);
-            $("#FSTAREC").prop('checked', (pSTAREC==1));
-            $('#modalaccountype').modal({ backdrop: "static", keyboard: false});
-            $('#modalaccountype').modal('toggle');
-        }
-        function CallForAdd() {
-            $("#modalcaption").html("Inclusão de Tipo de Usuário");
-            $("#OPERATION").val("1");
-            $("#FTIPCTA").val("0");
-            $("#FDSCCTA").val("");
-            $("#FTIPEXT").val("");
-            $("#FSTAREC").prop('checked', "true");
-            $('#modalaccountype').modal({ backdrop: "static", keyboard: false });
-            $('#modalaccountype').modal('toggle');
-        }
-
-        $(document).ready(function () {
-            $(document).on("click", "#btn_update", function () {
-
-                var mode = $("#OPERATION").val();
-                var VDATA = JSON.stringify(
-                    {
-                        'TIPCTA': parseInt($("#FTIPCTA").val()),
-                        'DSCCTA': $("#FDSCCTA").val(),
-                        'TIPEXT': $("#FTIPEXT").val(),
-                        'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
-                    });
-                $.ajax({
-                    type: "POST",
-                    url: "/Cadastros/ChangeAccountType?modo=" + mode,
-                    data: VDATA,
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    beforeSend: function () { },
-                    success: function (result) {
-                        console.log(result);
-                        var ok = parseInt(result.ReturnValue);
-                        if (ok > 0) { $('#modalaccountype').modal('toggle'); }
-                        else {
-                            $.alert({ class: 'Warning', title: 'Tipo de Conta', message: result.MessageToUser, effect: 'newspaper' });
-                        };
-                    },
-                    error: function (data) {
-                        $.alert({ class: 'danger', title: 'Tipo de Conta', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="~/Scripts/Rules/TipoConta.js"></script>
 }
 

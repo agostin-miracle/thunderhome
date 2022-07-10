@@ -40,13 +40,7 @@ ContactBook Select(System.Int32 pCODUSU, System.Byte pTIPCTO, System.Byte pREGAT
     /// Localiza um contato com base nos parâmetros fornecidos
     /// </summary>
 /// <returns>ExecutionResponse</returns>
-    /// <summary>
-    /// Seleciona todos os registros de contato do usuário fornecido
-    /// </summary>
-        /// <param name="pCODUSU">Usuário</param>
-
-    /// <returns>List of QueryContactBook</returns>
-List<QueryContactBook> List(System.Int32? pCODUSU);
+ExecutionResponse  Find( System.Int32 pCODUSU,System.Int32 pCODEND,System.Int32 pTIPCTO,System.String pNUMTEL,System.Int16? pCODPAI,System.Int16? pCODOPR,System.String pNUMDDD,System.Byte? pREGATV);
 
     }
 }

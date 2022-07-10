@@ -10,13 +10,13 @@ namespace ThunderFire.Interface
     public interface IVirtualAccount
     {
            /// <summary>
-    /// Insere um registro na tabela TBCADCTA (Virtual Account)
+    /// Insere um registro na tabela TBCADCTA (Cadastro de Contas)
     /// </summary>
     ///<param name="model">VirtualAccount</param>
     /// <returns>int</returns>
 ExecutionResponse Insert(VirtualAccount model);
     /// <summary>
-    /// Altera um registro da tabela TBCADCTA (Virtual Account)  de acordo com a chave identity
+    /// Altera um registro da tabela TBCADCTA (Cadastro de Contas)  de acordo com a chave identity
     /// </summary>
     ///<param name="model">VirtualAccount</param>
     /// <returns>ExecutionResponse</returns>
@@ -50,21 +50,17 @@ VirtualAccount Select(System.String pCODCMF, System.Byte? pORGCTA);
     /// Exclui logicamente um registro de conta
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  DeleteAccountID( System.Int32 pNIDCTA,System.Int32 pUPDUSU);
     /// <summary>
     /// Executa a aprovação ou rejeição de uma conta digital
     /// </summary>
 /// <returns>ExecutionResponse</returns>
+ExecutionResponse  ChangeStatusAccount( System.Int32 pNIDCTA,System.Byte pCODOPE,System.Int32 pUPDUSU);
     /// <summary>
     /// Localiza uma conta virtual a partir do código de usuário
     /// </summary>
 /// <returns>ExecutionResponse</returns>
-    /// <summary>
-    /// Obtêm todos os registros de contas virtuais registradas conforme parametro fornecido
-    /// </summary>
-        /// <param name="pCODUSU">Usuário</param>
-
-    /// <returns>List of QueryVirtualAccount</returns>
-List<QueryVirtualAccount> List(System.Int32? pCODUSU= null);
+ExecutionResponse  Locate( System.Int32 pCODUSU,System.Byte pORGCTA = 1,System.Int32 pTIPCTA = 1);
 
     }
 }

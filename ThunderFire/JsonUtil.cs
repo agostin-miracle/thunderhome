@@ -58,7 +58,7 @@ namespace ThunderFire
             DataContractJsonSerializer ds = new DataContractJsonSerializer(typeof(T),
                           new DataContractJsonSerializerSettings
                           {
-                              DateTimeFormat = new DateTimeFormat("yyyy-MM-dd")
+                              DateTimeFormat = new DateTimeFormat("yyyy-MM-ddTHH:mm:ss")
                           });
             MemoryStream stream = new MemoryStream();
             ds.WriteObject(stream, t);
@@ -77,5 +77,7 @@ namespace ThunderFire
             DataTable dt = (DataTable)JsonConvert.DeserializeObject(pJsonString, (typeof(DataTable)));
             return dt;
         }
+
+     
     }
 }

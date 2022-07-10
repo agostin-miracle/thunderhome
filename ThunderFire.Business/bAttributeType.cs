@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 04/03/2022 16:42
+///Data        : 18/03/2022 18:08
 ///Alias       : attributetype
 ///Descrição   : Tipo de Atributo
 ///</remarks>
@@ -66,6 +66,7 @@ string _changed = Objects.GetPropertiesValue("Tipo de Atributo",model,true);
             p.Add("@DSCATR", model.DSCATR, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@USELGN", model.USELGN, dbType:DbType.Boolean,  direction: ParameterDirection.Input);
             p.Add("@USEACT", model.USEACT, dbType:DbType.Boolean,  direction: ParameterDirection.Input);
+            p.Add("@USETAR", model.USETAR, dbType:DbType.Boolean,  direction: ParameterDirection.Input);
             p.Add("@STAREC", model.STAREC, dbType:DbType.Byte,  direction: ParameterDirection.Input);
             p.Add("@UPDUSU", model.UPDUSU, dbType:DbType.Int32,  direction: ParameterDirection.Input);
                 _conn.Execute("PRTIPATRINS", p,commandType: CommandType.StoredProcedure);
@@ -166,6 +167,7 @@ string _original = Objects.GetPropertiesValue(ModelAud);
             p.Add("@DSCATR", model.DSCATR, dbType:DbType.String,  direction: ParameterDirection.Input);
             p.Add("@USELGN", model.USELGN, dbType:DbType.Boolean,  direction: ParameterDirection.Input);
             p.Add("@USEACT", model.USEACT, dbType:DbType.Boolean,  direction: ParameterDirection.Input);
+            p.Add("@USETAR", model.USETAR, dbType:DbType.Boolean,  direction: ParameterDirection.Input);
             p.Add("@STAREC", model.STAREC, dbType:DbType.Byte,  direction: ParameterDirection.Input);
             p.Add("@DATUPD", model.DATUPD, dbType:DbType.DateTime,  direction: ParameterDirection.Input);
             p.Add("@UPDUSU", model.UPDUSU, dbType:DbType.Int32,  direction: ParameterDirection.Input);
@@ -263,32 +265,8 @@ _errormessage="";
                     {
             RETURN_VALUE  = _conn.Query<AttributeType>(sql:"PRTIPATRSEL", param:new {CODATR=pCODATR
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
-                    this.Found = true;
-                    }
-                    catch (Exception Error)
-                    {
-                    this.HasError = true;
-                    this.Found=false;
-                    _logger.Info(Error);
-            }
-            }
-                    return RETURN_VALUE;
-            }
 
-    /// <summary>
-    /// Obtêm todos os registros de tipo de atributo cadastrados
-    /// </summary>
-    /// <returns>List of AttributeType</returns>
-    public List<AttributeType> List()
-        {
-        this.Found=false;
-            this.ProcessCode= 0;
-    List<AttributeType> RETURN_VALUE=null;
-                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
-                    {
-                    try
-                    {
-            RETURN_VALUE = _conn.Query<AttributeType>(sql:"PRTIPATRLST", param:new {},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)

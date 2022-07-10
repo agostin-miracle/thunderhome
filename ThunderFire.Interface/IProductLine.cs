@@ -27,11 +27,6 @@ ExecutionResponse Update(ProductLine model);
         /// <param name="pLINPRO">Linha de Produto</param>
     /// <returns>ProductLine</returns>
 ProductLine Select(System.Int32 pLINPRO);
-    /// <summary>
-    /// Obtêm todos os registros de linha de produtos existentes
-    /// </summary>
-    /// <returns>List of ProductLine</returns>
-List<ProductLine> List();
 
     }
 }

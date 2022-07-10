@@ -16,7 +16,7 @@ namespace ThunderFire.Interface
     /// <returns>int</returns>
 ExecutionResponse Insert(UserGroup model);
     /// <summary>
-    /// Altera um registro da tabela TBSYSUXG (User Group)  de acordo com a chave primaria
+    /// Altera um registro da tabela TBSYSUXG (User Group)  de acordo com a chave identity
     /// </summary>
     ///<param name="model">UserGroup</param>
     /// <returns>ExecutionResponse</returns>

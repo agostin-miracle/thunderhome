@@ -110,35 +110,6 @@ go=HttpStatusCode.NotFound;
 }
 return Content(go, RETURN_VALUE);
 }
-    /// <summary>
-    /// Obtêm uma lista de todos os tipos de conta
-    /// </summary>
-    
-    /// <returns>List of AccountType</returns>
-[HttpGet]
-    public IHttpActionResult List()
-    {
-HttpStatusCode go = HttpStatusCode.OK;
-object RETURN_VALUE=null;
-if (Init())
-{
- RETURN_VALUE = WRKOBJ.List();
-if(WRKOBJ.Found)
-{
-go = HttpStatusCode.OK;
-}
-else
-{
-if(WRKOBJ.HasError)
-{
-    go=HttpStatusCode.BadRequest;
-}
-else
-go=HttpStatusCode.NotFound;
-}
-}
-return Content(go, RETURN_VALUE);
-}
 
 
 }

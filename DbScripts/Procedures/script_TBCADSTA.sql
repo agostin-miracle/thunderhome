@@ -3,14 +3,14 @@ IF OBJECT_ID ( 'dbo.PRCADSTAINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 16:58:39
+     Date : 19/03/2022 14:29:11
  Objetivo : Inserção de Registros na Tabela TBCADSTA
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADSTAINS
         (@CODSTA smallint, 
         @DSCSTA varchar(70), 
         @CODMOD tinyint, 
-        @SIGOPE smallint = 0, 
+        @SIGOPE smallint = 1, 
         @NXTSTA int, 
         @CANCHG tinyint = 0, 
         @DELMEN tinyint = 0, 
@@ -43,7 +43,7 @@ IF OBJECT_ID ( 'dbo.PRCADSTASEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 16:58:39
+     Date : 19/03/2022 14:29:11
  Objetivo : Seleciona o registro de acordo com o codigo do status fornecido
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADSTASEL
@@ -52,7 +52,16 @@ CREATE PROCEDURE dbo.PRCADSTASEL
 )
 AS
     SET NOCOUNT ON
-    SELECT * FROM TBCADSTA (NOLOCK) A
+    SELECT A.*
+    ,DSCCHG = CASE WHEN (A.CANCHG=1) THEN 'Sim' ELSE 'Não' END
+    ,DSCDEL = CASE WHEN (A.DELMEN=1) THEN 'Sim' ELSE 'Não' END
+    ,DSCREC = ISNULL(B.DSCTAB,'')
+    ,DSCMOD = ISNULL(C.DSCTAB,'')
+    ,LGNUSU = ISNULL(D.LGNUSU,'')
+      FROM TBCADSTA (NOLOCK) A
+     INNER JOIN TBTABGER B (NOLOCK) ON (B.NUMTAB =  7 AND B.KEYCOD = A.STAREC)
+     INNER JOIN TBTABGER C (NOLOCK) ON (C.NUMTAB = 14 AND C.KEYCOD = A.CODMOD)
+      LEFT JOIN TBLGNUSU D (NOLOCK) ON (D.CODUSU = A.UPDUSU  AND D.REGATV = 1)
 
     WHERE     (A.CODSTA=@CODSTA)
 
@@ -63,14 +72,14 @@ IF OBJECT_ID ( 'dbo.PRCADSTAUPD', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 04/03/2022 16:58:39
+     Date : 19/03/2022 14:29:11
  Objetivo : Altera um registro da tabela TBCADSTA (Transaction Status)  de acordo com a chave primaria
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRCADSTAUPD
         (@CODSTA smallint, 
         @DSCSTA varchar(70), 
         @CODMOD tinyint, 
-        @SIGOPE smallint = 0, 
+        @SIGOPE smallint = 1, 
         @NXTSTA int, 
         @CANCHG tinyint = 0, 
         @DELMEN tinyint = 0, 
@@ -111,33 +120,3 @@ CREATE PROCEDURE dbo.PRCADSTAUPD
         END
     RETURN @RETURN_VALUE
 GO
-IF OBJECT_ID ( 'dbo.PRCADSTASELALL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRCADSTASELALL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 04/03/2022 16:58:39
- Objetivo : Seleciona todos os registros de status de transações de acordo com o módulo informado
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRCADSTASELALL
-(
-    @CODMOD Integer=NULL
-)
-AS
-    SET NOCOUNT ON
-    SELECT A.*
-    ,DSCCHG = CASE WHEN (A.CANCHG=1) THEN 'Sim' ELSE 'Não' END
-    ,DSCDEL = CASE WHEN (A.DELMEN=1) THEN 'Sim' ELSE 'Não' END
-    ,DSCREC = ISNULL(B.NUMTAB,'')
-    ,DSCMOD = ISNULL(C.NUMTAB,'')
-    ,LGNUSU = ISNULL(D.LGNUSU,'')
-      FROM TBCADSTA (NOLOCK) A
-     INNER JOIN TBTABGER B (NOLOCK) ON (7 = B.NUMTAB AND A.STAREC = B.KEYCOD)
-     INNER JOIN TBTABGER C (NOLOCK) ON (14 = C.NUMTAB AND A.CODMOD = C.KEYCOD)
-      LEFT JOIN TBLGNUSU D (NOLOCK) ON (D.CODUSU = A.UPDUSU  AND D.REGATV = 1)
-     WHERE       (@CODMOD IS NULL OR A.CODMOD=@CODMOD)
-
-
-
-GO
-

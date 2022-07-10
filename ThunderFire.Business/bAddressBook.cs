@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 04/03/2022 13:37
+///Data        : 22/03/2022 17:13
 ///Alias       : addressbook
 ///Descrição   : Cadasto de Endereços
 ///</remarks>
@@ -268,40 +268,8 @@ _errormessage="";
                     {
             RETURN_VALUE  = _conn.Query<AddressBook>(sql:"PRCADENDSEL", param:new {CODEND=pCODEND
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
-                    this.Found = true;
-                    }
-                    catch (Exception Error)
-                    {
-                    this.HasError = true;
-                    this.Found=false;
-                    _logger.Info(Error);
-            }
-            }
-                    return RETURN_VALUE;
-            }
 
-    /// <summary>
-    /// Obtêm uma lista de todos os endereços de um usuário
-    /// </summary>
-        /// <param name="pCODUSU">Código do Usuário</param>
-    /// <param name="pTIPEND">Tipo de Endereço</param>
-    /// <param name="pREGATV">Registro Ativo</param>
-    /// <param name="pSTAREC">Status de Registro</param>
-    /// <returns>List of QueryAddressBook</returns>
-    public List<QueryAddressBook> List(System.Int32 pCODUSU, System.Int16 pTIPEND= -1, System.Int16 pREGATV= -1, System.Int16 pSTAREC= -1)
-        {
-        this.Found=false;
-            this.ProcessCode= 105;
-    List<QueryAddressBook> RETURN_VALUE=null;
-                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
-                    {
-                    try
-                    {
-            RETURN_VALUE = _conn.Query<QueryAddressBook>(sql:"PRCADENDSELALL", param:new {CODUSU=pCODUSU,
-TIPEND=pTIPEND,
-REGATV=pREGATV,
-STAREC=pSTAREC
-},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)

@@ -25,7 +25,7 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 04/03/2022 13:35
+///Data        : 22/03/2022 16:58
 ///Alias       : contactbook
 ///Descrição   : Tabela de Contatos
 ///</remarks>
@@ -244,6 +244,8 @@ _errormessage="";
                     {
             RETURN_VALUE  = _conn.Query<ContactBook>(sql:"PRCADCTOSEL", param:new {CODCTO=pCODCTO
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
+
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)
@@ -278,6 +280,8 @@ TIPCTO=pTIPCTO,
 REGATV=pREGATV,
 STAREC=pSTAREC
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
+
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)
@@ -347,32 +351,6 @@ string _errormessage="";
         }
         return respond;
     }
-
-    /// <summary>
-    /// Seleciona todos os registros de contato do usuário fornecido
-    /// </summary>
-        /// <param name="pCODUSU">Usuário</param>
-    /// <returns>Listof QueryContactBook</returns>
-    public List<QueryContactBook> List(System.Int32? pCODUSU)
-        {
-            this.ProcessCode= 0;
-                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
-                    {
-                    try
-                    {
-            var result = _conn.Query<QueryContactBook>(sql:"PRCADCTOSELALL", param:new {CODUSU=pCODUSU},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
-                    this.Found = true;
-                    return result.ToList();
-                    }
-                    catch (Exception Error)
-                    {
-                    this.HasError = true;
-                    this.Found=false;
-                    _logger.Info(Error);
-            }
-            }
-                    return null;
-            }
 
     }
 }

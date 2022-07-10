@@ -1,0 +1,84 @@
+﻿@model ThunderFireHomeAdmin.Models.TariffOperationsModel
+@{
+    ViewBag.Title = "Tarifa x Operacoes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="modaltarifaoperacao" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document" style="width:400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-tasks" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FNIDTXM" value="0" />
+                <div class="form-group row">
+                    <label for="CCODTAR" class="col-sm-3 col-form-label" style="text-align:right">Tarifa:</label>
+                    <div class="col">
+                        @Html.DropDownListFor(model => model.FCODTAR, new SelectList(Model.ListaTarifas, "CODTAR", "DSCTAR", Model.FCODTAR), " -- Selecione --", new { @class = "form-control form-control-sm" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="CCODMOV" class="col-sm-3 col-form-label text-right">Operação:</label>
+                    <div class="col">
+                        @Html.DropDownListFor(model => model.FCODMOV, new SelectList(Model.ListaOperacoes, "CODMOV", "DSCMOV", Model.FCODTAR), " -- Selecione --", new { @class = "form-control form-control-sm" })
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label for="FIDEPRE" class="col-sm-3 control-label form-control-sm text-right">Precedência:</label>
+                    <div class="col">
+                        <input type="text" class="form-control form-control-sm" id="FIDEPRE" size="2" maxlength="2" required>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked>
+                    <label class="form-check-label" for="FSTAREC">
+                        Ativo
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="modal-body">
+            <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+            <hr />
+        </div>
+
+        <div class="card-body">
+            <table id="tbtarifaoperacao" class="table-sm table-striped dt-responsive nowrap dataTable js-exportable" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Status</th>
+                        <th>Tarifa</th>
+                        <th>Operação</th>
+                        <th>Ordem</th>
+                        <th>Por</th>
+                        <th>&#160;</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Rules/TarifasOperacoes.js"></script>
+}

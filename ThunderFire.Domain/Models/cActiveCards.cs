@@ -300,6 +300,15 @@ public class QueryActiveCards
         public int ASSUSU{ get;set;}
 
         /// <summary>
+        /// Nome do usuário
+        /// </summary>
+        public string NOMUSU
+        { 
+            get { return _NOMUSU;}
+            set { _NOMUSU= value.ToUpper().NoAccents();}
+        }
+
+        /// <summary>
         /// Nível de Segurança
         /// </summary>
         public byte SECLVL{ get;set;}
@@ -310,9 +319,19 @@ public class QueryActiveCards
         public DateTime? DATATV{ get;set;}
 
         /// <summary>
+        /// Data de Ativação convertida para o formato dd/MM/yyyy
+        /// </summary>
+        public string CNVATV{ get;set;} = "";
+
+        /// <summary>
         /// Data do Cancelamento
         /// </summary>
         public DateTime? DATCAN{ get;set;}
+
+        /// <summary>
+        /// Data de Cancelamento convertida para o formato dd/MM/yyyy
+        /// </summary>
+        public string CNVCAN{ get;set;} = "";
 
         /// <summary>
         /// 0 - Não distribuir a mensalidade para o cartão@1 - Distribuir a mensalidade para o cartão@2 - Mensalidade distribuida@9 - Não existe configuração
@@ -323,6 +342,11 @@ public class QueryActiveCards
         /// Usuário de débito da mensalidade
         /// </summary>
         public int USUMEN{ get;set;}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string DSCTOM{ get;set;} = "";
 
         /// <summary>
         /// Nome do Portador do Cartão
@@ -358,6 +382,11 @@ public class QueryActiveCards
         /// Código do Status do Cartão
         /// </summary>
         public short STACRT{ get;set;}
+
+        /// <summary>
+        /// Descrição do Status
+        /// </summary>
+        public string DSCSTA{ get;set;} = "";
 
         /// <summary>
         /// Parte 1 do Nome do Portador
@@ -457,19 +486,14 @@ public class QueryActiveCards
         public byte STAREC{ get;set;}
 
         /// <summary>
+        /// Descrição do Status de Registro
+        /// </summary>
+        public string DSCREC{ get;set;} = "";
+
+        /// <summary>
         /// Data de Inclusão ou cadastramento
         /// </summary>
         public DateTime DATCAD{ get;set;}
-
-        /// <summary>
-        /// Data da Ultima Atualização
-        /// </summary>
-        public DateTime DATUPD{ get;set;}
-
-        /// <summary>
-        /// Usuário de Atualização
-        /// </summary>
-        public int UPDUSU{ get;set;}
 
         /// <summary>
         /// Data de Cadastro convertida para o formato dd/MM/yyyy HH:mm
@@ -477,43 +501,19 @@ public class QueryActiveCards
         public string CNVCAD{ get;set;} = "";
 
         /// <summary>
+        /// Data da Ultima Atualização
+        /// </summary>
+        public DateTime DATUPD{ get;set;}
+
+        /// <summary>
         /// Data de Atualização convertida para o formato dd/MM/yyyy HH:mm
         /// </summary>
         public string CNVUPD{ get;set;} = "";
 
         /// <summary>
-        /// Data de Ativação convertida para o formato dd/MM/yyyy
+        /// Usuário de Atualização
         /// </summary>
-        public string CNVATV{ get;set;} = "";
-
-        /// <summary>
-        /// Data de Cancelamento convertida para o formato dd/MM/yyyy
-        /// </summary>
-        public string CNVCAN{ get;set;} = "";
-
-        /// <summary>
-        /// Nome do usuário
-        /// </summary>
-        public string NOMUSU
-        { 
-            get { return _NOMUSU;}
-            set { _NOMUSU= value.ToUpper().NoAccents();}
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string DSCTOM{ get;set;} = "";
-
-        /// <summary>
-        /// Descrição do Status de Registro
-        /// </summary>
-        public string DSCREC{ get;set;} = "";
-
-        /// <summary>
-        /// Descrição do Status
-        /// </summary>
-        public string DSCSTA{ get;set;} = "";
+        public int UPDUSU{ get;set;}
 
         /// <summary>
         /// Identificação da Chave de Login do Usuário
@@ -521,8 +521,13 @@ public class QueryActiveCards
         public string LGNUSU{ get;set;} = "";
 
         /// <summary>
+        /// Descrição do Produto
+        /// </summary>
+        public string DSCPRO{ get;set;} = "";
+
+        /// <summary>
         /// 
         /// </summary>
-        public string NOMPRO{ get;set;} = "";
+        public int QTDMEN{ get;set;}
 
 }}

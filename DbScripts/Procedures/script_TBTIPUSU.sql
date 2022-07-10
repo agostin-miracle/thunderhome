@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRTIPUSUINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 21/02/2022 18:21:16
+     Date : 19/03/2022 10:58:01
  Objetivo : Inserção de Registros na Tabela TBTIPUSU
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPUSUINS
@@ -41,7 +41,7 @@ IF OBJECT_ID ( 'dbo.PRTIPUSUSEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 21/02/2022 18:21:16
+     Date : 19/03/2022 10:58:01
  Objetivo : Obtêm o registro do Tipo de Usuário fornecido
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPUSUSEL
@@ -56,28 +56,12 @@ AS
 
 GO
 
-IF OBJECT_ID ( 'dbo.PRTIPUSUSELALL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRTIPUSUSELALL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 21/02/2022 18:21:16
- Objetivo : Obtêm todos os registros de Tipo de Usuário
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRTIPUSUSELALL
-AS
-    SET NOCOUNT ON
-    SELECT * FROM TBTIPUSU (NOLOCK) A
-
-     ORDER BY A.TIPUSU
-GO
-
 IF OBJECT_ID ( 'dbo.PRTIPUSUUPD', 'P' ) IS NOT NULL
     DROP PROCEDURE dbo.PRTIPUSUUPD;
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 21/02/2022 18:21:16
+     Date : 19/03/2022 10:58:01
  Objetivo : Altera um registro da tabela TBTIPUSU ()  de acordo com a chave primaria
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRTIPUSUUPD
@@ -91,9 +75,9 @@ CREATE PROCEDURE dbo.PRTIPUSUUPD
     SET NOCOUNT ON
     SET @RETURN_VALUE = 0
     SET @DATUPD=GETDATE();
-           
+    
             IF(ISNULL(@DSCTUS,'')='')
-               SET @RETURN_VALUE=-3;
+            SET @RETURN_VALUE=-3;
 
     IF(@RETURN_VALUE=0)
         BEGIN

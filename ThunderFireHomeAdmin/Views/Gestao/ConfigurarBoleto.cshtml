@@ -1,0 +1,346 @@
+﻿@model ThunderFireHomeAdmin.Models.BilletConfigurationModel
+@{
+    ViewBag.Title = "Configurar Boletos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="modalconfigurarboleto" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-table" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <input type="hidden" id="FNIDCBL" value="0" />
+                <input type="hidden" id="FNIVCFG" value="-1" />
+                <input type="hidden" id="PUSUCFG" value="-1" />
+                <div class="form-row">
+                    <label for="FUSUCFG" class="col-sm-2 col-form-label">Usuário</label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.FUSUCFG, new SelectList(Model.ListaUsuarios, "CODUSU", "NOMUSU", Model.FUSUCFG), new { @class = "form-control form-control-sm" })
+                    </div>
+                    <label for="CTIPBOL" class="col-sm-2 col-form-label">Tipo de Boleto:</label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.FTIPBOL, new SelectList(Model.ListaTipoBoletos, "KEYCOD", "DSCTAB", Model.FTIPBOL), new { @class = "form-control form-control-sm" })
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="FAPLTAR" class="col-sm-2 col-form-label">Calcular Tarifa:</label>
+                    <div class="col-sm-4 text-left">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="FAPLTAR">
+                        </div>
+                    </div>
+
+                    <label for="FCODTAR" class="col-sm-2 col-form-label">Tarifa:</label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.FCODTAR, new SelectList(Model.ListaTarifas, "CODTAR", "DSCTAR", Model.FCODTAR), new { @class = "form-control form-control-sm" })
+                    </div>
+                </div>
+                <div class="form-row">
+
+                    <label for="FAPLTDP" class="col-sm-2 col-form-label">Calcular TDP:</label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.FAPLTDP, new SelectList(Model.ListaTaxaDepositante, "KEYCOD", "DSCTAB", Model.FAPLTDP), new { @class = "form-control form-control-sm" })
+                    </div>
+                    <label for="FTARTDP" class="col-sm-2 col-form-label">Tarifa:</label>
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.FTARTDP, new SelectList(Model.ListaTarifas, "CODTAR", "DSCTAR", Model.FTARTDP), new { @class = "form-control form-control-sm" })
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+                    <label for="FINSBC1" class="col-sm-2 control-label form-control-sm">Instrução #1:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FINSBC1" size="30" maxlength="30" required>
+                    </div>
+                    <label for="FINSBC2" class="col-sm-2 control-label form-control-sm">Instrução #2:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FINSBC2" size="30" maxlength="30" required>
+                    </div>
+                    <label for="FINSBC3" class="col-sm-2 control-label form-control-sm">Instrução #3:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FINSBC3" size="30" maxlength="30" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label for="FTIPEXT" class="col-sm-2 control-label form-control-sm">Tipo Externo:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FTIPEXT" size="2" maxlength="2" required>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="FSTAREC" checked>
+                            <label class="form-check-label" for="FSTAREC">Ativo</label>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="CUSUCFG" class="col-sm-2 col-form-label">Gestor</label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(model => model.CUSUCFG, new SelectList(Model.ListaUsuarios.OrderBy(x => x.CODUSU), "CODUSU", "NOMUSU", Model.CUSUCFG), new { @class = "form-control form-control-sm" })
+                </div>
+            </div>
+
+            <hr />
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+
+            <table id="tbconfigboleto" class="table-sm table-striped table-bordered dt-responsive nowrap dataTable js-exportable" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Status</th>
+                        <th>Cliente</th>
+                        <th>Boleto</th>
+                        <th>Tarifa</th>
+                        <th>Tx. Deposit.</th>
+                        <th>Por</th>
+                        <th>&#160;</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+@section scripts{
+    <script>
+        var TbDetalhe = null;
+
+        $(document).ready(function () {
+
+            $(document).on('change', '#CUSUCFG', function () {
+                $('#tbconfigboleto').DataTable().ajax.reload();
+            });
+
+            $(document).on("click", "#btn_update", function () {
+                var mode = $("#OPERATION").val();
+                var VDATA = JSON.stringify({
+                    'NIDCBL': parseInt($("#FNIDCBL").val()),
+                    'USUCFG': parseInt($("#FUSUCFG").val()),
+                    'NIVCFG': parseInt($("#FNIVCFG").val()),
+                    'TIPBOL': parseInt($("#FTIPBOL").val()),
+                    'APLTAR': $("#FAPLTAR").is(':checked') ? 1 : 0,
+                    'CODTAR': parseInt($("#FCODTAR").val()),
+                    'TIPEXT': $("#FTIPEXT").val(),
+                    'INSBC1': $("#FINSBC1").val(),
+                    'INSBC2': $("#FINSBC2").val(),
+                    'INSBC3': $("#FINSBC3").val(),
+                    'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0,
+                    'APLTDP': parseInt($("#FAPLTDP").val()),
+                    'TARTDP': parseInt($("#FTARTDP").val())
+                });
+                $.ajax({
+                    type: "POST",
+                    url: GetUrl("Gestao/AtualizarConfiguracaoBoleto?modo=" + mode),
+                    data: VDATA,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function () { },
+                    success: function (result) {
+                        $.alert({ class: 'sucess', title: 'Configuração de Boleto', message: result.MessageToUser, effect: 'zoom' });
+                    },
+                    error: function (data) {
+                        $.alert({ class: 'danger', title: 'Configuração de Boleto', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                    }
+                });
+            });
+
+            $('#FAPLTDP').on('change', function () {
+                var value = $('#FAPLTDP').val();
+                if (value == 0) {
+                    $("#FTARTDP").val("0");
+                    $("#FTARTDP").prop("disabled", true);
+                }
+            });
+            $('#FAPLTAR').on('change', function () {
+                var value = $("#FAPLTAR").is(':checked') ? 1 : 0;
+                if (value == 0) {
+                    $("#FCODTAR").val("0");
+                    $("#FCODTAR").prop("disabled", true);
+                }
+            });
+
+            $('#modalconfigurarboleto').on('hide.bs.modal', function () {
+                location.href = GetUrl('Gestao/ConfigurarBoleto?qnivcfg=' +@Model.PNIVCFG  + '&qusucfg=' + $('#PUSUCFG').val());
+            });
+
+
+            AtualizaDetalhe();
+
+        });
+
+        function AtualizaDetalhe() {
+            try {
+                if (TbDetalhe == null) {
+                    TbDetalhe = $('#tbconfigboleto').DataTable(
+                        {
+                            paging: true,
+                            searching: false,
+                            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                            processing: true,
+                            serverSide: true,
+                            orderMulti: false,
+                            responsive: true,
+                            ajax: {
+                                url: GetUrl("Gestao/PesquisarConfiguracaoBoleto"),
+                                type: "POST",
+                                datatype: "json",
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                                data: {
+                                    pNIVCFG: @Model.PNIVCFG,
+                                    pUSUCFG: function () {
+                                        var InputVal = $('#CUSUCFG').val();
+                                        if (InputVal > 0)
+                                            return InputVal;
+                                        else
+                                            return 0;
+                                    }
+                                }
+                            },
+                            columns: [
+                                { data: "NIDCBL" },
+                                { data: "DSCREC" },
+                                { data: "NOMUSU" },
+                                { data: "DSCTBL" },
+                                {
+                                    
+                                    "render": function (data, type, row) {
+                                        var vDSCTAR = '';
+                                        if (row.APLTAR == 1)
+                                            vDSCTAR = "S";
+                                        else
+                                            vDSCTAR = "N";
+                                        if (row.vDSCTAR != '')
+                                            vDSCTAR += ' - ' + row.DSCTAR;
+                                        return vDSCTAR;
+                                    }
+                                },
+                                {
+                                    "render": function (data, type, row) {
+                                        return row.APLTDP.toString() + ' - ' + row.DSCTDP;
+                                    }
+                                },
+                                { data: "LGNUSU" },
+                                {
+                                    "render": function (data, type, row) {
+                                        return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit(" + row.NIDCBL + ");\"> <i class='fas fa-edit'></i></button>&nbsp;"
+                                    }
+                                }
+                            ],
+                            "language": {
+                                "processing": "Aguarde, buscando informações",
+                                "loadingRecords": "Carregando",
+                            },
+                            "pageLength": 10,
+                            "oLanguage": {
+                                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                                "sZeroRecords": "Nenhum registro encontrado",
+                                "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                                "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                                "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                                "sSearch": "Pesquisar: "
+                            },
+                            columnDefs: [
+                                { "targets": [0], "visible": false, "searchable": false },
+                                { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "2%" },
+                                { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "2%" },
+                                { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "4%" },
+                                { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "4%" },
+                                { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "4%" },
+                                { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "2%" },
+                                { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "2%" }
+                            ]
+                        });
+                }
+                else {
+                    TbDetalhe.DataTable().ajax.reload();
+                }
+            }
+            catch (e) {
+
+            }
+        }
+
+
+        function CallForAdd() {
+            var value = $("#CUSUCFG").val();
+            if (value >= 0) {
+                $("#OPERATION").val("1");
+
+                $("#FNIVCFG").val("@Model.PNIVCFG");
+                $("#FSTAREC").prop('checked', "true");
+                $("#FNIDCBL").val("0");
+                $("#FUSUCFG").val($("#CUSUCFG").val());
+                $("#PUSUCFG").val($("#CUSUCFG").val());
+                $("#FUSUCFG").prop("disabled", true);
+                $('#modalconfigurarboleto').modal({ backdrop: 'static', Keyboard: 'true' });
+                $('#modalconfigurarboleto').modal('toggle');
+            }
+            else
+                $.alert({ class: 'danger', title: 'Configuração de Boleto', message: 'Selecione um usuário válido', effect: 'zoom' });
+        }
+
+        function CallForEdit(pNIDCBL) {
+            $("#OPERATION").val("2");
+            $("#FNIVCFG").val("@Model.PNIVCFG");
+            $.ajax({
+                type: "GET",
+                url: GetUrl("gestao/SelecionarConfiguracaoBoleto"),
+                data: { pNIDCBL: pNIDCBL },
+                dataType: 'json',
+                success: function (result) {
+                    $("#FNIDCBL").val(result.NIDCBL);
+                    $("#FUSUCFG").val(result.USUCFG);
+                    $("#FUSUCFG").prop("disabled", true);
+                    $("#FTIPBOL").val(result.TIPBOL);
+                    $("#FTIPEXT").val(result.TIPEXT);
+                    $("#FINSBC1").val(result.INSBC1);
+                    $("#FINSBC2").val(result.INSBC2);
+                    $("#FINSBC3").val(result.INSBC3);
+                    $("#FAPLTDP").val(result.APLTDP);
+                    $("#FTARTDP").val(result.TARTDP);
+                    $("#FCODTAR").val(result.CODTAR);
+                    $("#FSTAREC").prop('checked', (result.STAREC == 1));
+                    $("#FAPLTAR").prop('checked', (result.APLTAR == 1));
+                    $("#PUSUCFG").val(result.USUCFG);
+                }
+            });
+            $('#modalconfigurarboleto').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalconfigurarboleto').modal('toggle');
+        }
+    </script>
+}

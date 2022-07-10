@@ -18,10 +18,18 @@ namespace DbScripts
     class Program
     {
         private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         static void Main(string[] args)
         {
-
-
+            ////IDbConnection _conn = ThunderFire.Connector.ConnectionFactory.GetConnection();
+            ////string _sql = @"SELECT dbo.GetLoginName(@NOMUSU)";
+            ////int Z = -1;
+            ////var RETURN_VALUE = _conn.Query<string>(sql: _sql, param: new
+            ////{
+            ////    NOMUSU = "CLAUDIA DEMETRIO DE OLIVEIRA FRANCISCO"
+            ////}, commandType: CommandType.Text, commandTimeout: 120).FirstOrDefault();
+            ////if (RETURN_VALUE != null)
+            ////    Z = 0;
             var _r1 = ComposeSystemFeatures();
             var _r2 = ComposeTable299();
 
@@ -85,7 +93,7 @@ namespace DbScripts
 
 
             //TruncateTables();
-            GeneralRegistry model = new GeneralRegistry();
+            Users model = new Users();
             model.ATRPPE = false;
             model.CODATR = 2;
             model.CODCMF = "05866457807";
@@ -104,7 +112,7 @@ namespace DbScripts
             model.TIPUSU = 1;
             model.UPDUSU = 0;
 
-            GeneralRegistryDao obj = new GeneralRegistryDao();
+            UsersDao obj = new UsersDao();
 
             //var retorno = obj.Insert(model);
 
@@ -233,8 +241,6 @@ namespace DbScripts
                     string _systbl = nodes[i].SelectSingleNode("@id").Value;
                     string _sysdsc = nodes[i].SelectSingleNode("@text").Value;
                     sql += String.Format("INSERT INTO TBTABGER (NUMTAB, KEYCOD, DSCTAB) VALUES ({0}, {1},'{2}');", 299, _systbl, _sysdsc) + Environment.NewLine;
-
-
                 }
             }
             return sql;

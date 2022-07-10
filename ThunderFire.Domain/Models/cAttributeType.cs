@@ -32,6 +32,11 @@ namespace ThunderFire.Domain.Models
         public bool USEACT{ get;set;} = false;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool USETAR{ get;set;} = false;
+
+        /// <summary>
         /// Código do Status de Registro
         /// </summary>
         /// <remarks>

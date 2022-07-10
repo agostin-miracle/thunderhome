@@ -2317,5 +2317,20 @@
     <description></description>
     <severity>ERROR</severity>
   </code>
+  <code number="10484" id="APPROVALEXENOTALLOWED">
+    <message>O USUÁRIO/CLIENTE NAO ESTA AUTORIZADO A UTILIZAR O RECURSO</message>
+    <description>O Usuário/Grupo não possui definição de acesso e execução para o recurso solicitado</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10485" id="APRROVALEXEMULTIDEFS">
+    <message>O USUÁRIO/CLIENTE POSSUI CONFIGURAÇÕES EM EXCESSO</message>
+    <description>O Usuário/Grupo possui mais de uma definição de acesso e execução para o recurso solicitado</description>
+    <severity>ERROR</severity>
+  </code>
+  <code number="10486" id="AUTHORIZATIONPAYMENTUSED">
+    <message>O CÓDIGO DE AUTORIZAÇÃO DE PAGAMENTO JÁ FOI UTILIZADO</message>
+    <description>Tenttiva de uso de uma autorização de pagamento mais de uma vez</description>
+    <severity>ERROR</severity>
+  </code>
 
 </messages>

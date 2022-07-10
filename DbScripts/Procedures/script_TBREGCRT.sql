@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTINS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:54
+     Date : 18/03/2022 16:45:34
  Objetivo : Inserção de Registros na Tabela TBREGCRT
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTINS
@@ -14,8 +14,8 @@ CREATE PROCEDURE dbo.PRREGCRTINS
         @ORGATV tinyint = 0, 
         @ASSUSU int = 0, 
         @SECLVL tinyint = 3, 
-        @DATATV date = null, 
-        @DATCAN date = null, 
+        @DATATV datetime = null, 
+        @DATCAN datetime = null, 
         @CALMEN tinyint = 0, 
         @USUMEN int = 0, 
         @NOMPRT varchar(70), 
@@ -66,7 +66,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTSEL', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Seleciona o registro de acordo com o Código do Cartão
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTSEL
@@ -86,7 +86,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTSELCRT', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Seleciona o registro de acordo com o Código Extendido do Cartão
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTSELCRT
@@ -106,7 +106,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTUPD', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Altera um registro da tabela TBREGCRT (Active Cards)  de acordo com a chave primaria
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTUPD
@@ -117,8 +117,8 @@ CREATE PROCEDURE dbo.PRREGCRTUPD
         @ORGATV tinyint = 0, 
         @ASSUSU int = 0, 
         @SECLVL tinyint = 3, 
-        @DATATV date = null, 
-        @DATCAN date = null, 
+        @DATATV datetime = null, 
+        @DATCAN datetime = null, 
         @CALMEN tinyint = 0, 
         @USUMEN int = 0, 
         @NOMPRT varchar(70), 
@@ -200,68 +200,12 @@ CREATE PROCEDURE dbo.PRREGCRTUPD
         END
     RETURN @RETURN_VALUE
 GO
-IF OBJECT_ID ( 'dbo.PRREGCRTSELALL', 'P' ) IS NOT NULL
-    DROP PROCEDURE dbo.PRREGCRTSELALL;
-GO
-/* ===================================================================================================
-   Author : Agostin
-     Date : 07/03/2022 18:52:55
- Objetivo : Obtêm uma lista de todos os cartões da base ativa conforme parâmetros de pesquisa informados
- ==================================================================================================== */
-CREATE PROCEDURE dbo.PRREGCRTSELALL
-(
-    @USUPRO Integer=NULL,
-    @STACRT smallint=NULL,
-    @NUMCRT varchar(16)=NULL,
-    @NOMPRT varchar(100)=NULL
-)
-AS
-    SET NOCOUNT ON
-    IF(@NUMCRT = '')
-        SET @NUMCRT = NULL
-    IF(@NUMCRT IS NOT NULL)
-        SET @NUMCRT = '%' +  RTRIM(@NUMCRT) +'%';
-    IF(@NOMPRT = '')
-        SET @NOMPRT = NULL
-    IF(@NOMPRT IS NOT NULL)
-        SET @NOMPRT = '%' +  RTRIM(@NOMPRT) +'%';
-    SELECT A.* 
-          ,CNVCAD = FORMAT(A.DATCAD, 'dd/MM/yyyy HH:mm')
-          ,CNVUPD = FORMAT(A.DATUPD, 'dd/MM/yyyy HH:mm')    
-          ,CNVATV = ISNULL(FORMAT(A.DATATV, 'dd/MM/yyyy'),'')    
-          ,CNVCAN = ISNULL(FORMAT(A.DATCAN, 'dd/MM/yyyy'),'')          
-          ,ISNULL(B.NOMUSU,'') AS NOMUSU
-          ,ISNULL(C.NOMUSU,'') AS DSCTOM
-          ,ISNULL(E.DSCTAB,'') AS DSCREC
-          ,ISNULL(D.DSCSTA,'') AS DSCSTA
-          ,LGNUSU = ISNULL(F.LGNUSU,'')
-          ,DSCPRO = ISNULL(I.DSCPRO,'')
-      FROM TBREGCRT (NOLOCK) A
-     INNER JOIN TBCADGER (NOLOCK) B ON (A.ASSUSU = B.CODUSU)
-      LEFT JOIN TBCADGER (NOLOCK) C ON (A.USUMEN = C.CODUSU)
-     INNER JOIN TBCADSTA (NOLOCK) D ON (A.STACRT = D.CODSTA)
-     INNER JOIN TBTABGER (NOLOCK) E ON (E.NUMTAB = 7 AND E.KEYCOD = A.STAREC)
-      LEFT JOIN TBLGNUSU (NOLOCK) F ON (F.CODUSU = A.UPDUSU AND F.REGATV=1)
-     INNER JOIN TBUSUPRO (NOLOCK) G ON (G.USUPRO = A.USUPRO)  
-     INNER JOIN TBCADGER (NOLOCK) H ON (H.CODUSU = G.CODUSU)   
-     INNER JOIN TBCADPRO (NOLOCK) I ON (I.CODPRO = G.CODPRO)    
-     WHERE A.CODCRT>0
- AND       (@USUPRO IS NULL OR A.USUPRO=@USUPRO)
-       AND (@STACRT IS NULL OR A.STACRT=@STACRT)
-       AND (@NUMCRT IS NULL OR A.NUMCRT LIKE @NUMCRT)
-       AND (@NOMPRT IS NULL OR A.NOMPRT LIKE @NOMPRT)
-     ORDER BY A.NUMCRT
-
-
-
-GO
-
 IF OBJECT_ID ( 'dbo.PRREGCRTCHGONLPAR', 'P' ) IS NOT NULL
     DROP PROCEDURE dbo.PRREGCRTCHGONLPAR;
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Altera o campo de permissão de compra on-line
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTCHGONLPAR
@@ -290,7 +234,8 @@ AS
           IF(@@ERROR=0)
               BEGIN
                   INSERT INTO TBAUDDAT ( UPDUSU,    AUDDAT, AUDKEY, AUDIDR,   AUDIMS,                AUDOBJ, AUDSRC,  AUDCHG) 
-                                VALUES (@UPDUSU, GETDATE(),     14, @CODCRT,       0, OBJECT_NAME(@@PROCID),     '', @AUDCHG)        
+                                VALUES (@UPDUSU, GETDATE(),     14, @CODCRT,       0, OBJECT_NAME(@@PROCID),     '', @AUDCHG);        
+                  SET @RETURN_VALUE=1;
               END
     	END
     ELSE
@@ -304,7 +249,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTCHGSAQPAR', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Altera o campo de permissão de saque
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTCHGSAQPAR
@@ -326,13 +271,14 @@ AS
     IF(EXISTS(SELECT 1 FROM TBREGCRT (NOLOCK) WHERE CODCRT = @CODCRT AND @RETURN_VALUE=0))
        BEGIN
           SET @AUDCHG = N'DESATIVOU O CARTAO PARA SAQUE'    
-          IF(@APLCON = 1)
+          IF(@APLSAQ = 1)
             SET @AUDCHG = N'ATIVOU O CARTAO PARA SAQUE' 
           UPDATE TBREGCRT SET APLSAQ = @APLSAQ, DATUPD = GETDATE(), UPDUSU = @UPDUSU WHERE CODCRT = @CODCRT
           IF(@@ERROR=0)
               BEGIN
                   INSERT INTO TBAUDDAT ( UPDUSU,    AUDDAT, AUDKEY, AUDIDR,   AUDIMS,                AUDOBJ, AUDSRC,  AUDCHG) 
                                 VALUES (@UPDUSU, GETDATE(),     14, @CODCRT,       0, OBJECT_NAME(@@PROCID),     '', @AUDCHG)        
+                  SET @RETURN_VALUE=1;                            
               END
     	END
     ELSE
@@ -346,7 +292,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTCHGOWN', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Altera o Gestor do Cartão em uso
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTCHGOWN
@@ -414,7 +360,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTCHGMEN', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Executa Ações de Atualização pela manutenção do Cartão
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTCHGMEN
@@ -422,7 +368,6 @@ CREATE PROCEDURE dbo.PRREGCRTCHGMEN
     @CODCRT Integer,
     @UPDUSU Integer,
     @CODACT Tinyint
-    ,@RETURN_VALUE INT OUTPUT
 )
 AS
     SET NOCOUNT ON
@@ -430,16 +375,30 @@ AS
     SET @RETURN_VALUE = 0
     IF(@UPDUSU<=0)
        SET @RETURN_VALUE=-1
-     	  BEGIN
-    			UPDATE TBCTRMEN 
-             SET STAREC = CASE WHEN (@CODACT=1) THEN 1 ELSE 13 END, 
-                 STAMEN = CASE WHEN (@CODACT=1) THEN 261 ELSE 267 END,  
-                 UPDUSU = @UPDUSU,
-                 DATUPD = GETDATE() 
-            WHERE CODCRT=@CODCRT AND STAREC NOT IN (0,9) AND STAMEN IN (SELECT CODSTA FROM TBCADSTA WHERE STAREC=1 AND CANCHG=1)
-    			SET @RETURN_VALUE = @@ROWCOUNT
-    		END
-    	RETURN @RETURN_VALUE
+    
+     IF(@CODACT=1 AND @RETURN_VALUE=0)
+        BEGIN
+            UPDATE TBREGMEN SET STAREC =1, UPDUSU = @UPDUSU,  DATUPD = GETDATE(),SRCCAN=0 
+             WHERE STAREC = 13
+               AND STAMEN = 261 
+               AND TIPMEN=  1         // Mensalidade cartão
+               AND MODREG=  1         // Provisao
+               AND BXAREG = 0         // Registro nao baixado 
+    				   AND CODREF = @CODCRT	  // Referencias do Cartão
+               AND SRCCAN = 1
+        END
+    IF(@CODACT=3 AND @RETURN_VALUE=0)
+        BEGIN
+            UPDATE TBREGMEN SET STAREC =13, UPDUSU = @UPDUSU,  DATUPD = GETDATE() 
+             WHERE STAREC = 1
+               AND STAMEN = 261 
+               AND TIPMEN=  1         // Mensalidade cartão
+               AND MODREG=  1         // Provisao
+               AND BXAREG = 0         // Registro nao baixado 
+    				   AND CODREF = @CODCRT	  // Referencias do Cartão
+               AND SRCCAN = 0
+        END
+    RETURN @RETURN_VALUE
 
 GO
 
@@ -448,7 +407,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTGETATV', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Verifica se o cartão e o CPF/CNPJ informado são passíveis de ativação
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTGETATV
@@ -498,7 +457,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTLCKCRT', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Operação@1 -Bloqueia o Cartão@2 - Reverte o Bloqueio Anterior@3 -Fixa o cartão como aguardando desbloqueio
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTLCKCRT
@@ -571,7 +530,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTCHGSTA', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Altera o Status de um Cartão
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTCHGSTA
@@ -601,18 +560,16 @@ AS
     		    SET @RETURN_VALUE=-2
       END
     
-    IF(@RETURN_VALUE=0)
-      BEGIN
-          SELECT @DELMEN = ISNULL(DELMEN,-1) FROM TBCADSTA (NOLOCK) WHERE CODSTA = @STACRT AND STAREC=1  
-      END
-    
-    SELECT @OLDSTA = CONVERT(VARCHAR(10),ISNULL(STACRT,0))
+    SELECT @OLDSTA = STACRT
           ,@STAANT = ISNULL(STAPRO,0)
           ,@CODUSU=ASSUSU 
       FROM TBREGCRT (NOLOCK) 
      WHERE CODCRT =@CODCRT  
-            
-    IF(@RETURN_VALUE=0)
+    
+    IF(@OLDSTA = @STACRT)
+      SET @RETURN_VALUE = -4
+      
+    IF(@RETURN_VALUE=0 AND (@RETURN_VALUE=0))
     		BEGIN         
         	  UPDATE TBREGCRT 
         		   SET STAPRO = STACRT,
@@ -624,26 +581,14 @@ AS
       		         DATCAN = CASE WHEN @DELMEN=1 THEN GETDATE() ELSE DATCAN END
         	   WHERE CODCRT = @CODCRT AND STAREC = 1 AND STACRT<>@STACRT
                
-            IF(@@ERROR=0)
+            IF(@@ERROR=0 AND @@ROWCOUNT>0)
                 BEGIN
-                
-                    IF(@CODUSU>0 AND @STACRT=109)
-                        BEGIN
-                            UPDATE TBCADUSU SET STAUSU = 61, STAREC=1, UPDUSU = @UPDUSU, DATUPD = GETDATE() WHERE CODUSU = @CODUSU AND STAUSU <>61
-                            UPDATE TBCADCTA SET STACTA = 250,STAREC=1,UPDUSU=@UPDUSU,DATUPD=GETDATE() WHERE CODUSU=@CODUSU AND ORGCTA=1 AND STACTA<>250                   
-                        END
-                    IF(@DELMEN=1)
-                       UPDATE TBCTRMEN SET STAMEN =269, STAREC =13, UPDUSU=@UPDUSU, DATUPD=GETDATE() WHERE STAMEN IN (SELECT CODSTA FROM TBCADSTA WHERE CANCHG=1)
-    
-    
-                SET @RETURN_VALUE=1        
-                DECLARE @AUDSRC VARCHAR(100) = N'STATUS DO CARTAO ' + @OLDSTA
-                DECLARE @AUDCHG VARCHAR(100) = N'STATUS DO CARTAO ' + CONVERT(VARCHAR(10),@STACRT) 
-                INSERT INTO TBAUDDAT ( UPDUSU,    AUDDAT, AUDKEY, AUDIDR,   AUDIMS,                AUDOBJ, AUDSRC, AUDCHG) 
-                              VALUES (@UPDUSU, GETDATE(),     14, @CODCRT,     104, OBJECT_NAME(@@PROCID),@AUDSRC, @AUDCHG)        
-    
-                    SET @RETURN_VALUE=1                                          
-                END
+                  SET @RETURN_VALUE=1                                                  
+                  DECLARE @AUDSRC VARCHAR(100) = N'STATUS DO CARTAO ' + CONVERT(VARCHAR,@OLDSTA)
+                  DECLARE @AUDCHG VARCHAR(100) = N'STATUS DO CARTAO ' + CONVERT(VARCHAR(10),@STACRT) 
+                  INSERT INTO TBAUDDAT ( UPDUSU,    AUDDAT, AUDKEY, AUDIDR,   AUDIMS,                AUDOBJ, AUDSRC, AUDCHG) 
+                                VALUES (@UPDUSU, GETDATE(),     14, @CODCRT,     104, OBJECT_NAME(@@PROCID),@AUDSRC, @AUDCHG)        
+               END                            
           END        
     RETURN @RETURN_VALUE
 
@@ -654,7 +599,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTCHGPSW', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Efetua a alteração da senha do cartão
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTCHGPSW
@@ -700,7 +645,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTCHGCVC', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Efetua a alteração do número o CVC do Cartão
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTCHGCVC
@@ -753,7 +698,7 @@ IF OBJECT_ID ( 'dbo.PRREGCRTCHGASS', 'P' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Cancela a associação de um cartão
  ==================================================================================================== */
 CREATE PROCEDURE dbo.PRREGCRTCHGASS
@@ -766,10 +711,10 @@ AS
     SET NOCOUNT ON
 
     SET @RETURN_VALUE=0
-    DECLARE @STAOLD SMALINT
+    DECLARE @STAOLD SMALLINT
     IF(EXISTS (SELECT 1 FROM TBREGCRT WHERE CODCRT =@CODCRT AND ASSUSU>0 AND STACRT<>101))
       BEGIN
-        SELECT @STAOLD = STACRT FROM TBREGCRT WHERE CODCRT=@CODCRT
+        SELECT @STAOLD = STACRT FROM TBREGCRT (NOLOCK) WHERE CODCRT=@CODCRT
         UPDATE TBREGCRT 
            SET NOMPRT='',
                NOMCR1='',

@@ -3,11 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ThunderFire.Domain.DTO;
+using ThunderFire.Domain.Models;
 
 namespace ThunderFire.Domain
 {
+    public enum MODULOS
+    {
+        BOLETOS = 1,
+        CADASTRO_GERAL = 4,
+        CONTAS = 7,
+        CARTOES = 5,
+        MENSALIDADES = 10,
+        POS = 9
+    }
+    public enum ATRIBUTOS
+    {
+        EMPRESA = 1,
+        USUARIOS = 2,
+        GESTORES = 3,
+        CLIENTES = 4,
+        FORNECEDORES = 5,
+        SACADOS = 6
+    }
+
+    
+
     public class Constants
     {
+
+
+        public const short PRODUTO_BOLETO = 4;
 
         #region ** LOGIN **
 
@@ -32,22 +58,10 @@ namespace ThunderFire.Domain
 
         #region ** ATRIBUTOS **
 
-        public const int ATRIBUTO_EMPRESA = 1;
-        public const int ATRIBUTO_USUARIOS = 2;
-        public const int ATRIBUTO_GESTORES = 3;
-        public const int ATRIBUTO_CLIENTES = 4;
-        public const int ATRIBUTO_FORNECEDORES = 5;
-        public const int ATRIBUTO_SACADOS = 6;
 
         #endregion
 
-        #region ** MODULOS **
-        public const int MODULO_CADASTRO_GERAL = 1;
-        public const int MODULO_CONTAS= 7;
-        public const int MODULO_CARTOES = 5;
-        public const int MODULO_MENSALIDADES = 10;
-        public const int MODULO_POS = 9;
-        #endregion ** MODULOS **
+
         #region ** TABELAS INTERNAS **
 
         public const int TABELA_PAISES = 1;
@@ -55,18 +69,28 @@ namespace ThunderFire.Domain
         public const int TABELA_PROXIMOS_NUMEROS = 6;
         public const int TABELA_STATUS_REGISTRO = 7;
         public const int TABELA_TIPO_PESSOA = 8;
+        public const int TABELA_SINAL_OPERACAO = 10;
         public const int TABELA_BANCOS = 12;
         public const int TABELA_GENERO = 13;
         public const int TABELA_MODULOS = 14;
+        public const int TABELA_TIPOS_BOLETO = 16;
         public const int TABELA_TIPO_BENEFICIARIO = 20;
         public const int TABELA_ORIGEM_CONTA = 23;
+        public const int TABELA_FORMA_COBRANCA = 30;
+        public const int TABELA_OPERACOES_POS = 44;
         public const int TABELA_OPERADORAS_TELEFONIA = 45;
+        public const int TABELA_TIPO_MENSALIDADE = 50;
         public const int TABELA_NIVEL_CONFIANCA = 54;
+        public const int TABELA_BANDEIRAS = 63;
         public const int TABELA_TIPO_LOGON = 65;
-        public const int TABELA_ESTADO_CIVIL= 76;
+        public const int TABELA_ESTADO_CIVIL = 76;
         public const int TABELA_NACIONALIDADES = 80;
         public const int TABELA_LOGRADOUROS = 81;
+        public const int TABELA_REGRAS_EXPANSAO_TARIFAS = 94;
+        public const int TABELA_RESPONSAVEL_TARIFA = 105;
+        public const int TABELA_NIVEL_APL_EXPANSAO_TARIFAS = 921;
         public const int TABELA_INTERNAS = 299;
+        public const int TABELA_NIVEL_CONFIGURACAO_USUARIO = 947;
 
         #endregion ** TABELAS INTERNAS **
 
@@ -155,5 +179,57 @@ namespace ThunderFire.Domain
 
 
 
+
+
+        #region -- SELETORESPADRAO --
+        public static List<GeneralTable> AddSeletorBase(List<GeneralTable> l, int pKEYCOD = -1, string pDSCTAB = "-- SELECIONE --")
+        {
+            List<GeneralTable> _ilist = new List<GeneralTable>();
+            _ilist = l;
+            GeneralTable _i = new GeneralTable();
+            _i.KEYCOD = pKEYCOD;
+            _i.DSCTAB = pDSCTAB;
+            _ilist.Add(_i);
+            _i = null;
+            return _ilist.OrderBy(p => p.KEYCOD).ToList();
+        }
+
+        public static List<AttributeType> AddSeletorBase(List<AttributeType> l, short pKEYCOD = -1, string pDSCTAB = "-- SELECIONE --")
+        {
+            List<AttributeType> _ilist = new List<AttributeType>();
+            _ilist = l;
+            AttributeType _i = new AttributeType();
+            _i.CODATR = pKEYCOD;
+            _i.DSCATR = pDSCTAB;
+            _ilist.Add(_i);
+            _i = null;
+            return _ilist.OrderBy(p => p.CODATR).ToList();
+        }
+        public static List<TransactionStatus> AddSeletorBase(List<TransactionStatus> l, short pKEYCOD = -1, string pDSCTAB = "-- SELECIONE --")
+        {
+            List<TransactionStatus> _ilist = new List<TransactionStatus>();
+            _ilist = l;
+            TransactionStatus _i = new TransactionStatus();
+            _i.CODSTA = pKEYCOD;
+            _i.DSCSTA = pDSCTAB;
+            _ilist.Add(_i);
+            _i = null;
+            return _ilist.OrderBy(p => p.CODSTA).ToList();
+        }
+
+        public static List<MyUsers> AddSeletorBase(List<MyUsers> l, short pKEYCOD = -1, string pDSCTAB = "-- SELECIONE --")
+        {
+            List<MyUsers> _ilist = new List<MyUsers>();
+            _ilist = l;
+            MyUsers _i = new MyUsers();
+            _i.CODUSU= pKEYCOD;
+            _i.NOMUSU = pDSCTAB;
+            _ilist.Add(_i);
+            _i = null;
+            return _ilist.OrderBy(p => p.CODUSU).ToList();
+        }
+
+
+        #endregion
     }
 }

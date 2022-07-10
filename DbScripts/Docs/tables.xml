@@ -16,4 +16,26 @@
   <item id="14" text="TBREGCRT - Registro de Cartões Ativos" />
   <item id="2" text="TBLGNUSU - Login de Usuário" />
   <item id="17" text="TBUSUPRO - Gerencia de Produtos" />
+  <item id="24" text="TBREGMEN - Monthly Payment" />
+  <item id="25" text="TBTIPTAR - Tariff Type" />
+  <item id="26" text="TBTIPMOV - Operations" />
+  <item id="27" text="TBCADTAR - Tariffs" />
+  <item id="28" text="TBCADTAR - Tariffs" />
+  <item id="29" text="TBMODTAR - Tariff Modality" />
+  <item id="30" text="TBTARMOV - Associação de Tarifas e Operações" />
+  <item id="31" text="TBTARMOV - Associação de Tarifas e Operações" />
+  <item id="32" text="TBCADTAR - Tariffs" />
+  <item id="4" text="TBTABGER - Tabela Geral do Sistema" />
+  <item id="33" text="TBREGBOL - Registro de Boletos" />
+  <item id="34" text="TBVALBOL - Registro de Valores de Boletos" />
+  <item id="10" text="TBTIPEND - Address Type" />
+  <item id="11" text="TBTIPCTO - Tipos de Contato" />
+  <item id="7" text="TBTIPUSU - Tipo de Usuário" />
+  <item id="35" text="TBCADCVL - Linked Account" />
+  <item id="39" text="TBBXABOL - Registro de Detalhe do Recebimento de Boleto" />
+  <item id="38" text="TBRBBBOL - Registro de Recebimento de Boleto" />
+  <item id="41" text="TBREGMOV - Tabela de Registro de Transferências" />
+  <item id="40" text="TBTIPLCT - Account Entry Type" />
+  <item id="43" text="TBCADLCT - Tabela de Cadastro de Lançamentos" />
+  <item id="42" text="TBREGMOV - Tabela de Registro de Transferências" />
 </tables>

@@ -12,13 +12,13 @@
         <div class="card-body">
 
             <div class="form-group row">
-                <label for="CUSUPRO" class="col-sm-2 col-form-label">Usuário</label>
+                <label for="CUSUPRO" class="col-sm-2 col-form-label">Gestor</label>
                 <div class="col-sm-4">
-                    @Html.DropDownListFor(model => model.CUSUPRO, new SelectList(Model.ListaGestor, "CODUSU", "NOMUSU"), " -- Selecione --", new { @class = "form-control form-control-sm" });
+                    @Html.DropDownListFor(model => model.CUSUPRO, new SelectList(Model.ListaGestor, "CODUSU", "NOMUSU",Model.CUSUPRO), " -- Selecione --", new { @class = "form-control form-control-sm" });
                 </div>
                 <label for="CSTACRT" class="col-sm-2 col-form-label">Status</label>
                 <div class="col-sm-4">
-                    @Html.DropDownListFor(model => model.CSTACRT, new SelectList(Model.ListaStatus, "CODSTA", "DSCSTA"), " -- Selecione --", new { @class = "form-control form-control-sm" });
+                    @Html.DropDownListFor(model => model.CSTACRT, new SelectList(Model.ListaStatus, "CODSTA", "DSCSTA",Model.CSTACRT), " -- Selecione --", new { @class = "form-control form-control-sm" });
                 </div>
             </div>
             <div class="form-group row">
@@ -44,6 +44,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Cartão</th>
+                            <th>Status</th>
                             <th>Ativação</th>
                             <th>Canc.</th>
                             <th>Portador</th>
@@ -88,15 +89,22 @@
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         contentType: 'application/x-www-form-urlencoded; charset=utf-8',
                         data: {
-                            pUSUPRO: function () { return $('#CUSUPRO').val() },
-                            pSTACRT: function () { return $('#CSTACRT').val() },
-                            pNUMCRT: function () { return $('#CNUMCRT').val() },
-                            pNOMPRT: function () { return $('#CNOMPRT').val() }
+                            pUSUPRO: function () {
+                                var InputVal = $('#CUSUPRO').val();
+                                if (InputVal > 0)
+                                    return InputVal;
+                                else
+                                    return 0;
+                            },
+                            pSTACRT: function () { return $('#CSTACRT').val(); },
+                            pNUMCRT: function () { return $('#CNUMCRT').val(); },
+                            pNOMPRT: function () { return $('#CNOMPRT').val(); }
                         }
                     },
                     columns: [
                         { data: "CODCRT" },
                         { data: "NUMCRT" },
+                        { data: "DSCSTA" },
                         { data: "CNVATV" },
                         { data: "CNVCAN" },
                         { data: "NOMPRT" },
@@ -105,8 +113,8 @@
                             data: "APLCON",
                             "render": function (data, type, row) {
                                 var textout = "Sim";
-                                if (data == "0" || data == "false")
-                                    textou = "Não";
+                                if (data == 0)
+                                    textout = "Não";
                                 return textout;
                             }
                         },
@@ -115,8 +123,8 @@
                             data: "APLSAQ",
                             "render": function (data, type, row) {
                                 var textout = "Sim";
-                                if (data == "0" || data == "false")
-                                    textou = "Não";
+                                if (data == 0)
+                                    textout = "Não";
                                 return textout;
                             }
                         },
@@ -126,16 +134,24 @@
                         {
                             "render": function (data, type, row) {
                                 var botoes = "";
-                                botoes += "<button id='btnpermitirsaque' title='Comutar a Função Saque' class='btn ChangeOnlineShop btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',1,0);\"> <i class='fa fa-money fa-xs'></i></button>&nbsp;";
-                                botoes += "<button id='btnpermitircompra' title='Comutar a Função Compra On-line' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',2,0);\"> <i class='fa fa-shopping-cart fa-xs'></i></button>&nbsp;";
-
                                 if (row.STACRT != 120) {
+                                    botoes += "<button id='btnpermitirsaque' title='Comutar a Função Saque' class='btn ChangeOnlineShop btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',1,0);\"> <i class='fa fa-money fa-xs'></i></button>&nbsp;";
+                                    botoes += "<button id='btnpermitircompra' title='Comutar a Função Compra On-line' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',2,0);\"> <i class='fa fa-shopping-cart fa-xs'></i></button>&nbsp;";
+                                }
 
+                                if (row.QTDMEN > 0) {
+                                    if (row.STACRT != 120) {
+                                        if (row.STAPRO != 127) {
+                                            botoes += "<button id='btnmensalremove' title='Remover Mensalidades do Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',3,1);\"> <i class='fa fa-calendar-circle-minus fa-xs'></i></button>&nbsp;";
+                                        }
+                                    }
+                                }
+                                if (row.STACRT != 120) {
                                     if (row.STAPRO != 127) {
-                                        botoes += "<button id='btnmensalremove' title='Remover Mensalidades do Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',3,1);\"> <i class='fa fa-calendar-circle-minus fa-xs'></i></button>&nbsp;";
                                         botoes += "<button id='btnmensalrestore' title='Restaurar Mensalidades do Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',3,3);\"> <i class='fa fa-calendar-circle-plus fa-xs'></i></button>&nbsp;";
                                     }
-
+                                }
+                                if (row.STACRT != 120) {
                                     botoes += "<button id='btnblocktempcard' title='Bloquear o Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',4,1);\"> <i class='fa fa-ban fa-xs'></i></button>&nbsp;";
                                     if (row.STAPRO == 127) {
                                         botoes += "<button id='btnunblocktempcard' title='Remover o bloqueio do Cartão' class='btn btn-light btn-sm' onclick=\"ProcessDataOnCard('" + row.CODCRT + "',4,2);\"> <i class='fa fa-unlock fa-xs'></i></button>&nbsp;";
@@ -167,11 +183,12 @@
                         { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "4%" },
                         { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "4%" },
                         { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "4%" },
-                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "4%" },
                         { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "2%" },
-                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "8%" },
-                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "8%" }
-
+                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "2%" },
+                        { className: "text-left", "targets": [7], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-left", "targets": [8], "visible": true, "searchable": false, "width": "8%" },
+                        { className: "text-left", "targets": [9], "visible": true, "searchable": false, "width": "8%" }
                     ]
                 });
 
@@ -199,23 +216,14 @@
 
         function ProcessDataOnCard(pCODCRT, pACTION, pCODACT) {
             var commandquery = "/Gestao/ChangeDataOnCard";
-            $("#OPERATION").val("2");
             $.ajax({
                 type: "POST",
                 url: commandquery,
                 data: { pCODCRT: pCODCRT, pACTION: pACTION, pCODACT: pCODACT },
                 dataType: 'json',
                 success: function (result) {
-                    console.log(result);
-                    var ok = parseInt(result.ReturnValue);
-                    if (ok > 0) {
-
-                        $.alert({ class: 'Warning', title: 'Cartões', message: result.MessageToUser, effect: 'newspaper' });
-
-                    }
-                    else {
-                        $.alert({ class: 'Warning', title: 'Cartões', message: result.MessageToUser, effect: 'newspaper' });
-                    };
+                    $.alert({ class: 'Warning', title: 'Cartões', message: result.MessageToUser, effect: 'newspaper' });
+                    $('#gridaddress').DataTable().ajax.reload();
                 },
                 error: function (data) {
                     $.alert({ class: 'danger', title: 'Cartões', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });

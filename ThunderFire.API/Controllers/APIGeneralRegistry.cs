@@ -213,13 +213,42 @@ return Content(go, RETURN_VALUE);
 
     /// <returns>List of MyUsers</returns>
 [HttpGet]
-    public IHttpActionResult ListUserByUserType(System.Byte? pTIPUSU, System.Int32? pCODUSU)
+    public IHttpActionResult ListUsers(System.Byte? pTIPUSU, System.Int32? pCODUSU)
     {
 HttpStatusCode go = HttpStatusCode.OK;
 object RETURN_VALUE=null;
 if (Init())
 {
- RETURN_VALUE = WRKOBJ.ListUserByUserType(pTIPUSU.Value, pCODUSU.Value);
+ RETURN_VALUE = WRKOBJ.ListUsers(pTIPUSU.Value, pCODUSU.Value);
+if(WRKOBJ.Found)
+{
+go = HttpStatusCode.OK;
+}
+else
+{
+if(WRKOBJ.HasError)
+{
+    go=HttpStatusCode.BadRequest;
+}
+else
+go=HttpStatusCode.NotFound;
+}
+}
+return Content(go, RETURN_VALUE);
+}
+    /// <summary>
+    /// Obtêm uma lista de usuários com permissão de uso da tarifação
+    /// </summary>
+    
+    /// <returns>List of MyUsers</returns>
+[HttpGet]
+    public IHttpActionResult ListUserTarifacion()
+    {
+HttpStatusCode go = HttpStatusCode.OK;
+object RETURN_VALUE=null;
+if (Init())
+{
+ RETURN_VALUE = WRKOBJ.ListUserTarifacion();
 if(WRKOBJ.Found)
 {
 go = HttpStatusCode.OK;

@@ -3,7 +3,7 @@ IF OBJECT_ID ( 'dbo.TR_TBREGCRT_CADCTA', 'TR' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Trigger de Eventos da Tabela de Registro de Cartoes
  ==================================================================================================== */
 CREATE TRIGGER dbo.TR_TBREGCRT_CADCTA
@@ -36,7 +36,7 @@ IF OBJECT_ID ( 'dbo.TR_TBREGCRT_UPDATE', 'TR' ) IS NOT NULL
 GO
 /* ===================================================================================================
    Author : Agostin
-     Date : 07/03/2022 18:52:55
+     Date : 18/03/2022 16:45:34
  Objetivo : Trigger de Eventos de ajuste de status da Tabela de Registro de Cartoes
  ==================================================================================================== */
 CREATE TRIGGER dbo.TR_TBREGCRT_UPDATE
@@ -44,22 +44,20 @@ ON dbo.TBREGCRT
  AFTER INSERT, UPDATE
 AS
     BEGIN
-        DECLARE @UPDUSU INT
+        DECLARE @UPDUSU INT = 2
     		DECLARE @CODCRT INT
     		DECLARE @STACRT SMALLINT
-    		SELECT @UPDUSU = UPDUSU, @CODCRT = CODCRT, @STACRT=STACRT
-    		  FROM inserted
+    		SELECT @CODCRT = CODCRT, @STACRT=STACRT FROM INSERTED
     
-    		if(@STACRT IN (120,123,129))
+    		IF(@STACRT IN (120,123,129))
     			BEGIN
-    				UPDATE TBCTRMEN
-    				   SET STAREC = 13,
-    	                   DATUPD=GETDATE(),
-    	                   UPDUSU=@UPDUSU
-    				 WHERE STAREC=1
-    				   AND STAMEN in (260,261)
-    				   AND CODCRT =@CODCRT
-    				   AND LOTFIN = 0
+    				UPDATE TBREGMEN SET STAREC = 13, DATUPD=GETDATE(), UPDUSU=@UPDUSU
+    				 WHERE STAREC = 1
+    				   AND STAMEN = 261
+               AND TIPMEN=  1   // Mensalidade cartão
+               AND MODREG=  1   // Provisao
+               AND BXAREG = 0   // Registro nao baixado
+    				   AND CODREF = @CODCRT	// Referencias do Cartão
     			END
     	END
 

@@ -55,6 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="actions.cs" />
+    <Compile Include="bAccountEntryPosting.cs" />
+    <Compile Include="bAccountEntryType.cs" />
     <Compile Include="bAccountType.cs" />
     <Compile Include="bActiveCards.cs" />
     <Compile Include="bAddressBook.cs" />
@@ -62,26 +65,57 @@
     <Compile Include="bAttributeType.cs" />
     <Compile Include="bContactBook.cs" />
     <Compile Include="bContactType.cs" />
+    <Compile Include="bExpandedTariff.cs" />
+    <Compile Include="bExpandedTypes.cs" />
     <Compile Include="bFeaturesGroup.cs" />
-    <Compile Include="bGeneralRegistry.cs" />
     <Compile Include="bGeneralTable.cs" />
     <Compile Include="bGroups.cs" />
+    <Compile Include="bHolydays.cs" />
+    <Compile Include="bLinkedAccount.cs" />
     <Compile Include="bLoginUser.cs" />
+    <Compile Include="bMonthlyPayment.cs" />
+    <Compile Include="bOperations.cs" />
+    <Compile Include="bOperationsRegister.cs" />
+    <Compile Include="bProduct.cs" />
     <Compile Include="bProductCards.cs" />
     <Compile Include="bProductLine.cs" />
-    <Compile Include="bProductManagement.cs" />
-    <Compile Include="bProducts.cs" />
+    <Compile Include="bProductManager.cs" />
     <Compile Include="bSystemFeatures.cs" />
+    <Compile Include="bTariff.cs" />
+    <Compile Include="bTariffed.cs" />
+    <Compile Include="bTariffModality.cs" />
+    <Compile Include="bTariffOperations.cs" />
+    <Compile Include="bTariffType.cs" />
+    <Compile Include="bTicket.cs" />
+    <Compile Include="bTicketConfiguration.cs" />
+    <Compile Include="bTicketReceiptDetail.cs" />
+    <Compile Include="bTicketReceiptRecord.cs" />
+    <Compile Include="bTicketValues.cs" />
     <Compile Include="bTransactionStatus.cs" />
+    <Compile Include="bTransferRegistration.cs" />
+    <Compile Include="bUserGroup.cs" />
+    <Compile Include="bUsers.cs" />
     <Compile Include="bUserType.cs" />
     <Compile Include="BusinessBase.cs" />
     <Compile Include="bVirtualAccount.cs" />
+    <Compile Include="Listas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support.cs" />
     <Compile Include="uLoginUser.cs" />
+    <Compile Include="Validations.cs" />
     <Compile Include="WriteAuditing.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Docs\TBCADEND.html" />
+    <Content Include="Docs\TBCADGER.html" />
+    <Content Include="Docs\TBCADPRO.html" />
+    <Content Include="Docs\TBCADSTA.html" />
+    <Content Include="Docs\TBCADTAR.html" />
+    <Content Include="Docs\TBREGCRT.html" />
+    <Content Include="Docs\TBTABGER.html" />
+    <Content Include="Docs\TBTIPATR.html" />
+    <Content Include="Docs\TBTIPCTO.html" />
+    <Content Include="Docs\TBTIPEND.html" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

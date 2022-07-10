@@ -202,6 +202,36 @@ go=HttpStatusCode.NotFound;
 }
 return Content(go, RETURN_VALUE);
 }
+    /// <summary>
+    /// Obtêm uma lista de usuarios associados aos produtos
+    /// </summary>
+        /// <param name="pUSUPRO">Usuário Gestor</param>
+
+    /// <returns>List of MyUsers</returns>
+[HttpGet]
+    public IHttpActionResult ListUsers(System.Int32 pUSUPRO= null)
+    {
+HttpStatusCode go = HttpStatusCode.OK;
+object RETURN_VALUE=null;
+if (Init())
+{
+ RETURN_VALUE = WRKOBJ.ListUsers(pUSUPRO);
+if(WRKOBJ.Found)
+{
+go = HttpStatusCode.OK;
+}
+else
+{
+if(WRKOBJ.HasError)
+{
+    go=HttpStatusCode.BadRequest;
+}
+else
+go=HttpStatusCode.NotFound;
+}
+}
+return Content(go, RETURN_VALUE);
+}
 
 
 }

@@ -44,6 +44,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAccountEntryPosting.cs" />
+    <Compile Include="IAccountEntryType.cs" />
     <Compile Include="IAccountType.cs" />
     <Compile Include="IActiveCards.cs" />
     <Compile Include="IAddressBook.cs" />
@@ -51,18 +53,36 @@
     <Compile Include="IAttributeType.cs" />
     <Compile Include="IContactBook.cs" />
     <Compile Include="IContactType.cs" />
+    <Compile Include="IExpandedTariff.cs" />
+    <Compile Include="IExpandedTypes.cs" />
     <Compile Include="IFeaturesGroup.cs" />
-    <Compile Include="IGeneralRegistry.cs" />
     <Compile Include="IGeneralTable.cs" />
     <Compile Include="IGroups.cs" />
+    <Compile Include="IHolydays.cs" />
+    <Compile Include="ILinkedAccount.cs" />
     <Compile Include="ILoginUser.cs" />
+    <Compile Include="IMonthlyPayment.cs" />
+    <Compile Include="IOperations.cs" />
+    <Compile Include="IOperationsRegister.cs" />
+    <Compile Include="IProduct.cs" />
     <Compile Include="IProductCards.cs" />
     <Compile Include="IProductLine.cs" />
-    <Compile Include="IProductManagement.cs" />
-    <Compile Include="IProducts.cs" />
+    <Compile Include="IProductManager.cs" />
     <Compile Include="ISystemFeatures.cs" />
+    <Compile Include="ITariff.cs" />
+    <Compile Include="ITariffed.cs" />
+    <Compile Include="ITariffModality.cs" />
+    <Compile Include="ITariffOperations.cs" />
+    <Compile Include="ITariffType.cs" />
+    <Compile Include="ITicket.cs" />
+    <Compile Include="ITicketConfiguration.cs" />
+    <Compile Include="ITicketReceiptDetail.cs" />
+    <Compile Include="ITicketReceiptRecord.cs" />
+    <Compile Include="ITicketValues.cs" />
     <Compile Include="ITransactionStatus.cs" />
+    <Compile Include="ITransferRegistration.cs" />
     <Compile Include="IUserGroup.cs" />
+    <Compile Include="IUsers.cs" />
     <Compile Include="IUserType.cs" />
     <Compile Include="IVirtualAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

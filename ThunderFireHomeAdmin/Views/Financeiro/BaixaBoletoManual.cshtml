@@ -1,0 +1,183 @@
+﻿@model ThunderFireHomeAdmin.Models.TicketReceiptRecordModel
+@{
+    ViewBag.Title = "Baixa de Boleto Manual";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="modal fade" id="modalboletomanual" tabindex="-1" role="dialog" aria-labelledby="modalattr" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa-solid fa-money-check" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="OPERATION" value="0" />
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="FNIDBOL" class="col-sm-2 form-control-sm">Boleto:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm numero" id="FNIDBOL" name="FNIDBOL" value="" size="8" maxlength="8">
+                    </div>
+                    <label for="FDATPGT" class="col-sm-2 form-control-sm">Data:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm date" id="FDATPGT" name="FDATPGT" value="" size="10" maxlength="10">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="FNUMREX" class="col-sm-2 form-control-sm">Autorização:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FNUMREX" name="FNUMREX" size="25" maxlength="25" placeholder="" value="">
+                    </div>
+                    <label for="FVLRLIQ" class="col-sm-2 form-control-sm">Valor:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm money" id="FVLRLIQ" name="FVLRLIQ" placeholder="" value="">
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Baixar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/Rules/CommonRules.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('.numero').mask('########');
+            $('.date').mask('00/00/0000');
+            $('.money').mask('000.000,00', { reverse: true });
+            $('.datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: "pt-BR",
+                minViewMode: 0,
+                orientation: 'auto',
+                startDate: new Date(2022, 03, 01),
+                autoclose: true,
+                daysOfWeekDisabled: ['0']
+            });
+            $("#FDATPGT").val(GetCurrentDate());
+
+
+            $('#FNIDBOL').on('change', function () {
+                var pNIDBOL = $(this).val();
+                if (pNIDBOL > 0) {
+                    $.ajax({
+                        type: "GET",
+                        url: GetUrl("Financeiro/SelecionarBoleto"),
+                        data: { pNIDBOL: pNIDBOL },
+                        dataType: 'json',
+                        success: function (result) {
+
+                            console.log(result.VLRLIQ);
+                            console.log(result.DATVCT);
+                            $("#FVLRLIQ").val(FormatValue(result.VLRLIQ));
+                            //$("#FDATPGT").val(fromDate(result.DATVCT));
+                        }
+                    });
+                }
+            });
+
+            $('#modalboletomanual').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalboletomanual').modal('show');
+
+
+            $(document).on("click", "#btn_update", function () {
+                if (PrimaryValidation()) {
+                    var vDATA = JSON.stringify({
+                        'NIDLIM': 0,
+                        'NIDBOL': parseInt($("#FNIDBOL").val()),
+                        'TIPBXA': 2,
+                        'DATPGT': toDateIso($("#FDATPGT").val(), "-"),
+                        'FILNAM': 'BAIXA MANUAL',
+                        'USUBCO': 0,
+                        'NUMREX': $("#FNUMREX").val(),
+                        'TOTPAG': ToFloat($("#FVLRLIQ").val()),
+                        'TOTJUR': 0,
+                        'TOTDES': 0,
+                        'TOTTAR': 0,
+                        'TOTTEX': 0,
+                        'TOTDCP': 0,
+                        'TOTLIQ': ToFloat($("#FVLRLIQ").val()),
+                        'STAREC': 1,
+                        'UPDUSU': 0
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: GetUrl("Financeiro/RegistrarBaixa"),
+                        data: vDATA,
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        beforeSend: function () { },
+                        success: function (result) {
+                            var ok = parseInt(result.ReturnValue);
+                            if (ok > 0) {
+                                $('#modalboletomanual').modal('toggle');
+                            }
+                            else {
+                                var status = $(this).data('status');
+                                $.alert({ class: status, title: 'Acesso', message: result.MessageToUser, effect: 'newspaper' });
+                            };
+                        },
+                        error: function (data) {
+                            var status = $(this).data('status');
+                            $.alert({ class: 'danger', title: 'Acesso', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
+                        }
+                    });
+                }
+            });
+
+        });
+
+
+        function PrimaryValidation() {
+
+            var aval;
+            var msg = '';
+            var ret = true;
+
+            if (ret === true) {
+                aval = parseInt($("#FNIDBOL").val());
+                if (aval <= 0) {
+                    msg = 'Informe um número de boleto válido';
+                    ret = false;
+                }
+            }
+            if (ret === true) {
+                aval = $("#FDATPGT").val();
+                if (aval == '') {
+                    msg = 'Informe uma data de pagamento válida';
+                    ret = false;
+                }
+            }
+
+            if (ret == true) {
+                var val = ToFloat($("#FVLRLIQ").val());
+
+                if (val <= 0) {
+                    ret = false;
+                    msg = "Informe um valor válido para operacao";
+                }
+            }
+
+            if (ret === false) {
+                $.alert({ class: 'danger', title: 'Tarifa', message: msg, effect: 'zoom' });
+            }
+
+            return ret;
+        }
+
+    </script>
+
+}
+

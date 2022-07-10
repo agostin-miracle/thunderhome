@@ -25,9 +25,9 @@ namespace ThunderFire.Business
 ///Produto     : SQLDBTools
 ///Titulo      : SQLDBTools
 ///Version     : 1.3.0.0
-///Data        : 04/03/2022 15:20
+///Data        : 11/04/2022 17:46
 ///Alias       : virtualaccount
-///Descrição   : Virtual Account
+///Descrição   : Cadastro de Contas
 ///</remarks>
     public partial class VirtualAccountDao : BusinessBase, IVirtualAccount
     {
@@ -43,7 +43,7 @@ this.KeyTableId =12;
 }
        
     /// <summary>
-    /// Insere um registro na tabela TBCADCTA (Virtual Account)
+    /// Insere um registro na tabela TBCADCTA (Cadastro de Contas)
     /// </summary>
     ///<param name="model">VirtualAccount</param>
     /// <returns>int</returns>
@@ -51,14 +51,13 @@ this.KeyTableId =12;
         {
             ExecutionResponse respond = new ExecutionResponse();
             int RETURN_VALUE = 0;
-            int _AUDNUM =0;
             this.HasError =false;
             this.ProcessCode= 10;
                     using (IDbConnection _conn = ConnectionFactory.GetConnection())
                     {
             try
             {
-string _changed = Objects.GetPropertiesValue("Virtual Account",model,true);
+string _changed = Objects.GetPropertiesValue("Cadastro de Contas",model,true);
 
             var p = new DynamicParameters();
             p.Add("@RETURN_VALUE", 0, dbType:DbType.Int32,  direction: ParameterDirection.Output);
@@ -85,20 +84,6 @@ respond.ReturnValue = RETURN_VALUE;
 string _errormessage="";
                 if(RETURN_VALUE>0)
                 {
-                    Auditing audit = new Auditing();
-          audit.UPDUSU =model.UPDUSU;
-          audit.AUDDAT=DateTime.Now;
-          audit.AUDKEY =KeyTableId;
-          audit.AUDIDR =RETURN_VALUE;
-          audit.AUDIMS =0;
-          audit.AUDTSK =this.GetType().Name + "." + MethodBase.GetCurrentMethod().Name;
-          audit.AUDOBJ = "PRCADCTAUPD";
-          audit.AUDSRC ="";
-          audit.AUDCHG =_changed;
-          audit.NIDTOK =0;
-          audit.NUMIPA =Environment.MachineName;
-          _AUDNUM=WriteAuditing.Insert(audit);
-          respond.Logged=_AUDNUM>0;
                     respond.MessageToUser ="CONTA VIRTUAL INCLUIDA COM SUCESSO";
 _errormessage="";
                 }
@@ -143,7 +128,7 @@ _errormessage="";
         }
 
     /// <summary>
-    /// Altera um registro da tabela TBCADCTA (Virtual Account)  de acordo com a chave identity
+    /// Altera um registro da tabela TBCADCTA (Cadastro de Contas)  de acordo com a chave identity
     /// </summary>
     ///<param name="model">VirtualAccount</param>
     /// <returns>ExecutionResponse</returns>
@@ -157,7 +142,7 @@ ExecutionResponse respond = new ExecutionResponse();
                             VirtualAccount ModelAud = Select(model.NIDCTA);
 string _original = Objects.GetPropertiesValue(ModelAud);
 
-            string _changed = Objects.GetPropertiesValue("Virtual Account",model,true);
+            string _changed = Objects.GetPropertiesValue("Cadastro de Contas",model,true);
 
                     using (IDbConnection _conn = ConnectionFactory.GetConnection())
                     {
@@ -254,6 +239,8 @@ _errormessage="";
                     {
             RETURN_VALUE  = _conn.Query<VirtualAccount>(sql:"PRCADCTASEL", param:new {NIDCTA=pNIDCTA
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
+
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)
@@ -294,6 +281,8 @@ CODUSU=pCODUSU,
 ORGCTA=pORGCTA,
 TIPCTA=pTIPCTA
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
+
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)
@@ -324,6 +313,8 @@ TIPCTA=pTIPCTA
             RETURN_VALUE  = _conn.Query<VirtualAccount>(sql:"PRCADCTASELCMF", param:new {CODCMF=pCODCMF,
 ORGCTA=pORGCTA
 },  commandType: CommandType.StoredProcedure, commandTimeout: 120).FirstOrDefault();
+
+                    if(RETURN_VALUE!=null)
                     this.Found = true;
                     }
                     catch (Exception Error)
@@ -348,15 +339,12 @@ ORGCTA=pORGCTA
             int _AUDNUM =0;
             this.ProcessCode= 200;
             ExecutionResponse respond = new ExecutionResponse();
-            if(pUPDUSU>0)
+            if(ThunderFire.Business.Support.CheckAccess(this.KeyTableId, this.ProcessCode,pUPDUSU)!=1)
             {
-            if(ThunderFire.Business.Support.GetUserAccess(GetAuthorizationID(),pUPDUSU)!=1)
-            {
-            respond.ErrorCode = "APPROVALUSERNOTALLOWED";
-            respond.ErrorMessage = ErrorManager.GetStringMsg("APPROVALUSERNOTALLOWED");
-        respond.ReturnValue=-3;
+        respond.ReturnValue=ThunderFire.Business.Support.ReturnValue;
+        respond.MessageToUser=ThunderFire.Business.Support.MessageToUser;
+        respond.ErrorCode=ThunderFire.Business.Support.ErrorCode;
         return respond;
-            }
             }
         int RETURN_VALUE = 0;
                     using (IDbConnection _conn = ConnectionFactory.GetConnection())
@@ -448,15 +436,12 @@ _errormessage="";
             int _AUDNUM =0;
             this.ProcessCode= 205;
             ExecutionResponse respond = new ExecutionResponse();
-            if(pUPDUSU>0)
+            if(ThunderFire.Business.Support.CheckAccess(this.KeyTableId, this.ProcessCode,pUPDUSU)!=1)
             {
-            if(ThunderFire.Business.Support.GetUserAccess(GetAuthorizationID(),pUPDUSU)!=1)
-            {
-            respond.ErrorCode = "APPROVALUSERNOTALLOWED";
-            respond.ErrorMessage = ErrorManager.GetStringMsg("APPROVALUSERNOTALLOWED");
-        respond.ReturnValue=-3;
+        respond.ReturnValue=ThunderFire.Business.Support.ReturnValue;
+        respond.MessageToUser=ThunderFire.Business.Support.MessageToUser;
+        respond.ErrorCode=ThunderFire.Business.Support.ErrorCode;
         return respond;
-            }
             }
         int RETURN_VALUE = 0;
                     using (IDbConnection _conn = ConnectionFactory.GetConnection())
@@ -544,6 +529,14 @@ _errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
                     respond.MessageToUser ="O USUÁRIO NÃO ESTÁ OPERACIONAL PARA ESTA ACAO, VIDE O STATUS DO USUARIO";
 _errormessage="";
                 }
+                if(RETURN_VALUE==-6)
+                {
+                    respond.ErrorCode="APPROVALFAIL";
+_errormessage= ErrorManager.GetStringMsg(respond.ErrorCode);
+                    respond.ErrorMessage=_errormessage;
+                    respond.MessageToUser ="A CONTA VIRTUAL NÃO ESTÁ EM ESTADO DE APROVAÇÃO";
+_errormessage="";
+                }
         }
         catch (Exception Error)
         {
@@ -591,7 +584,6 @@ p.Add("@ORGCTA", pORGCTA, dbType:DbType.Byte,  direction: ParameterDirection.Inp
 p.Add("@TIPCTA", pTIPCTA, dbType:DbType.Int32,  direction: ParameterDirection.Input);
 RETURN_VALUE=_conn.ExecuteScalar<Int32>(sql:"PRCADCTALOC", param:p,  commandType: CommandType.StoredProcedure, commandTimeout: 120);
 respond.ReturnValue= RETURN_VALUE;
-string _errormessage="";
         }
         catch (Exception Error)
         {
@@ -614,32 +606,6 @@ string _errormessage="";
         }
         return respond;
     }
-
-    /// <summary>
-    /// Obtêm todos os registros de contas virtuais registradas conforme parametro fornecido
-    /// </summary>
-        /// <param name="pCODUSU">Usuário</param>
-    /// <returns>Listof QueryVirtualAccount</returns>
-    public List<QueryVirtualAccount> List(System.Int32? pCODUSU= null)
-        {
-            this.ProcessCode= 0;
-                    using (IDbConnection _conn = ConnectionFactory.GetConnection())
-                    {
-                    try
-                    {
-            var result = _conn.Query<QueryVirtualAccount>(sql:"PRCADCTASELALL", param:new {CODUSU=pCODUSU},  commandType: CommandType.StoredProcedure, commandTimeout: 120).ToList();
-                    this.Found = true;
-                    return result.ToList();
-                    }
-                    catch (Exception Error)
-                    {
-                    this.HasError = true;
-                    this.Found=false;
-                    _logger.Info(Error);
-            }
-            }
-                    return null;
-            }
 
     }
 }

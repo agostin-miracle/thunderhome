@@ -1,3 +1,28 @@
+
+IF OBJECT_ID ( 'dbo.FormatCard', 'FN' ) IS NOT NULL
+    DROP FUNCTION dbo.FormatCard;
+GO
+/* Formato um número de cartão */
+CREATE FUNCTION [dbo].[FormatCard] (@NUMCRT VARCHAR(20)=NULL)
+RETURNS VARCHAR(100)
+AS
+	BEGIN
+		DECLARE @fmtd VARCHAR(20)
+		SET @fmtd=N''
+				
+		IF(LEN(@NUMCRT)>0)
+			BEGIN
+				DECLARE @NCRT VARCHAR(20)
+				SELECT @NCRT = SUBSTRING(ISNULL(@NUMCRT,' ')+ SPACE(16),1,16) 
+				SET @fmtd = SUBSTRING(@NCRT,1,4)+'-XXXX-XXXX-'+ SUBSTRING(@NCRT,13,4)
+			END
+		RETURN @fmtd
+	END
+
+
+GO
+
+
 IF OBJECT_ID ( 'dbo.CreateAccountBase', 'FN' ) IS NOT NULL
     DROP FUNCTION dbo.CreateAccountBase;
 GO
@@ -228,3 +253,96 @@ AS
 
 
 GO
+
+
+IF OBJECT_ID ( 'dbo.Split', 'FN' ) IS NOT NULL
+    DROP FUNCTION dbo.Split;
+GO
+
+
+create function Split (@string varchar(max), @separador char(1)) 
+returns table as return
+    with a as (
+        select
+            id = 1,
+            len_string = len(@string) + 1,
+            ini = 1,
+            fim = coalesce(nullif(charindex(@separador, @string, 1), 0), len(@string) + 1),
+            elemento = ltrim(rtrim(substring(@string, 1, coalesce(nullif(charindex(@separador, @string, 1), 0), len(@string) + 1)-1)))
+        union all
+        select
+            id + 1,
+            len(@string) + 1,
+            convert(int, fim) + 1,
+            coalesce(nullif(charindex(@separador, @string, fim + 1), 0), len_string), 
+            ltrim(rtrim(substring(@string, fim + 1, coalesce(nullif(charindex(@separador, @string, fim + 1), 0), len_string)-fim-1)))
+        from a where fim < len_string)
+    select id, elemento from a 
+
+go
+
+IF OBJECT_ID ( 'dbo.GetLoginName', 'FN' ) IS NOT NULL
+    DROP FUNCTION dbo.GetLoginName;
+GO
+
+CREATE FUNCTION dbo.GetLoginName(@NOMUSU VARCHAR(100))
+RETURNS VARCHAR(50)
+AS
+ BEGIN
+	   DECLARE @TABELA TABLE (ID INT IDENTITY, NOME VARCHAR(50))
+	   INSERT INTO @TABELA (NOME) SELECT ELEMENTO FROM dbo.Split(@NOMUSU, ' ') WHERE LEN(elemento)> 2
+
+	   DECLARE @MAX_ITEM INT= 0
+	   SELECT @MAX_ITEM = MAX(ID) FROM @TABELA
+	   DECLARE @NOME VARCHAR(50)
+	   DECLARE @RV VARCHAR(50)=''
+	   DECLARE @CT INT=1
+	   WHILE (@CT <= @MAX_ITEM)
+	       BEGIN
+		        IF(@CT=@MAX_ITEM)
+					SELECT @NOME = UPPER(NOME) FROM @TABELA WHERE ID=@CT 		       
+				ELSE
+					SELECT @NOME = LEFT(UPPER(NOME),1) FROM @TABELA WHERE ID=@CT 		       
+				SET @CT=@CT+1
+				SELECT @RV = @RV + @NOME
+		   END
+	   RETURN @RV
+ END
+
+GO
+
+
+CREATE FUNCTION [dbo].[GetNextDueDate](@DATVCT DATETIME)
+RETURNS DATETIME
+AS
+BEGIN
+	DECLARE @DOW int
+	DECLARE @LOOP1 TINYINT = 1
+	WHILE (@LOOP1=1)
+		BEGIN
+			IF(EXISTS(SELECT 1 FROM TBCADFER (NOLOCK) WHERE DATMOV = CONVERT(varchar,@DATVCT,112)))
+				BEGIN
+					SET @DATVCT = DATEADD(day,1,@DATVCT)
+				END
+			ELSE
+				SET @LOOP1=0
+		END
+
+	SET @DOW = DATEPART(DW,@DATVCT)	
+	IF(@DOW=7)
+		SET @DATVCT = DATEADD(day,2,@DATVCT)
+	IF(@DOW=1)
+		SET @DATVCT = DATEADD(day,1,@DATVCT)
+	SET @LOOP1 = 1
+	WHILE (@LOOP1=1)
+		BEGIN
+			IF(EXISTS(SELECT 1 FROM TBCADFER (NOLOCK) WHERE DATMOV = CONVERT(varchar,@DATVCT,112)))
+				BEGIN
+					SET @DATVCT = DATEADD(day,1,@DATVCT)
+				END
+			ELSE
+				SET @LOOP1=0
+		END
+
+	RETURN @DATVCT
+END

@@ -1,0 +1,89 @@
+﻿@model ThunderFireHomeAdmin.Models.TariffModalityModel
+@{
+    ViewBag.Title = "Modalidade de Tarifa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="modal fade" id="modalmodalidade" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 style="color:red;float:left"><i class="fa fa-project-diagram" aria-hidden="true"> </i> @ViewBag.Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="OPERATION" value="0" />
+                <div class="form-group row">
+                    <label for="FMODCRT" class="col-sm-2 control-label form-control-sm">Modalidade:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FMODCRT" size="8" maxlength="8" disabled>
+                    </div>
+
+                    <label for="FDSCMOD" class="col-sm-2 col-form-label">Descrição:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FDSCMOD" size="25" maxlength="25">
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label for="FPARINI" class="col-sm-3 control-label form-control-sm">Valor Incial:</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control form-control-sm inteiro" id="FPARINI" size="3" maxlength="3" required>
+                    </div>
+                    <label for="FPARFIN" class="col-sm-3 control-label form-control-sm">Valor Final:</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control form-control-sm inteiro" id="FPARFIN" size="3" maxlength="3" required>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FSTAREC" checked>
+                    <label class="form-check-label form-control-sm" for="FSTAREC">Ativo</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn_update">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+            </div>
+            <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+            <hr />
+
+            <div class="card-body">
+                <table id="tbmodalidade" class="table-sm table-striped table-bordered dt-responsive nowrap dataTable js-exportable" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Status</th>
+                            <th>Modalidade</th>
+                            <th>Descrição</th>
+                            <th>Por</th>
+                            <th>&#160;</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Rules/ModalidadeTarifa.js"></script>
+}

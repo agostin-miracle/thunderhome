@@ -1,10 +1,10 @@
-﻿@model ThunderFireHomeAdmin.Models.ProductManagementModel
+﻿@model ThunderFireHomeAdmin.Models.ProductManagerModel
 @{
     ViewBag.Title = "Usuario Gestor";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="modal fade" id="modalproductmanagement" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
+<div class="modal fade" id="modalgestorproduto" tabindex="-1" role="dialog" aria-labelledby="attributetypelabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,38 +17,26 @@
                 <input type="hidden" id="OPERATION" value="0" />
                 <input type="hidden" id="FUPDUSU" value="0" />
                 <input type="hidden" id="FUSUPRO" value="0" />
-                <div class="form-group row">
+                <div class="form-row">
                     <label for="FCODUSU" class="col-sm-2 control-label form-control-sm">Usuário:</label>
                     <div class="col-sm-10">
-                        <select class="form-control form-control-sm" id="FCODUSU" style="max-width:80%;">
-                            <option value="-1">Selecione</option>
-                            @if (Model.ListaGestor != null)
-                            {
-                                foreach (var item in Model.ListaGestor)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
-                                }
-                            }
-                        </select>
+                        @if (Model.ListaGestor != null)
+                        {
+                            @Html.DropDownListFor(model => model.FCODUSU, new SelectList(Model.ListaGestor, "CODUSU", "NOMUSU", Model.FCODUSU), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-row">
                     <label for="FCODPRO" class="col-sm-2 control-label form-control-sm">Produto:</label>
                     <div class="col-sm-10">
-                        <select class="form-control form-control-sm" id="FCODPRO" style="max-width:80%;">
-                            <option value="-1">Selecione</option>
-                            @if (Model.ListaProduto != null)
-                            {
-                                foreach (var item in Model.ListaProduto)
-                                {
-                                    <option value="@Html.DisplayFor(modelItem => item.CODPRO)">@Html.DisplayFor(modelItem => item.DSCPRO)</option>
-                                }
-                            }
-                        </select>
+                        @if (Model.ListaProduto != null)
+                        {
+                            @Html.DropDownListFor(model => model.FCODPRO, new SelectList(Model.ListaProduto, "CODPRO", "DSCPRO", Model.FCODPRO), new { @class = "form-control form-control-sm" })
+                        }
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-row">
                     <label for="FVLRMIN" class="col-sm-2 control-label form-control-sm">Valor Mínimo:</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm money" id="FVLRMIN" size="8" maxlength="8" required>
@@ -57,49 +45,67 @@
                     <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm money" id="FVLRMAX" size="8" maxlength="8" required>
                     </div>
-
                 </div>
-                <div class="form-check">
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLRVC">
+
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="FAPLRVC" value="option1">
                             <label class="form-check-label form-control-sm" for="FAPLRVC">Aplicar Regra de Vencimento</label>
                         </div>
-                        <label for="FREGVCT" class="col-form-label col-sm-2 form-control-sm">Número de Dias:</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-sm" id="FREGVCT" size="8" maxlength="8" required>
-                        </div>
                     </div>
-                </div>
-                <div class="form-check">
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLMEN">
-                            <label class="form-check-label form-control-sm" for="FAPLMEN">Aplicar Mensalidade</label>
-                        </div>
-                        <label for="FVLRMEN" class="col-form-label col-sm-2 form-control-sm">Valor da Mensalidade</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-sm money" id="FVLRMEN" size="8" maxlength="8">
-                        </div>
+                    <label for="FREGVCT" class="col-sm-2 form-control-sm">Número de Dias</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="FREGVCT" size="8" maxlength="8">
                     </div>
                 </div>
 
-                <div class="form-check">
-                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLINT" checked>
+
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="FAPLMEN" value="option1">
+                            <label class="form-check-label form-control-sm" for="FAPLMEN">Aplicar Mensalidade</label>
+                        </div>
+                    </div>
+                    <label for="FVLRMEN" class="col-sm-2 form-control-sm">Valor da Mensalidade</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm money" id="FVLRMEN" size="8" maxlength="8">
+                    </div>
+                </div>
+                <hr />
+                <div class="form-row">
+                    <label for="FINSBC1" class="col-sm-2 form-control-sm">Instrução #1</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm boleto" id="FINSBC1" name="FINSBC1" placeholder="" value="" maxlength="30">
+                    </div>
+                    <label for="FINSBC2" class="col-sm-2 form-control-sm">Instrução #2</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm boleto" id="FINSBC2" name="FINSBC2" placeholder="" value="" maxlength="30">
+                    </div>
+                    <label for="FINSBC3" class="col-sm-2 form-control-sm">Instrução #3</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm boleto" id="FINSBC3" name="FINSBC3" placeholder="" value="" maxlength="30">
+                    </div>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="FAPLINT" value="option1">
                     <label class="form-check-label form-control-sm" for="FAPLINT">Aplicação Interna</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLCES">
-                    <label class="form-check-label form-control-sm" for="FAPLCES">Vincular Conta Virtual Ativa</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="FAPLCES" value="option2">
+                    <label class="form-check-label form-control-sm" for="FAPLCES">Vincular Conta Virtual</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FAPLTAD" checked>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="FAPLTAD" value="option3">
                     <label class="form-check-label form-control-sm" for="FAPLTAD">Aplicar Tarifa Administrativa</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input form-control-sm" type="checkbox" value="" id="FSTAREC" checked>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="FSTAREC" value="option3">
                     <label class="form-check-label form-control-sm" for="FSTAREC">Ativo</label>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -117,37 +123,30 @@
             <div class="form-group row">
                 <label for="CCODUSU" class="col-sm-2 control-label">Usuário</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-sm" id="CCODUSU">
-                        <option value="-1">Selecione</option>
-                        @if (Model.ListaGestor != null)
-                        {
-                            foreach (var item in Model.ListaGestor)
-                            {
-                                <option value="@Html.DisplayFor(modelItem => item.CODUSU)">@Html.DisplayFor(modelItem => item.NOMUSU)</option>
-                            }
-                        }
-
-                    </select>
+                    @if (Model.ListaGestor != null)
+                    {
+                        @Html.DropDownListFor(model => model.CCODUSU, new SelectList(Model.ListaGestor, "CODUSU", "NOMUSU", Model.CCODUSU), new { @class = "form-control form-control-sm" })
+                    }
                 </div>
                 <label for="CCODPRO" class="col-sm-2 control-label">Produto</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-sm" id="CCODPRO">
-                        <option value="-1">Selecione</option>
-                        @if (Model.ListaProduto != null)
-                        {
-                            foreach (var item in Model.ListaProduto)
-                            {
-                                <option value="@Html.DisplayFor(modelItem => item.CODPRO)">@Html.DisplayFor(modelItem => item.DSCPRO)</option>
-                            }
-                        }
-                    </select>
+                    @if (Model.ListaProduto != null)
+                    {
+                        @Html.DropDownListFor(model => model.CCODPRO, new SelectList(Model.ListaProduto, "CODPRO", "DSCPRO", Model.CCODPRO), new { @class = "form-control form-control-sm" })
+                    }
                 </div>
             </div>
 
-            <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
             <hr />
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" onclick="history.back()" class="btn btn-dark btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>Voltar</button>
+                    <button id="btn_add" value="Adicionar" class="btn btn-primary btn-sm" onclick="CallForAdd();"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</button>
+                </div>
+            </div>
+
             <div class="table-responsive">
-                <table id="gridshow" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                <table id="tbgestorproduto" class="table table-bordered table-striped table-hover dataTable js-exportable">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -170,85 +169,21 @@
 
 @section scripts{
     <script>
+        var TbDetalhe = null;
         $(document).ready(function () {
             $('.date').mask('00/00/0000');
             $('.money').mask('000.000,00', { reverse: true });
             $('.money2').mask("#.##0,00", { reverse: true });
-            commandquery = "/Cadastros/QueryProductManangement";
-            $('#gridshow').DataTable(
-                {
-                    paging: true,
-                    searching: false,
-                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
-                    processing: true,
-                    serverSide: true,
-                    orderMulti: false,
-                    ajax: {
-                        url: commandquery,
-                        type: "POST",
-                        datatype: "json",
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        contentType: 'application/x-www-form-urlencoded; charset=utf-8',
-                        data: {
-                            pCODPRO: function () { return $('#CCODPRO').val() },
-                            pCODUSU: function () { return $('#CCODUSU').val() }
-                        }
-                    },
-
-                    columns: [
-                        { data: "USUPRO" },
-                        { data: "DSCREC" },
-                        { data: "NOMUSU" },
-                        { data: "DSCPRO" },
-                        { data: "DSCAPL" },
-                        { data: "LGNUSU" },
-                        {
-                            "render": function (data, type, row) {
-                                return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.USUPRO + "');\"> <i class='fas fa-edit'></i></button>&nbsp;"
-                            }
-                        }
-                    ],
-                    "language": {
-                        "processing": "Aguarde, buscando informações",
-                        "loadingRecords": "Carregando",
-                    },
-                    "pageLength": 10,
-                    "oLanguage": {
-                        "sLengthMenu": "Mostrar _MENU_ registros por página",
-                        "sZeroRecords": "Nenhum registro encontrado",
-                        "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
-                        "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
-                        "sInfoFiltered": "(filtrado de _MAX_ registros)",
-                        "sSearch": "Pesquisar: "
-                    },
-                    columnDefs: [
-                        { "targets": [0], "visible": false, "searchable": false },
-                        { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "12px" },
-                        { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "60px" },
-                        { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "60px" },
-                        { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "15px" },
-                        { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "30px" },
-                        { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "30px" }
-                    ]
-                });
-
-
-
 
             $(document).on("click", "#btn_update", function () {
                 var mode = $("#OPERATION").val();
-                var vurl = "/Cadastros/InsertProductManagement";
-                if (mode == 2)
-                    vurl = "/Cadastros/UpdateProductManagement";
-
                 var vREGVCT = parseInt($("#FREGVCT").val());
-                var vVLRMIN = parseFloat($("#FVLRMIN").val());
+                var vCODPRO = parseInt($("#FCODPRO").val());
 
-                var cVLRMAX = $("#FVLRMAX").val().replace('.', '').replace(',', '');
-                console.log(cVLRMAX);
-                alert(cVLRMAX);
-                var vVLRMAX = parseFloat($("#FVLRMAX").val());
-                if (vREGVCT <= 255) {
+                if (vREGVCT == null || vREGVCT > 255)
+                    vREGVCT = 0;
+
+                if (PrimaryValidation()) {
 
                     var VDATA = JSON.stringify({
                         'USUPRO': parseInt($("#FUSUPRO").val()),
@@ -263,11 +198,14 @@
                         'APLCES': $("#FAPLCES").is(':checked') ? 1 : 0,
                         'APLTAD': $("#FAPLTAD").is(':checked') ? 1 : 0,
                         'APLMEN': $("#FAPLMEN").is(':checked') ? 1 : 0,
-                        'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0
+                        'STAREC': $("#FSTAREC").is(':checked') ? 1 : 0,
+                        'INSBC1': $("#FINSBC1").val(),
+                        'INSBC2': $("#FINSBC2").val(),
+                        'INSBC3': $("#FINSBC3").val()
                     });
                     $.ajax({
                         type: "POST",
-                        url: vurl,
+                        url: GetUrl("Cadastros/AtualizarGestorProduto?modo=" + mode),
                         data: VDATA,
                         dataType: 'json',
                         contentType: 'application/json',
@@ -275,33 +213,47 @@
                         success: function (result) {
                             console.log(result);
                             var ok = parseInt(result.ReturnValue);
-                            if (ok > 0) { $('#modalproductmanagement').modal('toggle'); }
-                            else { Alertar(result.MessageToUser, 'alert-danger') };
+                            if (ok > 0) {
+                                $('#modalgestorproduto').modal('toggle');
+                            }
+                            else {
+                                $.alert({ class: 'danger', title: 'Usuário Gestor', message: result.MessageToUser, effect: 'zoom' });
+                            };
                         },
                         error: function (data) {
-                            alert("Ocorreu um erro inesperado, por favor tente novamente");
+                            $.alert({ class: 'danger', title: 'Usuário Gestor', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
                         }
                     });
+
                 }
-                else {
-                    $.alert({ class: 'danger', title: 'Usuário Gestor', message: 'Ocorreu um erro inesperado, por favor tente novamente', effect: 'zoom' });
-                };
+
             });
 
+            $('#FCODPRO').on('change', function () {
+                var value = $(this).val();
+                if (value == 4) {
+                    $('.boleto').attr("disabled", "disabled");
+                }
+                else {
+                    $('.boleto').removeAttr("disabled");
+                }
+            });
+
+            AtualizaDetalhe()
         });
 
 
         function CallForAdd() {
             $("#OPERATION").val("1");
             $("#FSTAREC").prop('checked', "true");
-            $('#modalproductmanagement').modal({ backdrop: 'static', Keyboard: 'true' });
-            $('#modalproductmanagement').modal('toggle');
+            $('#modalgestorproduto').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalgestorproduto').modal('toggle');
         }
         function CallForEdit(pUSUPRO) {
             $("#OPERATION").val("2");
             $.ajax({
                 type: "GET",
-                url: "/Cadastros/SelectProductManagement",
+                url: GetUrl("Cadastros/SelecionarGestorProduto"),
                 data: { pUSUPRO: pUSUPRO },
                 dataType: 'json',
                 success: function (result) {
@@ -316,19 +268,123 @@
                     $("#FVLRMEN").val(result.VLRMEN);
                     $("#FAPLRVC").prop('checked', (result.APLRVC == 1));
                     $("#FREGVCT").val(result.REGVCT);
+                    $("#FINSBC1").val(result.INSBC1);
+                    $("#FINSBC2").val(result.INSBC2);
+                    $("#FINSBC3").val(result.INSBC3);
                     $("#FAPLCES").prop('checked', (result.APLCES == 1));
                     $("#FAPLMEN").prop('checked', (result.APLMEN == 1));
                     $("#FAPLTAD").prop('checked', (result.APLTAD == 1));
                     $("#FSTAREC").prop('checked', (result.STAREC == 1));
                 }
             });
-            $('#modalproductmanagement').modal({ backdrop: 'static', Keyboard: 'true' });
-            $('#modalproductmanagement').modal('toggle');
+            $('#modalgestorproduto').modal({ backdrop: 'static', Keyboard: 'true' });
+            $('#modalgestorproduto').modal('toggle');
         }
 
         function ToFloat(value) {
             var v = value.replace('.', '').replace(',', '');
             return parseInt(v) / 100;
         }
+
+
+
+
+        function AtualizaDetalhe() {
+            try {
+                if (TbDetalhe == null) {
+
+                    TbDetalhe = $('#tbgestorproduto').DataTable(
+                        {
+                            paging: true,
+                            searching: false,
+                            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                            processing: true,
+                            serverSide: true,
+                            orderMulti: false,
+                            ajax: {
+                                url: GetUrl("Cadastros/PesquisarGestorProduto"),
+                                type: "POST",
+                                datatype: "json",
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                                data: {
+                                    pCODPRO: function () { return $('#CCODPRO').val() },
+                                    pCODUSU: function () { return $('#CCODUSU').val() }
+                                }
+                            },
+
+                            columns: [
+                                { data: "USUPRO" },
+                                { data: "DSCREC" },
+                                { data: "NOMUSU" },
+                                { data: "DSCPRO" },
+                                { data: "DSCAPL" },
+                                { data: "LGNUSU" },
+                                {
+                                    "render": function (data, type, row) {
+                                        return "<button id='btn_call_edt' value='Editar' class='btn btn-primary btn-sm' onclick=\"CallForEdit('" + row.USUPRO + "');\"> <i class='fas fa-edit'></i></button>&nbsp;"
+                                    }
+                                }
+                            ],
+                            "language": {
+                                "processing": "Aguarde, buscando informações",
+                                "loadingRecords": "Carregando",
+                            },
+                            "pageLength": 10,
+                            "oLanguage": {
+                                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                                "sZeroRecords": "Nenhum registro encontrado",
+                                "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                                "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                                "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                                "sSearch": "Pesquisar: "
+                            },
+                            columnDefs: [
+                                { "targets": [0], "visible": false, "searchable": false },
+                                { className: "text-left", "targets": [1], "visible": true, "searchable": false, "width": "12px" },
+                                { className: "text-left", "targets": [2], "visible": true, "searchable": false, "width": "60px" },
+                                { className: "text-left", "targets": [3], "visible": true, "searchable": false, "width": "60px" },
+                                { className: "text-left", "targets": [4], "visible": true, "searchable": false, "width": "15px" },
+                                { className: "text-left", "targets": [5], "visible": true, "searchable": false, "width": "30px" },
+                                { className: "text-left", "targets": [6], "visible": true, "searchable": false, "width": "30px" }
+                            ]
+                        });
+                }
+                else {
+                    TbDetalhe.DataTable().ajax.reload();
+                }
+            }
+            catch (e) {
+            }
+        }
+
+        function PrimaryValidation() {
+
+            var aval;
+            var msg = '';
+            var ret = true;
+
+            var modo = parseInt($("#FOPERATION").val());
+            if (modo == null || (modo< 1 && modo > 2)) {
+                msg = 'Operação invalida';
+                ret = false;
+            }
+
+            if (ret === true) {
+                aval = parseInt($("#FCODPRO").val());
+                if (aval <= 0) {
+                    msg = 'Selecione um código de Produto válido';
+                    ret = false;
+                }
+            }
+            if (ret === false) {
+                $.alert({ class: 'danger', title: 'Tarifa', message: msg, effect: 'zoom' });
+            }
+            return ret;
+        }
+
+
+
+
     </script>
 }

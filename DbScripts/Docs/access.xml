@@ -5,11 +5,11 @@
   <item platform="1" method="Insert" id="9" order="10" key="00090010" procedure="PRCADCTOINS" tb="TBCADCTO - Tabela de Contatos" text="Inclusão de Registros na tabela TBCADCTO Tabela de Contatos" />
   <item platform="1" method="Update" id="9" order="20" key="00090020" procedure="PRCADCTOUPD" tb="TBCADCTO - Tabela de Contatos" text="Alteração de Registros na tabela TBCADCTO Tabela de Contatos" />
   <item platform="1" method="Find" id="9" order="100" key="00090100" procedure="PRCADCTOFIN" tb="TBCADCTO - Tabela de Contatos" text="Localiza um contato com base nos parâmetros fornecidos" />
-  <item platform="1" method="Insert" id="12" order="10" key="00120010" procedure="PRCADCTAINS" tb="TBCADCTA - Virtual Account" text="Inclusão de Registros na tabela TBCADCTA Virtual Account" />
-  <item platform="1" method="Update" id="12" order="20" key="00120020" procedure="PRCADCTAUPD" tb="TBCADCTA - Virtual Account" text="Alteração de Registros na tabela TBCADCTA Virtual Account" />
-  <item platform="1" method="DeleteAccountID" id="12" order="100" key="00120100" procedure="PRCADCTADELNID" tb="TBCADCTA - Virtual Account" text="Exclui logicamente um registro de conta" />
-  <item platform="1" method="ChangeStatusAccount" id="12" order="105" key="00120105" procedure="PRCADCTACHGSTAACC" tb="TBCADCTA - Virtual Account" text="Executa a aprovação ou rejeição de uma conta digital" />
-  <item platform="1" method="Locate" id="12" order="110" key="00120110" procedure="PRCADCTALOC" tb="TBCADCTA - Virtual Account" text="Localiza uma conta virtual a partir do código de usuário" />
+  <item platform="1" method="Insert" id="12" order="10" key="00120010" procedure="PRCADCTAINS" tb="TBCADCTA - Cadastro de Contas" text="Inclusão de Registros na tabela TBCADCTA Cadastro de Contas" />
+  <item platform="1" method="Update" id="12" order="20" key="00120020" procedure="PRCADCTAUPD" tb="TBCADCTA - Cadastro de Contas" text="Alteração de Registros na tabela TBCADCTA Cadastro de Contas" />
+  <item platform="1" method="DeleteAccountID" id="12" order="100" key="00120100" procedure="PRCADCTADELNID" tb="TBCADCTA - Cadastro de Contas" text="Exclui logicamente um registro de conta" />
+  <item platform="1" method="ChangeStatusAccount" id="12" order="105" key="00120105" procedure="PRCADCTACHGSTAACC" tb="TBCADCTA - Cadastro de Contas" text="Executa a aprovação ou rejeição de uma conta digital" />
+  <item platform="1" method="Locate" id="12" order="110" key="00120110" procedure="PRCADCTALOC" tb="TBCADCTA - Cadastro de Contas" text="Localiza uma conta virtual a partir do código de usuário" />
   <item platform="1" method="Insert" id="13" order="10" key="00130010" procedure="PRSYSFUNINS" tb="TBSYSFUN - System Features" text="Inclusão de Registros na tabela TBSYSFUN System Features" />
   <item platform="1" method="Update" id="13" order="20" key="00130020" procedure="PRSYSFUNUPD" tb="TBSYSFUN - System Features" text="Alteração de Registros na tabela TBSYSFUN System Features" />
   <item platform="1" method="Insert" id="21" order="10" key="00210010" procedure="PRSYSGRPINS" tb="TBSYSGRP - Groups" text="Inclusão de Registros na tabela TBSYSGRP Groups" />
@@ -25,10 +25,10 @@
   <item platform="1" method="ChangePin" id="18" order="110" key="00180110" procedure="PRADMCRTCHGPSW" tb="TBCADCRT - Cadastro de Cartões" text="Efetua a alteração da senha do cartão" />
   <item platform="1" method="ChangeCVC" id="18" order="115" key="00180115" procedure="PRADMCRTCHGCVC" tb="TBCADCRT - Cadastro de Cartões" text="Efetua a alteração do número o CVC do Cartão" />
   <item platform="1" method="CancelAssociation" id="18" order="120" key="00180120" procedure="PRREGCRTCHGASS" tb="TBCADCRT - Cadastro de Cartões" text="Efetua o cancelamento da associação de um cartão" />
-  <item platform="1" method="Insert" id="1" order="10" key="00010010" procedure="PRCADGERINS" tb="TBCADGER - Cadastro Geral" text="Inclusão de Registros na tabela TBCADGER Cadastro Geral" />
-  <item platform="1" method="Update" id="1" order="20" key="00010020" procedure="PRCADGERUPD" tb="TBCADGER - Cadastro Geral" text="Alteração de Registros na tabela TBCADGER Cadastro Geral" />
-  <item platform="1" method="ValidateEntryCMF" id="1" order="100" key="00010100" procedure="PRCADGERVALENTRCMF" tb="TBCADGER - Cadastro Geral" text="Valida um CPF/CNPJ já existente para o mesmo atributo na base de cadastro geral" />
-  <item platform="1" method="PesquisarCMF" id="1" order="105" key="00010105" procedure="PRCADUSUPSQCMF" tb="TBCADGER - Cadastro Geral" text="Verifica se já existe um cadastro com o CPF/CNPJ cadastrado, e retorna o id localizado" />
+  <item platform="1" method="Insert" id="1" order="10" key="00010010" procedure="PRCADGERINS" tb="TBCADGER - Cadastro Geral de Usuários" text="Inclusão de Registros na tabela TBCADGER Cadastro Geral de Usuários" />
+  <item platform="1" method="Update" id="1" order="20" key="00010020" procedure="PRCADGERUPD" tb="TBCADGER - Cadastro Geral de Usuários" text="Alteração de Registros na tabela TBCADGER Cadastro Geral de Usuários" />
+  <item platform="1" method="ValidateEntryCMF" id="1" order="100" key="00010100" procedure="PRCADGERVALENTRCMF" tb="TBCADGER - Cadastro Geral de Usuários" text="Valida um CPF/CNPJ já existente para o mesmo atributo na base de cadastro geral" />
+  <item platform="1" method="PesquisarCMF" id="1" order="105" key="00010105" procedure="PRCADUSUPSQCMF" tb="TBCADGER - Cadastro Geral de Usuários" text="Verifica se já existe um cadastro com o CPF/CNPJ cadastrado, e retorna o id localizado" />
   <item platform="1" method="Insert" id="16" order="10" key="00160010" procedure="PRCADPROINS" tb="TBCADPRO - Products" text="Inclusão de Registros na tabela TBCADPRO Products" />
   <item platform="1" method="Update" id="16" order="20" key="00160020" procedure="PRCADPROUPD" tb="TBCADPRO - Products" text="Alteração de Registros na tabela TBCADPRO Products" />
   <item platform="1" method="Insert" id="5" order="10" key="00050010" procedure="PRTIPATRINS" tb="TBTIPATR - Tipo de Atributo" text="Inclusão de Registros na tabela TBTIPATR Tipo de Atributo" />
@@ -58,7 +58,93 @@
   <item platform="1" method="NeedRefresh" id="2" order="115" key="00020115" procedure="PRLGNUSUREF" tb="TBLGNUSU - Login de Usuário" text="Verifica se o usuario precisa fazer um refresh de senha" />
   <item platform="1" method="ChangePassword" id="2" order="120" key="00020120" procedure="PRLGNUSUCHGPSW" tb="TBLGNUSU - Login de Usuário" text="Efetua um login com base nas credenciais de acesso" />
   <item platform="1" method="ResetPassword" id="2" order="125" key="00020125" procedure="PRLGNUSURSTPSW" tb="TBLGNUSU - Login de Usuário" text="Efetua um login com base nas credenciais de acesso" />
-  <item platform="1" method="Insert" id="17" order="10" key="00170010" procedure="PRUSUPROINS" tb="TBUSUPRO - Gerencia de Produtos" text="Inclusão de Registros na tabela TBUSUPRO Gerencia de Produtos" />
-  <item platform="1" method="Update" id="17" order="20" key="00170020" procedure="PRUSUPROUPD" tb="TBUSUPRO - Gerencia de Produtos" text="Alteração de Registros na tabela TBUSUPRO Gerencia de Produtos" />
+  <item platform="1" method="Insert" id="17" order="10" key="00170010" procedure="PRUSUPROINS" tb="TBUSUPRO - Gestores de Produtos" text="Inclusão de Registros na tabela TBUSUPRO Gestores de Produtos" />
+  <item platform="1" method="Update" id="17" order="20" key="00170020" procedure="PRUSUPROUPD" tb="TBUSUPRO - Gestores de Produtos" text="Alteração de Registros na tabela TBUSUPRO Gestores de Produtos" />
   <item platform="1" method="CancelAssociation" id="14" order="145" key="00140145" procedure="PRREGCRTCHGASS" tb="TBREGCRT - Active Cards" text="Cancela a associação de um cartão" />
+  <item platform="1" method="Insert" id="24" order="10" key="00240010" procedure="PRREGMENINS" tb="TBREGMEN - Monthly Payment" text="Inclusão de Registros na tabela TBREGMEN Monthly Payment" />
+  <item platform="1" method="Update" id="24" order="20" key="00240020" procedure="PRREGMENUPD" tb="TBREGMEN - Monthly Payment" text="Alteração de Registros na tabela TBREGMEN Monthly Payment" />
+  <item platform="1" method="CreateMonthlyCard" id="24" order="100" key="00240100" procedure="PRREGMENCRTMENCRT" tb="TBREGMEN - Monthly Payment" text="Verifica se o cartão já foi alocado para um portador" />
+  <item platform="1" method="Insert" id="25" order="10" key="00250010" procedure="PRTIPTARINS" tb="TBTIPTAR - Tariff Type" text="Inclusão de Registros na tabela TBTIPTAR Tariff Type" />
+  <item platform="1" method="Update" id="25" order="20" key="00250020" procedure="PRTIPTARUPD" tb="TBTIPTAR - Tariff Type" text="Alteração de Registros na tabela TBTIPTAR Tariff Type" />
+  <item platform="1" method="Insert" id="26" order="10" key="00260010" procedure="PRTIPMOVINS" tb="TBTIPMOV - Operations" text="Inclusão de Registros na tabela TBTIPMOV Operations" />
+  <item platform="1" method="Update" id="26" order="20" key="00260020" procedure="PRTIPMOVUPD" tb="TBTIPMOV - Operations" text="Alteração de Registros na tabela TBTIPMOV Operations" />
+  <item platform="1" method="Insert" id="27" order="10" key="00270010" procedure="PREXPTARINS" tb="TBEXPTAR - Expanded Tariff" text="Inclusão de Registros na tabela TBEXPTAR Expanded Tariff" />
+  <item platform="1" method="Update" id="27" order="20" key="00270020" procedure="PREXPTARUPD" tb="TBEXPTAR - Expanded Tariff" text="Alteração de Registros na tabela TBEXPTAR Expanded Tariff" />
+  <item platform="1" method="ICalculate" id="27" order="100" key="00270100" procedure="PRCADTARCALI" tb="TBCADTAR - Tariffs" text="Efetua o cálculo de uma tarifa com base nos parâmetros fornecidos" />
+  <item platform="1" method="Find" id="27" order="105" key="00270105" procedure="PRCADTARFND" tb="TBCADTAR - Tariffs" text="Procura por um registro de tarifação de acordo com os parâmetros fornecidos" />
+  <item platform="1" method="LocateTarifacao" id="27" order="110" key="00270110" procedure="PRCADTARFNDTAR" tb="TBCADTAR - Tariffs" text="Verifica o usuário detentor do registro de tarifa e obtêm um ID de Tarifação com base nos parâmetros fornecidos" />
+  <item platform="1" method="Calculate" id="27" order="115" key="00270115" procedure="PRCADTARCAL" tb="TBCADTAR - Tariffs" text="Verifica o usuário detentor do registro de tarifa e obtêm um ID de Tarifação com base nos parâmetros fornecidos" />
+  <item platform="1" method="I1BilletTax" id="27" order="120" key="00270120" procedure="" tb="TBCADTAR - Tariffs" text="Efetua o Cálculo de uma Tarifa de Boleto" />
+  <item platform="1" method="I1Calculate" id="27" order="125" key="00270125" procedure="" tb="TBCADTAR - Tariffs" text="Efetua o Cálculo de uma tarifa com base nos parâmetros fornecidos" />
+  <item platform="1" method="CalculateValue" id="27" order="130" key="00270130" procedure="PRCADTARCALVAL" tb="TBCADTAR - Tariffs" text="Obtêm o valor de tarifação de acordo com os parâmetros fornecidos" />
+  <item platform="1" method="I1CalculateValue" id="27" order="135" key="00270135" procedure="" tb="TBCADTAR - Tariffs" text="Efetua o cálculo de uma tarifa com base nos parâmetros fornecidos" />
+  <item platform="1" method="I2Calculate" id="27" order="140" key="00270140" procedure="" tb="TBCADTAR - Tariffs" text="Efetua o cálculo de uma tarifa com basee nos parâmetros fornecidos" />
+  <item platform="1" method="Calculate" id="27" order="145" key="00270145" procedure="PRCADTARCALNID" tb="TBCADTAR - Tariffs" text="Verifica o usuário detentor do registro de tarifa e obtêm um ID de Tarifação com base nos parâmetros fornecidos" />
+  <item platform="1" method="GetExpandeRate" id="27" order="150" key="00270150" procedure="PRCADTARGETEXPTAR" tb="TBCADTAR - Tariffs" text="Obtêm a tarifa expandida de registro de tarifação" />
+  <item platform="1" method="CopyManagersFee" id="27" order="155" key="00270155" procedure="PRCADTARGERCPY" tb="TBCADTAR - Tariffs" text="Processa a cópia de tarifas de gestores" />
+  <item platform="1" method="CopyUsersFee" id="27" order="160" key="00270160" procedure="PRCADTARUSRCPY" tb="TBCADTAR - Tariffs" text="Processa a cópia de tarifas de usuarios" />
+  <item platform="1" method="InactiveRates" id="27" order="165" key="00270165" procedure="PRCADTARINAALL" tb="TBCADTAR - Tariffs" text="Processa a inativação de registros de tarifas de usuarios ou gestores inativos" />
+  <item platform="1" method="Insert" id="28" order="10" key="00280010" procedure="PRTIPEXPINS" tb="TBTIPEXP - Tipo de Expansão de Tarifa" text="Inclusão de Registros na tabela TBTIPEXP Tipo de Expansão de Tarifa" />
+  <item platform="1" method="Update" id="28" order="20" key="00280020" procedure="PRTIPEXPUPD" tb="TBTIPEXP - Tipo de Expansão de Tarifa" text="Alteração de Registros na tabela TBTIPEXP Tipo de Expansão de Tarifa" />
+  <item platform="1" method="Locate" id="28" order="100" key="00280100" procedure="PRCFGBOLOCREC" tb="TBCFGBOL - Ticket Configuration" text="Localiza um id de registro de configuração de boleto de acordo com os parâmetros fornecidos" />
+  <item platform="1" method="Find" id="28" order="105" key="00280105" procedure="PRCADTARFND" tb="TBCADTAR - Tariffs" text="Procura por um registro de tarifação de acordo com os parâmetros fornecidos" />
+  <item platform="1" method="LocateTarifF" id="28" order="110" key="00280110" procedure="PRCADTARFNDTAR" tb="TBCADTAR - Tariffs" text="Verifica o usuário detentor do registro de tarifa e obtêm um ID de Tarifação com base nos parâmetros fornecidos" />
+  <item platform="1" method="Calculate" id="28" order="115" key="00280115" procedure="PRCADTARCAL" tb="TBCADTAR - Tariffs" text="Verifica o usuário detentor do registro de tarifa e obtêm um ID de Tarifação com base nos parâmetros fornecidos" />
+  <item platform="1" method="I1BilletTax" id="28" order="120" key="00280120" procedure="" tb="TBCADTAR - Tariffs" text="Efetua o Cálculo de uma Tarifa de Boleto" />
+  <item platform="1" method="I1Calculate" id="28" order="125" key="00280125" procedure="" tb="TBCADTAR - Tariffs" text="Efetua o Cálculo de uma tarifa com base nos parâmetros fornecidos" />
+  <item platform="1" method="CalculateValue" id="28" order="130" key="00280130" procedure="PRCADTARCALVAL" tb="TBCADTAR - Tariffs" text="Obtêm o valor de tarifação de acordo com os parâmetros fornecidos" />
+  <item platform="1" method="I1CalculateValue" id="28" order="135" key="00280135" procedure="" tb="TBCADTAR - Tariffs" text="Efetua o cálculo de uma tarifa com base nos parâmetros fornecidos" />
+  <item platform="1" method="I2Calculate" id="28" order="140" key="00280140" procedure="" tb="TBCADTAR - Tariffs" text="Efetua o cálculo de uma tarifa com basee nos parâmetros fornecidos" />
+  <item platform="1" method="Calculate" id="28" order="145" key="00280145" procedure="PRCADTARCALNID" tb="TBCADTAR - Tariffs" text="Verifica o usuário detentor do registro de tarifa e obtêm um ID de Tarifação com base nos parâmetros fornecidos" />
+  <item platform="1" method="GetExpandeRate" id="28" order="150" key="00280150" procedure="PRCADTARGETEXPTAR" tb="TBCADTAR - Tariffs" text="Obtêm a tarifa expandida de registro de tarifação" />
+  <item platform="1" method="CopyManagersFee" id="28" order="155" key="00280155" procedure="PRCADTARGERCPY" tb="TBCADTAR - Tariffs" text="Processa a cópia de tarifas de gestores" />
+  <item platform="1" method="CopyUsersFee" id="28" order="160" key="00280160" procedure="PRCADTARUSRCPY" tb="TBCADTAR - Tariffs" text="Processa a cópia de tarifas de usuarios" />
+  <item platform="1" method="InactiveRates" id="28" order="165" key="00280165" procedure="PRCADTARINAALL" tb="TBCADTAR - Tariffs" text="Processa a inativação de registros de tarifas de usuarios ou gestores inativos" />
+  <item platform="1" method="Insert" id="29" order="10" key="00290010" procedure="PRCFGBOLINS" tb="TBCFGBOL - Ticket Configuration" text="Inclusão de Registros na tabela TBCFGBOL Ticket Configuration" />
+  <item platform="1" method="Update" id="29" order="20" key="00290020" procedure="PRCFGBOLUPD" tb="TBCFGBOL - Ticket Configuration" text="Alteração de Registros na tabela TBCFGBOL Ticket Configuration" />
+  <item platform="1" method="Insert" id="30" order="10" key="00300010" procedure="PRMODTARINS" tb="TBMODTAR - Tariff Modality" text="Inclusão de Registros na tabela TBMODTAR Tariff Modality" />
+  <item platform="1" method="Update" id="30" order="20" key="00300020" procedure="PRMODTARUPD" tb="TBMODTAR - Tariff Modality" text="Alteração de Registros na tabela TBMODTAR Tariff Modality" />
+  <item platform="1" method="Locate" id="29" order="100" key="00290100" procedure="PRCFGBOLOCREC" tb="TBCFGBOL - Ticket Configuration" text="Localiza um id de registro de configuração de boleto de acordo com os parâmetros fornecidos" />
+  <item platform="1" method="Insert" id="31" order="10" key="00310010" procedure="PRTARMOVINS" tb="TBTARMOV - Associação de Tarifas e Operações" text="Inclusão de Registros na tabela TBTARMOV Associação de Tarifas e Operações" />
+  <item platform="1" method="Update" id="31" order="20" key="00310020" procedure="PRTARMOVUPD" tb="TBTARMOV - Associação de Tarifas e Operações" text="Alteração de Registros na tabela TBTARMOV Associação de Tarifas e Operações" />
+  <item platform="1" method="Insert" id="32" order="10" key="00320010" procedure="PRCADTARINS" tb="TBCADTAR - Tariffs" text="Inclusão de Registros na tabela TBCADTAR Tariffs" />
+  <item platform="1" method="Update" id="32" order="20" key="00320020" procedure="PRCADTARUPD" tb="TBCADTAR - Tariffs" text="Alteração de Registros na tabela TBCADTAR Tariffs" />
+  <item platform="1" method="GetExpandeTariff" id="32" order="100" key="00320100" procedure="PRCADTARGETEXPTAR" tb="TBCADTAR - Tariffs" text="Obtêm a tarifa expandida de registro de tarifação" />
+  <item platform="1" method="GetExpandeTariff" id="32" order="105" key="00320105" procedure="PRCADTARGETEXPTAR" tb="TBCADTAR - Tariffs" text="Obtêm a tarifa expandida de registro de tarifação" />
+  <item platform="1" method="GetExpandeTariff" id="32" order="110" key="00320110" procedure="PRCADTARGETEXPTAR" tb="TBCADTAR - Tariffs" text="Obtêm a tarifa expandida de registro de tarifação" />
+  <item platform="1" method="GetExpandeTariff" id="32" order="115" key="00320115" procedure="PRCADTARGETEXPTAR" tb="TBCADTAR - Tariffs" text="Obtêm a tarifa expandida de registro de tarifação" />
+  <item platform="1" method="GetExpandeTariff" id="32" order="120" key="00320120" procedure="PRCADTARGETEXPTAR" tb="TBCADTAR - Tariffs" text="Obtêm a tarifa expandida de registro de tarifação" />
+  <item platform="1" method="Insert" id="4" order="10" key="00040010" procedure="PRTABGERINS" tb="TBTABGER - Tabela Geral do Sistema" text="Inclusão de Registros na tabela TBTABGER Tabela Geral do Sistema" />
+  <item platform="1" method="Update" id="4" order="20" key="00040020" procedure="PRTABGERUPD" tb="TBTABGER - Tabela Geral do Sistema" text="Alteração de Registros na tabela TBTABGER Tabela Geral do Sistema" />
+  <item platform="1" method="FindKey" id="4" order="100" key="00040100" procedure="PRTABGERFNDKEY" tb="TBTABGER - Tabela Geral do Sistema" text="Obtêm o Id de Registro de uma Tabela Geral Baseada no Código Chave da Tabela" />
+  <item platform="1" method="FindKeyText" id="4" order="105" key="00040105" procedure="PRTABGERFNDTXT" tb="TBTABGER - Tabela Geral do Sistema" text="Obtêm o Id de Registro de uma Tabela Geral Baseada no Código Chave Texto da Tabela" />
+  <item platform="1" method="Insert" id="33" order="10" key="00330010" procedure="PRREGBOLINS" tb="TBREGBOL - Registro de Boletos" text="Inclusão de Registros na tabela TBREGBOL Registro de Boletos" />
+  <item platform="1" method="Update" id="33" order="20" key="00330020" procedure="PRREGBOLUPD" tb="TBREGBOL - Registro de Boletos" text="Alteração de Registros na tabela TBREGBOL Registro de Boletos" />
+  <item platform="1" method="Insert" id="34" order="10" key="00340010" procedure="PRREGOPEINS" tb="TBREGOPE - Registration of Operations" text="Inclusão de Registros na tabela TBREGOPE Registration of Operations" />
+  <item platform="1" method="Update" id="34" order="20" key="00340020" procedure="PRREGOPEUPD" tb="TBREGOPE - Registration of Operations" text="Alteração de Registros na tabela TBREGOPE Registration of Operations" />
+  <item platform="1" method="Insert" id="10" order="10" key="00100010" procedure="PRTIPENDINS" tb="TBTIPEND - Address Type" text="Inclusão de Registros na tabela TBTIPEND Address Type" />
+  <item platform="1" method="Update" id="10" order="20" key="00100020" procedure="PRTIPENDUPD" tb="TBTIPEND - Address Type" text="Alteração de Registros na tabela TBTIPEND Address Type" />
+  <item platform="1" method="Insert" id="11" order="10" key="00110010" procedure="PRTIPCTOINS" tb="TBTIPCTO - Tipos de Contato" text="Inclusão de Registros na tabela TBTIPCTO Tipos de Contato" />
+  <item platform="1" method="Update" id="11" order="20" key="00110020" procedure="PRTIPCTOUPD" tb="TBTIPCTO - Tipos de Contato" text="Alteração de Registros na tabela TBTIPCTO Tipos de Contato" />
+  <item platform="1" method="Insert" id="7" order="10" key="00070010" procedure="PRTIPUSUINS" tb="TBTIPUSU - Tipo de Usuário" text="Inclusão de Registros na tabela TBTIPUSU Tipo de Usuário" />
+  <item platform="1" method="Update" id="7" order="20" key="00070020" procedure="PRTIPUSUUPD" tb="TBTIPUSU - Tipo de Usuário" text="Alteração de Registros na tabela TBTIPUSU Tipo de Usuário" />
+  <item platform="1" method="Insert" id="35" order="10" key="00350010" procedure="PRCADCVLINS" tb="TBCADCVL - Linked Account" text="Inclusão de Registros na tabela TBCADCVL Linked Account" />
+  <item platform="1" method="RemoveLinkedID" id="35" order="100" key="00350100" procedure="PRCADCVLREMLNK" tb="TBCADCVL - Linked Account" text="Remove um conta vinculada da lista" />
+  <item platform="1" method="LocateAccount" id="35" order="105" key="00350105" procedure="PRCADCVLLOCACT" tb="TBCADCVL - Linked Account" text="Localiza uma conta digital conforme os parâmetros fornecidos" />
+  <item platform="1" method="Update" id="35" order="20" key="00350020" procedure="PRCADCVLUPD" tb="TBCADCVL - Linked Account" text="Alteração de Registros na tabela TBCADCVL Linked Account" />
+  <item platform="1" method="Insert" id="39" order="10" key="00390010" procedure="PRBXABOLINS" tb="TBBXABOL - Registro de Detalhe do Recebimento de Boleto" text="Inclusão de Registros na tabela TBBXABOL Registro de Detalhe do Recebimento de Boleto" />
+  <item platform="1" method="Update" id="39" order="20" key="00390020" procedure="PRBXABOLUPD" tb="TBBXABOL - Registro de Detalhe do Recebimento de Boleto" text="Alteração de Registros na tabela TBBXABOL Registro de Detalhe do Recebimento de Boleto" />
+  <item platform="1" method="Insert" id="38" order="10" key="00380010" procedure="PRRBBBOLINS" tb="TBRBBBOL - Ticket Receipt Record" text="Inclusão de Registros na tabela TBRBBBOL Ticket Receipt Record" />
+  <item platform="1" method="Update" id="38" order="20" key="00380020" procedure="PRRBBBOLUPD" tb="TBRBBBOL - Ticket Receipt Record" text="Alteração de Registros na tabela TBRBBBOL Ticket Receipt Record" />
+  <item platform="1" method="CloseTicket" id="33" order="100" key="00330100" procedure="PRREGBOLCLOTKT" tb="TBREGBOL - Registro de Boletos" text="Encerra um boleto" />
+  <item platform="1" method="CloseBatch" id="38" order="100" key="00380100" procedure="PRRBBBOLCLOBAT" tb="TBRBBBOL - Ticket Receipt Record" text="Executa o fechamento de um lote de Registro de Recebimento de Boleto" />
+  <item platform="1" method="Insert" id="41" order="10" key="00410010" procedure="PRREGMOVINS" tb="TBREGMOV - Tabela de Registro de Transferências" text="Inclusão de Registros na tabela TBREGMOV Tabela de Registro de Transferências" />
+  <item platform="1" method="Update" id="41" order="20" key="00410020" procedure="PRREGMOVUPD" tb="TBREGMOV - Tabela de Registro de Transferências" text="Alteração de Registros na tabela TBREGMOV Tabela de Registro de Transferências" />
+  <item platform="1" method="Insert" id="40" order="10" key="00400010" procedure="PRTIPLCTINS" tb="TBTIPLCT - Account Entry Type" text="Inclusão de Registros na tabela TBTIPLCT Account Entry Type" />
+  <item platform="1" method="Update" id="40" order="20" key="00400020" procedure="PRTIPLCTUPD" tb="TBTIPLCT - Account Entry Type" text="Alteração de Registros na tabela TBTIPLCT Account Entry Type" />
+  <item platform="1" method="Insert" id="43" order="10" key="00430010" procedure="PRCADLCTINS" tb="TBCADLCT - Tabela de Cadastro de Lançamentos" text="Inclusão de Registros na tabela TBCADLCT Tabela de Cadastro de Lançamentos" />
+  <item platform="1" method="Update" id="43" order="20" key="00430020" procedure="PRCADLCTUPD" tb="TBCADLCT - Tabela de Cadastro de Lançamentos" text="Alteração de Registros na tabela TBCADLCT Tabela de Cadastro de Lançamentos" />
+  <item platform="1" method="Copy" id="43" order="100" key="00430100" procedure="PRCADLCTCPY" tb="TBCADLCT - Tabela de Cadastro de Lançamentos" text="Copia um conjunto de cadastro de lançamentos para outros" />
+  <item platform="1" method="Delete" id="43" order="105" key="00430105" procedure="PRCADLCTDEL" tb="TBCADLCT - Tabela de Cadastro de Lançamentos" text="Exclui um conjunto de cadastro de lançamentos" />
+  <item platform="1" method="Insert" id="42" order="10" key="00420010" procedure="PRREGMOVINS" tb="TBREGMOV - Tabela de Registro de Transferências" text="Inclusão de Registros na tabela TBREGMOV Tabela de Registro de Transferências" />
 </access>

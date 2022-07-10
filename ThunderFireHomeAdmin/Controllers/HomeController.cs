@@ -64,5 +64,20 @@ namespace ThunderFireHomeAdmin.Controllers
 
         #endregion
 
+
+
+        #region -- Usuarios --
+        [HttpPost]
+        public JsonResult UsuariosPorNome(string pNOMUSU)
+        {
+            return Json(ThunderFire.Business.Lists.GetUsersByName(pNOMUSU), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ContasporCondicao(byte pFUNLCT, string pNOMUSU)
+        {
+            return Json(ThunderFire.Business.Lists.AccountsByEntryCondition(pFUNLCT,pNOMUSU), JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
     }
 }

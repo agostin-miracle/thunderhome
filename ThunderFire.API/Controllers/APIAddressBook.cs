@@ -110,39 +110,6 @@ go=HttpStatusCode.NotFound;
 }
 return Content(go, RETURN_VALUE);
 }
-    /// <summary>
-    /// Obtêm uma lista de todos os endereços de um usuário
-    /// </summary>
-        /// <param name="pCODUSU">Código do Usuário</param>
-    /// <param name="pTIPEND">Tipo de Endereço</param>
-    /// <param name="pREGATV">Registro Ativo</param>
-    /// <param name="pSTAREC">Status de Registro</param>
-
-    /// <returns>List of QueryAddressBook</returns>
-[HttpGet]
-    public IHttpActionResult List(System.Int32 pCODUSU, System.Int16 pTIPEND= -1, System.Int16 pREGATV= -1, System.Int16 pSTAREC= -1)
-    {
-HttpStatusCode go = HttpStatusCode.OK;
-object RETURN_VALUE=null;
-if (Init())
-{
- RETURN_VALUE = WRKOBJ.List(pCODUSU, pTIPEND, pREGATV, pSTAREC);
-if(WRKOBJ.Found)
-{
-go = HttpStatusCode.OK;
-}
-else
-{
-if(WRKOBJ.HasError)
-{
-    go=HttpStatusCode.BadRequest;
-}
-else
-go=HttpStatusCode.NotFound;
-}
-}
-return Content(go, RETURN_VALUE);
-}
 
     /// <summary>
     /// Localiza o ID de um endereço com base nos parametros fornecidos
